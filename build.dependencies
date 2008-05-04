@@ -1,0 +1,32 @@
+<dependencies>
+
+	<dependency type="aspect">
+		<package name="InfrastructureAspects" version="0.1.0" type="project">
+			<module name="InfrastructureAspects"/>
+		</package>
+	</dependency>
+	
+	<dependency type="dev">
+		<package name="xstream" version="1.2.2" type="lib"> 
+			<module name="xstream"/>
+		</package>
+	</dependency>	
+
+	<dependency type="project">
+		<package name="JavaUtilLibrary" version="0.1.0" type="project">
+			<module name="JavaUtilLibrary"/>
+		</package>
+		<package name="AnnotationLibrary" version="0.1.0" type="project">
+			<module name="AnnotationLibrary"/>
+		</package>
+	</dependency>	
+
+	<dependency type="runtime">
+		<package name="commons-logging" version="1.1" type="lib">
+			<module name="commons-logging"/>
+		</package>
+		<package name="xstream" version="1.2.2" type="lib"> 
+			<module name="xstream"/>
+		</package>
+	</dependency>	
+</dependencies>

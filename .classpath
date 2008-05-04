@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="unittest"/>
+	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.ajdt.core.ASPECTJRT_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/InfrastructureAspects"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/JavaUtilLibrary"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/AnnotationLibrary"/>
+	<classpathentry kind="lib" path="lib/runtime/commons-logging.jar"/>
+	<classpathentry kind="var" path="COMMON_BUILD/lib/junit3/junit.jar"/>
+	<classpathentry kind="lib" path="lib/project/AnnotationLibrary.jar">
+		<attributes>
+			<attribute name="org.eclipse.ajdt.inpath" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/dev/xstream.jar"/>
+	<classpathentry kind="lib" path="lib/aspects/InfrastructureAspects.jar">
+		<attributes>
+			<attribute name="org.eclipse.ajdt.aspectpath" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
