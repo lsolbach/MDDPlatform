@@ -2,6 +2,7 @@ package org.soulspace.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -73,6 +74,34 @@ public class CollectionUtils {
 			}			
 		}
 		return list;
+	}
+	
+	/**
+	 * Converts the typed Array into a typed ArrayList
+	 * @param <T>
+	 * @param tArray
+	 * @return
+	 */
+	public static <T> ArrayList<T> asArrayList(T[] tArray) {
+		ArrayList<T> tList = new ArrayList<T>();
+		for(T t : tArray) {
+			tList.add(t);
+		}
+		return tList;
+	}
+
+	/**
+	 * Converts the typed Array into a typed HashSet
+	 * @param <T>
+	 * @param tArray
+	 * @return
+	 */
+	public static <T> HashSet<T> asHashSet(T[] tArray) {
+		HashSet<T> tSet = new HashSet<T>();
+		for(T t : tArray) {
+			tSet.add(t);
+		}
+		return tSet;
 	}
 	
 	/**
