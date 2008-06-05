@@ -3,6 +3,9 @@ package org.soulspace.base.domain.test;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.soulspace.annotation.domain.Entity;
+
+@Entity
 public class OrganisationImpl implements Organisation {
 
 	String name;

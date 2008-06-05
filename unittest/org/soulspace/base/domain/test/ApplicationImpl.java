@@ -4,7 +4,6 @@ import org.soulspace.annotation.domain.Entity;
 import org.soulspace.annotation.infrastructure.Persistent;
 
 @Entity
-@Persistent
 public class ApplicationImpl implements Application {
 
 	String name;

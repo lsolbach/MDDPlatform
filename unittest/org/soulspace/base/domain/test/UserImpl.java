@@ -1,5 +1,8 @@
 package org.soulspace.base.domain.test;
 
+import org.soulspace.annotation.domain.Entity;
+
+@Entity
 public class UserImpl implements User {
 
 	String login;

@@ -186,4 +186,15 @@ privileged public aspect AggregateAspect {
 //			((AggregateChild) child).getAggregateRoot().markDirty();			
 //		}
 //	}
+//	
+//	void newAggregateChildModification(Aggregate a, Date modificationTime) {
+//		for(AggregateChild child : a.getAggregateChild()) {
+//			// create new modifications of aggregate childs
+//			if(((Persistant) child).isDirty() || ((Entity) child).getModification() == 0) {
+//				((Persistant) child).newModification(modificationTime);
+//				newAggregateChildModification(child, modificationTime);
+//			}
+//		}
+//	}	
+
 }
