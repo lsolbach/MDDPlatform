@@ -17,7 +17,7 @@ public class TestValue {
 
 	@Function
 	public TestValue multiply(TestValue arg) {
-		return new TestValue(value + arg.getValue());
+		return new TestValue(value * arg.getValue());
 	}
 
 	public double getValue() {

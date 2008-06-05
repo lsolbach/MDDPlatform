@@ -5,6 +5,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.ajdt.core.ASPECTJRT_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/project/AnnotationLibrary.jar"/>
-	<classpathentry kind="var" path="COMMON_BUILD/lib/junit3/junit.jar"/>
+	<classpathentry kind="lib" path="lib/dev/junit.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

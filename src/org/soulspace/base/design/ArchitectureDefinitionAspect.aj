@@ -2,6 +2,13 @@ package org.soulspace.base.design;
 
 public abstract aspect ArchitectureDefinitionAspect {
 
+	/*
+	 * definition of join point locations
+	 */
+	
+	/*
+	 * layer definitions
+	 */
 	public pointcut inPresentationLayer() :
 		within(*..web..*)
 		|| within(*..ui..*)
@@ -18,11 +25,18 @@ public abstract aspect ArchitectureDefinitionAspect {
 	public pointcut inInfrastructureLayer() :
 		within(*..infrastructure..*)
 	;
-	
+
 	public pointcut inTest() :
-		within(org.junit.TestCase+)
+		within(junit.framework.TestCase+)
 	;
 	
+	/*
+	 * definition of call targets
+	 */
+	
+	/*
+	 * layer targets
+	 */
 	public pointcut presentationLayerCall() :
 		call(* *..web..*.*(..))
 		|| call(*..web..new(..))
@@ -48,8 +62,6 @@ public abstract aspect ArchitectureDefinitionAspect {
 	public pointcut serviceCall() :
 		call(* *.Service+.*(..))
 		|| call(*.Service+.new(..))
-		|| call(* *.*Service+.*(..))
-		|| call(*.*Service+.new(..))
 	;
 	
 }

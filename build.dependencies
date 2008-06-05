@@ -1,12 +1,10 @@
 <dependencies>
 
-<!--
 	<dependency type="dev">
 		<package name="junit" version="3.8.1" type="lib">
 			<module name="junit"/>
 		</package>
 	</dependency>
--->
 
 	<dependency type="project">
 		<package name="AnnotationLibrary" version="0.2.0" type="project">
