@@ -42,6 +42,10 @@ public aspect NullCheckAspect {
 		Signature sig = thisJoinPoint.getSignature();
 		Boolean[] nullArgs = new Boolean[args.length];
 		int nullArgCount = 0;
+
+		if(args == null) {
+			return;
+		}
 		
 		if(sig instanceof MethodSignature) {
 			paramAnnotations = ((MethodSignature) sig).getMethod().getParameterAnnotations();
@@ -71,6 +75,9 @@ public aspect NullCheckAspect {
 	}
 	
 	boolean hasOptionalAnnotation(Annotation[] annotationArray) {
+		if(annotationArray == null) {
+			return false;
+		}
 		boolean isPresent = false;
 		for(Annotation annotation : annotationArray) {
 			if(annotation instanceof Optional) {
