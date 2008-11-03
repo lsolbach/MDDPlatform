@@ -1,7 +1,7 @@
 package org.soulspace.base.domain.validation;
 
 public interface ValidationIssue {
-	String getSeverity();
+	Severity getSeverity();
 	String getProperty();
 	String getMessage();
 }

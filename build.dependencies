@@ -1,17 +1,11 @@
 <dependencies>
 
 	<dependency type="aspect">
-		<package name="InfrastructureAspects" version="0.1.0" type="project">
+		<package name="InfrastructureAspects" version="0.2.0" type="project">
 			<module name="InfrastructureAspects"/>
 		</package>
 	</dependency>
 	
-	<dependency type="dev">
-		<package name="xstream" version="1.2.2" type="lib"> 
-			<module name="xstream"/>
-		</package>
-	</dependency>	
-
 	<dependency type="project">
 		<package name="JavaUtilLibrary" version="0.1.0" type="project">
 			<module name="JavaUtilLibrary"/>
@@ -22,11 +16,27 @@
 	</dependency>	
 
 	<dependency type="runtime">
+		<package name="InfrastructureAspects" version="0.2.0" type="project">
+			<module name="InfrastructureAspects"/>
+		</package>
 		<package name="commons-logging" version="1.1" type="lib">
 			<module name="commons-logging"/>
+		</package>
+		<package name="apache-log4j" version="1.2.15" type="lib"> 
+			<module name="log4j"/>
 		</package>
 		<package name="xstream" version="1.2.2" type="lib"> 
 			<module name="xstream"/>
 		</package>
 	</dependency>	
+
+	<dependency type="dev">
+		<package name="junit" version="3.8.1" type="lib"> 
+			<module name="junit"/>
+		</package>
+		<package name="xstream" version="1.2.2" type="lib"> 
+			<module name="xstream"/>
+		</package>
+	</dependency>	
+
 </dependencies>

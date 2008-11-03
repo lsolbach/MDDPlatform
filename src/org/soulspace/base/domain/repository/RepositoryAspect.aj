@@ -3,9 +3,12 @@ package org.soulspace.base.domain.repository;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
+
 import org.soulspace.base.domain.entity.Entity;
+import org.soulspace.base.domain.validation.Validateable;
+import org.soulspace.base.domain.validation.ValidationException;
+import org.soulspace.base.domain.validation.ValidationResult;
 import org.soulspace.base.infrastructure.persistence.PersistentStorage;
 
 /**
@@ -13,9 +16,9 @@ import org.soulspace.base.infrastructure.persistence.PersistentStorage;
  * 
  */
 privileged public aspect RepositoryAspect {
-
 	// FIXME convert StorageException to RepositoryException
-	Log log = LogFactory.getLog("Repository");
+
+	Logger log = Logger.getLogger(RepositoryAspect.class.getName());
 	
 	//
 	// intertype declarations
@@ -30,7 +33,6 @@ privileged public aspect RepositoryAspect {
 	PersistentStorage Repository.getStorage() {
 		return storage;
 	}
-	
 	
 	//
 	// pointcuts
@@ -77,4 +79,27 @@ privileged public aspect RepositoryAspect {
 		&& args(entity)
 		;
 
+	pointcut getById(String id) :
+		execution(* Repository+.get*(String, ..))
+		&& args(id)
+		;
+
+	pointcut storeValidateable(Validateable v) :
+		execution(* Repository+.store*(Validateable+))
+		&& args(v);
+		;
+	
+	before(Validateable v) : storeValidateable(v) {
+		ValidationResult vResult = v.validate();
+		if(!vResult.isValid()) {
+			// FIXME check severity
+			throw new ValidationException("Object invalid!", vResult);
+		}
+	}
+	
+	after(String id) returning (Object o) : getById(id) {
+		if(o == null) {
+			throw new RepositoryException("Object with id " + id + " not found!");
+		}
+	}
 }
