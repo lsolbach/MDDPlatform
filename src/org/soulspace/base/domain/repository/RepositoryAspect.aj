@@ -84,22 +84,11 @@ privileged public aspect RepositoryAspect {
 		&& args(id)
 		;
 
-	pointcut storeValidateable(Validateable v) :
-		execution(* Repository+.store*(Validateable+))
-		&& args(v);
-		;
-	
-	before(Validateable v) : storeValidateable(v) {
-		ValidationResult vResult = v.validate();
-		if(!vResult.isValid()) {
-			// FIXME check severity
-			throw new ValidationException("Object invalid!", vResult);
-		}
-	}
-	
 	after(String id) returning (Object o) : getById(id) {
 		if(o == null) {
 			throw new RepositoryException("Object with id " + id + " not found!");
 		}
 	}
+
+	// around store: if not dirty, don't store?!? TODO check for concurrent modification?
 }

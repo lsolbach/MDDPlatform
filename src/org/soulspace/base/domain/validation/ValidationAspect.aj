@@ -33,5 +33,4 @@ public aspect ValidationAspect {
 			throw new ValidationException("Object " + v + " invalid!", vResult);
 		}
 	}
-
 }
