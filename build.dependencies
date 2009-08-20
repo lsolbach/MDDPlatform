@@ -10,14 +10,14 @@
 		<package name="JavaUtilLibrary" version="0.1.0" type="project">
 			<module name="JavaUtilLibrary"/>
 		</package>
-		<package name="AnnotationLibrary" version="0.1.0" type="project">
-			<module name="AnnotationLibrary"/>
-		</package>
 	</dependency>	
 
 	<dependency type="runtime">
 		<package name="InfrastructureAspects" version="0.2.0" type="project">
 			<module name="InfrastructureAspects"/>
+		</package>
+		<package name="AnnotationLibrary" version="0.1.0" type="project">
+			<module name="AnnotationLibrary"/>
 		</package>
 		<package name="commons-logging" version="1.1" type="lib">
 			<module name="commons-logging"/>
@@ -33,9 +33,6 @@
 	<dependency type="dev">
 		<package name="junit" version="3.8.1" type="lib"> 
 			<module name="junit"/>
-		</package>
-		<package name="xstream" version="1.2.2" type="lib"> 
-			<module name="xstream"/>
 		</package>
 	</dependency>	
 
