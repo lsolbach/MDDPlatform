@@ -11,5 +11,9 @@ public aspect ImmutableAspect {
 		&& !withincode((@org.soulspace.annotation.design.Immutable *).new(..))
 		;
 
+//	before() : immutableMutation() {
+//		assert false : "forbidden change on an immutable object!";
+//	}
+	
 	declare error : immutableMutation() : "forbidden change on an immutable object!";
 }
