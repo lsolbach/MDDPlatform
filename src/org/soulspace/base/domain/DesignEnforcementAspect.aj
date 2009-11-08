@@ -2,7 +2,7 @@ package org.soulspace.base.domain;
 
 import org.soulspace.base.domain.entity.Entity;
 
-public aspect DesignValidationAspect {
+public aspect DesignEnforcementAspect {
 
 	pointcut entityCreation() :
 		call((Entity+).new(..))
@@ -35,6 +35,17 @@ public aspect DesignValidationAspect {
 		&& !inUnitTest()
 		;
 	
-	declare error : entityCreationViolation() : "Entity creation violation, use a Factory";
+	declare error : entityCreationViolation() : "Don't create entities with new, use a factory!";
 	
+	pointcut valueMutation() :
+		call(* Value+.set*(..))
+		;
+		
+	declare warning : valueMutation() : "Don't change value objects, create new ones!";
+	
+	pointcut collectionReplace() :
+		call(* DomainObject+.set*(Collection+))
+		;
+	
+	declare warning : collectionReplace() : "Don't replace a collection, use add/remove methods on domain object!";
 }
