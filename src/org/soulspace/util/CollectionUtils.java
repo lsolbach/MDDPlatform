@@ -41,7 +41,39 @@ public class CollectionUtils {
 		}
 		return filteredList;
 	}
-	
+
+	/**
+	 * Adds the content of the second list to the first list, but checks for each element if the element is not already there.
+	 * To be used as a Set replacement, if the order of inserts is relevant.
+	 * @param <T>
+	 * @param l1
+	 * @param l2
+	 * @return
+	 */
+	public static <T> List<T> addAllUnique(List<T> l1, List<T> l2) {
+		for(T element : l2) {
+			if(!l1.contains(element)) {
+				l1.add(element);
+			}			
+		}
+		return l1;
+	}
+
+	/**
+	 * Add the element to the list, if it is not already there.
+	 * To be used as a Set replacement, if the order of inserts is relevant.
+	 * @param <T>
+	 * @param l1
+	 * @param element
+	 * @return
+	 */
+	public static <T> List<T> addAllUnique(List<T> l1, T element) {
+		if(!l1.contains(element)) {
+			l1.add(element);
+		}			
+		return l1;
+	}	
+
 	/**
 	 * Filter the list, so the list contains only objects accepted by the given filter
 	 * @param <T>
@@ -109,13 +141,14 @@ public class CollectionUtils {
 	 * @param coll
 	 * @return string array
 	 */
-	public static String[] asStringArray(Collection coll) {
+	public static String[] asStringArray(Collection<Object> coll) {
 		int i = 0;
 		String[] strings = new String[coll.size()];
-		Iterator it = coll.iterator();
+		Iterator<Object> it = coll.iterator();
 		while(it.hasNext()) {    
 			strings[i++] = it.next().toString();
 		}
 		return strings;
 	}
+	
 }
