@@ -1,5 +1,4 @@
-package org.soulspace.annotation.infrastructure;
-
+package org.soulspace.annotation.domain;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -8,6 +7,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface Revisioned {
+public @interface Historised {
 
 }
