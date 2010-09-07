@@ -12,6 +12,8 @@ import org.soulspace.base.domain.validation.Validator;
 
 public class ValidatorImpl implements Validator {
 
+	ValidationResult result = new ValidationResultImpl();	
+	
 	@Override
 	public Class<? extends Validateable> getType() {
 		// TODO Auto-generated method stub
@@ -26,11 +28,11 @@ public class ValidatorImpl implements Validator {
 
 	@Override
 	public ValidationResult validate(Validateable v) {
-		return null;
+		validateFields(v);
+		return result;
 	}
 
-	public ValidationResult validateFields(Validateable v) {
-		ValidationResult result = new ValidationResultImpl();
+	protected void validateFields(Validateable v) {
 		Field[] fields = v.getClass().getFields();
 		for(Field field : fields) {
 			Class type = field.getType();
@@ -51,7 +53,5 @@ public class ValidatorImpl implements Validator {
 				//PatternValidatorImpl.isValid(value, pattern.pattern());
 			}
 		}
-		return result;	
-	}
-	
+	}	
 }
