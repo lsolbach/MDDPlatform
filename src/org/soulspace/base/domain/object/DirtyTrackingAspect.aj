@@ -3,6 +3,7 @@ package org.soulspace.base.domain.object;
 import java.util.Map;
 import java.util.HashMap;
 
+import org.soulspace.aop.util.AspectHelper;
 import org.soulspace.base.domain.entity.Entity;
 import org.soulspace.base.domain.repository.Repository;
 import org.soulspace.base.util.AspectUtils;
@@ -12,28 +13,22 @@ public aspect DirtyTrackingAspect {
 	/*
 	 * Intertype declarations
 	 */
-	transient boolean DirtyTrackable.dirty = false;
-	transient Map<String, String> DirtyTrackable.fieldMap = new HashMap<String, String>(); 
+	transient Map<String, String> DirtyTrackable.dirtyFieldMap = new HashMap<String, String>(); 
 	
 	public boolean DirtyTrackable.isDirty() {
-		return dirty;
+		return dirtyFieldMap.size() > 0;
 	}
 
-	void DirtyTrackable.markDirty(String field) {
-		dirty = true;
-		fieldMap.put(field, field);
+	private void DirtyTrackable.markDirty(String field) {
+		dirtyFieldMap.put(field, field);
 	}
 
-	void DirtyTrackable.clearDirty() {
-		dirty = false;
-		fieldMap = new HashMap<String, String>();
+	private void DirtyTrackable.clearDirty() {
+		dirtyFieldMap = new HashMap<String, String>();
 	}
 	
-	void DirtyTrackable.clearDirty(String field) {
-		fieldMap.remove(field);
-		if(fieldMap.size() == 0) {
-			dirty = false;
-		}
+	private void DirtyTrackable.clearDirty(String field) {
+		dirtyFieldMap.remove(field);
 	}
 	
 	/*
@@ -58,37 +53,34 @@ public aspect DirtyTrackingAspect {
 		&& target(obj)
 		;
 
-//	pointcut persistentSetField(DirtyTrackable obj) :
-//		set(!transient * DirtyTrackable+.*)
-//		&& !within(DirtyTrackingAspect)
-//		&& this(obj)
-//		;
+	pointcut persistentSetField(DirtyTrackable obj) :
+		set(!transient * DirtyTrackable+.*)
+		&& !within(DirtyTrackingAspect)
+		&& this(obj)
+		;
 
 	pointcut persistentModification(DirtyTrackable obj) :
 		(persistentSetCall(obj)
 		|| persistentAddCall(obj)
 		|| persistentRemoveCall(obj))
 //		|| persistentSetField(obj))
-//		&& !within(DirtyTrackingAspect)
+		&& !within(DirtyTrackingAspect)
 		;
 
 	after(DirtyTrackable obj) returning : persistentModification(obj) {
-		String field = AspectUtils.getNameFromJoinPoint(thisJoinPoint);
+		// TODO test for transient/persistent fields
+		String field = AspectHelper.getFieldName(thisJoinPoint);
 		obj.markDirty(field);
 	}
 
 
-	pointcut repositoryStore(Repository repository, Entity entity) :
-		execution(* Repository+.store*(Entity+))
-		&& this(repository)
-		&& args(entity)
+	pointcut repositoryStore(DirtyTrackable obj) :
+		execution(* Repository+.store*(DirtyTrackable+))
+		&& args(obj)
 		;
 	
-//	pointcut remove(Repository repository, Entity entity) :
-//		execution(* Repository+.remove*(Entity+))
-//		&& this(repository)
-//		&& args(entity)
-//		;
+	after(DirtyTrackable obj) returning : repositoryStore(obj) {
+		obj.clearDirty();
+	}
 
-	
 }

@@ -35,22 +35,23 @@ public abstract aspect AbstractAuditAspect {
 	abstract pointcut rootCreate(Auditable auditable);
 	abstract pointcut rootUpdate(Auditable auditable);
 	abstract pointcut rootDelete(Auditable auditable);
+
 	abstract pointcut childCreate(Auditable auditable, DomainObject child);
 	abstract pointcut childUpdate(Auditable auditable, DomainObject child);
 	abstract pointcut childDelete(Auditable auditable, DomainObject child);
 	
 	after(Auditable auditable) : rootCreate(auditable) {
-		auditRepository.putAuditEvent(new AuditEventImpl(AuditEventType.CREATE, (DomainObject) auditable));
+		auditRepository.addAuditEvent(new AuditEventImpl(AuditEventType.CREATE, (DomainObject) auditable));
 		auditable.clearAuditEventList();
 	}
 	
 	after(Auditable auditable) : rootUpdate(auditable) {
-		auditRepository.putAuditEvent(new AuditEventImpl(AuditEventType.UPDATE, (DomainObject) auditable));
+		auditRepository.addAuditEvent(new AuditEventImpl(AuditEventType.UPDATE, (DomainObject) auditable));
 		auditable.clearAuditEventList();
 	}
 	
 	after(Auditable auditable) : rootDelete(auditable) {
-		auditRepository.putAuditEvent(new AuditEventImpl(AuditEventType.DELETE, (DomainObject) auditable));
+		auditRepository.addAuditEvent(new AuditEventImpl(AuditEventType.DELETE, (DomainObject) auditable));
 		auditable.clearAuditEventList();
 	}
 

@@ -1,6 +1,9 @@
 <dependencies>
 
 	<dependency type="aspect">
+		<package name="AspectLibrary" version="0.1.0" type="project">
+			<module name="AspectLibrary"/>
+		</package>
 		<package name="InfrastructureAspects" version="0.2.0" type="project">
 			<module name="InfrastructureAspects"/>
 		</package>
@@ -10,13 +13,10 @@
 		<package name="JavaUtilLibrary" version="0.1.0" type="project">
 			<module name="JavaUtilLibrary"/>
 		</package>
-	</dependency>	
+	</dependency>
 
 	<dependency type="runtime">
-		<package name="InfrastructureAspects" version="0.2.0" type="project">
-			<module name="InfrastructureAspects"/>
-		</package>
-		<package name="AnnotationLibrary" version="0.1.0" type="project">
+		<package name="AnnotationLibrary" version="0.2.0" type="project">
 			<module name="AnnotationLibrary"/>
 		</package>
 		<package name="commons-logging" version="1.1" type="lib">
