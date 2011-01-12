@@ -1,4 +1,4 @@
-package org.soulspace.base.design;
+package org.soulspace.architecture;
 
 public abstract aspect ArchitectureDefinitionAspect {
 
@@ -64,4 +64,13 @@ public abstract aspect ArchitectureDefinitionAspect {
 		|| call(*.Service+.new(..))
 	;
 	
+	
+	/**
+	 * 
+	 */
+
+	/**
+	 * 
+	 */
+
 }

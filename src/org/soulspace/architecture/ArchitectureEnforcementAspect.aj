@@ -1,4 +1,4 @@
-package org.soulspace.base.design;
+package org.soulspace.architecture;
 
 public aspect ArchitectureEnforcementAspect extends ArchitectureDefinitionAspect {
 
