@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface MaxLength {
-	int value() default 255;
+@Target({ElementType.FIELD, ElementType.METHOD})
+public @interface Aggregation {
+
 }

@@ -1,12 +1,14 @@
-package org.soulspace.annotation.metadata;
+package org.soulspace.annotation.security;
 
 import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface MaxLength {
-	int value() default 255;
+@Target(ElementType.METHOD)
+@Inherited
+public @interface Secured {
+	String permission();
 }
