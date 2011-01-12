@@ -6,7 +6,6 @@ import java.util.HashMap;
 import org.soulspace.aop.util.AspectHelper;
 import org.soulspace.base.domain.entity.Entity;
 import org.soulspace.base.domain.repository.Repository;
-import org.soulspace.base.util.AspectUtils;
 
 public aspect DirtyTrackingAspect {
 	
@@ -19,15 +18,15 @@ public aspect DirtyTrackingAspect {
 		return dirtyFieldMap.size() > 0;
 	}
 
-	private void DirtyTrackable.markDirty(String field) {
+	void DirtyTrackable.markDirty(String field) {
 		dirtyFieldMap.put(field, field);
 	}
 
-	private void DirtyTrackable.clearDirty() {
+	void DirtyTrackable.clearDirty() {
 		dirtyFieldMap = new HashMap<String, String>();
 	}
 	
-	private void DirtyTrackable.clearDirty(String field) {
+	void DirtyTrackable.clearDirty(String field) {
 		dirtyFieldMap.remove(field);
 	}
 	

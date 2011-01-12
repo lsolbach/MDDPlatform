@@ -14,12 +14,10 @@ public class AuditEventImpl implements AuditEvent {
 		this.object = object;
 	}
 	
-	@Override
 	public DomainObject getObject() {
 		return object;
 	}
 
-	@Override
 	public AuditEventType getType() {
 		return type;
 	}

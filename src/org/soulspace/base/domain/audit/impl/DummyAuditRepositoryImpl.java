@@ -6,7 +6,6 @@ import org.soulspace.base.domain.audit.Auditable;
 
 public class DummyAuditRepositoryImpl implements AuditRepository {
 
-	@Override
 	public void addAuditEvent(AuditEvent event) {
 		System.out.println("Audit " + event.getType() + ": "
 				+ event.getObject().toString());

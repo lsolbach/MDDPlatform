@@ -14,19 +14,16 @@ public class ValidatorImpl implements Validator {
 
 	ValidationResult result = new ValidationResultImpl();	
 	
-	@Override
 	public Class<? extends Validateable> getType() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public boolean isValid() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
 	public ValidationResult validate(Validateable v) {
 		validateFields(v);
 		return result;
