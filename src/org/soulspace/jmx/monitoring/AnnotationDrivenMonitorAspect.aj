@@ -6,21 +6,17 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 import org.aspectj.lang.Signature;
+import org.soulspace.annotation.metadata.Optional;
 import org.soulspace.jmx.util.JmxHelper;
 
 public aspect AnnotationDrivenMonitorAspect {	
 	
 	declare parents : (@org.soulspace.annotation.infrastructure.Monitored *) implements Monitored;
 	
-	public interface Monitored {
-		String printStats();
-		void clearStats();
-		Map<String, CallStat> getCallStatMap();
-	}
-	
 	/*
 	 * Managed intertype declarations 
 	 */
+	@Optional
 	public Map<String, CallStat> Monitored.callStatMap = null;
 
 	public String Monitored.printStats() {
@@ -63,9 +59,10 @@ public aspect AnnotationDrivenMonitorAspect {
 
 	public pointcut monitoredCalls(Monitored m) :
 		execution(* (@org.soulspace.annotation.infrastructure.Monitored *).*(..))
+//		||
+//		execution(@org.soulspace.annotation.infrastructure.Monitored * *.*(..))
 		&& target(m)
 		;
-	
 	
 	Object around(Monitored m) : monitoredCalls(m) {
 		// TODO check if callStatMap is initialized, if not initialize callStatMap and register MBean,

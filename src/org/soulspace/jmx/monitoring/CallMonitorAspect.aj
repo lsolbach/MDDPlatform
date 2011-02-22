@@ -3,7 +3,6 @@ package org.soulspace.jmx.monitoring;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.HashMap;
 import java.util.WeakHashMap;
 
 import org.aspectj.lang.JoinPoint;

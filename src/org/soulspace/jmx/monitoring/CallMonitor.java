@@ -14,16 +14,14 @@ public class CallMonitor implements CallMonitorMBean {
 
 	private Map<String, CallStat> callStatMap = new WeakHashMap<String, CallStat>();
 
-	@Override
 	public void clearStatistics() {
 		callStatMap = new WeakHashMap<String, CallStat>();
 	}
 
-	@Override
 	public List<String> getStatistics() {
 		List<String> statList = new ArrayList<String>(); 
 		for(Entry<String, CallStat> entry :callStatMap.entrySet()) {
-			
+			statList.add(entry.getValue().toString());
 		}
 		return statList;
 	}
