@@ -1,4 +1,4 @@
-package org.soulspace.annotation.metadata;
+package org.soulspace.annotation.design;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
@@ -7,8 +7,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
+@Target(ElementType.TYPE)
 @Inherited
-public @interface Unique {
-	boolean value() default true;
+public @interface NullCheck {
+
 }
