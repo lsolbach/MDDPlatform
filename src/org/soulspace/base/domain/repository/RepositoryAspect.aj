@@ -1,15 +1,11 @@
 package org.soulspace.base.domain.repository;
 
 import java.util.Date;
-import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import org.soulspace.base.domain.entity.Entity;
-import org.soulspace.base.domain.validation.Validateable;
-import org.soulspace.base.domain.validation.ValidationException;
-import org.soulspace.base.domain.validation.ValidationResult;
-import org.soulspace.base.infrastructure.persistence.PersistentStorage;
+import org.soulspace.base.domain.object.Entity;
+import org.soulspace.base.domain.persistence.PersistentStorage;
 
 /**
  * The RepositoryAspect handles the persistance of Entity objects
@@ -20,21 +16,8 @@ privileged public aspect RepositoryAspect {
 
 	Logger log = Logger.getLogger(RepositoryAspect.class.getName());
 	
-	//
-	// intertype declarations
-	//
 	declare parents : (@org.soulspace.annotation.domain.Repository *) implements Repository;
 
-	public PersistentStorage Repository.storage;
-	public void Repository.setStorage(PersistentStorage storage) {
-		this.storage = storage;
-		registerClasses();
-	}
-	PersistentStorage Repository.getStorage() {
-		return storage;
-	}
-	
-	//
 	// pointcuts
 	//
 	pointcut loadList(Repository repository) :
@@ -89,6 +72,5 @@ privileged public aspect RepositoryAspect {
 			throw new RepositoryException("Object with id " + id + " not found!");
 		}
 	}
-
 	// around store: if not dirty, don't store?!? TODO check for concurrent modification?
 }

@@ -5,6 +5,6 @@ import java.util.List;
 public interface Aggregate {
 
 	List<AggregateChild> getAggregateChild();
-	AggregateChild findAggregateChild(String id);
-
+	void addAggregateChild(AggregateChild child);
+	void removeAggregateChild(AggregateChild child);
 }

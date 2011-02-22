@@ -1,6 +1,5 @@
 package org.soulspace.base.domain.aggregate;
 
-
 import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.List;
@@ -8,13 +7,16 @@ import java.util.Map;
 import java.util.HashMap;
 
 import org.soulspace.annotation.domain.Aggregation;
-import org.soulspace.base.domain.entity.EntityAspect;
+import org.soulspace.base.domain.object.EntityAspect;
 import org.soulspace.util.CollectionUtils;
 import org.soulspace.util.ReflectionUtils;
 
 privileged public aspect AggregateAspect {
 
 	declare precedence : AggregateAspect, EntityAspect;
+
+	declare parents : (@org.soulspace.annotation.domain.AggregateRoot *) implements AggregateRoot;
+	declare parents : (@org.soulspace.annotation.domain.AggregateChild *) implements AggregateChild;
 
 	//
 	// Intertype declarations
@@ -25,7 +27,7 @@ privileged public aspect AggregateAspect {
 	private transient boolean Aggregate.initialized = false;
 	void Aggregate.initialize(Aggregate aggregate) {
 		if(!initialized) {
-			aggregateChildMap = new HashMap<String, AggregateChild>();
+			aggregateChildMap = new HashMap<Integer, AggregateChild>();
 
 			Field[] fields = getClass().getFields();
 			for(Field field : fields) {
@@ -59,7 +61,7 @@ privileged public aspect AggregateAspect {
 	}
 	
 	// map of all children of the aggregate
-	public transient Map<String, AggregateChild> Aggregate.aggregateChildMap = new HashMap<String, AggregateChild>();
+	public transient Map<Integer, AggregateChild> Aggregate.aggregateChildMap = new HashMap<Integer, AggregateChild>();
 	
 	public List<AggregateChild> Aggregate.getAggregateChild() {
 		List<AggregateChild> descendants = CollectionUtils.asList(aggregateChildMap.values(), AggregateChild.class);
@@ -70,26 +72,12 @@ privileged public aspect AggregateAspect {
 		return descendants;
 	}
 	
-	public AggregateChild Aggregate.findAggregateChild(String id) {
-		AggregateChild result = null;
-		if((result = aggregateChildMap.get(id)) != null) {
-			return result;
-		} else {
-			for(AggregateChild child : aggregateChildMap.values()) {
-				if((result = child.findAggregateChild(id)) != null) {
-					return result;
-				}
-			}
-		}
-		return null;
-	}
-	
 	public void Aggregate.addAggregateChild(AggregateChild child) {
-		aggregateChildMap.put(child.getId(), child);
+		aggregateChildMap.put(child.hashCode(), child);
 	}
 	
 	public void Aggregate.removeAggregateChild(AggregateChild child) {
-		aggregateChildMap.remove(child.getId());
+		aggregateChildMap.remove(child.hashCode());
 	}
 	
 	// AggregateChild
@@ -104,9 +92,6 @@ privileged public aspect AggregateAspect {
 		aggregateRoot = root;
 	}
 
-	declare parents : (@org.soulspace.annotation.domain.AggregateRoot *) implements AggregateRoot;
-	declare parents : (@org.soulspace.annotation.domain.AggregateChild *) implements AggregateChild;
-
 	//
 	// Pointcuts
 	//
@@ -114,33 +99,33 @@ privileged public aspect AggregateAspect {
 		adviceexecution() && within(AggregateAspect)
 		;
 	
-	pointcut constructAggregate() :
+	pointcut AggregateConstruction() :
 		call(Aggregate+.new(..))
 		;
 	
-	pointcut accessAggregateChildMap(Aggregate aggregate) :
-		get(Map<String, AggregateChild>+ *.aggregateChildMap)
+	pointcut aggregateChildMapAccess(Aggregate aggregate) :
+		get(Map<Integer, AggregateChild>+ *.aggregateChildMap)
 		&& target(aggregate)
 		;
 	
 	// pointcuts for aggregate structure operations
-	pointcut addAggregateChild(Aggregate parent, AggregateChild child) :
+	pointcut addChild(Aggregate parent, AggregateChild child) :
 		execution(* Aggregate+.add*(AggregateChild+))
 		&& !execution(* Aggregate+.addAggregateChild(..))
 		&& this(parent) && args(child)
 		;
 	
-	pointcut setAggregateChild(Aggregate parent, AggregateChild child) :
+	pointcut setChild(Aggregate parent, AggregateChild child) :
 		execution(* Aggregate+.set*(AggregateChild+))
 		&& this(parent) && args(child)
 		;
 	
-	pointcut newAggregateChild(Aggregate parent, AggregateChild child) :
-		addAggregateChild(parent, child)
-		|| setAggregateChild(parent, child)
+	pointcut aggregateChildAddition(Aggregate parent, AggregateChild child) :
+		addChild(parent, child)
+		|| setChild(parent, child)
 		;
 		
-	pointcut removeAggregateChild(Aggregate parent, AggregateChild child) :
+	pointcut aggregateChildRemoval(Aggregate parent, AggregateChild child) :
 		execution(* Aggregate+.remove*(AggregateChild+))		
 		&& !execution(* Aggregate+.removeAggregateChild(..))
 		&& this(parent) && args(child)
@@ -149,16 +134,15 @@ privileged public aspect AggregateAspect {
 	//
 	// Advices
 	//
-
-	before(Aggregate aggregate) : accessAggregateChildMap(aggregate) {
+	before(Aggregate aggregate) : aggregateChildMapAccess(aggregate) {
 		aggregate.initialize(aggregate);
 	}
 	
-//	after() returning(Aggregate aggregate) : constructAggregateRoot() {
+//	after() returning(Aggregate aggregate) : aggregateRootConstruction() {
 //		aggregate.initialize();
 //	}
 	
-	void around(Aggregate parent, AggregateChild child) : newAggregateChild(parent, child) {
+	void around(Aggregate parent, AggregateChild child) : aggregateChildAddition(parent, child) {
 		// check params
 		proceed(parent, child);
 		if(parent instanceof AggregateRoot) {
@@ -169,32 +153,11 @@ privileged public aspect AggregateAspect {
 		parent.addAggregateChild(child);
 	}
 	
-	void around(Aggregate parent, AggregateChild child) : removeAggregateChild(parent, child) {
+	void around(Aggregate parent, AggregateChild child) : aggregateChildRemoval(parent, child) {
 		// check params
 		proceed(parent, child);
 		child.setAggregateRoot(null);
 		parent.removeAggregateChild(child);		
 	}
-
-//	pointcut childChange(Entity child) :
-//		execution(void Entity.markDirty())
-//		&& this(child)
-//		;
-//	
-//	after(Entity child) returning : childChange(child) {
-//		if(child instanceof AggregateChild) {
-//			((AggregateChild) child).getAggregateRoot().markDirty();			
-//		}
-//	}
-//	
-//	void newAggregateChildModification(Aggregate a, Date modificationTime) {
-//		for(AggregateChild child : a.getAggregateChild()) {
-//			// create new modifications of aggregate childs
-//			if(((Persistant) child).isDirty() || ((Entity) child).getModification() == 0) {
-//				((Persistant) child).newModification(modificationTime);
-//				newAggregateChildModification(child, modificationTime);
-//			}
-//		}
-//	}	
 
 }

@@ -10,7 +10,7 @@ import org.soulspace.base.domain.validation.ValidationResult;
 
 public class ValidationResultImpl implements ValidationResult {
 	private List<ValidationIssue> issueList = new ArrayList<ValidationIssue>();
-	private Severity maxSeverity;
+	private Severity maxSeverity = Severity.SUCCESS;
 	
 	public void addValidationIssue(ValidationIssue issue) {
 		if(issue.getSeverity().compareTo(maxSeverity) > 0) {

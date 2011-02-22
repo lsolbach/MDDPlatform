@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.HashMap;
 
 import org.soulspace.aop.util.AspectHelper;
-import org.soulspace.base.domain.entity.Entity;
 import org.soulspace.base.domain.repository.Repository;
 
 public aspect DirtyTrackingAspect {
@@ -71,7 +70,6 @@ public aspect DirtyTrackingAspect {
 		String field = AspectHelper.getFieldName(thisJoinPoint);
 		obj.markDirty(field);
 	}
-
 
 	pointcut repositoryStore(DirtyTrackable obj) :
 		execution(* Repository+.store*(DirtyTrackable+))

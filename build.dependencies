@@ -4,9 +4,9 @@
 		<package name="AspectLibrary" version="0.1.0" type="project">
 			<module name="AspectLibrary"/>
 		</package>
-		<package name="InfrastructureAspects" version="0.2.0" type="project">
+		<!--package name="InfrastructureAspects" version="0.2.0" type="project">
 			<module name="InfrastructureAspects"/>
-		</package>
+		</package-->
 	</dependency>
 	
 	<dependency type="project">
@@ -16,7 +16,7 @@
 	</dependency>
 
 	<dependency type="runtime">
-		<package name="AnnotationLibrary" version="0.2.0" type="project">
+		<package name="AnnotationLibrary" version="0.3.0" type="project">
 			<module name="AnnotationLibrary"/>
 		</package>
 		<package name="commons-logging" version="1.1" type="lib">
