@@ -64,13 +64,4 @@ public abstract aspect ArchitectureDefinitionAspect {
 		|| call(*.Service+.new(..))
 	;
 	
-	
-	/**
-	 * 
-	 */
-
-	/**
-	 * 
-	 */
-
 }

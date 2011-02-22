@@ -7,13 +7,11 @@
 	</dependency>
 
 	<dependency type="project">
-		<package name="AnnotationLibrary" version="0.2.0" type="project">
+	</dependency>	
+
+	<dependency type="runtime">
+		<package name="AnnotationLibrary" version="0.3.0" type="project">
 			<module name="AnnotationLibrary"/>
 		</package>
 	</dependency>	
-
-<!--
-	<dependency type="runtime">
-	</dependency>	
--->
 </dependencies>

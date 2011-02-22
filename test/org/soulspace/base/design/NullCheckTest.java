@@ -1,6 +1,6 @@
 package org.soulspace.base.design;
 
-import org.soulspace.annotation.design.Optional;
+import org.soulspace.annotation.metadata.Optional;
 
 public class NullCheckTest {
 

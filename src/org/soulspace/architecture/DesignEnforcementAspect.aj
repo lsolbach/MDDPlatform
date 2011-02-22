@@ -23,10 +23,11 @@ public aspect DesignEnforcementAspect extends AbstractDesignDefininitionAspect {
 	declare error : entityCreationViolation() : "Don't create entities with new, use a factory!";
 	
 	pointcut valueMutation() :
-		call(* org.soulspace.base.domain.value.Value+.set*(..))
+		call(* org.soulspace.base.domain.object.Value+.set*(..))
 		;
 		
 	declare warning : valueMutation() : "Don't change value objects, create new ones!";
+	
 	pointcut collectionReplace() :
 		call(* org.soulspace.base.domain.object.DomainObject+.set*(Collection+))
 		;

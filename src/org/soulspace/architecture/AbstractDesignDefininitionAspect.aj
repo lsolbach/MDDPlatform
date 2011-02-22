@@ -54,5 +54,4 @@ public abstract aspect AbstractDesignDefininitionAspect {
 		call((@org.soulspace.annotation.domain.Value *).new(..))
 		;
 	
-
 }
