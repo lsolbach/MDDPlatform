@@ -8,10 +8,12 @@ import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.soulspace.base.infrastructure.storage.XStreamStorage;
+
 
 import com.thoughtworks.xstream.XStream;
 
-public class XStreamStorageImpl extends AbstractFileStorageImpl {
+public class XStreamStorageImpl extends AbstractFileStorageImpl implements XStreamStorage {
 
 	protected XStream xstream = new XStream();
 	protected Map<Class, String> aliasRegistry = new HashMap<Class, String>();

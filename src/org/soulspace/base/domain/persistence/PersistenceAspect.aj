@@ -35,7 +35,6 @@ public aspect PersistenceAspect {
 	
 	public void Persistence.setStorage(PersistentStorage storage) {
 		this.storage = storage;
-		registerClasses();
 	}
 	
 	PersistentStorage Persistence.getStorage() {

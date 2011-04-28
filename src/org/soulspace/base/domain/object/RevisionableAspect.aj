@@ -4,6 +4,8 @@ import java.util.Date;
 
 public aspect RevisionableAspect {
 	
+	declare parents : (@org.soulspace.annotation.domain.Revisioned *) implements Revisionable;
+	
 	Date Revisionable.createdAt;
 	String Revisionable.createdBy;
 	Date Revisionable.modifiedAt;

@@ -21,6 +21,7 @@ import org.soulspace.base.domain.object.DomainObject;
 import org.soulspace.base.domain.object.Identified;
 import org.soulspace.base.domain.object.Modifiable;
 import org.soulspace.base.domain.object.Temporal;
+import org.soulspace.base.domain.object.Versioned;
 import org.soulspace.base.domain.persistence.IdModificationFileFilter;
 import org.soulspace.base.domain.persistence.PersistentStorage;
 import org.soulspace.base.infrastructure.storage.StorageException;
@@ -44,7 +45,7 @@ public class XStreamPersistentStorageImpl implements PersistentStorage {
 		}
 	}
 	
-	public void setRepositoryRoot(String rootDir) {
+	public void setRootDir(String rootDir) {
 		this.rootDir = rootDir;
 		File file = new File(rootDir);
 		if(!file.exists()) {
@@ -317,7 +318,7 @@ public class XStreamPersistentStorageImpl implements PersistentStorage {
 		if(persistent instanceof Identified) {
 			key = ((Identified) persistent).getId();
 		}
-		if(persistent instanceof Modifiable) {
+		if(persistent instanceof Modifiable && persistent instanceof Versioned) {
 			key = key + "-" + ((Modifiable) persistent).getModification();
 		}
 		return key;

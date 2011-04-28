@@ -8,7 +8,7 @@ import org.soulspace.base.domain.object.Entity;
 import org.soulspace.base.domain.persistence.PersistentStorage;
 
 /**
- * The RepositoryAspect handles the persistance of Entity objects
+ * The RepositoryAspect handles the persistence of domain objects
  * 
  */
 privileged public aspect RepositoryAspect {
