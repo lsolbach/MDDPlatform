@@ -1,5 +1,7 @@
 package org.soulspace.base.domain.object;
 
-public interface Entity extends DomainObject, Identified, Modifiable {
+import org.soulspace.base.domain.validation.Validatable;
+
+public interface Entity extends DomainObject, Identified, Modifiable, Validatable {
 	
 }

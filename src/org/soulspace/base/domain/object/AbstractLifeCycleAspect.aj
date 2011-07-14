@@ -2,13 +2,43 @@ package org.soulspace.base.domain.object;
 
 public abstract aspect AbstractLifeCycleAspect {
 
-	pointcut rootCreated(DomainObject root);
-	pointcut rootRead(DomainObject root);
-	pointcut rootUpdated(DomainObject root);
-	pointcut rootDeleted(DomainObject root);
+	pointcut rootCreated(DomainObject root) :
+		execution(* Repository+.add*(DomainObject+))
+		&& !within(AbstractLifeCycleAspect+)
+		&& args(root)
+		;
+	
+	pointcut rootRead() :
+		// FIXME handle collections
+		execution(DomainObject+ Repository+.get*(..))
+		&& !within(AbstractLifeCycleAspect+)
+		;
+	
+	pointcut rootUpdated(DomainObject root) :
+		execution(* Repository+.update*(DomainObject+))
+		&& !within(AbstractLifeCycleAspect+)
+		&& args(root)
+		;
+	
+	pointcut rootDeleted(DomainObject root) :
+		execution(* Repository+.delete*(DomainObject+))
+		&& !within(AbstractLifeCycleAspect+)
+		&& args(root)
+		;
 
-	pointcut childCreated(DomainObject root, DomainObject child);
-	pointcut childUpdated(DomainObject root, DomainObject child);
-	pointcut childDeleted(DomainObject root, DomainObject child);
+	pointcut childCreated(DomainObject root, DomainObject child) // TODO
+		;
+
+	pointcut childUpdated(DomainObject root, DomainObject child) // TODO
+		;
+
+	pointcut childAdded(DomainObject root, DomainObject child) // TODO
+		;
+	
+	pointcut childRemoved(DomainObject root, DomainObject child) // TODO
+		;
+	
+	pointcut childDeleted(DomainObject root, DomainObject child) // TODO
+		;
 
 }

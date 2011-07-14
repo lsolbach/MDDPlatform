@@ -1,6 +1,6 @@
 package org.soulspace.base.domain.validation;
 
-public interface Validateable {
+public interface Validatable {
 
 	boolean isValid();
 	ValidationResult validate();

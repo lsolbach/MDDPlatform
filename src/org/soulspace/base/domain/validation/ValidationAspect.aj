@@ -6,38 +6,48 @@ import org.soulspace.base.domain.validation.impl.ValidatorImpl;
 
 public aspect ValidationAspect {
 
-	declare parents : (@org.soulspace.annotation.domain.Validateable *) implements Validateable;
+	declare parents : (@org.soulspace.annotation.domain.Validatable *) implements Validatable;
 	
-	public boolean Validateable.isValid() {
+	public boolean Validatable.isValid() {
 		return true;
 	}
 	
-	public ValidationResult Validateable.validate() {
+	public ValidationResult Validatable.validate() {
 		return ValidatorImpl.validate(this);
 	}
 	
 	pointcut factoryShipping() :
-		execution(Validateable+ Factory+.*())
+		execution(Validatable+ Factory+.*(..))
 		;
 	
-	after() returning(Validateable v) : factoryShipping() {
+	pointcut repositoryStorage() :
+		execution(* Repository+.add*(Validatable+))
+		||
+		execution(* Repository+.update*(Validatable+))
+		;
+	
+	pointcut repositoryValidation(Validatable v) :
+		repositoryStorage()
+		&& args(v)
+		;
+	
+	// Validate object returned from factory
+	after() returning(Validatable v) : factoryShipping() {
 		validate(v);
 	}
 
-	pointcut repositoryStorage(Validateable v) :
-		execution(* Repository+.store*(Validateable+))
-		&& args(v);
-		;
-	
-	before(Validateable v) : repositoryStorage(v) {
+	// Validate object before storing to repository
+	before(Validatable v) : repositoryValidation(v) {		
 		validate(v);
 	}
-	
-	ValidationResult validate(Validateable v) {
-		ValidationResult vResult = v.validate();
-		if(vResult.getSeverity().equals(Severity.ERROR)) {
-			throw new ValidationException("Object " + v + " invalid!", vResult);
+		
+	void validate(Validatable v) {
+		if(v == null) {
+			throw new NullPointerException("The object to validate is null!");
 		}
-		return vResult;
+		ValidationResult vResult = v.validate();
+		if(!vResult.isValid()) {
+			throw new ValidationException("The object " + v + " is invalid!", vResult);
+		}
 	}
 }

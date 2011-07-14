@@ -4,11 +4,11 @@ import org.soulspace.annotation.domain.Entity;
 import org.soulspace.annotation.infrastructure.Persistent;
 import org.soulspace.annotation.metadata.Mandatory;
 import org.soulspace.annotation.metadata.Size;
-import org.soulspace.base.domain.validation.Validateable;
+import org.soulspace.base.domain.validation.Validatable;
 import org.soulspace.base.domain.validation.ValidationResult;
 
 @Entity
-public class ApplicationImpl implements Application, Validateable {
+public class ApplicationImpl implements Application, Validatable {
 
 	@Mandatory
 	@Size(min = 2, max = 20)
