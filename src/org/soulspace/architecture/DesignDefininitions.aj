@@ -1,56 +1,56 @@
 package org.soulspace.architecture;
 
-public abstract aspect AbstractDesignDefininitionAspect {
+public abstract aspect DesignDefininitions {
 
-	pointcut inEntity() :
+	public static pointcut inEntity() :
 		within((@org.soulspace.annotation.domain.Entity *))
 		;	
 
-	pointcut inValue() :
+	public static pointcut inValue() :
 		within((@org.soulspace.annotation.domain.Value *))
 		;	
 
-	pointcut inDomainObject() :
+	public static pointcut inDomainObject() :
 		inEntity() || inValue()
 		;	
 
-	pointcut inFactory() :
+	public static pointcut inFactory() :
 		within((@org.soulspace.annotation.domain.Factory *))
 		;	
 
-	pointcut inRepository() :
+	public static pointcut inRepository() :
 		within((@org.soulspace.annotation.domain.Repository *))
 		;	
 
-	pointcut inService() :
+	public static pointcut inService() :
 		within((@org.soulspace.annotation.domain.Service *))
 		;	
 
-	pointcut entityCall() :
+	public static pointcut callingEntity() :
 		call(* (@org.soulspace.annotation.domain.Entity *).*(..))
 		;
 
-	pointcut valueCall() :
+	public static pointcut callingValue() :
 		call(* (@org.soulspace.annotation.domain.Value *).*(..))
 		;
 
-	pointcut factoryCall() :
+	public static pointcut callingFactory() :
 		call(* (@org.soulspace.annotation.domain.Factory *).*(..))
 		;
 
-	pointcut repositoryCall() :
+	public static pointcut repositoryCall() :
 		call(* (@org.soulspace.annotation.domain.Repository *).*(..))
 		;
 
-	pointcut serviceCall() :
+	public static pointcut callingService() :
 		call(* (@org.soulspace.annotation.domain.Service *).*(..))
 		;
 	
-	pointcut entityCreation() :
+	public static pointcut creatingEntity() :
 		call((@org.soulspace.annotation.domain.Entity *).new(..))
 		;
 	
-	pointcut valueCreation() :
+	public static pointcut creatingValue() :
 		call((@org.soulspace.annotation.domain.Value *).new(..))
 		;
 	

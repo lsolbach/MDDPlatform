@@ -1,19 +1,19 @@
 package org.soulspace.architecture;
 
-public aspect ArchitectureEnforcementAspect extends ArchitectureDefinitionAspect {
+public aspect ArchitectureEnforcementAspect extends ArchitectureDefinitions {
 
 	pointcut forbiddenPresentationLayerCall() :
-		presentationLayerCall()
+		callingPresentationLayer()
 		&& (inApplicationLayer() || inDomainLayer() || inInfrastructureLayer())
 		;
 	
 	pointcut forbiddenApplicationLayerCall() :
-		applicationLayerCall()
+		callingApplicationLayer()
 		&& (inDomainLayer() || inInfrastructureLayer())
 		;
 	
 	pointcut forbiddenDomainLayerCall() :
-		domainLayerCall()
+		callingDomainLayer()
 		&& inInfrastructureLayer()
 		;
 	

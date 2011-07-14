@@ -3,7 +3,7 @@ package org.soulspace.architecture;
 import java.util.Collection;
 
 
-public aspect DesignEnforcementAspect extends AbstractDesignDefininitionAspect {
+public aspect DesignEnforcementAspect extends DesignDefininitions {
 
 	pointcut inUnitTest() :
 		within(junit.framework.TestCase+)
@@ -14,13 +14,22 @@ public aspect DesignEnforcementAspect extends AbstractDesignDefininitionAspect {
 		;		
 	
 	pointcut entityCreationViolation() :
-		entityCreation()
+		creatingEntity()
 		&& !inFactory()
 		&& !inTest()
 		&& !inUnitTest()
 		;
 	
 	declare error : entityCreationViolation() : "Don't create entities with new, use a factory!";
+	
+	pointcut valueCreationViolation() :
+		creatingValue()
+		&& !inFactory()
+		&& !inTest()
+		&& !inUnitTest()
+		;
+	
+	declare error : valueCreationViolation() : "Don't create values with new, use a factory!";
 	
 	pointcut valueMutation() :
 		call(* org.soulspace.base.domain.object.Value+.set*(..))
