@@ -24,6 +24,10 @@ public aspect IdentifiedAspect {
 		return id;
 	}
 	
+	public void Identified.setId(String id) {
+		this.id = id;
+	}
+	
 	public boolean Identified.equals(Object o) {
 		if(!this.getClass().isInstance(o)) {
 			return false;			
