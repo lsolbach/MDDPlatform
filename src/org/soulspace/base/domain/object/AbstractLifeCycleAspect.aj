@@ -1,5 +1,7 @@
 package org.soulspace.base.domain.object;
 
+import org.soulspace.base.domain.repository.Repository;
+
 public abstract aspect AbstractLifeCycleAspect {
 
 	pointcut rootCreated(DomainObject root) :

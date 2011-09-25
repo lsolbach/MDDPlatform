@@ -2,9 +2,11 @@ package org.soulspace.base.domain.object;
 
 import java.util.Date;
 
+import org.soulspace.base.domain.repository.Repository;
+
 public aspect RevisionableAspect {
 	
-	declare parents : (@org.soulspace.annotation.domain.Revisioned *) implements Revisionable;
+	declare parents : (@org.soulspace.annotation.domain.Revisionable *) implements Revisionable;
 	
 	Date Revisionable.createdAt;
 	String Revisionable.createdBy;
@@ -41,6 +43,29 @@ public aspect RevisionableAspect {
 	
 	public synchronized void Revisionable.setModifiedBy(String modifiedBy) {
 		this.modifiedBy = modifiedBy;
+	}
+	
+	public pointcut addRevisionable(Revisionable revisionable) :
+		execution(void Repository+.add*(Revisionable+))
+		&& args(revisionable)
+		;
+
+	before(Revisionable revisionable) : addRevisionable(revisionable) {
+		Date now = new Date();
+		revisionable.setCreatedAt(now);
+		revisionable.setModifiedAt(now);
+		// TODO add user
+	}
+	
+	public pointcut updateRevisionable(Revisionable revisionable) :
+		execution(Revisionable+ Repository+.update*(Revisionable+))
+		&& args(revisionable)
+		;
+
+	before(Revisionable revisionable) : updateRevisionable(revisionable) {
+		Date now = new Date();
+		revisionable.setModifiedAt(now);
+		// TODO add user
 	}
 	
 }

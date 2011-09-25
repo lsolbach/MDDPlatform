@@ -11,7 +11,7 @@ public class DummyAuditRepositoryImpl implements AuditRepository {
 				+ event.getObject().toString());
 		if (event.getObject() instanceof Auditable) {
 			Auditable root = (Auditable) event.getObject();
-			for (AuditEvent childEvent : root.getHistorisationEventList()) {
+			for (AuditEvent childEvent : root.getAuditEventList()) {
 				System.out.println("Audit " + childEvent.getType() + ": "
 						+ root.toString() + " -> "
 						+ childEvent.getObject().toString());
