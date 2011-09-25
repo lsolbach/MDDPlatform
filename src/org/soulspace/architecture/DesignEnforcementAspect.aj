@@ -1,32 +1,32 @@
 package org.soulspace.architecture;
 
-import java.util.Collection;
 
+public aspect DesignEnforcementAspect {
 
-public aspect DesignEnforcementAspect extends DesignDefininitions {
+	pointcut directFieldAccess() :
+		get(public !final * *)
+		|| set(public !final * *);
 
-	pointcut inUnitTest() :
-		within(junit.framework.TestCase+)
-		;
-	
-	pointcut inTest() :
-		within(*..*Test)
-		;		
+	declare warning : directFieldAccess() : "Use accessor methods for access";
+
+	pointcut systemStreamAccess() :   
+		get(* System.out)
+		|| get(* System.err);
+
+	declare warning : systemStreamAccess() : "Use logging instead of system streams";
 	
 	pointcut entityCreationViolation() :
-		creatingEntity()
-		&& !inFactory()
-		&& !inTest()
-		&& !inUnitTest()
+		DesignDefininitions.creatingEntity()
+		&& !DesignDefininitions.inFactory()
+		&& !ArchitectureDefinitions.inTest()
 		;
 	
 	declare error : entityCreationViolation() : "Don't create entities with new, use a factory!";
 	
 	pointcut valueCreationViolation() :
-		creatingValue()
-		&& !inFactory()
-		&& !inTest()
-		&& !inUnitTest()
+		DesignDefininitions.creatingValue()
+		&& !DesignDefininitions.inFactory()
+		&& !ArchitectureDefinitions.inTest()
 		;
 	
 	declare error : valueCreationViolation() : "Don't create values with new, use a factory!";
