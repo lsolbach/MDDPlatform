@@ -2,6 +2,6 @@ package org.soulspace.base.domain.identity;
 
 public interface IdGenerator {
 	String getId();
-	String getId(String sequence);
-//	String getId(Identified idObject);
+	String getId(String type);
+	//String getId(Identified object);
 }

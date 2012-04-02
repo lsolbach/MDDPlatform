@@ -1,12 +1,12 @@
 package org.soulspace.base.domain.object;
 
 import org.soulspace.base.domain.identity.IdGenerator;
-import org.soulspace.base.domain.identity.StupidIdGenerator;
+import org.soulspace.base.domain.identity.StupidIdGeneratorImpl;
 
 public aspect IdentifiedAspect {
 
 	// default to simple IdGenerator
-	private IdGenerator idGenerator = new StupidIdGenerator();
+	private IdGenerator idGenerator = new StupidIdGeneratorImpl();
 
 	public void setIdGenerator(IdGenerator idGenerator) {
 		this.idGenerator = idGenerator;

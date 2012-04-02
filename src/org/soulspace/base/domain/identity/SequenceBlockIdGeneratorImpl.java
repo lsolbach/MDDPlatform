@@ -1,5 +1,5 @@
 package org.soulspace.base.domain.identity;
 
-public class SequenceBlockIdGenerator {
+public class SequenceBlockIdGeneratorImpl {
 	
 }
