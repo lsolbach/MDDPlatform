@@ -1,11 +1,23 @@
 package org.soulspace.base.domain.authorisation;
 
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.Signature;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.soulspace.annotation.security.Secured;
 import org.soulspace.annotation.security.Sensitive;
 
 public abstract aspect AuthorisationAspect {
 
-	// TODO implement security context (with user and roles for the application)
+	private AuthorisationService authorisationService;
+	
+	public void setAuthorisationService(AuthorisationService authorisationService) {
+		this.authorisationService = authorisationService;
+	}
+	
+	public AuthorisationService getAuthorisationService() {
+		return this.authorisationService;
+	}
+	
 	declare precedence : AuthorisationAspect, *;
 
 	pointcut securedMethodCall() :
@@ -24,9 +36,11 @@ public abstract aspect AuthorisationAspect {
 //		execution(Set<(@Sensitive *)> *(..))
 //		;
 
-	before() : securedMethodCall() {		
-		if(!hasPermission()) {
-			throw new AuthorisationException("Call not permitted");
+	before() : securedMethodCall() {
+		String requiredPermission = getPermission(thisJoinPoint);
+		if(!authorisationService.checkPermission(requiredPermission)) {
+			throw new AuthorisationException("Call to " + thisJoinPointStaticPart.toShortString()
+					+ " is not permitted. Required permission " + requiredPermission + "!");
 		}
 	}
 	
@@ -36,12 +50,18 @@ public abstract aspect AuthorisationAspect {
 		}
 	}
 	
-	boolean hasPermission() {
-		return false;
-	}
-
+	// TODO implement for real
 	boolean hasAccess() {
 		return false;		
+	}
+
+	String getPermission(JoinPoint thisJoinPoint) {
+		Signature sig = thisJoinPoint.getSignature();
+		if(sig instanceof MethodSignature) {
+			Secured secured = ((MethodSignature) sig).getMethod().getAnnotation(Secured.class);
+			return secured.permission();
+		}
+		return "";
 	}
 	
 }
