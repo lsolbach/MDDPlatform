@@ -33,21 +33,21 @@ public class XStreamPersistentStorageImpl implements PersistentStorage {
 	
 	private static long MIN_MODIFICATION = 0;
 	protected XStream xstream = new XStream(new Dom4JDriver());
-	protected String rootDir = "/tmp/repository";
+	protected String location = "/tmp/repository";
 	protected Map<Class<? extends DomainObject>, String> aliasRegistry = new HashMap<Class<? extends DomainObject>, String>();
 	protected Map<Class<? extends DomainObject>, Class<? extends DomainObject>> interfaceRegistry = new HashMap<Class<? extends DomainObject>, Class<? extends DomainObject>>();
 	protected Map<String, Class<? extends DomainObject>> nameRegistry = new HashMap<String, Class<? extends DomainObject>>();
 	
 	public XStreamPersistentStorageImpl() {
-		File file = new File(rootDir);
+		File file = new File(location);
 		if(!file.exists()) {
 			file.mkdirs();
 		}
 	}
 	
-	public void setRootDir(String rootDir) {
-		this.rootDir = rootDir;
-		File file = new File(rootDir);
+	public void setLocation(String location) {
+		this.location = location;
+		File file = new File(location);
 		if(!file.exists()) {
 			file.mkdirs();
 		}
@@ -68,7 +68,7 @@ public class XStreamPersistentStorageImpl implements PersistentStorage {
 
 		if(DomainObject.class.isAssignableFrom(rClass)) {
 			// create subdirs for each entity class except for aggregate childs
-			File file = new File(rootDir + File.separator + rInterface.getSimpleName());
+			File file = new File(location + File.separator + rInterface.getSimpleName());
 			if(!file.exists()) {
 				// create subdirs
 				file.mkdirs();
@@ -103,6 +103,7 @@ public class XStreamPersistentStorageImpl implements PersistentStorage {
 					writer.close();
 				} catch (IOException e) {
 					// FIXME log
+					System.out.println("Error closing file!");
 				}
 			}
 		}
@@ -139,6 +140,7 @@ public class XStreamPersistentStorageImpl implements PersistentStorage {
 					reader.close();
 				} catch (IOException e) {
 					// FIXME log
+					System.out.println("Error closing file!");
 				}
 			}
 		}
@@ -335,12 +337,12 @@ public class XStreamPersistentStorageImpl implements PersistentStorage {
 	
 	String getStorageDirName(Class<? extends DomainObject> type) {
 		String interfaceName = interfaceRegistry.get(type).getSimpleName();
-		return rootDir + File.separator + interfaceName;
+		return location + File.separator + interfaceName;
 	}
 
 	String getStorageDirName(DomainObject persistent) {
 		String interfaceName = interfaceRegistry.get(persistent.getClass()).getSimpleName();
-		return rootDir + File.separator + interfaceName;
+		return location + File.separator + interfaceName;
 	}
 
 	public void writeObject(Writer writer, Object o) {
