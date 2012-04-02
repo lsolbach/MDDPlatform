@@ -4,7 +4,7 @@ import org.soulspace.base.domain.audit.AuditEvent;
 import org.soulspace.base.domain.audit.AuditRepository;
 import org.soulspace.base.domain.audit.Auditable;
 
-public class DummyAuditRepositoryImpl implements AuditRepository {
+public class SysOutAuditRepositoryImpl implements AuditRepository {
 
 	public void addAuditEvent(AuditEvent event) {
 		System.out.println("Audit " + event.getType() + ": "
