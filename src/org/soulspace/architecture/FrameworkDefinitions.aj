@@ -24,7 +24,6 @@ public aspect FrameworkDefinitions {
 	
 	
 	// Common frameworks
-	
 	public static pointcut inSpringFramework() :
 		within(org.springframework..*);
 	
@@ -54,7 +53,6 @@ public aspect FrameworkDefinitions {
 	
 	
 	// Test frameworks
-	
 	public static pointcut inJUnit() :
 		within(junit.framework..*);
 		
