@@ -36,9 +36,8 @@ public class DateUtils {
 		return result;
 	}
 
+	/* TODO don't use hardcoded constants here */
 	public static Date valueOf(String timeString) {
-//		GregorianCalendar gCal = new GregorianCalendar();
-//		return gCal.getTime();
 		try {
 			return DateFormat.getDateInstance(DateFormat.SHORT, Locale.GERMANY).parse(timeString);			
 		} catch (ParseException e) {

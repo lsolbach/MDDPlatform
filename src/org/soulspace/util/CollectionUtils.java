@@ -86,7 +86,7 @@ public class CollectionUtils {
 		while (it.hasNext()) {
 			if(!filter.accept(it.next())) {
 				it.remove();
-			}			
+			}	
 		}
 		return list;
 	}

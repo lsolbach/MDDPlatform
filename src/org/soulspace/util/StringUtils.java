@@ -34,8 +34,6 @@ public class StringUtils {
 		File file = new File(fileName);
 		System.out.println(file.getAbsolutePath());
 
-		// loadDir(file.getParent());
-
 		BufferedReader in = new BufferedReader(new FileReader(file));
 		while ((line = in.readLine()) != null) {
 			buffer.append(line + "\n");

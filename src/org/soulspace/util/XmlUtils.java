@@ -20,11 +20,11 @@ public class XmlUtils {
 			return "";
 		}
 		String r = s;
-		r = r.replaceAll("&amp;", "&");
-		r = r.replaceAll("&gt;", ">");
-		r = r.replaceAll("&lt;", "<");
-		r = r.replaceAll("&quot;", "\"");
 		r = r.replaceAll("&apos;", "'");
+		r = r.replaceAll("&quot;", "\"");
+		r = r.replaceAll("&lt;", "<");
+		r = r.replaceAll("&gt;", ">");
+		r = r.replaceAll("&amp;", "&");
 		return r;
 	}
 }
