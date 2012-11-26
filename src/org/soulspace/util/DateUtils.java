@@ -8,20 +8,12 @@ import java.util.Locale;
 
 public class DateUtils {
 
-	public static int compareFrom(Date d0, Date d1) {
-		int result = 0;
-		if(d0 == null && d1 == null) {
-			result = 0;
-		} else if(d0 == null) {
-			result = -1;
-		} else if(d1 == null) {
-			result = 1;
-		} else {
-			result = d0.compareTo(d1);
-		}
-		return result;
-	}
-	
+	/**
+	 * 
+	 * @param d0
+	 * @param d1
+	 * @return
+	 */
 	public static int compareTo(Date d0, Date d1) {
 		int result = 0;
 		if(d0 == null && d1 == null) {
@@ -36,6 +28,27 @@ public class DateUtils {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param d0
+	 * @param d1
+	 * @return
+	 */
+	public static int compareFrom(Date d0, Date d1) {
+		// FIXME check
+		int result = 0;
+		if(d0 == null && d1 == null) {
+			result = 0;
+		} else if(d0 == null) {
+			result = -1;
+		} else if(d1 == null) {
+			result = 1;
+		} else {
+			result = d0.compareTo(d1);
+		}
+		return result;
+	}
+	
 	/* TODO don't use hardcoded constants here */
 	public static Date valueOf(String timeString) {
 		try {
