@@ -16,6 +16,8 @@ History
 
 Version 0.3.0 (--.--.2012)
 --------------------------
+* intitial import to github
+* switched to git
 * refactorings
 * enhanced unit tests
 
