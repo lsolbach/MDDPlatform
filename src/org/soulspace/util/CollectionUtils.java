@@ -43,6 +43,23 @@ public class CollectionUtils {
 	}
 
 	/**
+	 * Filter the list, so the list contains only objects accepted by the given filter
+	 * @param <T>
+	 * @param list
+	 * @param filter
+	 * @return
+	 */
+	public static <T> List<T> filterListInplace(List<T> list, Filter<T> filter) {
+		Iterator<T> it = list.iterator();
+		while (it.hasNext()) {
+			if(!filter.accept(it.next())) {
+				it.remove();
+			}	
+		}
+		return list;
+	}
+	
+	/**
 	 * Adds the content of the second list to the first list, but checks for each element if the element is not already there.
 	 * To be used as a Set replacement, if the order of inserts is relevant.
 	 * @param <T>
@@ -74,23 +91,6 @@ public class CollectionUtils {
 		return l1;
 	}	
 
-	/**
-	 * Filter the list, so the list contains only objects accepted by the given filter
-	 * @param <T>
-	 * @param list
-	 * @param filter
-	 * @return
-	 */
-	public static <T> List<T> filterListInplace(List<T> list, Filter<T> filter) {
-		Iterator<T> it = list.iterator();
-		while (it.hasNext()) {
-			if(!filter.accept(it.next())) {
-				it.remove();
-			}	
-		}
-		return list;
-	}
-	
 	/**
 	 * Convert the collection to a typed list of given type. 
 	 * @param <T>
@@ -141,12 +141,11 @@ public class CollectionUtils {
 	 * @param coll
 	 * @return string array
 	 */
-	public static String[] asStringArray(Collection<Object> coll) {
+	public static String[] asStringArray(Collection<? extends Object> coll) {
 		int i = 0;
 		String[] strings = new String[coll.size()];
-		Iterator<Object> it = coll.iterator();
-		while(it.hasNext()) {    
-			strings[i++] = it.next().toString();
+		for(Object o : coll) {
+			strings[i++] = o.toString();
 		}
 		return strings;
 	}

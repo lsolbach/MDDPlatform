@@ -34,8 +34,8 @@ public class DateUtils {
 	 * @param d1
 	 * @return
 	 */
+	// TODO delete if not used
 	public static int compareFrom(Date d0, Date d1) {
-		// FIXME check
 		int result = 0;
 		if(d0 == null && d1 == null) {
 			result = 0;
@@ -44,12 +44,12 @@ public class DateUtils {
 		} else if(d1 == null) {
 			result = 1;
 		} else {
-			result = d0.compareTo(d1);
+			result = d1.compareTo(d0);
 		}
 		return result;
 	}
 	
-	/* TODO don't use hardcoded constants here */
+	// TODO don't use hardcoded constants here
 	public static Date valueOf(String timeString) {
 		try {
 			return DateFormat.getDateInstance(DateFormat.SHORT, Locale.GERMANY).parse(timeString);			
@@ -57,5 +57,4 @@ public class DateUtils {
 			throw new RuntimeException(e);
 		}
 	}
-
 }
