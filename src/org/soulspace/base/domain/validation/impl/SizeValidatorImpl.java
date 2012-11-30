@@ -13,6 +13,7 @@ import org.soulspace.base.domain.validation.ValidationResult;
 public class SizeValidatorImpl implements FieldValidator {
 
 	public static boolean isValidString(String value, int min, int max) {
+		// System.out.println("validating string size...");
 		if(value == null) {
 			return true;
 		}
@@ -24,6 +25,7 @@ public class SizeValidatorImpl implements FieldValidator {
 	}
 
 	public static boolean isValidArray(Object[] values, int min, int max) {
+		// System.out.println("validating array size...");
 		if(values == null) {
 			return true;
 		}
@@ -35,6 +37,7 @@ public class SizeValidatorImpl implements FieldValidator {
 	}
 
 	public static boolean isValidCollection(Collection<? extends Object> values, int min, int max) {
+		// System.out.println("validating collection size...");
 		if(values == null) {
 			return true;
 		}
@@ -46,6 +49,7 @@ public class SizeValidatorImpl implements FieldValidator {
 	}
 
 	public static boolean isValidMap(Map<? extends Object, ? extends Object> values, int min, int max) {
+		// System.out.println("validating map size...");
 		if(values == null) {
 			return true;
 		}
@@ -59,25 +63,26 @@ public class SizeValidatorImpl implements FieldValidator {
 	@SuppressWarnings("unchecked")
 	public static <T> boolean isValid(Class<T> type, T value, int min, int max) {
 		if(type.equals(String.class)) {
-			System.out.println("validating size of string value");
+			// System.out.println("validating size of string value");
 			return isValidString((String) value, min, max);
 		} else if(type.equals(Array.class)) {
-			System.out.println("validating size of array");
+			// System.out.println("validating size of array");
 			return isValidArray((Object[]) value, min, max);			
 		} else if(type.equals(Collection.class)) {
-			System.out.println("validating size of collection");
+			// System.out.println("validating size of collection");
 			return isValidCollection((Collection<? extends Object>) value, min, max);			
 		} else if(type.equals(Map.class)) {
-			System.out.println("validating size of map");
+			// System.out.println("validating size of map");
 			return isValidMap((Map<? extends Object, ? extends Object>) value, min, max);
 		} else {
-			System.out.println(type.getName());
+			// System.out.println("Unhandled size validation for type " + type.getName());
 			return true;
 		}
 	}
 	
 	@SuppressWarnings("unchecked")
 	public ValidationResult validateField(ValidationResult result, Field field, Object value) {
+		// System.out.println("validating size of field " + field.getName() + "...");
 		if(field.isAnnotationPresent(Size.class) && value != null) {
 			// validate size
 			Size size = field.getAnnotation(Size.class);
@@ -118,7 +123,7 @@ public class SizeValidatorImpl implements FieldValidator {
 									Severity.ERROR,
 									"The array must contain at most " + max + " elements!"));
 				}
-			} else if(type.equals(Collection.class)) {
+			} else if(Collection.class.isAssignableFrom(type)) {
 				// System.out.println("validating size of collection");
 				Collection<? extends Object> collValue = (Collection<? extends Object>) value;
 				if(collValue.size() < min) {
@@ -135,7 +140,7 @@ public class SizeValidatorImpl implements FieldValidator {
 									Severity.ERROR,
 									"The collection must contain at most " + max + " elements!"));
 				}
-			} else if(type.equals(Map.class)) {
+			} else if(Map.class.isAssignableFrom(type)) {
 				// System.out.println("validating size of map");
 				Map<? extends Object, ? extends Object> mapValue = (Map<? extends Object, ? extends Object>) value;
 				if(mapValue.size() < min) {
@@ -153,7 +158,7 @@ public class SizeValidatorImpl implements FieldValidator {
 									"The map must contain at most " + max + " elements!"));
 				}
 			} else {
-				// System.out.println(type.getName());
+				System.out.println("Unhandled size validation for type " + type.toString());
 			}
 		}
 		return result;

@@ -15,6 +15,7 @@ public class MandatoryValidatorImpl implements FieldValidator {
 	public ValidationResult validateField(ValidationResult result, Field field,
 			Object value) {
 		if (field.isAnnotationPresent(Mandatory.class)) {
+			// System.out.println("validating mandatoriness of field " + field.getName() + "...");
 			if (value == null) {
 				result.addValidationIssue(
 						new ValidationIssueImpl(field.getName(),
