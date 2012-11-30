@@ -45,27 +45,26 @@ public aspect RevisionableAspect {
 		this.modifiedBy = modifiedBy;
 	}
 	
-	public pointcut addRevisionable(Revisionable revisionable) :
-		execution(void Repository+.add*(Revisionable+))
-		&& args(revisionable)
+	// Create revision data at construction time to have fully initialized objects all the time
+	public pointcut revisionableCreation() :
+		call(Revisionable+.new(..))
 		;
 
-	before(Revisionable revisionable) : addRevisionable(revisionable) {
+	after() returning(Revisionable revisionable) : revisionableCreation() {
 		Date now = new Date();
 		revisionable.setCreatedAt(now);
 		revisionable.setModifiedAt(now);
 		// TODO add user
 	}
 	
-	public pointcut updateRevisionable(Revisionable revisionable) :
+	public pointcut revisionableUpdate(Revisionable revisionable) :
 		execution(Revisionable+ Repository+.update*(Revisionable+))
 		&& args(revisionable)
 		;
 
-	before(Revisionable revisionable) : updateRevisionable(revisionable) {
+	before(Revisionable revisionable) : revisionableUpdate(revisionable) {
 		Date now = new Date();
 		revisionable.setModifiedAt(now);
 		// TODO add user
 	}
-	
 }
