@@ -25,20 +25,19 @@ public class AspectHelper {
 
 	public static String renderArgs(JoinPoint jp) {
 		Object[] args = jp.getArgs();
-
 		if(args == null || args.length == 0) {
 			return "()";
+		} else {
+			StringBuilder sb = new StringBuilder();
+			sb.append("(");
+			sb.append(renderArg(args[0]));
+			for(int i = 1; i < args.length; i++) {
+				sb.append(", ");
+				sb.append(renderArg(args[i]));
+			}
+			sb.append(")");
+			return sb.toString();
 		}
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append("(");
-		renderArg(args[0]);
-		for(int i = 1; i < args.length; i++) {
-			sb.append(", ");
-			sb.append(renderArg(args[i]));
-		}
-		sb.append(")");
-		return sb.toString();
 	}
 
 	public static String renderArg(Object arg) {
