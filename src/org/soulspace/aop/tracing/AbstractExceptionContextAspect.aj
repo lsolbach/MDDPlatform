@@ -2,9 +2,8 @@ package org.soulspace.aop.tracing;
 
 public abstract aspect AbstractExceptionContextAspect {
 
-	abstract public void log(String message);
-
 	abstract pointcut exceptionsTraced();
+	abstract public void log(String message);
 	
 	after() throwing(Exception e) : 
 		exceptionsTraced()

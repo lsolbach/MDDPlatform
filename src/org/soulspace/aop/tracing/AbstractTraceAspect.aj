@@ -6,10 +6,10 @@ import org.soulspace.aop.util.AspectHelper;
 public abstract aspect AbstractTraceAspect {
 
 	long indent;
-	abstract public pointcut loggedMethods();
+	abstract public pointcut tracedMethods();
 	abstract public void log(String message);
 
-	Object around() : loggedMethods() {
+	Object around() : tracedMethods() {
 		log(methodStart(thisJoinPoint));
 		Object o = proceed();
 		log(methodReturn(o));
