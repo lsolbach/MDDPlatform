@@ -2,14 +2,14 @@ package org.soulspace.base.domain.test;
 
 import junit.framework.TestCase;
 
-public class AuthorisationTest extends TestCase {
+public class AuthorizationTest extends TestCase {
 
 	SecuredService ts = new SecuredService();
 	
 	public void testServiceCall() {
 		try {
 			ts.securedCall();			
-			fail("Call to secured method succeded with insufficient rights");
+			fail("Failed to precent access to secured method with insufficient rights");
 		} catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -19,7 +19,7 @@ public class AuthorisationTest extends TestCase {
 	public void testSensitive() {
 		try {
 			SensitiveData td = ts.returnSensitve();
-			fail("Access to sensitve data succeded with insufficient rights");
+			fail("Failed to precent access to sensitve data with insufficient rights");
 		} catch(Exception e) {
 			System.out.println(e.getMessage());			
 		}
