@@ -6,7 +6,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.soulspace.annotation.security.Secured;
 import org.soulspace.annotation.security.Sensitive;
 
-public abstract aspect AuthorisationAspect {
+public abstract aspect AbstractAuthorisationAspect {
 
 	private AuthorisationService authorisationService;
 	
@@ -18,15 +18,9 @@ public abstract aspect AuthorisationAspect {
 		return this.authorisationService;
 	}
 	
-	declare precedence : AuthorisationAspect, *;
-
-	pointcut securedMethodCall() :
-		call(@Secured * *(..))
-		;
+	abstract pointcut securedMethodCall();
 	
-	pointcut returnSensitive() :
-		execution((@Sensitive *) *(..))
-		;
+	abstract pointcut returnSensitive();
 
 //	pointcut returnSensitiveList()
 //		execution(List<? extends (@Sensitive *)> *(..))
@@ -50,18 +44,8 @@ public abstract aspect AuthorisationAspect {
 		}
 	}
 	
-	// TODO implement for real
-	boolean hasAccess() {
-		return false;		
-	}
+	abstract boolean hasAccess();
 
-	String getPermission(JoinPoint thisJoinPoint) {
-		Signature sig = thisJoinPoint.getSignature();
-		if(sig instanceof MethodSignature) {
-			Secured secured = ((MethodSignature) sig).getMethod().getAnnotation(Secured.class);
-			return secured.permission();
-		}
-		return "";
-	}
+	abstract String getPermission(JoinPoint thisJoinPoint);
 	
 }
