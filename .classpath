@@ -4,7 +4,7 @@
 	<classpathentry kind="src" path="unittest"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.ajdt.core.ASPECTJRT_CONTAINER"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/InfrastructureAspects"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/JpaLibrary"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/JavaUtilLibrary"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/AnnotationLibrary"/>
 	<classpathentry kind="lib" path="lib/dev/junit.jar"/>
