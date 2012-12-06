@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="ArchitectureAspects" default="distribute">
+<project name="ArchitectureFramework" default="distribute">
 
 	<!-- import environment variables -->
 	<property environment="env"/>
