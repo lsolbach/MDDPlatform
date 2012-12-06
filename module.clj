@@ -1,8 +1,8 @@
 [
- :name "DomainAspects"
+ :name "DomainFramework"
  :project "org.soulspace.architecture"
  :project-lead "Ludger Solbach"
- :type "library"
+ :type "framework"
  :version "0.5.1"
  :description "A domain framework with abstractions and aspects for domain driven design"
  :vendor "soulspace.org"
