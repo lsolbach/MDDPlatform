@@ -32,7 +32,6 @@ public aspect DirtyTrackingAspect {
 	/*
 	 * Poincuts
 	 */
-	
 	pointcut persistentSetCall(DirtyTrackable obj) :
 		execution(* DirtyTrackable+.set*(..))
 		&& !within(DirtyTrackingAspect)

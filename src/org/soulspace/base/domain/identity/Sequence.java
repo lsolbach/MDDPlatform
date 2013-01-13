@@ -5,7 +5,7 @@ public interface Sequence {
 	String getName();
 	void setName(String name);
 	
-	long getValue();
-	void setValue(long value);
+	long getNextValue();
+	void setNextValue(long nextValue);
 	
 }

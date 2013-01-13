@@ -36,6 +36,7 @@ public abstract aspect AbstractAuditAspect {
 	abstract pointcut rootUpdate(Auditable auditable);
 	abstract pointcut rootDelete(Auditable auditable);
 
+	// TODO use AggregateChild as type for children?
 	abstract pointcut childCreate(Auditable auditable, DomainObject child);
 	abstract pointcut childUpdate(Auditable auditable, DomainObject child);
 	abstract pointcut childDelete(Auditable auditable, DomainObject child);

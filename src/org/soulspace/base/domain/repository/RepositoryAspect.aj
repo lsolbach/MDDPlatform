@@ -30,7 +30,7 @@ privileged public aspect RepositoryAspect {
 		execution(* Repository+.get*List(boolean))
 		&& this(repository)
 		&& args(onlyValid);
-		;	
+		;
 
 	pointcut loadListForTime(Repository repository, Date time) :
 		execution(* Repository+.get*List(Date))
