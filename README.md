@@ -1,6 +1,5 @@
 AnnotationLibrary
 =================
-
 A java annotation library to support model driven and aspect oriented architectures
 
 Author/Project Lead
@@ -24,4 +23,5 @@ History
 
 Version 0.3.1 (--.--.201-)
 --------------------------
-* Added Tracked annotation
+* added Tracked annotation
+* changed version control from cvs to git
