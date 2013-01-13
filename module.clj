@@ -1,9 +1,9 @@
 [
  :name "JmxLibrary"
- :project "org.soulspace.modelling"
+ :project "org.soulspace.architecture"
  :type "library"
  :version "0.2.0"
- :description "A repository for UML 1.4/XMI 1.2 files"
+ :description "A library for managing application with the Java Management Extension (JMX)."
  :vendor "soulspace.org"
  :plugins ["global" "deps" "java" "package"]
  :dependencies [["org.soulspace.architecture" "AspectLibrary" "0.2.0"]
