@@ -3,7 +3,6 @@ package org.soulspace.architecture;
 public aspect FrameworkDefinitions {
 
 	// Java
-
 	public static pointcut inSql() :
 		within(java.sql..*)
 		||
@@ -55,5 +54,4 @@ public aspect FrameworkDefinitions {
 	// Test frameworks
 	public static pointcut inJUnit() :
 		within(junit.framework..*);
-		
 }
