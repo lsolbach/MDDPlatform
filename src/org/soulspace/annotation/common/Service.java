@@ -1,4 +1,4 @@
-package org.soulspace.annotation.domain;
+package org.soulspace.annotation.common;
 
 
 import java.lang.annotation.ElementType;
@@ -10,6 +10,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Inherited
-public @interface Factory {
+public @interface Service {
 
 }
