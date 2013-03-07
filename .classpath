@@ -8,11 +8,10 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/JavaUtilLibrary"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/AnnotationLibrary"/>
 	<classpathentry kind="lib" path="lib/dev/junit.jar"/>
-	<classpathentry kind="lib" path="lib/runtime/AnnotationLibrary.jar"/>
 	<classpathentry kind="lib" path="lib/aspect/AspectLibrary.jar"/>
 	<classpathentry kind="lib" path="lib/dev/commons-logging.jar"/>
 	<classpathentry kind="lib" path="lib/dev/log4j.jar"/>
 	<classpathentry kind="lib" path="lib/dev/xstream.jar"/>
-	<classpathentry kind="lib" path="lib/runtime/aspectjrt.jar"/>
+	<classpathentry kind="lib" path="lib/runtime/AnnotationLibrary.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

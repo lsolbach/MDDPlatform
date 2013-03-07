@@ -3,7 +3,7 @@
  :project "org.soulspace.architecture"
  :project-lead "Ludger Solbach"
  :type "framework"
- :version "0.5.1"
+ :version "0.6.0"
  :description "A domain framework with abstractions and aspects for domain driven design"
  :vendor "soulspace.org"
  :plugins ["global" "deps" "aspectj" "junit" "package" "publish"]

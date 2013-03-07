@@ -9,11 +9,8 @@ public abstract aspect AbstractChangeDetectionAspect {
 		;
 
 	pointcut domainObjectCollectionChange(DomainObject obj, Object arg) :
-		(
-			execution(* DomainObject+.add*(Object, ..))
-			||
-			execution(* DomainObject+.remove*(Object, ..))
-		)
+		(execution(* DomainObject+.add*(Object, ..))
+		|| execution(* DomainObject+.remove*(Object, ..)))
 		&& target(obj)
 		&& args(arg)
 		;
