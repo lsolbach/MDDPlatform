@@ -1,6 +1,6 @@
 [
  :name "JavaUtilLibrary"
- :project "org.soulspace"
+ :project "org.soulspace.common"
  :project-lead "Ludger Solbach"
  :vendor "soulspace.org"
  :type "library"
