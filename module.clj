@@ -7,6 +7,7 @@
  :vendor "soulspace.org"
  :plugins ["global" "deps" "java" "package"]
  :dependencies [["org.soulspace.architecture" "AspectLibrary" "0.2.0"]
-                ["org.soulspace.architecture" "AnnotationLibrary" "0.3.1"]
+                ["org.soulspace.architecture" "AnnotationLibrary" "0.4.0"]
+                ["log4j" "log4j" "1.2.15" "dev"]
                 ["junit" "junit" "3.8.1" "dev"]]
  ]
