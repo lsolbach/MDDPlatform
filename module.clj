@@ -8,7 +8,7 @@
  :vendor "soulspace.org"
  :plugins ["global" "deps" "aspectj" "junit" "package" "publish"]
  :dependencies [["org.soulspace.architecture" "AspectLibrary" "0.1.0" "aspect"]
-                ["org.soulspace.architecture" "AnnotationLibrary" "0.3.1"]
+                ["org.soulspace.architecture" "AnnotationLibrary" "0.4.0"]
                 ["org.soulspace.common" "JavaUtilLibrary" "0.2.0"]
                 ["org.aspectj" "aspectjrt" "1.6.11"] ; transitive AspectLibrary
                 ["log4j" "log4j" "1.2.15" "dev"]
