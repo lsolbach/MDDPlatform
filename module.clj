@@ -1,6 +1,6 @@
 [
  :name "JpaLibrary"
- :project "org.soulspace.modelling"
+ :project "org.soulspace.architecture"
  :type "library"
  :version "0.3.0"
  :description "A repository for UML 1.4/XMI 1.2 files"
