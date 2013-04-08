@@ -10,5 +10,5 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD})
 @Inherited
 public @interface Tracked {
-	String trackingId();
+	public String trackingId();
 }
