@@ -5,13 +5,13 @@ import org.soulspace.annotation.common.Tracked;
 
 public abstract aspect AbstractTrackingAspect {
 
-	pointcut trackedOperations() : 
+	public pointcut trackedOperations() : 
 		execution(@Tracked * *.*(..))
 		;
 	
-	after() : trackedOperations() {
+	after() returning : trackedOperations() {
 		track(thisJoinPoint);
 	}
 	
-	abstract void track(JoinPoint joinPoint);
+	public abstract void track(JoinPoint joinPoint);
 }
