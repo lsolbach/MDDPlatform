@@ -1,8 +1,8 @@
-package org.soulspace.architecture;
+package org.soulspace.architecture.design;
 
 public aspect DesignEnforcementAspect {
 
-	// TODO ok in declaring type
+	// TODO ok in declaring type!?
 	pointcut directFieldAccess() :
 		get(public !final * *)
 		|| set(public !final * *);
