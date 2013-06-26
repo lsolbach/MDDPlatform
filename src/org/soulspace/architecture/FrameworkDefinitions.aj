@@ -98,7 +98,6 @@ public aspect FrameworkDefinitions {
 	public static pointcut inJUnit() :
 		within(junit.framework..*);
 
-
 	//
 	// Dependency Injection
 	
@@ -109,5 +108,4 @@ public aspect FrameworkDefinitions {
 	public static pointcut springFrameworkCall() :
 		call(* org.springframework..*.*(..));
 	
-
 }

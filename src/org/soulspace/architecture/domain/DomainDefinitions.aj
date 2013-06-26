@@ -1,6 +1,6 @@
-package org.soulspace.architecture;
+package org.soulspace.architecture.domain;
 
-public abstract aspect DesignDefininitions {
+public aspect DomainDefinitions {
 
 	public static pointcut inEntity() :
 		within((@org.soulspace.annotation.domain.Entity *))
