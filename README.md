@@ -1,6 +1,6 @@
 AnnotationLibrary
 =================
-A java annotation library to support model driven and aspect oriented architectures
+A java annotation library to support model driven and aspect oriented architectures.
 
 Author/Project Lead
 -------------------
