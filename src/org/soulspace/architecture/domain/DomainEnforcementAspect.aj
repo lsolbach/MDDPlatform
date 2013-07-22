@@ -1,16 +1,19 @@
 package org.soulspace.architecture.domain;
 
+import org.soulspace.architecture.ArchitectureDefinitions;
+import org.soulspace.architecture.domain.DomainDefinitions;
+
 public aspect DomainEnforcementAspect {
 
 	pointcut entityCreationViolation() :
-		DesignDefininitions.creatingEntity()
-		&& !DesignDefininitions.inFactory()
+		DomainDefinitions.creatingEntity()
+		&& !DomainDefinitions.inFactory()
 		&& !ArchitectureDefinitions.inTest();
 	declare error : entityCreationViolation() : "Don't create entities with new, use a factory!";
 	
 	pointcut valueCreationViolation() :
-		DesignDefininitions.creatingValue()
-		&& !DesignDefininitions.inFactory()
+		DomainDefinitions.creatingValue()
+		&& !DomainDefinitions.inFactory()
 		&& !ArchitectureDefinitions.inTest();
 	declare error : valueCreationViolation() : "Don't create values with new, use a factory!";
 	
