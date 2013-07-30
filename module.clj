@@ -2,7 +2,7 @@
  :module "ArchitectureFramework"
  :project "org.soulspace.architecture"
  :project-lead "Ludger Solbach"
- :type "framework"
+ :type :framework
  :version "0.2.0"
  :description "An architecture framework with abstractions and aspects"
  :vendor "soulspace.org"
@@ -10,5 +10,5 @@
  :dependencies [[["org.soulspace.architecture" "AspectLibrary" "0.2.0"] "aspect"]
                 [["org.soulspace.architecture" "AnnotationLibrary" "0.3.1"]]
                 [["org.aspectj" "aspectjrt" "1.6.11"]] ; transitive AspectLibrary
-                [["junit" "junit" "3.8.1"] "dev"]]
+                [["junit" "junit" "3.8.1"] :dev]]
  ]
