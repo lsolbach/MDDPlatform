@@ -3,8 +3,9 @@
  :project "org.soulspace.architecture"
  :type :library
  :version "0.3.0"
- :description "A repository for UML 1.4/XMI 1.2 files"
+ :description "A helper library for merging JPA persistence units with Spring."
+ :license ["Eclipse Public License 1.0" "http://www.eclipse.org/legal/epl-v10.html"]
  :provider "soulspace.org"
- :plugins ["global" "sdeps" "java" "package"]
+ :plugins ["global" "sdeps" "depsdot" "java" "package"]
  :dependencies [[["org.springframework" "spring-orm" "3.0.5.RELEASE"]]]
  ]
