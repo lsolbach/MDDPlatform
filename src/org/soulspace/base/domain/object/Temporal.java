@@ -19,6 +19,11 @@ public interface Temporal extends Entity, Revisionable {
 	boolean intersectsBegin(Temporal t);
 	boolean intersectsEnd(Temporal t);
 	boolean hides(Temporal t);
+
+	boolean isDeactivated();
+	boolean isValid(Date t);
+	boolean isEffective(Date t);
+	boolean isKnown(Date t);
 	
 	public class TemporalComparator implements Comparator<Temporal>, Serializable {
 
