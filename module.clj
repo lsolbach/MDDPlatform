@@ -5,8 +5,9 @@
  :type :library
  :version "0.2.0"
  :description "An aspect library containing some useful general purpose aspects"
- :vendor "soulspace.org"
- :plugins ["global" "sdeps" "aspectj" "junit" "package"]
+ :license ["Eclipse Public License 1.0" "http://www.eclipse.org/legal/epl-v10.html"]
+ :provider "soulspace.org"
+ :plugins ["global" "sdeps" "depsdot" "aspectj" "junit" "package"]
  :dependencies [[["org.soulspace.architecture" "AnnotationLibrary" "0.4.0"]]
                 [["org.aspectj" "aspectjrt" "1.6.11"]]
                 [["log4j" "log4j" "1.2.15"] :dev]
