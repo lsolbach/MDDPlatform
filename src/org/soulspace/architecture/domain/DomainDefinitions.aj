@@ -15,7 +15,7 @@ public aspect DomainDefinitions {
 		;	
 
 	public static pointcut inFactory() :
-		within((@org.soulspace.annotation.domain.Factory *))
+		within((@org.soulspace.annotation.common.Factory *))
 		;	
 
 	public static pointcut inRepository() :
@@ -23,7 +23,7 @@ public aspect DomainDefinitions {
 		;	
 
 	public static pointcut inService() :
-		within((@org.soulspace.annotation.domain.Service *))
+		within((@org.soulspace.annotation.common.Service *))
 		;	
 
 	public static pointcut callingEntity() :
@@ -35,7 +35,7 @@ public aspect DomainDefinitions {
 		;
 
 	public static pointcut callingFactory() :
-		call(* (@org.soulspace.annotation.domain.Factory *).*(..))
+		call(* (@org.soulspace.annotation.common.Factory *).*(..))
 		;
 
 	public static pointcut repositoryCall() :
@@ -43,7 +43,7 @@ public aspect DomainDefinitions {
 		;
 
 	public static pointcut callingService() :
-		call(* (@org.soulspace.annotation.domain.Service *).*(..))
+		call(* (@org.soulspace.annotation.common.Service *).*(..))
 		;
 	
 	public static pointcut creatingEntity() :
