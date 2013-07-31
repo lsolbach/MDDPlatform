@@ -12,14 +12,18 @@ License
 
 Copyright
 ---------
-© 2005-2012 Ludger Solbach
+© 2005-2013 Ludger Solbach
 
 Code Repository
 ---------------
-[https://github.com/lsolbach/GlobalBuild] (https://github.com/lsolbach/GlobalBuild)
+[https://github.com/lsolbach/DomainFramework] (https://github.com/lsolbach/DomainFramework)
 
 History
 -------
+
+Version 0.6.0 (--.--.201-)
+--------------------------
+
 
 Version 0.5.1 (--.--.201-)
 --------------------------
