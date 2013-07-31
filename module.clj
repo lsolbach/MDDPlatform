@@ -5,7 +5,8 @@
  :type :library
  :version "0.4.0"
  :description "A java annotation library to support model driven and aspect oriented architectures."
- :vendor "soulspace.org"
- :plugins ["global" "sdeps" "java" "package"]
+ :license ["Eclipse Public License 1.0" "http://www.eclipse.org/legal/epl-v10.html"]
+ :provider "soulspace.org"
+ :plugins ["global" "sdeps" "depsdot" "java" "package"]
  :dependencies []
  ]
