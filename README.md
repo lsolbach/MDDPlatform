@@ -16,7 +16,7 @@ License
 
 Code Repository
 ---------------
-[https://github.com/lsolbach/CljJavaLibrary] (https://github.com/lsolbach/CljJavaLibrary)
+[https://github.com/lsolbach/AnnotationLibrary] (https://github.com/lsolbach/AnnotationLibrary)
 
 History
 -------
