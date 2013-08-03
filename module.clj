@@ -6,7 +6,7 @@
  :version "0.6.0"
  :description "A domain framework with abstractions and aspects for domain driven design"
  :vendor "soulspace.org"
- :plugins ["global" "sdeps" "aspectj" "junit" "package"]
+ :plugins ["global" "dependencies" "aspectj" "junit" "package"]
  :dependencies [[["org.soulspace.architecture" "AspectLibrary" "0.2.0"] :aspect]
                 [["org.soulspace.architecture" "AnnotationLibrary" "0.4.0"]]
                 [["org.soulspace.common" "JavaUtilLibrary" "0.3.0"]]
