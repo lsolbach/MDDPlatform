@@ -25,7 +25,7 @@ public interface PersistentStorage {
 	
 	void write(DomainObject persistent);
 
-	void delete(DomainObject persistent);	
+	void delete(DomainObject persistent);
 
 	<T extends DomainObject> List<T> loadList(Class<T> type);
 

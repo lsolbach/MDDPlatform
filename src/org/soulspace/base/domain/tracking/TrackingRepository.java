@@ -1,5 +1,5 @@
 package org.soulspace.base.domain.tracking;
 
 public interface TrackingRepository {
-	void track();
+	void addTrackingEvent(TrackingEvent trackingEvent);
 }

@@ -30,7 +30,7 @@ public aspect DirtyTrackingAspect {
 	}
 	
 	/*
-	 * Poincuts
+	 * Pointcuts
 	 */
 	pointcut persistentSetCall(DirtyTrackable obj) :
 		execution(* DirtyTrackable+.set*(..))

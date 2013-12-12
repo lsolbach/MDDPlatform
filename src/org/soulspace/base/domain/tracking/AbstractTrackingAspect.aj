@@ -5,13 +5,22 @@ import org.soulspace.annotation.common.Tracked;
 
 public abstract aspect AbstractTrackingAspect {
 
-	public pointcut trackedOperations() : 
-		execution(@Tracked * *.*(..))
-		;
+	private TrackingRepository trackingRepository;
 	
-	after() returning : trackedOperations() {
-		track(thisJoinPoint);
+	public void setTrackingRepository(TrackingRepository trackingRepository) {
+		this.trackingRepository = trackingRepository;
 	}
 	
-	public abstract void track(JoinPoint joinPoint);
+	public pointcut trackedOperations(String trackingId) : 
+		execution(@Tracked * *.*(..))
+		&& @annotation(Tracked(trackingId))
+		;
+	
+	after(String trackingId) returning : trackedOperations(trackingId) {
+		TrackingEvent trackingEvent = createTrackingEvent(trackingId, thisJoinPoint);
+		trackingRepository.addTrackingEvent(trackingEvent);
+	}
+	
+	public abstract TrackingEvent createTrackingEvent(String trackingId, JoinPoint joinPoint);
+	
 }
