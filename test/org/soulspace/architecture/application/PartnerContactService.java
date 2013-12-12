@@ -8,6 +8,7 @@ public class PartnerContactService {
 //	PartnerSearchServlet pss = new PartnerSearchServlet();
 	
 	public void makeContact(Partner p1, Partner p2) {
-		
+//		Partner partner = new Partner();
+//		partner.toString();
 	}
 }

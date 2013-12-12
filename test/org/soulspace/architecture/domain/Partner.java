@@ -10,5 +10,6 @@ public class Partner {
 	
 	void contactPartner(Partner partner) {
 //		pcs.makeContact(this, partner);
+//		System.out.println("contacted");
 	}
 }
