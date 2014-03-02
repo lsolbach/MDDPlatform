@@ -17,26 +17,3 @@ License
 Code Repository
 ---------------
 [https://github.com/lsolbach/AnnotationLibrary] (https://github.com/lsolbach/AnnotationLibrary)
-
-History
--------
-
-Version 0.4.0 (--.--.201-)
---------------------------
-* made trackingId public
-* refactored build
-
-Version 0.3.1 (30.11.2012)
---------------------------
-* added Past and Future annotations
-* moved Service and Factory annotations to common
-* changed version control from cvs to git
-
-Version 0.3.0 (22.02.2011)
---------------------------
-* added Tracked annotation
-* added Versioned
-* renamed NullCheck to NullChecked
-* renamed Revisioned to Revisionable
-* enhanced constraint annotations
-* refactored packages

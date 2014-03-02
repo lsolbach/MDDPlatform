@@ -9,7 +9,7 @@
  :provider "soulspace.org"
  :plugins ["global"
            ["org.soulspace.baumeister/DependencyPlugin"]
-           ["org.soulspace.baumeister/AspectJPlugin"]
+           ["org.soulspace.baumeister/JavaPlugin"]
            ["org.soulspace.baumeister/JUnitPlugin"]
            ["org.soulspace.baumeister/PackagePlugin"]]
  :dependencies []
