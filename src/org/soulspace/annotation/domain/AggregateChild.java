@@ -16,10 +16,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Annotation for Objects that are part of an Aggregate.
+ * Annotation for domain objects that are part of an aggregate.
  * @author soulman
  */
-
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Inherited

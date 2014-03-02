@@ -16,9 +16,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Annotation for objects that are the root of an Aggregate
- * @author soulman
- *
+ * Annotation for domain objects that are the root of an Aggregate
+ * @author Ludger Solbach
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
