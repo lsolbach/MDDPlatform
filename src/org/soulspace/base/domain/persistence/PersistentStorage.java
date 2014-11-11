@@ -4,7 +4,11 @@ import java.util.Date;
 import java.util.List;
 
 import org.soulspace.base.domain.object.DomainObject;
+import org.soulspace.base.domain.object.Identified;
 import org.soulspace.base.domain.object.Modifiable;
+import org.soulspace.base.domain.object.Temporal;
+
+import com.sun.corba.se.spi.ior.Identifiable;
 
 public interface PersistentStorage {
 
@@ -27,26 +31,26 @@ public interface PersistentStorage {
 
 	void delete(DomainObject persistent);
 
-	<T extends DomainObject> List<T> loadList(Class<T> type);
+	<T extends DomainObject & Identified> List<T> loadList(Class<T> type);
 
-	<T extends DomainObject> List<T> loadList(Class<T> type, String id);
+	<T extends DomainObject & Identified> List<T> loadList(Class<T> type, String id);
 
-	<T extends DomainObject> List<T> loadList(Class<T> type, Date effective);
+	<T extends DomainObject & Identified> List<T> loadList(Class<T> type, Date effective);
 
-	<T extends DomainObject> List<T> loadList(Class<T> type, boolean validOnly);
+	<T extends DomainObject & Identified> List<T> loadList(Class<T> type, boolean validOnly);
 
-	<T extends DomainObject> List<T> loadList(Class<T> type, Date forTime, boolean validOnly);
+	<T extends DomainObject & Identified> List<T> loadList(Class<T> type, Date forTime, boolean validOnly);
 
-	<T extends DomainObject> List<T> loadList(Class<T> type, Date atTime, Date forTime, boolean validOnly);
+	<T extends DomainObject & Identified> List<T> loadList(Class<T> type, Date atTime, Date forTime, boolean validOnly);
 
-	<T extends DomainObject> List<T> loadList(Class<T> type, String id, boolean validOnly);
+	<T extends DomainObject & Identified> List<T> loadList(Class<T> type, String id, boolean validOnly);
 
-	<T extends DomainObject> T load(Class<T> type, String id);
+	<T extends DomainObject & Identified> T load(Class<T> type, String id);
 
-	<T extends DomainObject & Modifiable> T load(Class<T> type, String id, long modification);
+	<T extends DomainObject & Identified & Modifiable> T load(Class<T> type, String id, long modification);
 
-	<T extends DomainObject> T load(Class<T> type, String id, Date accessTime);
+	<T extends DomainObject & Identified> T load(Class<T> type, String id, Date accessTime);
 
-	<T extends DomainObject & Modifiable> T load(Class<T> type, String id, Date atTime, Date forTime, Long modification, boolean validOnly);
-	
+	<T extends DomainObject & Identified & Modifiable> T load(Class<T> type, String id, Date atTime, Date forTime, Long modification, boolean validOnly);
+		
 }

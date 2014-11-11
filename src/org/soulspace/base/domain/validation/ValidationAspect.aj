@@ -4,6 +4,11 @@ import org.soulspace.base.domain.factory.Factory;
 import org.soulspace.base.domain.repository.Repository;
 import org.soulspace.base.domain.validation.impl.ValidatorImpl;
 
+/**
+ * Valdidation aspect.
+ * 
+ * @author Ludger Solbach
+ */
 public aspect ValidationAspect {
 
 	declare parents : (@org.soulspace.annotation.domain.Validatable *) implements Validatable;
@@ -16,6 +21,7 @@ public aspect ValidationAspect {
 		return ValidatorImpl.validate(this);
 	}
 	
+	// captures factory shippings of validatable objects 
 	pointcut factoryShipping() :
 		execution(Validatable+ Factory+.*(..))
 		;

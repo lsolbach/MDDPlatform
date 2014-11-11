@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Date;
 
-public interface Temporal extends Entity, Revisionable {
+public interface Temporal extends DomainObject, Identified, Modifiable, Revisionable {
 
 	Date getValidFrom();
 	void setValidFrom(Date validFrom);
@@ -25,6 +25,9 @@ public interface Temporal extends Entity, Revisionable {
 	boolean isEffective(Date t);
 	boolean isKnown(Date t);
 	
+	/**
+	 * Comparator for Temporal objects that compares them based on their validFrom field.
+	 */
 	public class TemporalComparator implements Comparator<Temporal>, Serializable {
 
 		private static final long serialVersionUID = 1L;

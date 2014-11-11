@@ -9,8 +9,8 @@ import junit.framework.TestCase;
 
 public class TemporalTest extends TestCase {
 
-	Date d0;
-	Date d1;
+	Date sooner;
+	Date later;
 	
 	Temporal t0;
 	Temporal t1;
@@ -20,8 +20,8 @@ public class TemporalTest extends TestCase {
 	Temporal t5;
 	
 	public TemporalTest() {
-		d0 = new Date(10);
-		d1 = new Date(20);
+		sooner = new Date(10);
+		later = new Date(20);
 		
 		t0 = new TemporalData();
 		
@@ -42,32 +42,18 @@ public class TemporalTest extends TestCase {
 
 		t5 = new TemporalData();
 		t5.setValidTo(new Date(30));
-
-	}
-	
-	public void testCompareFrom() {
-		assertEquals(0, DateUtils.compareFrom(null, null));
-		assertEquals(-1, DateUtils.compareFrom(null, d0));
-		assertEquals(1, DateUtils.compareFrom(d0, null));
-		assertEquals(0, DateUtils.compareFrom(d1, d1));
-		assertEquals(-1, DateUtils.compareFrom(d0, d1));
-		assertEquals(1, DateUtils.compareFrom(d1, d0));
 	}
 	
 	public void testCompareTo() {
-		assertEquals(0, DateUtils.compareTo(null, null));
-		assertEquals(1, DateUtils.compareTo(null, d0));
-		assertEquals(-1, DateUtils.compareTo(d0, null));
-		assertEquals(0, DateUtils.compareTo(d1, d1));
-		assertEquals(-1, DateUtils.compareTo(d0, d1));
-		assertEquals(1, DateUtils.compareTo(d1, d0));
+		assertEquals(0, later.compareTo(later));
+		assertEquals(-1, sooner.compareTo(later));
+		assertEquals(1, later.compareTo(sooner));
 	}
 	
 	public void testIntersectsBoth() {
-		System.out.println("testing...");
-		assertTrue(t2.intersectsBoth(t0));
-		assertTrue(t2.intersectsBoth(t1));
-		assertFalse(t0.intersectsBoth(t2));
+		assertTrue("25/35 intersects both null/null", t2.intersectsBoth(t0));
+		assertTrue("25/35 intersects both 20/40", t2.intersectsBoth(t1));
+		assertFalse("null/null doesn't intersect both 25/35",  t0.intersectsBoth(t2));
 		assertFalse(t1.intersectsBoth(t2));
 		assertFalse(t3.intersectsBoth(t2));
 		assertFalse(t4.intersectsBoth(t2));
@@ -75,19 +61,16 @@ public class TemporalTest extends TestCase {
 	}
 
 	public void testIntersectsBegin() {
-		System.out.println("testing...");
 		assertTrue(t2.intersectsBegin(t3));
 		assertTrue(t2.intersectsBegin(t4));
 	}
 
 	public void testIntersectsEnd() {
-		System.out.println("testing...");
 		assertTrue(t2.intersectsEnd(t5));
 //		assertTrue(t2.intersectsEnd(t1));
 	}
 
 	public void testHides() {
-		System.out.println("testing...");
 		assertTrue(t0.hides(t2));
 		assertTrue(t1.hides(t2));
 		assertTrue(t1.hides(t1));

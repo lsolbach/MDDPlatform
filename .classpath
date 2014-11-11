@@ -15,7 +15,6 @@
 	<classpathentry kind="lib" path="build/lib/dev/commons-logging.jar"/>
 	<classpathentry kind="lib" path="build/lib/dev/junit.jar"/>
 	<classpathentry kind="lib" path="build/lib/dev/log4j.jar"/>
-	<classpathentry kind="lib" path="build/lib/dev/oro.jar"/>
 	<classpathentry kind="lib" path="build/lib/dev/xstream.jar"/>
 	<classpathentry kind="lib" path="build/lib/runtime/AnnotationLibrary.jar"/>
 	<classpathentry kind="lib" path="build/lib/runtime/aspectjrt.jar"/>

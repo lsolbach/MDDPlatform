@@ -13,8 +13,22 @@ public aspect TemporalAspect {
 	//
 	// intertype declarations
 	//
+	/**
+	 * The time stamp since this object is valid (in the domain).
+	 * A null value means it was valid since ever.
+	 */
 	Date Temporal.validFrom;
+
+	/**
+	 * The time stamp until this object is valid  (in the domain).
+	 * A null value means it is valid forever.
+	 */
 	Date Temporal.validTo;
+
+	/**
+	 * The time stamp this object was invalidated technically.
+	 * A null value means it has not been invalidated yet.
+	 */
 	Date Temporal.invalidatedAt;
 
 	public synchronized Date Temporal.getValidFrom() {
@@ -45,40 +59,47 @@ public aspect TemporalAspect {
 		setInvalidatedAt(new Date());
 	}
 	
+	/**
+	 * Tests if this temporal intersects both ends of the other temporal
+	 * @param t the other temporal
+	 */
 	public boolean Temporal.intersectsBoth(Temporal t) {
-		if(DateUtils.compareFrom(getValidFrom(), t.getValidFrom()) > 0
-				&& DateUtils.compareTo(getValidTo(), t.getValidTo()) <= 0) {
-			log.info("intersected at new from and to");
+		if(isFromBeforeFrom(t.getValidFrom(), getValidFrom())
+				&& isToBeforeTo(getValidTo(), t.getValidTo())) {
+			log.trace("intersected at new from and to");
 			return true;
 		}
 		return false;
 	}
 	
+	/**
+	 * Tests if this temporal intersects the beginning of the other temporal
+	 * @param t the other temporal
+	 */
 	public boolean Temporal.intersectsBegin(Temporal t) {
-		if(DateUtils.compareFrom(getValidFrom(), t.getValidFrom()) <= 0
-				&& DateUtils.compareTo(getValidTo(), t.getValidFrom()) > 0
-				&& DateUtils.compareTo(getValidTo(), t.getValidTo()) < 0) {
-			log.info("intersects at from");
+		if(isFromBeforeFrom(getValidFrom(), t.getValidFrom())
+			&& isFromBeforeTo(t.getValidFrom(), getValidTo())
+			&& isToBeforeTo(getValidTo(), t.getValidTo())) {
+			log.trace("intersects at from");
 			return true;
 		}
 		return false;
 	}
 	
 	public boolean Temporal.intersectsEnd(Temporal t) {
-		if(DateUtils.compareFrom(getValidFrom(), t.getValidFrom()) > 0
-				&& DateUtils.compareTo(getValidFrom(), t.getValidTo()) < 0
-				&& DateUtils.compareTo(getValidTo(), t.getValidTo()) >= 0) {
-			log.info("intersects at to");
+		if(isFromBeforeFrom(t.getValidFrom(), getValidFrom())
+			&& isFromBeforeTo(getValidFrom(), t.getValidTo())
+			&& isToBeforeTo(t.getValidTo(), getValidTo())) {
+			log.trace("intersects at to");
 			return true;
 		}
 		return false;
 	}
 	
 	public boolean Temporal.hides(Temporal t) {
-		if(DateUtils.compareFrom(getValidFrom(), t.getValidFrom()) <= 0
-				&& DateUtils.compareTo(getValidTo(), t.getValidTo()) >= 0
-				) {
-			log.info("hides");
+		if((isFromBeforeFrom(getValidFrom(), t.getValidFrom()) || isEqual(getValidFrom(), t.getValidFrom()))
+			&& (isToBeforeTo(t.getValidTo(), getValidTo()) || isEqual(getValidTo(), t.getValidTo()))) {
+			log.trace("hides");
 			return true;
 		}
 		return false;
@@ -130,6 +151,48 @@ public aspect TemporalAspect {
 			return true;
 		}
 		return false;
+	}
+	
+	static boolean isFromBeforeFrom(Date d0, Date d1) {
+		if(d0 == null) {
+			return d1 != null;
+		} else if(d1 == null) {
+			return false;
+		}
+		return d0.before(d1);
+	}
+	
+	static boolean isFromBeforeTo(Date d0, Date d1) {
+		if(d0 == null) {
+			return true;
+		} else if (d1 == null) {
+			return true;
+		}
+		return d0.before(d1);
+	}
+	
+	static boolean isToBeforeFrom(Date d0, Date d1) {
+		if(d0 == null || d1 == null) {
+			return false;
+		}
+		return d0.before(d1);
+	}
+	
+	static boolean isToBeforeTo(Date d0, Date d1) {
+		if(d0 == null) {
+			return false;
+		} else if (d1 == null) {
+			return d0 != null;
+		}
+		return d0.before(d1);
+	}
+	
+	static boolean isEqual(Date d0, Date d1) {
+		if(d0 == null) {
+			return d1 == null;
+		} else {
+			 return d0.equals(d1);
+		}
 	}
 	
 	/**

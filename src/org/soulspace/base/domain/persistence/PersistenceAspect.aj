@@ -12,6 +12,7 @@ import org.soulspace.base.domain.object.Deactivatable;
 import org.soulspace.base.domain.object.DirtyTrackable;
 import org.soulspace.base.domain.object.DomainObject;
 import org.soulspace.base.domain.object.Entity;
+import org.soulspace.base.domain.object.Identified;
 import org.soulspace.base.domain.object.IdentifiedAspect;
 import org.soulspace.base.domain.object.Modifiable;
 import org.soulspace.base.domain.object.Revisionable;
@@ -84,7 +85,7 @@ public aspect PersistenceAspect {
 				} else if (isDirty) {
 					// dirty, must be stored
 					// optimistic locking, get stored entity
-					Entity stored = (Entity) storage.load(persistent.getClass(), entity.getId());
+					Entity stored = (Entity) storage.load(entity.getClass(), entity.getId());
 					if (stored == null || !persistent.getClass().isInstance(stored)) {
 						throw new StorageException("Couldn't load stored version of Object " + persistent);
 					}
@@ -185,20 +186,22 @@ public aspect PersistenceAspect {
 	 * @param entity
 	 * @param modificationTime
 	 */
-	<T extends DomainObject & Temporal> void writeTemporal(PersistentStorage storage,
+	@SuppressWarnings("unchecked")
+	<T extends Temporal & Identified> void writeTemporal(PersistentStorage storage,
 			T persistent, Date modificationTime) {
 		Temporal te = (Temporal) persistent;
+		
 		List<T> list = (List<T>) storage.loadList(persistent.getClass(),
 				persistent.getId());
 		List<T> temporals = (List<T>) filterTemporals(list, true);
 
-		for (Temporal t : temporals) {
+		for (T t : temporals) {
 			if (te.intersectsBoth(t)) {
 				// intersected
 				log.debug("intersects begin and end");
-				Temporal newT1 = storage.load(t.getClass(), t.getId(), t
+				T newT1 = (T) storage.load(t.getClass(), t.getId(), t
 						.getModification());
-				Temporal newT2 = storage.load(t.getClass(), t.getId(), t
+				T newT2 = (T) storage.load(t.getClass(), t.getId(), t
 						.getModification());
 
 				newModification(newT1, modificationTime);
@@ -261,5 +264,4 @@ public aspect PersistenceAspect {
 		Collections.sort(temporalList, new Temporal.TemporalComparator());
 		return temporalList;
 	}
-	
 }

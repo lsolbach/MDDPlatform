@@ -117,7 +117,7 @@ public class XStreamPersistentStorageImpl implements PersistentStorage {
 		}
 	}
 	
-	public <T extends DomainObject> List<T> loadList(Class<T> type, String id, Long modification) {
+	public <T extends DomainObject & Identified> List<T> loadList(Class<T> type, String id, Long modification) {
 		List<T> list = new ArrayList<T>();
 		FileReader reader = null;
 		try {
@@ -146,7 +146,7 @@ public class XStreamPersistentStorageImpl implements PersistentStorage {
 		}
 	}
 
-	public <T extends DomainObject> List<T> loadList(Class<T> type, Date forTime, boolean validOnly) {
+	public <T extends DomainObject & Identified> List<T> loadList(Class<T> type, Date forTime, boolean validOnly) {
 		List<T> list = loadList(type, null, null);
 		// filter list
 		Iterator<T> it = list.iterator();
@@ -165,7 +165,7 @@ public class XStreamPersistentStorageImpl implements PersistentStorage {
 		return list;
 	}
 
-	public <T extends DomainObject> List<T> loadList(Class<T> type, Date atTime, Date forTime, boolean validOnly) {
+	public <T extends DomainObject & Identified> List<T> loadList(Class<T> type, Date atTime, Date forTime, boolean validOnly) {
 		List<T> list = loadList(type, null, null);
 		// filter list
 		Iterator<T> it = list.iterator();
@@ -192,7 +192,7 @@ public class XStreamPersistentStorageImpl implements PersistentStorage {
 		return list;
 	}
 
-	public <T extends DomainObject> List<T> loadList(Class<T> type, String id, boolean validOnly) {
+	public <T extends DomainObject & Identified> List<T> loadList(Class<T> type, String id, boolean validOnly) {
 		List<T> list = loadList(type, id, null);
 		Iterator<T> it = list.iterator();
 		while (it.hasNext()) {
@@ -204,23 +204,23 @@ public class XStreamPersistentStorageImpl implements PersistentStorage {
 		return list;
 	}
 
-	public <T extends DomainObject> List<T> loadList(Class<T> type) {
+	public <T extends DomainObject & Identified> List<T> loadList(Class<T> type) {
 		return loadList(type, null, null);
 	}
 	
-	public <T extends DomainObject> List<T> loadList(Class<T> type, Date forDate) {
+	public <T extends DomainObject & Identified> List<T> loadList(Class<T> type, Date forDate) {
 		return loadList(type, forDate, true);
 	}
 		
-	public <T extends DomainObject> List<T> loadList(Class<T> type, boolean validOnly) {
+	public <T extends DomainObject & Identified> List<T> loadList(Class<T> type, boolean validOnly) {
 		return loadList(type, new Date(), validOnly);
 	}
 	
-	public <T extends DomainObject> List<T> loadList(Class<T> type, String id) {
+	public <T extends DomainObject & Identified> List<T> loadList(Class<T> type, String id) {
 		return loadList(type, id, true);
 	}
 
-	public <T extends DomainObject> T load(Class<T> type, String id) {
+	public <T extends DomainObject & Identified> T load(Class<T> type, String id) {
 		T result = null;
 		List<T> list = loadList(type, id, null);
 		// return object with highest modification number
@@ -244,7 +244,7 @@ public class XStreamPersistentStorageImpl implements PersistentStorage {
 		return result;
 	}
 
-	public <T extends DomainObject> T load(Class<T> type, String id, Date forDate) {
+	public <T extends DomainObject & Identified> T load(Class<T> type, String id, Date forDate) {
 		T result = null;
 		List<T> list = loadList(type, id, null);
 		for (T o : list) {
@@ -263,7 +263,7 @@ public class XStreamPersistentStorageImpl implements PersistentStorage {
 	}
 	
 	
-	public <T extends DomainObject & Modifiable> T load(Class<T> type, String id, long modification) {
+	public <T extends DomainObject  & Identified & Modifiable> T load(Class<T> type, String id, long modification) {
 		T result = null;
 		List<T> list = loadList(type, id, modification);
 		for(T t : list) {
@@ -274,7 +274,7 @@ public class XStreamPersistentStorageImpl implements PersistentStorage {
 		return result;
 	}
 	
-	public <T extends DomainObject & Modifiable> T load(Class<T> type, String id, Date atTime,
+	public <T extends DomainObject & Identified & Modifiable> T load(Class<T> type, String id, Date atTime,
 			Date forTime, Long modification, boolean validOnly) {
 		if(id == null || id.equals("")) {
 			throw new StorageException("Id not set");
