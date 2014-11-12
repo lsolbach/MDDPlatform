@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<project name="AspectLibrary" default="distribute">
+
+	<!-- import environment variables -->
+	<property environment="env"/>
+	<property file="build.properties"/>
+	<property name="global.build.dir" value="${env.GLOBAL_BUILD_HOME}"/>
+		
+	<!-- import global build files -->
+	<import file="${global.build.dir}/ant/global.properties.xml"/>
+	<import file="${global.build.dir}/ant/global.build.xml"/>
+
+</project>

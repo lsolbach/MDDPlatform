@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="unittest"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.ajdt.core.ASPECTJRT_CONTAINER"/>
+	<classpathentry kind="lib" path="build/lib/dev/commons-logging.jar"/>
+	<classpathentry kind="lib" path="build/lib/dev/junit.jar"/>
+	<classpathentry kind="lib" path="build/lib/dev/log4j.jar"/>
+	<classpathentry kind="lib" path="build/lib/dev/oro.jar"/>
+	<classpathentry kind="lib" path="build/lib/runtime/AnnotationLibrary.jar"/>
+	<classpathentry kind="lib" path="build/lib/runtime/aspectjrt.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
