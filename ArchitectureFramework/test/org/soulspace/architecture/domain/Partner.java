@@ -6,10 +6,10 @@ import org.soulspace.architecture.application.PartnerContactService;
 @Entity
 public class Partner {
 
-//	PartnerContactService pcs = new PartnerContactService();
+	//PartnerContactService pcs = new PartnerContactService();
 	
 	void contactPartner(Partner partner) {
-//		pcs.makeContact(this, partner);
+		//pcs.makeContact(this, partner);
 		System.out.println("contacted");
 	}
 }

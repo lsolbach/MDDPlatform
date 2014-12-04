@@ -1,7 +1,9 @@
 package org.soulspace.base.design;
 
+import org.soulspace.annotation.design.NullChecked;
 import org.soulspace.annotation.metadata.Optional;
 
+@NullChecked
 public class NullCheckTest {
 
 	private static String name;

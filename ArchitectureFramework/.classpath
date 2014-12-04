@@ -12,6 +12,5 @@
 	<classpathentry kind="lib" path="build/lib/dev/junit.jar"/>
 	<classpathentry kind="lib" path="build/lib/runtime/AnnotationLibrary.jar"/>
 	<classpathentry kind="lib" path="build/lib/runtime/aspectjrt.jar"/>
-	<classpathentry kind="lib" path="lib/aspect/AspectLibrary.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
