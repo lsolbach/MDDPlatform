@@ -13,7 +13,7 @@
            ["org.soulspace.baumeister/JUnitPlugin"]
            ["org.soulspace.baumeister/PackagePlugin"]]
  :dependencies [["org.soulspace.architecture/AnnotationLibrary, 0.4.0"]
-                ["org.aspectj/aspectjrt, 1.6.11"]
+                ["org.aspectj/aspectjrt, 1.8.7"]
                 ["log4j/log4j, 1.2.15" :dev]
                 ["commons-logging/commons-logging, 1.1.1" :dev]
                 ["junit/junit, 3.8.1" :dev]]

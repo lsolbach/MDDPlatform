@@ -2,7 +2,6 @@ package org.soulspace.base.domain.object;
 
 import java.util.Date;
 import org.apache.log4j.Logger;
-import org.soulspace.util.DateUtils;
 
 public aspect TemporalAspect {
 

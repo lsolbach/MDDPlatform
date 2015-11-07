@@ -3,7 +3,6 @@ package org.soulspace.base.domain.test;
 import java.util.Date;
 
 import org.soulspace.base.domain.object.Temporal;
-import org.soulspace.util.DateUtils;
 
 import junit.framework.TestCase;
 
