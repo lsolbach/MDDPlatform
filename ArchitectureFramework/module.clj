@@ -6,7 +6,6 @@
  :version "0.2.1"
  :description "An architecture framework with abstractions and aspects"
  :plugins ["global"
-           ["org.soulspace.baumeister/DependencyPlugin"]
            ["org.soulspace.baumeister/AspectJPlugin"]
            ["org.soulspace.baumeister/JUnitPlugin"]
            ["org.soulspace.baumeister/PackagePlugin"]]

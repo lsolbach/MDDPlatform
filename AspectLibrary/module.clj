@@ -8,7 +8,6 @@
  :license ["Eclipse Public License 1.0" "http://www.eclipse.org/legal/epl-v10.html"]
  :provider "soulspace.org"
  :plugins ["global"
-           ["org.soulspace.baumeister/DependencyPlugin"]
            ["org.soulspace.baumeister/AspectJPlugin"]
            ["org.soulspace.baumeister/JUnitPlugin"]
            ["org.soulspace.baumeister/PackagePlugin"]]

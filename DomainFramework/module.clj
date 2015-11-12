@@ -6,7 +6,6 @@
  :version "0.6.1"
  :description "A domain framework with abstractions and aspects for domain driven design"
  :plugins ["global"
-           ["org.soulspace.baumeister/DependencyPlugin"]
            ["org.soulspace.baumeister/AspectJPlugin"]
            ["org.soulspace.baumeister/JUnitPlugin"]
            ["org.soulspace.baumeister/PackagePlugin"]]
