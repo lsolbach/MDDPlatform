@@ -24,8 +24,7 @@ numeric hasMappings(map element) {
 }
 
 map getQueryResult(map element) {
-	/* TODO change dependency stereotype to 'responds' to align with ws requests/responses? */
-	map result = select(cHasStereotype('creates'), element:ClientDependencySet)
+	map result = select(cHasStereotype('responds'), element:ClientDependencySet)
 	result:Supplier
 }
 

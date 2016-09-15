@@ -3,8 +3,8 @@
 --?><?
 string fileComment(map element) {
 ?>/*
- * Query result interface <?name(This)?>
-<? generationInfo(' * ')?>
+ * Query result interface <?name(element)?>
+<? generationInfo(element, ' * ')?>
  */<?
 }
 

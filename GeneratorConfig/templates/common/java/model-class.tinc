@@ -3,7 +3,7 @@ string fileComment(map element) {
 ?>/*
  * Abstract class <?name(This)?>
  * Base implementation of model interface <?Name?>.
-<? generationInfo(' * ')?>
+<? generationInfo(element, ' * ')?>
  */<?
 }
 

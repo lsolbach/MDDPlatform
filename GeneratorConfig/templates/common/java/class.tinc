@@ -5,7 +5,7 @@
  * Methods for java class generation
  * Specific for the MDSD profile
  *
- * Â©2010-2012 Ludger Solbach
+ * ©2010 Ludger Solbach
 --?><?
 string memberFields(map element) {
 	dependencyFields(element)

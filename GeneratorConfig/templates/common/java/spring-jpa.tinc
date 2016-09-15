@@ -1,6 +1,6 @@
 <?!--
  * common/java/spring-jpa.tinc
- * Â©2010-2012 Ludger Solbach
+ * ©2010-2012 Ludger Solbach
 --?><?
 map getImportMap(map element) {
 	map importMap = super(element)

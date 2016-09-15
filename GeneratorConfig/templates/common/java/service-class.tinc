@@ -1,9 +1,9 @@
 <?
 string fileComment(map element) {
 ?>/*
- * Abstract class <?name(This)?>
- * Base implementation of service interface <?Name?>.
-<? generationInfo(' * ')?>
+ * Abstract class <?name(element)?>
+ * Base implementation of service interface <?element:Name?>.
+<? generationInfo(element, ' * ')?>
  */<?
 }
 

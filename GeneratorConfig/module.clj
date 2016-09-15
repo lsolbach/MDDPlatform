@@ -9,7 +9,7 @@
  :plugins [["org.soulspace.baumeister/MDDGeneratorPlugin"]
            ["org.soulspace.baumeister/PackagePlugin"]] 
  :dependencies [["org.soulspace.modelling/ArgoUMLProfileLibrary, 1.0.0, ArgoUMLProfileLibrary, zip" :generator]
-                ["org.soulspace.modelling/MDDTemplateLibrary, 1.0.2, MDDTemplateLibrary, zip" :generator]]
+                ["org.soulspace.modelling/MDDTemplateLibrary, 1.0.3, MDDTemplateLibrary, zip" :generator]]
  :mddgenerator-model-dir "profiles"
  :mddgenerator-model-name "MDSDProfile"
  :mddgenerator-template-path "${lib-generator-dir}/templates:templates"

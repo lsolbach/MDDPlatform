@@ -2,7 +2,7 @@
 string fileComment(map element) {
 ?>/*
  * Interface of model <?name(element)?>
-<?generationInfo(' * ')?>
+<?generationInfo(element, ' * ')?>
  */<?
 }
 ?>

@@ -3,9 +3,9 @@
 --?><?
 string fileComment(map element) {
 ?>/*
- * Abstract class <?name(This)?>
- * Base implementation of query result interface <?Name?>.
-<? generationInfo(' * ')?>
+ * Abstract class <?name(element)?>
+ * Base implementation of query result interface <?element:Name?>.
+<? generationInfo(element, ' * ')?>
  */<?
 }
 

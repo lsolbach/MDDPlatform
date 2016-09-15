@@ -1,8 +1,8 @@
 <?
 string fileComment(map element) {
 ?>/*
- * Query interface <?name(This)?>.
-<? generationInfo(' * ')?>
+ * Query interface <?name(element)?>.
+<? generationInfo(element, ' * ')?>
  */<?
 }
 
