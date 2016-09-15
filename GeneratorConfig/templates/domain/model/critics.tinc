@@ -1,0 +1,115 @@
+<?
+list validate(map package) {
+	list criticList
+	foreach element | isFactory(element) <- getClassList(package) {	
+		criticList = criticList + validateFactory(element)
+	}
+	foreach element | isRepository(element) <- getClassList(package) {	
+		criticList = criticList + validateRepository(element)
+	}
+	foreach element | isDomainObject(element) <- getClassList(package) {	
+		criticList = criticList + validateDomainObject(element)
+	}
+	criticList
+}
+
+list validateDomainObject(map element) {
+	list criticList
+
+	/* Errors */
+	if(isAbstractDomainObject(element) && !isAbstract(element)) {
+		criticList.add(critic(element, 'Error',
+							'The domain object ' + qualifiedName(element)
+							+ ' must be abstract, because it is not an entity nor a value.'))
+	}
+	if(isDomainObject(element) && !isAbstractDomainObject(element) && getContainerList(element).size() < 1) {
+		criticList.add(critic(element, 'Error',
+							'The domain object ' + qualifiedName(element)
+							+ ' must be part of a container (repository or aggregate root).'))
+	
+	}
+	if(isDomainObject(element) && getContainerList(element).size() > 1) {
+		criticList.add(critic(element, 'Error',
+							'The domain object ' + qualifiedName(element)
+							+ ' is part of more than one container (repository or aggregate root).'))
+	
+	}
+	if(isEntity(element) && !isAggregateRoot(element) && hasChildren(element)) {
+		criticList.add(critic(element, 'Error',
+							'The entity ' + qualifiedName(element)
+							+ ' has children but is not an aggregate root!'))
+	}
+	if(!isEntity(element) && isAggregateRoot(element)) {
+		criticList.add(critic(element, 'Error',
+			 				'The class ' + qualifiedName(element)
+			 				+ ' is an aggregate root but not an entity.'
+			 				+ ' Only entities can be aggregate roots.'))
+	}
+	if(isValue(element) && hasChildren(element)) {
+		criticList.add(critic(element, 'Error',
+							'The class ' + qualifiedName(element) + ' is a value object.'
+							+ ' Only entities can have children.'))
+
+	}
+	if(isRootValue(element) && getKeyList(element).size() == 0) {
+		criticList.add(critic(element, 'Error',
+							'The class ' + qualifiedName(element)
+							+ ' is a root value stored in a repository but has no primary key.'))
+	}
+
+	/* Warnings */
+	if(isAggregateRoot(element) && !hasChildren(element)) {
+		criticList.add(critic(element, 'Warning',
+							'The class ' + qualifiedName(element)
+							+ ' is an aggregate root but has no children.'))
+	}
+	
+	/* Info */
+	if(isDomainObject(element)) {
+		criticList.add(critic(element, 'Info',
+							'The class ' + qualifiedName(element)
+							+ ' has ' + getChildList(element) + ' children.'))
+	}
+	if(isDomainObject(element)) {
+		criticList.add(critic(element, 'Info',
+							'The class ' + qualifiedName(element)
+							+ ' has ' + getContainerList(element) + ' parents.'))
+	}
+	if(isRootValue(element) && getKeyList(element).size() == 1) {
+		criticList.add(critic(element, 'Info',
+							'The class ' + qualifiedName(element)
+							+ ' is a root value stored in a repository with a defined key.'))
+	}
+	if(isRootValue(element) && getKeyList(element).size() > 1) {
+		criticList.add(critic(element, 'Info',
+							'The class ' + qualifiedName(element)
+							+ ' is a root value stored in a repository with a composite key.'))
+	}
+	criticList
+}
+
+string validateRepository(map element) {
+	list criticList
+
+	/* Errors */
+	if(isRepository(element) && !hasChildren(element)) {
+		criticList.add(critic(element, 'Error',
+							'The class ' + qualifiedName(element) + ' is a repository'
+							+ ' but does not have any composed domain objects.'))
+
+	}
+	criticList
+}
+
+string validateFactory(map element) {
+	list criticList
+
+	/* Errors */
+	if(isFactory(element) && !hasChildren(element)) {
+		criticList.add(critic(element, 'Error',
+							'The class ' + qualifiedName(element) + ' is a factory'
+							+ ' but does not create any domain objects (FIX CONDITION).'))
+	}
+	criticList
+}
+?>

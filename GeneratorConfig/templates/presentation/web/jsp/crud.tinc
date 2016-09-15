@@ -1,0 +1,204 @@
+<?
+string content(map view) {
+	if(hasTaggedValue(view, 'viewType')) {
+		if(taggedValue(view, 'viewType') eq 'LIST') {
+			listing(view)
+		} else if(taggedValue(view, 'viewType') eq 'FILTER') {
+			filter(view)
+		} else if(taggedValue(view, 'viewType') eq 'SEARCH') {
+			search(view)
+		} else if(taggedValue(view, 'viewType') eq 'NEW') {
+			new(view)
+		} else if(taggedValue(view, 'viewType') eq 'SHOW') {
+			show(view)
+		} else if(taggedValue(view, 'viewType') eq 'EDIT') {
+			edit(view)
+		} else if(taggedValue(view, 'viewType') eq 'DELETE') {
+			delete(view)
+		}
+	}
+}
+
+string listing(map view) {
+	h1(view:Name)
+	listingResultContent(view)
+}
+
+string listingResultContent(map view) {
+	/* result table */
+	list resultModelList = filter(isResultModel, getFieldList(view))	
+}
+
+string search(map element) {
+	h1(view:Name)
+	searchFormContent(view)
+	searchResultContent(view)
+}
+
+string searchFormContent(map view) {
+	/* form with search criteria plus result table */
+	list criteriaModelList = filter(isCriteriaModel, getFieldList(view))	
+	foreach model <- criteriaModelList {
+		inputModel(model)
+	}
+	formOkCancel(view)
+}
+
+string searchResultContent(map view) {
+	list resultModelList = filter(isResultModel, getFieldList(view))
+	foreach model <- resultModelList {
+		outputTableModel(model)
+	}	
+}
+
+string filter(map view) {
+	h1(view:Name)
+	filterFormContent(view)
+	filterResultContent(view)
+}
+
+string filterFormContent(map view) {
+	/* form with filter criteria plus result table */
+	list criteriaModelList = filter(isCriteriaModel, getFieldList(view))	
+	foreach model <- criteriaModelList {
+		inputModel(model)
+	}
+	formOkCancel(view)
+}
+
+string filterResultContent(map view) {
+	list resultModelList = filter(isResultModel, getFieldList(view))
+	foreach model <- resultModelList {
+		outputTableModel(model)
+	}	
+}
+
+string show(map view) {
+	h1(view:Name)
+	showContent(view)
+}
+
+string showContent(map view) {
+	/* page with details */
+	list viewModelList = getViewModelList(view)
+	foreach model <- viewModelList {
+		outputModel(model)
+	}
+	/* TODO add form */
+}
+
+string delete(map view) {
+	h1(view:Name)
+	form(view, deleteFormContent(view), view:Name)
+}
+
+string deleteFormContent(map view) {
+	/* page with details plus delete message and ok and cancel */
+	list viewModelList = getViewModelList(view)
+	foreach model <- viewModelList {
+		outputModel(model)
+	}
+	/* TODO add form */
+}
+
+string new(map view) {
+	h1(view:Name)
+	form(view, newFormContent(view), view:Name)
+}
+
+string newFormContent(map view) {
+	/* form with input fields plus ok and cancel */
+	list viewModelList = getViewModelList(view)
+	foreach model <- viewModelList {
+		inputModel(model)
+	}
+	/* ok and cancel */
+	formOkCancel(view)	
+}
+
+string edit(map view) {
+	h1(view:Name)
+	form(view, editFormContent(view), view:Name)
+}
+
+string editFormContent(map view) {
+	/* form with input fields plus ok and cancel */
+	list viewModelList = getViewModelList(view)
+	foreach model <- viewModelList {
+		inputModel(model)
+	}
+	/* ok and cancel */
+	formOkCancel(view)
+}
+
+string showProperty(map attr) {
+	attr:Name + ': ' + 	attributeValue(attr)
+}
+
+string editProperty(map attr) {
+	attr:Name + ':' + br()
+	if(attr:Type:Name.firstLower() eq 'string') {
+		string maxLength = maxLength(attr)
+		if(maxLength && maxLength <= 50) {
+			formText(attr)
+		} else {
+			formTextarea(attr)
+		}
+	} else if(attr:Type:Name.toLower() eq 'password' ) {
+			formPassword(attr)
+		/* options */
+	} else if(attr:Type:Name.firstLower() eq 'integer'
+			|| attr:Type:Name.firstLower() eq 'long') {
+		formText(attr)		
+	} else if(attr:Type:Name.firstLower() eq 'boolean' ) {
+		formCheckbox(attr)
+	} else {
+		formText(attr)
+	}
+}
+
+string maxLength(map attr) {
+	string maxLength
+	if(hasTaggedValue(attr, 'maxLength')) {
+		maxLength = taggedValue(attr, 'maxLength')
+	} else if(hasStereotype(attr, 'mapped')) {
+		/* maxLength = maxLength(getMappingSourceAttribute(attr)) */
+	}
+	maxLength
+}
+
+string minLength(map attr) {
+	string minLength
+	if(hasTaggedValue(attr, 'minLength')) {
+		/* minLength = taggedValue(attr, 'minLength') */
+	} else if(hasStereotype(attr, 'mapped')) {
+		minLength = minLength(getMappingSourceAttribute(attr))
+	}
+	minLength
+}
+
+string updateAssociation(map asso) {
+	/* TODO render transition to association type specific page */
+}
+
+string formOkCancel(map view) {
+	formSubmit(view, 'Ok', 'Ok')
+	formSubmit(view, 'Cancel', 'Cancel')
+}
+
+string inputModel(map model) {
+	/* render input fields for model */
+	join(mapFn(editProperty, model:Type:AttributeList), br() + lineFeed() + tab())
+}
+
+string outputModel(map model) {
+	/* render output for model */
+	join(mapFn(showProperty, model:Type:AttributeList), br() + lineFeed() + tab())
+}
+
+string outputTableModel(map model) {
+	/* TODO render table (TODO paging, sorting, ...)*/
+	join(mapFn(showProperty, model:Type:AttributeList), br() + lineFeed() + tab())
+}
+
+?>

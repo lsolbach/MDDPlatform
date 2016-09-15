@@ -1,0 +1,20 @@
+<?
+string fileComment(map element) {
+	'/*' + lineFeed()
+	' * Interface of service ' + name(element) + lineFeed()
+	generationInfo(element, ' * ') + lineFeed()
+	' */'
+}
+
+map getImportMap(map element) {
+	map importMap = super(element)
+	add(importMap, 'org.soulspace.annotation.common.Service')
+	importMap
+}
+
+list getTypeAnnotationList(map element) {
+	list annotationList = super(element)
+	annotationList.add('@Service')
+	annotationList
+}
+?>

@@ -1,0 +1,7 @@
+<?
+string tagLibs(map element) {
+	super(element)?>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<?
+}
+?>

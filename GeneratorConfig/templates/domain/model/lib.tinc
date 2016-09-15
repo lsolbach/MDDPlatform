@@ -1,0 +1,199 @@
+<?!--
+ * domain/model/lib
+ * 
+ * Functions for the domain layer based on the meta model of the ModelRepository
+ * Specific for the MDSD profile
+ * 
+ * ©2010-2012 Ludger Solbach
+--?><?
+method isEntity = cHasStereotype('entity')
+
+method isValue = cHasStereotype('value')
+
+method isFactory = cHasStereotype('factory')
+
+method isRepository = cHasStereotype('repository')
+
+method isService = cHasStereotype('service')
+
+numeric isRevisionable(map element) {
+	taggedValue(element, 'revisionable') eq 'true'	
+}
+
+numeric isValidatable(map element) {
+	!taggedValue(element, 'validatable') eq 'false'
+}
+
+numeric isAuditable(map element) {
+	taggedValue(element, 'auditable') eq 'true'
+}
+
+numeric isTemporal(map element) {
+	taggedValue(element, 'temporal') eq 'true'
+}
+
+numeric isAggregateRoot(map element) {
+	hasStereotype(element, 'aggregate root')
+}
+
+numeric isRootEntity(map element) {
+	isEntity(element) && isRepository(getContainer(element))
+}
+
+numeric isRootValue(map element) {
+	isValue(element) && isRepository(getContainer(element))
+}
+
+numeric isDomainObject(map element) {
+	hasStereotype(element, 'domain object') || isEntity(element) || isValue(element)
+}
+
+numeric isAbstractDomainObject(map element) {
+ 	hasStereotype(element, 'domain object')
+}
+
+numeric isEnumeration(map element) {
+	super(element) || hasStereotype(element, 'enumeration')
+}
+
+numeric isPersistent(map element) {
+	isDomainObject(element)
+}
+
+numeric isLazy(map element) {
+	taggedValue(element, 'lazy') eq 'true'
+}
+
+numeric isUnique(map element) {
+	taggedValue(element, 'unique') eq 'true'
+}
+
+numeric isKey(map element) {
+	hasStereotype(element, 'key')
+}
+
+numeric isProfileAttribute(map element, string attrName) {
+	numeric result = 0
+	if(isEntity(element) && attrName eq 'id') {
+		result = 1
+	} else if(isEntity(element) && attrName eq 'modification') {
+		result = 1
+	} else if(isDomainObject(element) && isRevisionable(element)
+	 			&& (attrName eq 'createdAt' || attrName eq 'modifiedAt')) {
+		result = 1
+	} else if(isDomainObject(element) && isRevisionable(element)
+	 			&& (attrName eq 'createdBy' || attrName eq 'modifiedBy')) {
+		result = 1
+	} else if(isDomainObject(element) && isTemporal(element)
+	 			&& (attrName eq 'validFrom' || attrName eq 'validTo' || attrName eq 'invalidatedAt')) {
+		result = 1
+	}
+	result
+}
+
+map getProfileAttributeType(string name) {
+	map type
+	if(isEntity(element) && attrName eq 'id') {
+		type.put('Name', 'Id')
+		type.put('Namespace', 'mdsd.common.types')
+		type.put('QualifiedName', type['Namespace'] + '.' + type['Name'])
+	} else if(isEntity(element) && attrName eq 'modification') {
+		type.put('Name', 'Integer')
+		type.put('Namespace', '')
+		type.put('QualifiedName', type['Name'])
+	} else if(isDomainObject(element) && isRevisionable(element)
+	 			&& (attrName eq 'createdAt' || attrName eq 'modifiedAt')) {
+		type.put('Name', 'Timestamp')
+		type.put('Namespace', 'mdsd.common.types')
+		type.put('QualifiedName', type['Namespace'] + '.' + type['Name'])
+	} else if(isDomainObject(element) && isRevisionable(element)
+	 			&& (attrName eq 'createdBy' || attrName eq 'modifiedBy')) {
+		type.put('Name', 'Id')
+		type.put('Namespace', 'mdsd.common.types')
+		type.put('QualifiedName', type['Namespace'] + '.' + type['Name'])
+	} else if(isDomainObject(element) && isTemporal(element)
+	 			&& (attrName eq 'validFrom' || attrName eq 'validTo' || attrName eq 'invalidatedAt')) {
+		type.put('Name', 'Timestamp')
+		type.put('Namespace', 'mdsd.common.types')
+		type.put('QualifiedName', type['Namespace'] + '.' + type['Name'])
+	}
+	type
+}
+
+map getProfileAttribute(map element, string attrName, map attrType) {
+	map profileAttr
+
+	profileAttr.put('ParentElement', parentElement)
+	profileAttr.put('Name', name)
+	profileAttr.put('Type', attrType)
+
+	/* FIXME implement */
+	profileAttr
+}
+
+numeric hasContainer(map element) {
+	isDomainObject(element) && getContainerList(element).size() == 1
+}
+
+numeric hasChildren(map element) {
+	isDomainObject(element) && getChildList(element)
+}
+
+/* tests if the package contains repositories */
+numeric hasRepository(map package) {
+	filter(isRepository, getClassList(package))
+}
+
+/* get the repository for the element */
+map getRepository(map element) {
+	map container = element
+	while(container && !isRepository(container)) {
+		container = getContainer(container)
+	}
+	container
+}
+
+/* get the list of model packages required by this model package */
+/* (that's the package itself and all the model packages it depends on) */
+list getModelPackageList(map package) {
+	getModelPackageList(newList(), package)
+}
+
+method isModelPackage = cHasStereotype('model package')
+
+list getModelPackageList(list modelPackageList, map package) {
+	map pkg = package
+	pkg.debug('getting model package list for package ' + pkg:QualifiedName)
+	list modelPackageList
+	foreach dep | isDependency(dep) <- pkg:ClientDependencySet {
+		dep:Supplier.debug('getting model package list for dep ' + dep:Supplier:QualifiedName)
+		modelPackageList = getModelPackageList2(modelPackageList, dep:Supplier)
+	}
+	if(isModelPackage(pkg)) {
+		pkg.debug('adding package to model package list ' + pkg:QualifiedName)
+		modelPackageList = modelPackageList.add(pkg)
+	} else {
+		pkg.debug('not adding package to model package list ' + pkg:QualifiedName)
+	}
+	pkg.debug('leaving package ' + pkg:QualifiedName)
+	modelPackageList
+}
+
+list getModelPackageList2(list modelPackageList, map package) {
+	map pkg = package
+	pkg.debug('getting model package list for package ' + pkg:QualifiedName)
+	list modelPackageList
+	foreach dep | isDependency(dep) <- pkg:ClientDependencySet {
+		dep:Supplier.debug('getting model package list for dep ' + dep:Supplier:QualifiedName)
+		modelPackageList = getModelPackageList(modelPackageList, dep:Supplier)
+	}
+	if(isModelPackage(pkg)) {
+		pkg.debug('adding package to model package list ' + pkg:QualifiedName)
+		modelPackageList = modelPackageList.add(pkg)
+	} else {
+		pkg.debug('not adding package to model package list ' + pkg:QualifiedName)
+	}
+	pkg.debug('leaving package ' + pkg:QualifiedName)
+	modelPackageList
+}
+?>

@@ -1,0 +1,42 @@
+<?!--
+ * test/java/junit-spring
+--?><?
+map getImportMap(map element) {
+	map importMap = super(element)
+
+	importMap.put('org.junit.Test', 'org.junit.Test')
+	importMap.put('org.junit.Assert', 'org.junit.Assert')
+	importMap.put('org.junit.runner.RunWith', 'org.junit.runner.RunWith')
+	importMap.put('org.springframework.beans.factory.annotation.Autowired', 'org.springframework.beans.factory.annotation.Autowired')
+	importMap.put('org.springframework.test.context.ContextConfiguration', 'org.springframework.test.context.ContextConfiguration')
+	importMap.put('org.springframework.test.context.junit4.SpringJUnit4ClassRunner', 'org.springframework.test.context.junit4.SpringJUnit4ClassRunner')
+
+	importMap
+}
+
+string typeAnnotations(map element) {
+	super(element)?>
+@ContextConfiguration(locations="classpath:/<?element:Namespace.replace('.', '/')?>/test-config.xml")
+@RunWith(SpringJUnit4ClassRunner.class)
+<?
+}
+
+string abstract(map element) {
+	'abstract'
+}
+
+string extension(map element) {
+}
+
+string implementations(map element) {
+}
+
+string dependencyFieldAnnotations(map dep) {
+	super(dep)?>
+	@Autowired<?
+}
+
+string operations(map element) {
+	dependencyAccessors(element)
+}
+?>

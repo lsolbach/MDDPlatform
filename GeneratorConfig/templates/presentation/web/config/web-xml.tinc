@@ -1,0 +1,158 @@
+<?
+string contentXml(map element) {?>
+<web-app id="<?appName(This)?>"
+	version="3.0"
+	xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_3_0.xsd">
+<?
+	displayName(This)
+	contextParams(This)
+	listeners(This)
+	distribution(This)
+	contextParams(This)
+	listeners(This)
+	servlets(This)
+	servletMappings(This)
+	filters(This)
+	filterMappings(This)
+	sessionConfig(This)
+?>
+</web-app><?
+}
+
+/* TODO generate a reasonable display name and match with appName()? */
+string displayName(map element) {?>
+	<display-name><?element:Name?></display-name>
+<?
+}
+
+string distribution(map element) {}
+
+string contextParams(map element) {
+
+}
+
+string contextParam(string paramName, string paramValue) {?>
+	<context-param>
+		<param-name><?paramName?></param-name>
+		<param-value><?paramValue?></param-value>
+	</context-param>
+<?
+}
+
+string listeners(map element) {
+
+}
+
+string listener(string className) {?>
+	<listener>
+		<listener-class><?className?></listener-class>
+	</listener>
+<?
+}
+
+string servlets(map element) {}
+
+string servlet(map element) {
+
+}
+
+string servletMappings(map element) {}
+
+string servletMapping(map element) {
+
+}
+
+string filters(map element) {?>
+	<!-- include charset filter by default?! -->
+	<filter>
+		<filter-name>charsetFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+<?
+}
+
+string filterMappings(map element) {?>
+	<!-- include charset filter by default?! -->
+	<filter-mapping>
+		<filter-name>charsetFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+<?
+}
+
+string filter(map filter) {?>
+	<filter>
+		<filter-name><?filter:Name.firstLower()?></filter-name>
+		<filter-class><?filter:QualifiedName?></filter-class><?
+		foreach attr <- filter:AttributeList {
+			initParam(attr:Name, attr:Name) /* FIXME which value? */
+		}?>
+	</filter>
+<?
+}
+
+string filter(string filterName, string filterClass, list filterParams) {?>
+	<filter>
+		<filter-name><?filterName?></filter-name>
+		<filter-class><?filterClass?></filter-class><?
+		foreach param <- filterParams {
+			initParam(param:Name, param:Value)
+		}?>
+	</filter>
+<?
+}
+
+string initParam(string paramName, string paramValue) {?>
+		<init-param>
+			<param-name><?paramName?></param-name>
+			<param-value><?paramValue?></param-value>
+		</init-param>
+<?
+}
+
+string filterMapping(map filter) {
+?>
+	<filter-mapping>
+		<filter-name><?filter:Name.firstLower()?></filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+<?
+}
+
+string sessionConfig(map element) {
+	sessionConfig(element, 60)
+}
+
+string sessionConfig(map element, numeric timeout) {?>
+	<session-config>
+		<session-timeout><?timeout?></session-timeout>
+	</session-config>
+<?
+}
+
+string appName(map element) {
+	element:Name
+}
+
+string exceptionErrorPage(string exception, string page) {?>
+	<error-page>
+		<exception-type><?exception?></exception-type>
+		<location>WEB-INF/jsp/error/<?page?>.jsp</location>
+	</error-page>
+<?
+}
+
+string codeErrorPage(string code, string page) {?>
+	<error-page>
+	    <error-code><?code?></error-code>
+		<location>WEB-INF/jsp/error/<?page?>.jsp</location>
+	</error-page>
+<?
+}
+?>

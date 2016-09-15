@@ -1,0 +1,15 @@
+<?
+string fileComment(map element) {
+	'/*' + lineFeed()
+	' * Interface of value ' + name(element) + lineFeed()
+	generationInfo(element, ' * ') + lineFeed()
+	' */'
+}
+
+list getTypeAnnotationList(map element) {
+	list annotationList = super(element) + getDomainTypeAnnotationList(element)
+	annotationList.add('@Value')
+	annotationList
+}
+
+?>

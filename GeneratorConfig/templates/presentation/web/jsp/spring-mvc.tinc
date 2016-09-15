@@ -1,0 +1,58 @@
+<?
+string tagLibs(map element) {
+	super(element)?>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<?
+}
+
+string form(map element, string content, string action) {
+?><form:form commandName="<?element:Name.firstLower()?>"><?
+	content?>
+</form:form>
+<?
+}
+
+string formText(map element) {
+?><form:input path="<?element:Name?>"/><?
+}
+
+string formTextarea(map element) {
+?><form:textarea path="<?element:Name?>"/><?
+}
+
+string formPassword(map element) {
+?><form:password path="<?element:Name?>"/><?
+}
+
+string formRadioButton(map element) {
+?><form:radiobutton path="<?element:Name?>" items="<?options(element)?>"/><?
+}
+
+string formCheckbox(map element) {
+	if(isBoolean(element:Type)) {
+?><form:checkbox path="<?element:Name?>"/><?
+	} else if(isCollection(element:Type)) {
+?><form:checkbox path="<?element:Name?>"/><?
+	} else {
+?><form:checkbox path="<?element:Name?>" value="<?options(element)?>"/><?
+	}
+}
+
+string formCheckboxes(map element) {
+?><form:checkboxes path="<?element:Name?>" items="<?options(element)?>"/><?
+}
+
+string formSelect(map element) {
+?><form:select path="<?element:Name?>" items="<?options(element)?>"/><?
+}
+
+string formHidden(map element) {
+?><form:hidden path="<?element:Name?>"/><?
+}
+
+string formErrors(map element) {
+?><form:errors path="<?element:Name?>"/><?
+}
+
+?>

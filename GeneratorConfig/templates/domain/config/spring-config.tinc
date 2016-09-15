@@ -1,0 +1,66 @@
+<?
+list classList = getClassList(This)
+list repositoryList = filter(isRepository, classList)
+list factoryList = filter(isFactory, classList)
+list serviceList = filter(isService, classList)
+
+list getNamespaceList(map element) {
+	list namespaces = super(element)
+	namespaces.add('beans')
+	namespaces.add('context')
+}
+
+string beans(map element) {
+	super(element)
+?>
+	<context:spring-configured/>
+	<context:annotation-config/>
+	<context:component-scan base-package="<?element:QualifiedName?>"/>
+<?
+	bean(factoryBean, factoryList)
+	bean(repositoryBean, repositoryList)	
+	bean(serviceBean, serviceList)
+	modelProviderAspectBean(element)
+}
+
+string serviceBean(map element) {?>
+	<bean id="<?element:Name.firstLower()?>" class="<?qualifiedImplementationName(element)?>"><?
+	dependencies(element)?>
+	</bean>
+<?
+}
+
+string factoryBean(map element) {?>
+    <bean id="<?element:Name.firstLower()?>" class="<?qualifiedImplementationName(element)?>"><?
+    dependencies(element)?>
+    </bean>
+<?
+}
+
+string repositoryBean(map element) {?>
+	<bean id="<?element:Name.firstLower()?>" class="<?qualifiedImplementationName(element)?>"><?
+	dependencies(element)?>
+	</bean>
+<?
+}
+
+string modelProviderAspectBean(map element) {?>
+	<bean class="<?element:Namespace?>.<?element:Name?>.ModelProviderAspect"
+		factory-method="aspectOf"><?
+	foreach type <- factoryList {
+		injectType(type)
+	}
+	foreach type <- repositoryList {
+		injectType(type)
+	}
+	foreach type <- serviceList {
+		injectType(type)
+	}
+	?>
+	</bean>
+<?}
+
+string injectType(map type) {?>
+		<property name="<?type:Name.firstLower()?>" ref="<?type:Name.firstLower()?>"/><?
+}
+?>

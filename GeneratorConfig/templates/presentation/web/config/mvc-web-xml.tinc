@@ -1,0 +1,34 @@
+<?
+string servlets(map element) {
+	super(element)?>
+	<?!-- TODO check context config! (load here or globally?)--?>
+	<servlet>
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/application-config.xml</param-value>
+		</init-param>
+	</servlet>
+<?
+}
+
+string servletMappings(map element) {
+	super(element)?>
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+<?
+}
+
+string contextParams(map element) {
+	super(element)
+	contextParam('contextConfigLocation', '/WEB-INF/application-config.xml')
+}
+
+string listeners(map element) {
+	super(element)
+	listener('org.springframework.web.context.ContextLoaderListener')
+}
+?>

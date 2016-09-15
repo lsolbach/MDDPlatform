@@ -1,0 +1,164 @@
+<?!--
+ * common/java/spring-jpa.tinc
+ * ©2010-2012 Ludger Solbach
+--?><?
+map getImportMap(map element) {
+	map importMap = super(element)
+	add(importMap, 'javax.persistence.*')
+	add(importMap, 'org.springframework.orm.jpa.*')
+	add(importMap, 'org.springframework.transaction.annotation.*')
+	add(importMap, 'org.springframework.stereotype.Component')
+	importMap
+}
+
+list getTypeAnnotationList(map element) {
+	list annotationList = super(element)
+	annotationList.add('@Component')
+	annotationList
+}
+
+string memberFields(map element) {
+	entityManagerField(element)
+	super(element)
+}
+
+string operations(map element) {
+	entityManagerGetMethod(element)
+	super(element)
+}
+
+string entityManagerField(map element) {?>
+	@PersistenceContext
+	protected EntityManager entityManager;
+<?
+}
+
+string entityManagerGetMethod(map element) {?>
+	protected EntityManager getEntityManager() {
+		return entityManager;
+	}
+<?
+}
+
+/* FIXME Query objects only work as spring configured singletons at the moment */
+/* change scope to prototype or generate a generic stateless DAO as singleton that gets the query and executes it */
+string queryMethod(map element) {
+	map result = getQueryResult(element)?>
+	@SuppressWarnings("unchecked")
+	@Transactional(readOnly=true)
+	public List<<?javaTypeForType(result)?>> execute() {
+		Query q = getEntityManager().createNativeQuery("<?selectClause(result) + fromClause(result) + whereClause(element)?>");
+		<?queryParameters(element)?>
+		List<<?javaTypeForType(result)?>> mappedResultList = new ArrayList<<?javaTypeForType(result)?>>();
+		List<Object[]> list = q.getResultList();
+		for(Object[] result : list) {
+			mappedResultList.add(new <?javaTypeForType(result)?>Impl(<?mappedConstructorArguments(result)?>));
+		}				
+		return mappedResultList;
+	}
+<?
+}
+
+/* render the result mapping in the constructor */
+string mappedConstructorArguments(map result) {
+	/* TODO add conversions instead of casts where applicable */
+	list argumentList
+	numeric i = 0
+	foreach attr | isMapped(attr) <- result:AttributeList {
+		argumentList.add('(' + javaType(attr) + ') result[' + toString(i) + ']')
+		i = i + 1
+	}
+	join(argumentList, ', ')
+}
+
+numeric isJoinedMapping(map asso) {
+	isMapping(asso) && hasTaggedValue(asso, 'joinOn')
+}
+
+numeric isBaseMapping(map asso) {
+	isMapping(asso) && !hasTaggedValue(asso, 'joinOn')
+}
+
+/* SQL generation */
+string selectClause(map result) {
+	list selectList
+	foreach attr | isMapped(attr) <- result:AttributeList {
+		map sourceAttr = getMappingSourceAttribute(attr)
+		map mappingAsso = getMappingAssociation(attr)
+		if(sourceAttr) {
+			selectList.add(mappingAsso:Name + '.' + dbName(sourceAttr))
+		}
+	}
+	'SELECT ' + join(selectList, ', ')
+}
+
+/* render from clause with necessary joins */
+string fromClause(map result) {
+	list baseMappingList = filter(isBaseMapping, filter(isMapping, result:AssociationList))
+	if(size(baseMappingList) == 1) {
+		map from = first(baseMappingList)
+		' FROM ' dbName(from:Type) + ' AS ' + from:Name
+
+		list joinList
+		list joinedMappingList = filter(isJoinedMapping, filter(isMapping, result:AssociationList))
+		foreach asso | isMapping(asso) <- joinedMappingList {
+			joinList.add(joinClause(result, from, asso))
+		}
+		join(joinList, ',')
+	}
+}
+
+/* render a join clause */
+string joinClause(map result, map from, map asso) {
+	map sourceAsso = getMappingSourceAssociation(result, taggedValue(asso, 'joinOn'))
+	' ' + taggedValue(asso, 'joinType') + ' JOIN ' + dbName(asso:Type) + ' AS ' + asso:Name
+	+ ' ON ' + asso:Name + '.' + foreignKeyName(sourceAsso) + ' = ' + from:Name + '.id'
+}
+
+/* render the where clause */
+string whereClause(map query) {
+	list predicateList
+	foreach attr | isMapped(attr) <- query:AttributeList {
+		map sourceAttr = getMappingSourceAttribute(attr)
+		map mappingAsso = getMappingAssociation(attr)
+		predicateList.add(mappingAsso:Name + '.' + dbName(sourceAttr) + ' ' + operator(attr) + ' :' + sourceAttr:Name)
+	}
+	' WHERE ' + join(predicateList, ' AND ')
+}
+
+/* render the setting of query parameters */
+string queryParameters(map query) {
+	list paramList
+	foreach attr | isMapped(attr) <- query:AttributeList {
+		map sourceAttr = getMappingSourceAttribute(attr)
+		paramList.add('q.setParameter("'+ sourceAttr:Name + '", ' + sourceAttr:Name + ');')
+	}
+	join(paramList, lineFeed() + tabs(2))
+}
+
+/* render a SQL operator */
+string operator(map element) {
+	if(hasTaggedValue(element, 'operator')) {
+		taggedValue(element, 'operator')
+	} else {
+		' = '
+	}
+}
+
+/* debug */
+string printMappings(map element) {
+	foreach attr | isMapped(attr) <- element:AttributeList {
+		map sourceAttr = getMappingSourceAttribute(attr)
+		if(sourceAttr) {
+			lineFeed() + '// ' + attr:ParentElement:QualifiedName + '.' + attr:Name + '(' + mappingPath(attr) + ')' + ' -> ' + sourceAttr:ParentElement:QualifiedName '.' + sourceAttr:Name
+		}
+	}
+	foreach asso | isJoinedMapping(asso) <- element:AssociationList {
+		map sourceAsso = getMappingSourceAssociation(element, taggedValue(asso, 'joinOn'))
+		if(sourceAsso) {
+			lineFeed() + '// join association mapping: ' + taggedValue(asso, 'joinOn') + ', asso: ' + sourceAsso:SourceEnd:Type:Name + '->' + sourceAsso:Type:Name + ':' + sourceAsso:Name
+		}
+	}
+}
+
+?>

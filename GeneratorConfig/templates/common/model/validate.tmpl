@@ -1,0 +1,17 @@
+Validation of package <?qualifiedName(This)?>:
+
+<?join(mapFn(displayCritic, validate(This)), lineFeed())?>
+
+<?
+string displayCritic(map critic) {
+	critic:Level + ': ' + tab() + critic:Text
+}
+
+string qualifiedName(map element) {
+	if(element:Namespace) {
+		element:Namespace + '.' + element:Name
+	} else {
+		element:Name
+	}
+}
+?>

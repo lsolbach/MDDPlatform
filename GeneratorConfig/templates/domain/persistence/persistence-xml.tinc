@@ -1,0 +1,33 @@
+<?
+method isClass = cIsElementType('Class')
+list classList = getClassList(This)
+
+string contentXml(map element) {?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	version="1.0">
+	<persistence-unit name="default">
+<?
+	classes(element)
+	mappingFiles(element)
+	persistenceProperties(element)
+?>
+	</persistence-unit>
+</persistence><?
+}
+
+string classes(map element) {
+	join(mapFiltered(class, isPersistenceClass, classList), lineFeed())
+}
+
+string class(map element) {
+?>		<class><?element:Namespace?>.impl.<?element:Name?>Impl</class><?
+}
+
+numeric isPersistenceClass(map element) {
+	isEntity(element) || isRootValue(element)
+}
+
+/* override in provider include */
+string mappingFiles(map element) { }
+string persistenceProperties(map element) { }
+?>

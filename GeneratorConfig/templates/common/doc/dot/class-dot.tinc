@@ -1,0 +1,13 @@
+<?
+string graphName(map element) {
+	qualifiedName(element)
+}
+
+string nodes(map element) {
+	class(This)
+}
+
+string edges(map element) {
+
+}
+?>

@@ -1,0 +1,20 @@
+<?
+string contentXml(map element) {?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="<?name(element)?>">
+        <wb-resource deploy-path="/" source-path="/WebContent"/>
+        <wb-resource deploy-path="/" source-path="/generated/WebContent"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/config/dev"/>
+        <!--dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/<?name(element)?>/lib/runtime/log4j.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/<?name(element)?>/lib/runtime/aspectjrt.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module-->
+        <property name="context-root" value="<?name(element)?>"/>
+        <property name="java-output-path" value="/<?name(element)?>/bin/classes"/>
+    </wb-module>
+</project-modules><?
+}
+?>

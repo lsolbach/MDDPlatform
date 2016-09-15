@@ -1,0 +1,49 @@
+<?!--
+ * common/config/log4j-config
+ *
+ * © 2012- Ludger Solbach
+ --?><?
+string content(map element) {?>
+# root category
+log4j.rootCategory=WARN, logfile
+<?
+	appenders(This)
+	loggers(This)
+}
+
+string appenders(map element) {
+
+}
+
+string appender(map element, string name) {
+	appender(element, name, 'FileAppender', 'WARN', 'PatternLayout', '%d{ISO8601} [%.10t] %-5p %40.40c - %m%n', 0)
+}
+
+string appender(map element, string name, string type, string level, string layout, string pattern, numeric additivity) {?>
+log4j.appender.<?name?>=org.apache.log4j.<?ConsoleAppender?>
+log4j.appender.perf.target=System.out<?
+	if(type eq 'ConsoleAppender') {
+	} else if(type eq 'FileAppender' || type eq 'RollingFileAppender') {?>
+log4j.appender.logfile.File=../logs/<?element:Name?>/<?name?>.log
+log4j.appender.logfile.MaxFileSize=16MB
+log4j.appender.logfile.MaxBackupIndex=3<?
+	}?>
+log4j.appender.perf.layout=org.apache.log4j.<?layout?><?
+	if(layout eq 'PatternLayout') {?>
+log4j.appender.perf.layout.ConversionPattern=<?pattern?><?
+	}?>
+log4j.additivity.<?name?>=<?boolean(additivity)?>
+<?
+}
+
+string loggers(map element) {
+
+}
+
+string logger(map element, string name, string level, string appender) {
+	'log4j.logger.' name '=' level
+	if(appender) {
+		', 'appender
+	}
+}
+?>

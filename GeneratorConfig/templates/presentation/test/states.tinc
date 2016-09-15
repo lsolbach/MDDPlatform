@@ -1,0 +1,10 @@
+<?
+string content(map element) {
+	foreach stateMachine <- getStateMachineList(element) {
+		'StateMachine: ' + stateMachine:Name + lineFeed()
+		foreach state <- getStateList(stateMachine) {
+			'State: ' + state:Name + lineFeed()
+		}
+	}
+}
+?>

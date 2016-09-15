@@ -1,0 +1,21 @@
+<?
+string dbName(map element) {
+	string dbName
+	if(hasTaggedValue(element, 'dbAlias')) {
+		dbName = dbName(taggedValue(element, 'dbAlias'))
+	} else if(hasTaggedValue(element, 'alias')) {
+		dbName = dbName(taggedValue(element, 'alias'))
+	} else {
+		dbName = super(element)
+	}
+	dbName
+}
+
+list additionalAttributes(map element) {
+	list attrList
+}
+
+list additionalAssociations(map element) {
+	list assoList
+}
+?>

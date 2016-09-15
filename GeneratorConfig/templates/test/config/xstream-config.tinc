@@ -1,0 +1,17 @@
+<?
+list namespaceList(map element) {
+	list namespaceList = super(element)
+	namespaceList
+}
+
+string beans(map element) {
+	super(element)
+?>
+	<!-- start of xstream config -->
+	<bean id="storage" class="org.soulspace.base.domain.persistence.impl.XStreamPersistentStorageImpl">
+		<property name="rootDir" value="/tmp/repository"/>
+	</bean>
+	<!-- end of xstream config -->
+<?
+}
+?>

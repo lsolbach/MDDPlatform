@@ -1,0 +1,94 @@
+<?
+/* configure quarz scheduler for scheduled service operations */
+
+list getNamespaceList(map element) {
+	super(element)
+}
+
+string beans(map element) {
+	super(element)?>
+<?
+}
+
+string jobDetailBean(map element) {?>
+	<bean name="<?element:Name.firstLower()?>" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="<?qualifiedName(element)?>" />
+		<property name="jobDataAsMap">
+			<map>
+				<!--entry key="timeout" value="5"/-->
+			</map>
+		</property>
+	</bean>
+<?
+}
+
+string methodJobDetailBean(map element, map op) {?>
+	<bean id="<?op:Name?>JobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="<?element:Name.firstLower()?>"/>
+		<property name="targetMethod" value="<?op:Name?>"/>
+		<property name="concurrent" value="false" />
+	</bean>
+<?
+}
+
+string schedulerBean(map element) {?>
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<?triggerRefs(element)?>
+<!--
+				<ref bean="cronTrigger"/>
+				<ref bean="simpleTrigger"/>
+-->
+			</list>
+		</property>
+	</bean>
+<?
+}
+
+string triggerRef(map element) {?>
+				<ref bean="<?element:Name.firstLower()?>Trigger"/><?
+}
+
+string simpleTriggerBean(map element) {?>
+	<bean id="<?element:Name.firstLower()?>Trigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<!-- see the example of method invoking job above -->
+		<property name="jobDetail" ref="<?element:Name.firstLower()?>" />
+		<property name="startDelay" value="<?startDelay(element)?>" />
+		<property name="repeatInterval" value="<?repeatInterval(element)?>" />
+	</bean>
+<?
+}
+
+string cronTriggerBean(map element) {?>
+	<bean id="<?element:Name.firstLower()?>Trigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="<?element:Name.firstLower()?>" />
+		<property name="cronExpression" value="<?cronExpression(element)?>" />
+	</bean>
+<?
+}
+
+string startDelay(map element) {
+	if(hasTaggedValue(element, 'startDelay')) {
+		taggedValue(element, 'startDelay')
+	} else {
+		'${' + element:QualifiedName.firstLower() + '.startDelay}'
+	}
+}
+
+string repeatInterval(map element) {
+	if(hasTaggedValue(element, 'repeatInterval')) {
+		taggedValue(element, 'repeatInterval')
+	} else {
+		'${' + element:QualifiedName.firstLower() + '.repeatInterval}'
+	}
+}
+
+string cronExpression(map element) {
+	if(hasTaggedValue(element, 'cronExpression')) {
+		taggedValue(element, 'cronExpression')
+	} else {
+		'${' + element:QualifiedName.firstLower() + '.cronExpression}'
+	}
+}
+?>

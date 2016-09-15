@@ -1,0 +1,126 @@
+<?!--
+   - integration/webservice/lib
+   - 
+   -
+   -
+   - © 2010- Ludger Solbach 
+   --?><?
+method isClass = cIsElementType('Class')
+
+/* check if the element is a web service endpoint */
+numeric isWsEndpoint(map element) {
+	hasStereotype(element, 'ws endpoint')	
+}
+
+/* check if the element is a web service type */
+numeric isWsType(map element) {
+	hasStereotype(element, 'ws type')	
+}
+
+/* check if the element is a web service request */
+numeric isWsRequest(map element) {
+	hasStereotype(element, 'ws request')
+}
+
+/* check if the element is a web service response */
+numeric isWsResponse(map element) {
+	hasStereotype(element, 'ws response')	
+}
+
+/* get the http namespace uri */
+string wsNamespace(map webService) {
+	if(hasTaggedValue(webService, 'namespace')) {
+		taggedValue(webService, 'namespace')
+	} else {
+		'http://' + webService:Name
+	}
+}
+
+/* get the namespace prefix */
+string wsNamespacePrefix(map webService) {
+	if(hasTaggedValue(webService, 'namespacePrefix')) {
+		taggedValue(webService, 'namespacePrefix')
+	} else {
+		webService:Name
+	}
+}
+
+/* get the endpoint for this web service */
+/* TODO handle more than one endpoint for a web service */
+map getEndpoint(map webService) {
+	select(isWsEndpoint, getClassList(webService))
+}
+
+/* get the list of requests handled by an endpoint */
+list getRequestList(map element) {
+	list requestList
+	foreach dep | hasStereotype(dep, 'handles') <- element:ClientDependencySet {
+		requestList.add(dep:Supplier)
+	}
+	requestList
+}
+
+/* get the response for a request */
+map getResponse(map request) {
+	map dep	= first(request:ClientDependencySet)
+	dep:Supplier
+}
+
+/* get the input parameters for a request */
+list getRequestParameterList(map request) {
+	getAttributeList(request) + getAssociationList(request)
+}
+
+list getArgumentList(map element) {
+	list argumentList
+	foreach attr <- element:AllAttributeList {
+		argumentList.add(attr)
+	}
+	foreach asso | !isMany(asso) <- element:AllAssociationList {
+		argumentList = argumentList + getArgumentList(asso:Type)
+	}
+	argumentList
+}
+
+/* get the return type of a request method from the response */
+string returnType(map response) {
+	if(response:AssociationList.size() == 1) {
+		associationType(response:AssociationList[0])
+	} else if(response:AttributeList.size() == 1) {
+		javaTypeForType(response:AttributeList[0]:Type)
+	} else {
+		'void'
+	}
+}
+
+/* check if a request method has a non void return type according to the response */
+numeric hasReturnType(map response) {
+	response:AssociationList.size() == 1 || response:AttributeList.size() == 1
+}
+
+/* check if the web service should be secured by WS-Security */
+numeric isSecure(map webService) {
+	hasTaggedValue(webService, 'secure') && taggedValue(webService, 'secure') ne 'false'
+}
+
+/* returns if a password digest is used for WS-Security UsernameTokenProfile */
+string passwordDigest(map element) {
+	/* default is 'false' (better security with 'true' is yet to be shown) */
+	if(getTaggedValue(element, 'passwordDigest') eq 'true') {
+		'true'
+	} else {
+		'false'
+	}
+}
+
+/* returns if a nonce is used for WS-Security */
+string nonce(map element) {
+	/* default is 'true' (more secure) */
+	if(getTaggedValue(element, 'nonce') eq 'false') {
+		'false'
+	} else {
+		'true'
+	}
+}
+
+?>

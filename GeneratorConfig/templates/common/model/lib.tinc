@@ -1,0 +1,205 @@
+<?!--
+   - common/model/lib
+   -
+   - Methods to query and navigate the meta model of the ModelRepository
+   - Specific for the MDSD profile
+   -
+   - ©2010-2012 Ludger Solbach
+   --?><?
+
+numeric isDependency(map dep) {
+	hasStereotype(dep, 'depends')
+}
+
+numeric isMapping(map element) {
+	hasStereotype(element, 'mapping')
+}
+
+numeric isMapped(map element) {
+	hasStereotype(element, 'mapped')
+}
+
+numeric hasMappings(map element) {
+	hasStereotype(element, 'model') && filter(isMapping, getAssociationList(element))
+}
+
+map getQueryResult(map element) {
+	/* TODO change dependency stereotype to 'responds' to align with ws requests/responses? */
+	map result = select(cHasStereotype('creates'), element:ClientDependencySet)
+	result:Supplier
+}
+
+
+/* get a list of path elements for the mapping path */
+list getMappingPathList(string path) {
+	list pathList = path.split('\.')
+	pathList
+}
+
+/* get a list of path elements for the mapped attribute */
+list getMappingPathList(map attr) {
+	string path = mappingPath(attr)
+	list pathList = path.split('\.')
+	pathList
+}
+
+/* get the mapping path for the mapped attribute */
+string mappingPath(map attr) {
+	string path
+	if(hasTaggedValue(attr, 'class')) {
+		path = taggedValue(attr, 'class') + '.' + attr:Name
+	} else if(hasTaggedValue(attr, 'field')) {
+		path = taggedValue(attr, 'field')
+	}
+	path
+}
+
+/* TODO handle paths with more than 2 elements (follow more than one association) */
+
+/* get the mapping association for the mapped attribute */
+map getMappingAssociation(map attr) {
+	map targetAsso
+	if(isMapped(attr)) {
+		list pathList = getMappingPathList(attr)
+		if(pathList.size() == 2) {
+			targetAsso = select(cHasName(pathList[0]), attr:ParentElement:AssociationList)
+		}
+	}
+	targetAsso
+}
+
+/* get the mapping association for the mapping path list */
+map getMappingAssociation(map element, list pathList) {
+	map targetAsso
+	if(pathList.size() == 2) {
+		targetAsso = select(cHasName(pathList[0]), element:AssociationList)
+	}
+	targetAsso
+}
+
+/* get the mapping association for the mapping path */
+map getMappingAssociation(map element, string path) {
+	getMappingAssociation(element, getMappingPathList(path))
+}
+
+
+/* get the mapping source association for the mapping path list */
+map getMappingSourceAssociation(map element, list pathList) {
+	map sourceAsso
+	if(pathList.size() == 1) {
+		sourceAsso = select(cHasName(pathList[0]), element:AssociationList)
+	} else if(pathList.size() == 2) {
+		map asso = select(cHasName(pathList[0]), element:AssociationList)
+		sourceAsso = select(cHasName(pathList[1]), asso:Type:AssociationList)
+	}
+	sourceAsso
+}
+
+/* get the mapping source association for the mapped attribute */
+map getMappingSourceAssociation(map attr) {
+	map sourceAsso
+	if(isMapped(attr)) {
+		sourceAsso = getMappingSourceAssociation(attr:ParentElement, getMappingPathList(attr))
+	}
+	sourceAsso
+}
+
+/* get the mapping source attribute for the mapping path */
+map getMappingSourceAssociation(map element, string path) {
+	getMappingSourceAssociation(element, getMappingPathList(path))
+}
+
+/* get the mapping source attribute for the mapped attribute */
+map getMappingSourceAttribute(map attr) {
+	map sourceAttr
+	if(isMapped(attr)) {
+		sourceAttr = getMappingSourceAttribute(attr:ParentElement, getMappingPathList(attr))
+	}
+	sourceAttr
+}
+
+/* get the mapping source attribute for the mapping path list */
+map getMappingSourceAttribute(map element, list pathList) {
+	map sourceAttr
+	if(pathList.size() == 1) {
+		if(!isProfileAttribute(asso:Type, pathList[0])) {
+			sourceAttr = select(cHasName(pathList[0]), asso:Type:AttributeList) 
+		} else {
+			sourceAttr = getProfileAttribute(asso:Type, pathList[0])
+		}
+	} else if(pathList.size() == 2) {
+		map asso = select(cHasName(pathList[0]), element:AssociationList)
+		if(!isProfileAttribute(asso:Type, pathList[1])) {
+			sourceAttr = select(cHasName(pathList[1]), asso:Type:AttributeList) 
+		} else {
+			sourceAttr = getProfileAttribute(asso:Type, pathList[1])
+		}
+	}
+	sourceAttr
+}
+
+/* get the mapping target attribute for the mapping path */
+map getMappingSourceAttribute(map element, string path) {
+	getMappingSourceAttribute(element, getMappingPathList(path))
+}
+
+/* attribute defined not in the model element but provided by some stereotype or tagged value of the profile (e.g Entity.id)*/
+numeric isProfileAttribute(map element, string attrName) {
+	if(attrName eq 'id') {
+		1
+	} else {
+		0
+	}
+}
+
+map getProfileAttribute(map parentElement, string name) {
+	map profileAttr
+	profileAttr.put('ParentElement', parentElement)
+	profileAttr.put('Name', name)
+	profileAttr.put('Type', getProfileAttributeType(name))
+	profileAttr
+}
+
+map getProfileAttributeType(string name) {
+	map type
+	if(name eq 'id') {
+		type.put('Name', 'Id')
+		type.put('Namespace', 'mdsd.common.types')
+		type.put('QualifiedName', type['Namespace'] + '.' + type['Name'])
+	} else {
+		name.debug('unhandled profile attribute:')
+	}
+	type
+}
+
+/* get a list of all fields with the 'key' stereotype */
+list getKeyList(map element) {
+	filter(isKey, filter(isPropertyField, getFieldList(element)))
+}
+
+numeric hasScheduledOperations(map element) {
+	filter(cHasTaggedValue('scheduled'), element:OperationList)
+}
+
+numeric isScheduled(map op) {
+	hasTaggedValue(op, 'scheduled')
+}
+
+numeric isArray(map element) {
+	element:Type:QualifiedName eq 'mdsd.common.types.Array'
+	|| (element:ElementType eq 'Attribute' && isMany(element))
+}
+
+numeric isBlob(map element) {
+	if(element:Type:QualifiedName eq 'mdsd.common.types.Array'
+		&& hasStereotype(element, 'typed')
+		&& getTaggedValue(element, 'type') eq 'Byte') {
+		1
+	} else if(isAttribute(element) && isMany(element) && element:Type:QualifiedName eq 'mdsd.common.types.Byte') {
+		1
+	} else {
+		0
+	}
+}
+
+?>

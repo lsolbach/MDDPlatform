@@ -1,0 +1,186 @@
+<?
+
+map initModelElement(map element, string name, string visibility) {
+	if(name && !element['Name']) {
+		element.put('Name', name)
+		element.put('Visibility', visibility)
+		element.put('Id', newId())
+		element.put('StereotypeSet', newList())
+		element.put('TaggedValueSet', newList())		
+	}
+	element
+}
+
+map initNamespace(map namespace, string name, string visibility) {
+	map namespace = initModelElement(namespace, name, visibility)
+	namespace.put('OwnedElementList', newList())
+	namespace
+}
+
+map addOwnedElementToNamespace(map namespace, map ownedElement) {
+	namespace:OwnedElementList.add(ownedElement)
+	ownedElement.put('Namespace', namespace)
+	namespace
+}
+
+map initGeneralizableElement(map element, string name, string visibility, string isAbstract,
+							string isRoot, string isLeaf) {
+	element = initModelElement(element, name, visibility)
+	element.put('Abstract', isAbstract)
+	element.put('Root', isRoot)
+	element.put('Leaf', isLeaf)
+	element
+}
+
+map initClassifier(map classifier, string name, string visibility, string isAbstract, string isRoot, string isLeaf) {
+	classifier = initNamespace(classifier, name, visibility)
+	classifier = initGeneralizableElement(classifier, name, visibility, isAbstract, isRoot, isLeaf)
+	classifier.put('FeatureList', newList())
+	classifier
+}
+
+map addFeatureToClassifier(map classifier, map feature) {
+	classifier:FeatureList.add(feature)
+	feature.put('Owner', classifier)
+	classifier
+}
+
+map initFeature(map feature, string name, string visibility, string ownerScope) {
+	feature = initModelElement(feature, name, visibility)
+	feature.put('OwnerScope', ownerScope)
+	feature
+}
+
+map initStructuralFeature(map feature, string name, string visibility,
+		string ownerScope, map multiplicity,
+		string changeability, string targetScope, string ordering) {
+	feature = initFeature(feature, name, visibility, ownerScope)
+	feature.put('Multiplicity', multiplicity)
+	feature.put('Changeability', changeability)
+	feature.put('TargetScope', targetScope)
+	feature.put('Ordering', ordering)
+	feature
+}
+
+map initBehaviouralFeature(map feature, string name, string visibility, string ownerScope, string isQuery) {
+	feature = initFeature(feature, name, visibility, ownerScope)
+	feature.put('Query', isQuery)
+	feature
+}
+
+map initPackage(map package, string name, string visibility) {
+	package = initNamespace(package, name, visibility)
+	package
+}
+
+map createPackage(string name, string visibility) {
+	map package = initPackage(newMap(), name, visibility)
+	package.put('ElementType', 'Package')
+	package
+}
+
+map initModel(map model, string name, string visibility) {
+	model = initPackage(model, name, visibility)
+	model
+}
+
+map createModel(string name, string visibility) {
+	map model = initModel(newMap(), name, visibility)
+	model.put('ElementType', 'Model')
+	model
+}
+
+map initSubSystem(map subSystem, string name, string visibility, string isAbstract,
+				string isRoot, string isLeaf, string isInstanciable) {
+	subSystem = initPackage(subSystem, name, visibility)
+	subSystem = initClassifier(subSystem, name, visibility, isAbstract, isRoot, isLeaf)
+	subSystem.put('Instanciable', isInstanciable)
+	subSystem
+}
+
+map createSubSystem(string name, string visibility, string instanciable) {
+	map subSystem = initSubSystem(newMap(name, visibility, isInstanciable))
+	subSystem.put('ElementType', 'SubSystem')
+	subSystem
+}
+
+map initClass(map class, string name, string visibility, string isAbstract, string isRoot, string isLeaf, string isActive) {
+	class = initClassifier(class, name, visibility, isAbstract, isRoot, isLeaf)
+	class.put('Active', isActive)
+	class
+}
+
+map createClass(string name, string visibility, string isAbstract,
+				string isRoot, string isLeaf, string isActive) {
+	map class = initClass(newMap(), name, visibility, isAbstract, isRoot, isLeaf, isActive)
+	class.put('ElementType', 'Class')
+	class
+}
+
+map initAttribute(map attr, string name, string visibility, string ownerScope,
+	 	map multiplicity, string changeability,
+	 	string targetScope, string ordering, string initialValue) {
+	attr = initStructuralFeature(attr, name, visibility, ownerScope, multiplicity,
+							changeability, targetScope, ordering)
+	attr.put('InitialValue', initialValue)
+	attr
+}
+
+map createAttribute(string name, string visibility, string ownerScope,
+	 	map multiplicity, string changeability,
+	 	string targetScope, string ordering, string initialValue) {
+	map attr = initAttribute(newMap(), name, visibility, ownerScope, multiplicity,
+							changeability, targetScope, ordering, initialValue)
+	attr.put('ElementType', 'Attribute')
+	attr
+}
+
+map createEnumeration(string name, string visibility) {
+	map enum = createModelElement(name, visibility)
+	enum.put('LiteralList', newList())
+	enum
+}
+
+map createEnumerationLiteral(string name, string visibility) {
+	map enumLiteral = createModelElement(name, visibility)
+	enumLiteral
+}
+
+map addEnumerationLiteralToEnumeration(map enum, map enumLiteral) {
+	enum:LiteralList.add(enumLiteral)
+	enum
+}
+
+map initStereotype(map stereotype, string name, string visibility) {
+	stereotype = initModelElement(name, visibility)
+	stereotype
+}
+
+map createStereotype(string name, string visibility) {
+	map stereotype = initStereotype(newMap(), name, visibility)
+	stereotype
+}
+
+map initTagDefinition(map tagDefinition, string name, string visibility) {
+	tagDefinition = initModelElement(name, visibility)
+	tagDefinition
+}
+
+map createTagDefinition(string name, string visibility) {
+	map tagDefinition = initTagDefinition(newMap(), name, visibility)
+	tagDefinition
+}
+
+map initTaggedValue(map taggedValue, string name, string visibility,
+					map type, string dataValue) {
+	taggedValue = initModelElement(name, visibility)
+	taggedValue.put('Type', type)
+	taggedValue.put('Value', dataValue)
+	taggedValue
+}
+
+map createTaggedValue(string name, string visibility, map type, string dataValue) {
+	map taggedValue = initTaggedValue(newMap(), name, visibility, type, dataValue)
+	taggedValue
+}
+?>

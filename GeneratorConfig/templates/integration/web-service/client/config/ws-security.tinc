@@ -1,0 +1,31 @@
+<?
+string beans(map element) {
+	super(element)
+	if(isSecure(element)) {?>
+
+	<bean id="<?wsNamespacePrefix(element)?>SecurityInterceptor"
+		class="org.springframework.ws.soap.security.xwss.XwsSecurityInterceptor">
+		<property name="policyConfiguration"
+			value="classpath*:/<?namespace(element).replace('.', '/')?>/client/securitypolicy.xml" />
+		<property name="callbackHandlers">
+			<list><ref bean="<?wsNamespacePrefix(element)?>UsernamePasswordHandler" /></list>
+		</property>
+	</bean>
+
+	<!-- Authentication CallbackHandler -->
+	<bean id="<?wsNamespacePrefix(element)?>UsernamePasswordHandler"
+		class="org.springframework.ws.soap.security.xwss.callback.SimpleUsernamePasswordCallbackHandler">
+		<property name="username" value="${<?wsNamespacePrefix(element)?>.username}" />
+		<property name="password" value="${<?wsNamespacePrefix(element)?>.password}" />
+	</bean>
+<?
+	}
+}
+
+string wsTemplateInterceptors(map element) {
+	super(element)
+	if(isSecure(element)) {?>
+				<ref bean="<?wsNamespacePrefix(element)?>SecurityInterceptor" /><?
+	}
+}
+?>	

@@ -1,0 +1,18 @@
+<?
+map getImportMap(map element) {
+	map importMap = super(element)
+	importMap.put('java.io.Serializable', 'java.io.Serializable')
+	importMap
+}
+
+list getImplementationList(map element) {
+	list implementationList = super(element)
+	implementationList.add('Serializable')
+	implementationList
+}
+
+string staticFields(map elements) {
+	super(element)?>
+	private static final long serialVersionUID = 1L;<?
+}
+?>

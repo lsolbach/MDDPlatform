@@ -1,0 +1,32 @@
+<?
+string fileComment(map element) {
+?>/*
+ * Interface of mvc controller <?name(This)?>
+<?generationInfo(' * ')?>
+ */<?
+}
+
+string typeAnnotations(map element) {
+	super(element)
+	lineFeed() + '@Controller'
+	if(hasTaggedValue(element, 'mapping')) {
+		lineFeed() + requestMappingAnnotation(element)
+	}
+}
+
+string operation(map op) {
+	if(isRequestMethod(op)) {
+		requestMethod(op)
+	} else {
+		super(op)
+	}
+}
+
+string requestMethod(map op) {
+	string params = requestMethodParameters(op)?>
+	<?requestMethodAnnotations(op)?>
+	String <?op:Name?>(<?requestMethodParameters(op)?>);
+<?
+}
+
+?>

@@ -1,0 +1,103 @@
+<?
+list classList = getClassList(This)
+list repositoryList = filter(isRepository, classList)
+list factoryList = filter(isFactory, classList)
+list serviceList = filter(isService, classList)
+
+map getImportMap(map element) {
+	map importMap
+	
+	importMap.put('org.aspectj.lang.JoinPoint', 'org.aspectj.lang.JoinPoint')	
+	importMap.put('org.soulspace.aop.util.AspectHelper', 'org.soulspace.aop.util.AspectHelper')	
+	importMap.put('org.soulspace.base.domain.object.Entity', 'org.soulspace.base.domain.object.Entity')	
+
+	importMap
+}
+
+
+string typeModifiers(map element) {
+	'public'
+}
+
+string aspectType(map element) {
+
+}
+
+string staticFields(map element) {
+
+}
+
+string memberFields(map element) {
+	foreach class <- factoryList {
+		propertyField(class)
+	}
+	foreach class <- repositoryList {
+		propertyField(class)
+	}
+	foreach class <- serviceList {
+		propertyField(class)
+	}
+}
+
+string propertyField(map element) {?>
+	<?javaTypeForType(element)?> <?javaName(element)?> = null;<?
+}
+
+string operations(map element) {
+	foreach class <- factoryList {
+		propertyAccessor(class)
+	}
+	foreach class <- repositoryList {
+		propertyAccessor(class)
+	}
+	foreach class <- serviceList {
+		propertyAccessor(class)
+	}
+}
+
+string propertyAccessor(map element) {?>
+
+	public <?javaTypeForType(element)?> get<?element:Name?>() { 
+		return <?javaName(element)?>;
+	}
+
+	public void set<?element:Name?>(<?javaTypeForType(element)?> <?javaName(element)?>) {
+		this.<?javaName(element)?> = <?javaName(element)?>;
+	}<?
+}
+
+string intertypeDeclarations(map element) {
+}
+
+/* TODO handle domain objects instead of entities only in pointcuts and advices */
+
+string pointcuts(map element) {
+	foreach repository <- repositoryList {
+		foreach asso | isEntity(asso:Type) <- repository:AssociationList {?>
+	pointcut <?asso:Name.firstLower()?>Access(Entity entity) :
+		execution(<?javaType(asso)?> Entity+.get*()) && target(entity);
+<?
+		}
+	}
+}
+
+string advices(map element) {
+	foreach repository <- repositoryList {
+		foreach asso | isEntity(asso:Type) <- repository:AssociationList {?>
+	<?javaType(asso)?> around(Entity entity) : <?asso:Name.firstLower()?>Access(entity) {
+		String theProperty = AspectHelper.getFieldName(thisJoinPoint);
+		String thePropertyId = theProperty + "Id";
+		
+		<?javaType(asso)?> <?javaName(asso)?> = (<?javaType(asso)?>) AspectHelper.getProperty(entity, theProperty);
+		<?javaType('mdsd.common.types.Id')?> <?javaName(asso)?>Id = (<?javaType('mdsd.common.types.Id')?>) AspectHelper.getProperty(entity, thePropertyId);
+		if(<?javaName(asso)?> == null && <?javaName(asso)?>Id != null) {
+			<?javaName(asso)?> = <?javaName(repository)?>.get<?asso:Type:Name?>(<?javaName(asso)?>Id);
+			AspectHelper.setProperty(entity, theProperty, <?javaName(asso)?>);
+		}
+		return <?javaName(asso)?>;
+	}
+<?
+		}
+	}
+}
+?>

@@ -1,0 +1,17 @@
+<?
+map getImportMap(map element) {
+	map importMap = super(element)
+	add(importMap, 'org.soulspace.annotation.domain.Tracked')
+	importMap
+}
+
+
+string operationMethodAnnotations(map op) {
+	list annotationList = super(op)
+	if(hasStereotype(op, 'tracked') && hasTaggedValue(op, 'trackingId')) {
+		add(annotationList, '@Tracked(trackingId="' + taggedValue(op, 'trackingId') + '")')
+	}
+	annotationList
+}
+
+?>

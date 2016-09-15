@@ -1,0 +1,45 @@
+<?
+list getNamespaceList(map element) {
+	list namespaces = super(element)
+	namespaces.add('webflow')
+}
+
+string namespaceDecl(string ns) {
+	if(ns eq 'webflow') {?>
+	xmlns:<?ns?>="http://www.springframework.org/schema/<?ns?>-config"<?
+	} else {
+		super(ns)
+	}
+}
+
+string namespaceLocation(string ns) {
+	if(ns eq 'webflow') {?>
+		http://www.springframework.org/schema/<?ns?>-config
+		http://www.springframework.org/schema/<?ns?>-config/spring-<?ns?>-config-2.0.xsd<?
+	} else {
+		super(ns)
+	}
+}
+
+string beans(map element) {
+	super(element)?>
+	<webflow:flow-registry id="flowRegistry" base-path="/WEB-INF/flows">
+		<webflow:flow-location-pattern value="*-flow.xml"/>
+	</webflow:flow-registry>
+		
+	<webflow:flow-executor id="flowExecutor" flow-registry="flowRegistry">
+		<webflow:flow-execution-repository max-executions="5" max-execution-snapshots="20"/>
+	</webflow:flow-executor>
+	
+	<!-- Enables FlowHandler URL mapping -->
+	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
+		<property name="flowExecutor" ref="flowExecutor" />
+	</bean>
+	
+	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
+		<property name="flowRegistry" ref="flowRegistry"/>
+		<property name="order" value="0"/>		
+	</bean>
+<?
+}
+?>

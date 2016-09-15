@@ -1,0 +1,103 @@
+<?
+string classes() {
+	mapFn(class, classList(This))
+}
+
+string classes(map element) {
+	mapFn(class, classList(element))
+}
+
+string class(map element) {?>
+	<?name(element)?> [
+  	label=<<table border="0" cellborder="1" cellspacing="0" <?color(element)?>>
+      <tr><td align="CENTER" port="top"><?
+	foreach key <- element:StereotypeMap.keyList() {
+		stereotype(element:StereotypeMap[key])
+	}
+	name(element)?>
+  	</td></tr>
+  	<tr><td align="left"><?
+	join(mapFn(attribute, element:AttributeList), '<br align="left"/>' + lineFeed())?>
+  	</td></tr>
+  	<tr><td align="left" port="bottom"><?
+	join(mapFn(operation, element:OperationList), '<br align="left"/>' + lineFeed())?>
+  	</td></tr>
+  	</table>
+  	>];<?
+}
+
+string stereotype(map stereotype) {
+	'&lt;&lt;'  + stereotype:Name + '&gt;&gt;<br align="center"/>'
+}
+
+string attribute(map attr) {
+	modifiers(attr) + attr:Name
+}
+
+string operation(map op) {
+	modifiers(op) + op:Name + '()'
+}
+
+string generalizations() {
+	generalisations(This)
+}
+
+string generalizations(map element) {
+	foreach superClass <- element:SuperClassList {
+		generalization(element, superclass)
+	}
+}
+
+string generalization(map element, map superClass) {?>
+	  <?superClass:Name?>:bottom -> <?class:Name?>:top [
+      arrowhead=none,
+      arrowtail=onormal
+		]
+<?
+}
+
+string modifiers(map element) {
+	if(element:Visibility eq 'public') {
+		'+'
+	} else if(visibility(element) eq 'protected') {
+		'#'
+	} else if(visibility(element) eq 'private') {
+		'-'
+	}
+	if(isDerived(element)) {
+		'/'
+	}
+}
+
+string associations(map element) {
+	mapFiltered(association, isNavigable, element:AssociationList)
+}
+
+string association(map asso) {?>
+	<?class:Name?>:bottom -> <?asso:Type:Name?>:top [
+	fontsize=12
+	<?
+	if(asso:Aggregation eq 'composite') {?>
+	arrowtail=diamond<?
+	} else if(asso:Aggregation eq 'aggregate') {?>
+	arrowtail=odiamond<?
+	}?>
+	arrowhead=vee
+	headlabel=<
+	<?asso:Name?>
+	>
+	];<?
+}
+
+string dependencies(map element) {
+	mapFn(dependency, element:ClientDependencySet)
+}
+
+string dependency(map dependency) {?>
+	<?class:Name?>:bottom -> <?dep:Supplier:Name?>:top [
+	arrowhead=vee,
+	style=dashed
+	];<?
+}
+
+?>

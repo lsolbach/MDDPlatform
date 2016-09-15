@@ -1,0 +1,13 @@
+<?
+numeric isController(map element) {
+	hasStereotype(element, 'controller')
+}
+
+numeric isEvent(map element) {
+	hasStereotype(element, 'event')
+}
+
+numeric isDataModel(map element) {
+	hasStereotype(element, 'model')
+}
+?>

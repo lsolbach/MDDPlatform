@@ -1,0 +1,62 @@
+<?!--
+ * architecture/doc/profile
+--?><?
+string headContent(map element) {?>
+	<style><?
+	inlineCss(element)?>
+	</style><?
+}
+
+string bodyContent(map element) {
+	h1('Profile Documentation for ' + element:Name)
+	package(element)
+}
+
+string package(map pkg) {
+	h2('Package ' + pkg:QualifiedName)
+	if(hasDocumentation(pkg)) {
+		p(documentation(pkg))
+	}
+	if(getDataTypeList(pkg)) {
+		h3('DataTypes')
+		foreach dt <- getDataTypeList(pkg) {
+			dataType(dt)
+		}
+	}
+	if(getStereotypeList(pkg)) {
+		h3('Stereotypes')
+		foreach st <- getStereotypeList(pkg) {
+			stereotype(st)
+		}
+	}
+	if(getTagDefinitionList(pkg)) {
+		h3('TagDefinitions')
+		foreach td <- getTagDefinitionList(pkg) {
+			tagDefinition(td)
+		}
+	}
+	foreach p <- getPackageList(pkg) {
+		package(p)
+	}
+}
+
+string dataType(map dataType) {
+	h4('DataType ' + dataType:Name)
+	p(documentation(dataType))
+}
+
+string stereotype(map stereotype) {
+	h4('Stereotype ' + stereotype:Name)
+	p(documentation(stereotype))
+	p('Defined on ' + join(stereotype:BaseClassList, ', '))
+	foreach td <- stereotype:DefinedTagSet {
+		tagDefinition(td)
+	}
+}
+
+string tagDefinition(map tagDefinition) {
+	h4('TagDefinition ' + tagDefinition:Name)
+	p(documentation(tagDefinition))
+}
+
+?>

@@ -1,0 +1,69 @@
+<?
+map webService = This:ParentElement
+
+string fileComment(map element) {
+?>/*
+ * Client class for web service <?webService:Name?>
+<? generationInfo(' * ')?>
+ */<?
+}
+
+map getImportMap(map element) {
+	map importMap = super(element)
+	add(importMap, 'WSTemplate')
+	importMap
+}
+
+string memberFields(map element) {?>
+	private WSTemplate wsTemplate;
+	private Marshaller marshaller;
+<?
+}
+
+string constructors(map element) {?>
+	public <?name(element)?>(WSTemplate wsTemplate) {
+		this.wsTemplate = wsTemplate ;
+	}
+<?
+}
+
+string operations(map element) {
+	super(element)
+	requestMethods(element)
+}
+
+string requestMethods(map element) {
+	foreach request <- getRequestList(element) {
+		requestMethod(request)
+	}
+}
+
+string requestMethod(map request) {
+	map response = getResponse(request)
+	string returnType = returnType(response)
+	requestMethodAnnotations(request)?>
+	<?returnType?> <?request:Name.firstLower?>(<?parameters(getRequestParameterList(request))?>)() {<?
+	if(returnType ne 'void') {?>
+		<?returnType?> result = null;<?
+	}
+	marshalRequest(request)?>
+	<?
+	unmarshalResponse(response)
+	if(returnType ne 'void') {?>
+		return result;<?
+	}?>
+	}
+<?
+}
+
+string requestMethodAnnotations(map request) {}
+
+string marshalRequest(map request) {
+
+}
+
+string unmarshalResponse(map response) {
+
+}
+
+?>

@@ -1,0 +1,21 @@
+<?!--
+ - common/java/mapping-interface
+ - 
+--?><?
+string operations(map element) {
+	super(element)
+	if(hasMappings(element)) {
+		mapFrom(element)
+		mapTo(element)
+	}
+}
+
+string mapFrom(map element) {?>
+	void mapFrom();<?
+}
+
+string mapTo(map element) {?>
+	void mapTo();<?
+}
+
+?>

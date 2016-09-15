@@ -1,0 +1,78 @@
+<?
+method isListener = cHasStereotype('listener')
+method isValidator = cHasStereotype('validator')
+
+string tagName(map element) {
+	element:Name	
+}
+
+string description(map element, numeric tabs) {
+	if(hasDocumentation(element))?>
+<?tabs(tabs)?><description>
+<?documentation(element)?>
+<?tabs(tabs)?></description>
+<?
+	}
+}
+
+string tlibVersion(map element) {
+	if(hasTaggedValue(element, 'version')) {?>
+	<tlib-version><?taggedValue(element, 'version')?></tlib-version><?
+	}
+}
+
+string validator(map element) {
+	list validatorList = filter(isValidator, getClassList(element))
+	if(validatorList.size() > 0) {
+		map validator = validatorList[0]?>
+	<validator>
+		<validator-class><?validator:Namespace?>.impl.<?validator:Name?>Impl</validator-class>
+	</validator><?
+	}
+}
+
+string listeners(map element) {
+	list listenerList = filter(isListener, getClassList(element))
+	if(validatorList.size() > 0) {
+	
+	}
+}
+
+string tags(map element) {
+	foreach class | hasStereotype(class, 'tag') <- getClassList(element) {
+		tag(class)
+	}
+}
+
+string tag(map element) {?>
+	<tag>
+		<name><?tagName(element)?></name>
+		<tag-class><?element:Namespace?>.impl.<?element:Name?>Impl</tag-class>
+		<body-content><?bodyContent(This)?></body-content><?
+		attributes(element)?>
+	</tag>
+<?
+}
+
+string bodyContent(map element) {
+	if(hasTaggedValue(element, 'bodyContent')) {
+		taggedValue(element, 'bodyContent')
+	} else {
+		'scriptless'
+	}
+}
+
+string attributes(map element) {
+	foreach attr <- element:AttributeList {
+		attribute(attr)
+	}
+}
+
+string attribute(map attr) {?>
+		<attribute>
+			<name><?tagName(attr)?></name>
+			<required><?boolean(!isOptional(attr))?></required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute><?
+}
+?>

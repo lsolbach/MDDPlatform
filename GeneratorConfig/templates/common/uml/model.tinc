@@ -1,0 +1,29 @@
+<?
+map getModel(map element) {
+
+	map myModel = createModel(element:Name, 'public')
+	map orgPackage = createPackage('org', 'public')
+	addOwnedElementToNamespace(myModel, orgPackage)
+	map soulspacePackage = createPackage('soulspace', 'public')
+	addOwnedElementToNamespace(orgPackage, soulspacePackage)
+	map systemPackage = createPackage('test', 'public')
+	addOwnedElementToNamespace(soulspacePackage, systemPackage)
+	map layerPackage = createPackage('domain', 'public')	
+	addOwnedElementToNamespace(systemPackage, layerPackage)
+
+	map entity = createClass('Entity', 'public', 'false', 'false', 'false', 'false')
+	map entityName = createAttribute('name', 'public' 'instance', newMap(),
+						 'changeable', 'instance', 'unordered', '')
+	addFeatureToClassifier(entity, entityName)
+	addOwnedElementToNamespace(layerPackage, entity)
+	
+	map factory = createClass('Factory', 'public', 'false', 'false', 'false', 'false')
+	addOwnedElementToNamespace(layerPackage, factory)
+	map repository = createClass('Repository', 'public', 'false', 'false', 'false', 'false')
+	addOwnedElementToNamespace(layerPackage, repository)
+	map service = createClass('Service', 'public', 'false', 'false', 'false', 'false')
+	addOwnedElementToNamespace(layerPackage, service)
+	
+	myModel
+}
+?>

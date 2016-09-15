@@ -1,0 +1,24 @@
+<?
+map getImportMap(map element) {
+	map importMap = super(element)
+	add(importMap, 'org.springframework.transaction.annotation.*')
+	importMap
+}
+
+string operationMethodAnnotations(map op) {
+	list annotationList = super(op)
+	if(taggedValue(op, 'transactionMode')) {
+		add(annotationList, '@Transactional(propagation=Propagation.' + taggedValue(op, 'transactionMode') + ', readOnly=' + readOnly(op) + ')')
+	}
+	/* TODO add default transactional annotation for methods missing a 'transactionMode'? (REQUIRED/READ_ONLY) */
+	annotationList
+}
+
+string readOnly(map op) {
+	if(isQuery(op)) {
+		'true'
+	} else {
+		'false'
+	}
+}
+?>

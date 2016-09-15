@@ -1,0 +1,158 @@
+<?
+string fileComment(map element) {
+	'/*' + lineFeed()
+	' * Abstract class ' + name(element) + lineFeed()
+	' * Base implementation of repository interface ' + element:Name + lineFeed()
+	generationInfo(element, ' * ') + lineFeed()
+	' */'
+}
+
+string abstract(map element) {
+	'abstract'
+}
+
+list getTypeAnnotationList(map element) {
+	list annotationList = super(element)
+	annotationList.add('@Repository')
+	annotationList
+}
+
+string associationFields(map element) {
+	foreach asso | !isComposed(asso) && isAccessibleAssociation(asso) && !isDerived(asso) <- getAllAssociationList(element) {
+		associationFieldAnnotations(asso)
+		associationField(asso)
+	}
+}
+
+string constructors(map element) {
+	defaultConstructor(element)
+}
+
+string operations(map element) {
+	super(element)
+	repositoryAccessors(element)
+}
+
+string repositoryGetAsListMethod(map asso) {?>
+	<?repositoryGetAsListMethodAnnotations(asso)?>
+	public List<<?javaType(asso)?>> get<?asso:Name.firstUpper()?>List() {
+		List<<?javaType(asso)?>> <?asso:Name?>List = null;
+		<?repositoryGetAsListMethodBody(asso)?>
+		return Collections.unmodifiableList(<?asso:Name?>List);
+	}
+<?
+}
+
+string repositoryGetAsListMethodAnnotations(map asso) {
+	join(getRepositoryGetAsListMethodAnnotationList(asso), lineFeed() + tab())
+}
+
+string repositoryGetAsSetMethod(map asso) {?>
+	<?repositoryGetAsSetMethodAnnotations(asso)?>
+	public Set<<?javaType(asso)?>> get<?asso:Name.firstUpper()?>Set() {
+		Set<<?javaType(asso)?>> <?asso:Name?>Set = null;
+		<?repositoryGetAsSetMethodBody(asso)?>
+		return Collections.unmodifiableSet(<?asso:Name?>Set);
+	}
+<?
+}
+
+string repositoryGetAsSetMethodAnnotations(map asso) {
+	join(getRepositoryGetAsSetMethodAnnotationList(asso), lineFeed() + tab())
+}
+
+string repositoryGetMethod(map asso) {?>
+	<?repositoryGetMethodAnnotations(asso)?>
+	public <?javaType(asso)?> get<?asso:Name.firstUpper()?>(<?qualifierParameters(asso)?>) {
+		<?javaType(asso)?> <?javaName(asso)?> = null;
+		<?repositoryGetMethodBody(asso)?>
+		return <?javaName(asso)?>;
+	}
+<?
+}
+
+string repositoryGetMethodAnnotations(map asso) {
+	join(getRepositoryGetMethodAnnotationList(asso), lineFeed() + tab())
+}
+
+string repositoryFindMethod(map asso) {?>
+	<?repositoryFindMethodAnnotations(asso)?>
+	public Set<<?javaType(asso)?>> find<?asso:Name.firstUpper()?>(<?qualifierParameters(asso)?>) {
+		Set<<?javaType(asso)?>> <?asso:Name?>Set = null;
+		<?repositoryFindMethodBody(asso)?>
+		return Collections.unmodifiableSet(<?asso:Name?>Set);
+	}
+<?
+}
+
+string repositoryFindMethodAnnotations(map asso) {
+	join(getRepositoryFindMethodAnnotationList(asso), lineFeed() + tab())
+}
+
+string repositoryFindByIdListMethod(map asso) {?>
+	<?repositoryFindByIdListMethodAnnotations(asso)?>
+	public List<<?javaType(asso)?>> find<?asso:Name.firstUpper()?>ByIdList(List<<?javaType(first(getQualifierList(asso)))?>> idList) {
+		List<<?javaType(asso)?>> <?asso:Name?>List = null;
+		<?repositoryFindByIdListMethodBody(asso)?>
+		return Collections.unmodifiableList(<?asso:Name?>List);
+	}
+<?
+}
+
+string repositoryFindByIdListMethodAnnotations(map asso) {
+	join(getRepositoryFindByIdListMethodAnnotationList(asso), lineFeed() + tab())
+}
+
+string repositoryAddMethod(map asso) {?>
+	<?repositoryAddMethodAnnotations(asso)?>
+	public void add<?asso:Name.firstUpper()?>(<?javaType(asso)?> <?javaName(asso)?>) {<?
+	if(isEntity(asso:Type)) {?>
+		<?repositoryAddMethodBody(asso)?><?
+	} else {?>
+		doAdd<?asso:Name.firstUpper()?>(<?javaName(asso)?>);<?
+	}?>
+	}
+<?
+	if(!isEntity(asso:Type)) {?>
+	protected abstract void doAdd<?asso:Name.firstUpper()?>(<?javaType(asso)?> <?javaName(asso)?>);
+<?
+	}
+}
+
+string repositoryAddMethodAnnotations(map asso) {
+	join(getRepositoryAddMethodAnnotationList(asso), lineFeed() + tab())
+}
+
+string repositoryUpdateMethod(map asso) {?>
+	<?repositoryUpdateMethodAnnotations(asso)?>
+	public <?javaType(asso)?> update<?asso:Name.firstUpper()?>(<?javaType(asso)?> <?javaName(asso)?>) {
+		<?repositoryUpdateMethodBody(asso)?>
+		return <?javaName(asso)?>;
+	}
+<?
+}
+
+string repositoryUpdateMethodAnnotations(map asso) {
+	join(getRepositoryUpdateMethodAnnotationList(asso), lineFeed() + tab())
+}
+
+string repositoryRemoveMethod(map asso) {?>
+	<?repositoryRemoveMethodAnnotations(asso)?>
+	public void remove<?asso:Name.firstUpper()?>(<?javaType(asso)?> <?javaName(asso)?>) {<?
+	if(isEntity(asso:Type)) {?>
+		<?repositoryRemoveMethodBody(asso)?><?
+	} else {?>
+		doRemove<?asso:Name.firstUpper()?>(<?javaName(asso)?>);<?
+	}?>
+	}
+<?
+	if(!isEntity(asso:Type)) {?>
+	protected abstract void doRemove<?asso:Name.firstUpper()?>(<?javaType(asso)?> <?javaName(asso)?>);
+<?
+	}
+}
+
+string repositoryRemoveMethodAnnotations(map asso) {
+	join(getRepositoryRemoveMethodAnnotationList(asso), lineFeed() + tab())
+}
+?>

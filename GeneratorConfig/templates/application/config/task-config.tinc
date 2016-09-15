@@ -1,0 +1,28 @@
+<?
+list getNamespaceList(map element) {
+	list namespaces = super(element)
+	namespaces.add('task')
+}
+
+string beans(map element) {
+	super(element)?>	
+		<task:annotation-driven executor="executor" scheduler="scheduler"/>
+		<task:scheduler id="scheduler" pool-size="10"/>
+		<task:executor id="executor" pool-size="1" queue-capacity="500"/>
+<?
+}
+
+string scheduledTasks(map element) {?>
+		<task:scheduled-tasks>
+			<?join(mapFiltered(scheduledTask, hasScheduledOperations, classList(element)), lineFeed() + tabs(3))?>
+		</task:scheduled-tasks>
+<?
+}
+
+string scheduledTask(map task) {
+	foreach scheduledOp | isScheduled(op) <- task:OperationList {
+	'<task:scheduled ref="' + task:Name.firstLower() + 
+		'" method="' + scheduledOp:Name + '" ' + schedulingSpec(op) + '/>'
+	}
+}
+?>

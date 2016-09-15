@@ -1,0 +1,149 @@
+<?
+map factoryMap = getFactoryMap(This)
+
+string fileComment(map element) {
+	'/*' + lineFeed()
+	' * Abstract class ' + name(element) + lineFeed()
+	' * Base implementation of factory interface ' + element:Name + lineFeed()
+	generationInfo(element, ' * ') + lineFeed()
+	' */'
+}
+
+map getImportMap(map element) {
+	map importMap = super(element)
+	add(importMap, 'org.soulspace.annotation.common.Factory')
+	/* add imports for the elements of the factory map */
+	foreach key <- factoryMap.keyList() {
+		importMap = importMap + getPropertyImports(factoryMap[key])
+	}
+	importMap
+}
+
+list getTypeAnnotationList(map element) {
+	list annotationList = super(element)
+	annotationList.add('@Factory')
+	annotationList
+}
+
+string abstract(map element) {
+	'abstract'
+}
+
+string operations(map element) {?>
+	// Factory methods<?
+	factoryMethods(element)
+	super(element)
+}
+
+string factoryMethods(map element) {
+	foreach dep | hasStereotype(dep, 'creates') <- element:ClientDependencySet {
+		/* TODO check for children and return domain object instead of the id when there are none? */
+		if(isEntity(dep:Supplier)) {
+			entityFactoryMethod(dep:Supplier)
+		} else {
+			valueFactoryMethod(dep:Supplier)
+		}
+	}
+}
+
+string entityFactoryMethod(map element) {
+	list fieldList = filter(isAccessibleField, getAllFieldList(element))
+	list mandatoryFieldList = filter(isMandatory, fieldList)?>
+	Map<String, <?element:Name?>Impl> <?element:Name.firstLower()?>Map = new WeakHashMap<String, <?element:Name?>Impl>();
+	
+	public String create<?element:Name.firstUpper()?>(<?constructorParameters(fieldList)?>) {
+		<?element:Name?>Impl <?javaName(element)?> = new <?element:Name?>Impl(<?constructorArguments(fieldList)?>);
+		<?element:Name.firstLower()?>Map.put(<?javaName(element)?>.getId(), <?javaName(element)?>);
+		return <?javaName(element)?>.getId();
+	}
+<?
+	if(mandatoryFieldList && mandatoryFieldList ne fieldList) {?>
+	public String create<?element:Name.firstUpper()?>(<?constructorParameters(mandatoryFieldList)?>) {
+		<?element:Name?>Impl <?javaName(element)?> = new <?element:Name?>Impl(<?constructorArguments(mandatoryFieldList)?>);
+		<?element:Name.firstLower()?>Map.put(<?javaName(element)?>.getId(), <?javaName(element)?>);
+		return <?javaName(element)?>.getId();
+	}
+<?
+	}?>
+	public <?element:Name?> get<?element:Name.firstUpper()?>(String id) {
+		return <?element:Name.firstLower()?>Map.remove(id);
+	}
+<?
+	foreach asso | isComposed(asso) <- element:AssociationList {
+		factoryChildInterface(asso)
+	}
+}
+
+string valueFactoryMethod(map element) {
+	list fieldList = filter(isAccessibleField, getAllFieldList(element))
+	list mandatoryFieldList = filter(isMandatory, fieldList)?>
+	Map<String, <?element:Name?>Impl> <?element:Name.firstLower()?>Map = new WeakHashMap<String, <?element:Name?>Impl>();
+	
+	public String create<?element:Name.firstUpper()?>(<?constructorParameters(fieldList)?>) {
+		String uuid = UUID.randomUUID().toString();
+		<?element:Name?>Impl <?javaName(element)?> = new <?element:Name?>Impl(<?constructorArguments(fieldList)?>);
+		<?element:Name.firstLower()?>Map.put(uuid, <?javaName(element)?>);
+		return uuid;
+	}
+<?
+	if(mandatoryFieldList && mandatoryFieldList ne fieldList) {?>
+	public String create<?element:Name.firstUpper()?>(<?constructorParameters(mandatoryFieldList)?>) {
+		String uuid = UUID.randomUUID().toString();
+		<?element:Name?>Impl <?javaName(element)?> = new <?element:Name?>Impl(<?constructorArguments(mandatoryFieldList)?>);
+		<?element:Name.firstLower()?>Map.put(uuid, <?javaName(element)?>);
+		return uuid;
+	}
+<?
+	}?>
+	public <?element:Name?> get<?element:Name.firstUpper()?>(String id) {
+		return <?element:Name.firstLower()?>Map.remove(id);
+	}
+<?
+	foreach asso | isComposed(asso) <- element:AssociationList {
+		factoryChildInterface(asso)
+	}
+}
+
+string factoryChildInterface(map asso) {
+	map element = asso:SourceEnd:Type
+	map child = asso:Type
+	list fieldList = filter(isAccessibleField, getAllFieldList(child))
+	list mandatoryFieldList = filter(isMandatory, fieldList)?>
+	public void add<?asso:Name.firstUpper()?>(String id, <?constructorParameters(fieldList)?>) {
+		<?element:Name?>Impl <?javaName(element)?> = <?element:Name.firstLower()?>Map.get(id);
+		if(<?javaName(element)?> != null) {
+			<?child:Name?>Impl <?javaName(child)?> = new <?child:Name?>Impl(<?constructorArguments(fieldList)?>);<?
+		if(isMany(asso)) {?>
+			<?javaName(element)?>.add<?asso:Name.firstUpper()?>(<?javaName(child)?>); <?
+		} else {?>
+			<?javaName(element)?>.set<?asso:Name.firstUpper()?>(<?javaName(child)?>); <?
+		}?>
+		}
+	}
+
+	public <?child:Name?> create<?asso:Name.firstUpper()?>(<?constructorParameters(fieldList)?>) {
+		<?child:Name?>Impl <?javaName(child)?> = new <?child:Name?>Impl(<?constructorArguments(fieldList)?>);
+		return <?javaName(child)?>;
+	}
+<?
+	if(mandatoryFieldList && mandatoryFieldList ne fieldList) {?>
+	public void add<?asso:Name.firstUpper()?>(String id, <?constructorParameters(mandatoryFieldList)?>) {
+		<?element:Name?>Impl <?javaName(element)?> = <?element:Name.firstLower()?>Map.get(id);
+		if(<?javaName(element)?> != null) {
+			<?child:Name?>Impl <?javaName(child)?> = new <?child:Name?>Impl(<?constructorArguments(mandatoryFieldList)?>);<?
+		if(isMany(asso)) {?>
+			<?javaName(element)?>.add<?asso:Name.firstUpper()?>(<?javaName(child)?>);<?
+		} else {?>
+			<?javaName(element)?>.set<?asso:Name.firstUpper()?>(<?javaName(child)?>);<?
+		}?>
+		}
+	}
+
+	public <?child:Name?> create<?asso:Name.firstUpper()?>(String id, <?constructorParameters(mandatoryFieldList)?>) {
+		<?child:Name?>Impl <?javaName(child)?> = new <?child:Name?>Impl(<?constructorArguments(mandatoryFieldList)?>);
+		return <?javaName(child)?>;
+	}
+<?
+	}
+}
+?>

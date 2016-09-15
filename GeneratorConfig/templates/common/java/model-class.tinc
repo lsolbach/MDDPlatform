@@ -1,0 +1,17 @@
+<?
+string fileComment(map element) {
+?>/*
+ * Abstract class <?name(This)?>
+ * Base implementation of model interface <?Name?>.
+<? generationInfo(' * ')?>
+ */<?
+}
+
+string imports(map element) {
+	super(element)
+}
+
+string abstract(map element) {
+	'abstract'
+}
+?>

@@ -1,0 +1,88 @@
+<?!--
+ - presentation/model/lib
+--?><?
+
+numeric isView(map element) {
+	hasStereotype(element, 'view')
+}
+
+numeric isViewState(map element) {
+	hasStereotype(element, 'view state')
+}
+
+numeric isViewModel(map element) {
+	hasStereotype(element, 'view model')
+}
+
+numeric isCriteriaModel(map element) {
+	isViewModel(element) && taggedValue(element, 'modelUsage') eq 'CRITERA'
+}
+
+numeric isResultModel(map element) {
+	isViewModel(element) && taggedValue(element, 'modelUsage') eq 'RESULT'
+}
+
+numeric isRequestMethod(map op) {
+	hasStereotype(op, 'request method')
+}
+
+numeric isRequestParam(map param) {
+	hasTaggedValue(param, 'requestParameter')
+}
+
+numeric isCookieValue(map param) {
+	hasTaggedValue(param, 'cookieValue')
+}
+
+list getViewModelList(map view) {
+	filter(isViewModel, getFieldList(view))
+}
+
+list getStateList(list compositeStateList) {
+	list stateList
+	foreach compositeState <- compositeStateList {
+		stateList = stateList + compositeState:SubVertexSet
+		list cStateList = filter(isCompositeState, compositeState:SubvertexSet)
+		if(compositeStateList) {
+			stateList = stateList + getStateList(cStateList)
+		}
+	}
+	stateList
+}
+
+list getStateList(map stateMachine) {
+	list stateList
+	stateList = stateList + stateMachine:Top:SubvertexSet
+	list compositeStateList = filter(isCompositeState, stateMachine:Top:SubvertexSet)
+	/* build a list of all states for this state machine */
+	if(compositeStateList) {
+		stateList = stateList + getStateList(compositeStateList)
+	}
+	stateList
+}
+
+map getViewStateForView(map view) {
+	map viewState
+	string viewName = view:Name
+	map package = view:ParentElement
+	list stateMachineList = getStateMachineList(package)
+	list stateList
+	stateList = getStateList()
+	foreach stateMachine <- getStateMachineList(package) {
+		stateList = stateList + getStateList(stateMachine)		
+	}
+	viewState = first(filter(cHasName(viewName), filter(isViewState, stateList)))
+	viewState
+}
+
+map getViewForViewState(map viewState) {
+	map view
+	string viewName = viewState:Name
+	map package = viewState:ParentElement
+	list viewList = filter(isView, getClassList(package))
+	view = first(filter(cHasName(viewName), viewList))
+
+	view
+}
+
+?>

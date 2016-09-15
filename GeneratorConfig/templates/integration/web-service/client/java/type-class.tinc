@@ -1,0 +1,26 @@
+<?
+map getImportMap(map element) {
+	map importMap = super(element)
+	add(importMap, element:Namespace + '.client.*')
+	remove(importMap, element:Namespace + '.*')
+	importMap
+}
+
+string fileComment(map element) {
+?>/*
+ * Web service client type <?name(element)?>
+ * Implementation of interface <?Name?>.
+<? generationInfo(' * ')?>
+ */
+<?
+}
+
+string constructors(map element) {
+	defaultConstructor(element)
+	propertiesConstructor(element)
+}
+
+numeric isAccessibleAssociation(map asso) {
+	super(asso) && !hasStereotype(asso, 'mapping')
+}
+?>

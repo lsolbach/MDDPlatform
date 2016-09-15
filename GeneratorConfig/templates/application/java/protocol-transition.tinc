@@ -1,0 +1,16 @@
+<?
+string fileComment(map element) {
+?>/*
+ * Abstract protocol transition class <?name(This)?>
+<? generationInfo(' * ')?>
+ */<?
+}
+
+string imports(map element) {
+	super(element)
+}
+
+string abstract(map element) {
+	'abstract'
+}
+?>

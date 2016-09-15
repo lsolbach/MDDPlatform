@@ -1,0 +1,53 @@
+<?
+string fileComment(map element) {
+	'/*' + lineFeed()
+	' * Interface of repository ' + name(element) + lineFeed()
+	generationInfo(element, ' * ') + lineFeed()
+	' */'
+}
+
+list getTypeAnnotationList(map element) {
+	list annotationList = super(element)
+	annotationList.add('@Repository')
+	annotationList
+}
+
+string operations(map element) {
+	repositoryAccessors(element)
+	super(element)
+}
+
+string repositoryGetAsListMethod(map asso) {?>
+	List<<?javaType(asso)?>> get<?asso:Name.firstUpper()?>List();<?
+}
+
+string repositoryGetAsSetMethod(map asso) {?>
+	Set<<?javaType(asso)?>> get<?asso:Name.firstUpper()?>Set();<?
+}
+
+string repositoryGetMethod(map asso) {?>
+	<?javaType(asso)?> get<?asso:Name.firstUpper()?>(<?qualifierParameters(asso)?>);<?
+}
+
+string repositoryFindMethod(map asso) {?>
+	Set<<?javaType(asso)?>> find<?asso:Name.firstUpper()?>(<?qualifierParameters(asso)?>);<?
+}
+
+string repositoryFindByIdListMethod(map asso) {?>
+	List<<?javaType(asso)?>> find<?asso:Name.firstUpper()?>ByIdList(List<<?javaType(first(getQualifierList(asso)))?>> idList);<?
+}
+
+/* also generate repository add methods for value objects contained directly in a repository */
+string repositoryAddMethod(map asso) {?>
+	void add<?asso:Name.firstUpper()?>(<?javaType(asso)?> <?javaName(asso)?>);<?
+}
+
+string repositoryUpdateMethod(map asso) {?>
+	<?javaType(asso)?> update<?asso:Name.firstUpper()?>(<?javaType(asso)?> <?javaName(asso)?>);<?
+}
+
+/* also generate repository remove methods for value objects contained directly in a repository */
+string repositoryRemoveMethod(map asso) {?>
+	void remove<?asso:Name.firstUpper()?>(<?javaType(asso)?> <?javaName(asso)?>);<?
+}
+?>

@@ -1,0 +1,5 @@
+<?
+string content(map element) {?>
+org.eclipse.wst.jsdt.launching.baseBrowserLibrary<?
+}
+?>

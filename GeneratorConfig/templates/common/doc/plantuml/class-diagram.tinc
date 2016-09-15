@@ -1,0 +1,119 @@
+<?
+string diagram(map element) {
+	classDiagram(element)
+}
+
+string classDiagram(map element) {
+	if(isPackage(element)) {
+		/*mapFn(class, getClassList(element))*/
+		foreach class <- getClassList(element) {
+			class(class)
+		}
+	} else {
+		class(element)
+	}
+}
+
+string class(map element) {
+	'class ' + element:Name + ' ' + stereotypes(element) +  '{' + lineFeed()
+	/*mapFn(property, getAttributeList(element))*/
+	foreach attr <- getAttributeList(element) {
+		tab() + property(attr) + lineFeed()
+	}
+	/*mapFn(operation, getOperationList(element))*/
+	foreach op <- getOperationList(element) {
+		tab() + operation(op) + lineFeed()
+	}
+	'}' + lineFeed()
+	lineFeed()
+	foreach superElement <- getSuperClassList(element) {
+		generalization(element, superElement) + lineFeed()
+	} 
+	foreach asso | isNavigable(asso) <- getAssociationList(element) {
+		association(asso) + lineFeed()
+	}
+	foreach dep <- getDependencyList(element) {
+		dependency(dep) + lineFeed()
+	} 
+	lineFeed()
+}
+
+string stereotypes(map element) {
+	list stereotypeList
+	foreach stereotype <- getStereotypeList(element) {
+		stereotypeList = stereotypeList.add('<<' + stereotype:Name + '>>')
+	}
+	join(stereotypeList, ' ')
+}
+
+string property(map attr) {
+	attr:Name + ' : ' + attr:Type:Name
+}
+
+string association(map asso) {
+	asso:SourceEnd:Type:Name + ' ' + associationRole(asso:SourceEnd)
+	associationAggregation(asso) + '--' + associationNavigability(asso)  + ' '
+	associationRole(asso) + associationModifiers(asso) + asso:Type:Name
+}
+
+string associationModifiers(map asso) {
+	if(isDerived(asso)) {
+		'/'
+	}
+}
+
+string associationAggregation(map asso) {
+	if(isComposition(asso)) {
+		'*'
+	} else if(isAggregation(asso)) {
+		'o'
+	}
+}
+
+string associationRole(map asso) {
+	'"'
+	if(isMany(asso)) {
+		if(isZeroToMany(asso)) {
+			'0..* '
+		} else {
+			'1..* '
+		}
+	} else {
+		if(isZeroToOne(asso)) {
+			'0..1 '	
+		} else {
+			'1 '
+		}
+	}
+	if(asso:Name) {
+		asso:Name
+	}
+	'" '
+}
+
+string associationNavigability(map asso) {
+	if(!isNavigable(asso:SourceEnd)) {
+		'>'
+	}
+}
+
+string operation(map op) {
+	op:Name + '()'
+}
+
+string parameter(map param) {
+	param:Name + ' : ' + param:Type:Name
+}
+
+string generalization(map element, map superElement) {
+	if(elementType(element) eq elementType(superElement)) {
+		superElement:Name + ' <|-- ' + element:Name
+	} else {
+		superElement:Name + ' <|.. ' + element:Name	
+	}
+}
+
+string dependency(map dep) {
+	dep:Client:Name + ' ..> ' + dep:Supplier:Name
+}
+?>

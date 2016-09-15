@@ -1,0 +1,202 @@
+<?
+string contentXml(map element) {?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+	http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+	<?startState(getStartStateList(Top:SubvertexSet))?>>
+
+<!-- Flow name <?Name?> in context <?Context:Name?> -->
+<?
+	protectedArea('Flow-' + replace(Id, '-', '_') + '-init', '<!--', '-->')
+	foreach state <- Top:SubvertexSet {
+		topSubState(state)
+	}?>
+</flow><?
+}
+
+list getStartStateList(list stateList) {
+	list startStateList
+	list compositeStateList = filter(isCompositeState, stateList)
+	if(compositeStateList.size() == 1) {
+		startStateList = getStartStateList(compositeStateList[0]:SubvertexSet)
+	} else {
+		startStateList = filter(isStartState, stateList)
+	}
+	startStateList
+}
+
+string startState(list startStateList) {
+	if(startStateList.size() == 1) {
+		map start
+		if(startStateList[0]:OutgoingTransitionSet.size() == 1) {
+			start = startStateList[0]:OutgoingTransitionSet[0]:Target
+			'start-state="' + start:Name + '"'
+		} else {
+			'start-state="ambiguous"'
+		}
+	} else {
+		'start-state="ambiguous"'
+	}
+}
+
+string topSubState(map state) {
+	if(state:ElementType eq 'CompositeState') {
+		/* encapsulated flow, handle global transitions */
+		globalTransitions(state)
+		foreach subState <- state:SubvertexSet {
+			state(subState)
+		}
+	} else {
+		state(state)
+	}
+}
+
+string state(map state) {
+	if(hasStereotype(state, 'view state')) {
+		viewState(state)
+	} else if(hasStereotype(state, 'action state')) {
+		actionState(state)
+	} else if(hasStereotype(state, 'decision state')) {
+		decisionState(state)
+	} else if(elementType(state) eq 'SubmachineState') {
+		subFlow(state)
+	} else if(elementType(state) eq 'Pseudostate' && state:Kind eq 'initial') {
+		/*startState(state)*/
+	} else if(elementType(state) eq 'FinalState') {
+		endState(state)
+	} else {?>
+	<!-- unhandled state <?name(state)?> of type <?elementType(state)?> --><?
+	}
+}
+
+string viewState(map state) {?>
+	<view-state id="<?state:Name?>" view="<?viewName(state)?>" model="<?modelName(state)?>"><?
+	binding(state)
+	stateEntry(state)
+	stateActivity(state)
+	stateExit(state)
+	transitions(state)?>
+	</view-state>
+<?
+}
+
+string actionState(map state) {?>
+	<action-state id="<?state:Name?>"><?
+	protectedArea('State-' + replace(state:Id, '-', '_') + '-action', '<!--', '-->')
+	transitions(state)?>
+	</action-state>
+<?
+}
+
+string decisionState(map state) {?>
+	<decision-state id="<?state:Name?>"><?
+	protectedArea('State-' + replace(state:Id, '-', '_') + '-decision', '<!--', '-->')
+	transitions(state)?>
+	</decision-state>
+<?
+}
+
+string subFlow(map state) {?>
+	<subflow-state id="<?state:Name?>" subflow="<?state:Submachine:Name?>">
+<?
+	transitions(state)?>
+	</subflow-state>
+<?
+}
+
+string endState(map state) {?>
+	<end-state id="<?state:Name?>">
+	</end-state>
+<?
+}
+
+string binding(map state) {
+	if(hasTaggedValue(state, 'binding')) {?>
+		<binder><?
+		protectedArea('State-' + replace(state:Id, '-', '_') + '-binder', '<!--', '-->')?>
+		</binder><?
+	}
+}
+
+string modelName(map state) {
+	if(hasTaggedValue(state, 'model')) {
+		taggedValue(state, 'model')
+	} else {
+		state:Name + 'Model'
+	}
+}
+
+string viewName(map state) {
+	if(hasTaggedValue(state, 'view')) {
+		taggedValue(state, 'view')
+	} else {
+		state:Name + 'View'
+	}
+}
+
+string name(map state) {
+	state:Name
+}
+
+string stateEntry(map state) {
+	if(state:EntryAction) {?>
+		<on-entry><?
+		protectedArea('State-' + replace(state:Id, '-', '_') + '-entry', '<!--', '-->')?>
+		</on-entry>
+<?
+	}
+}
+
+string stateExit(map state) {
+	if(state:ExitAction) {?>
+		<on-exit><?
+		protectedArea('State:' + replace(state:Id, '-', '_') + '-exit', '<!--', '-->')?>
+		</on-exit>
+<?
+	}
+}
+
+string stateActivity(map state) {
+	if(state:ActivityAction && state:StereotypeMap('view-state')) {?>
+		<on-render><?
+		protectedArea('State-' + replace(state:Id, '-', '_') + '-render', '<!--', '-->')?>
+		</on-render>
+<?
+	}
+}
+
+string transitions(map state) {
+	foreach transition <- state:OutgoingTransitionSet {
+		transition(transition)
+	}
+}
+
+string globalTransitions(map state) {
+	if(state:OutgoingTransitionSet) {?>
+	<global-transitions><?
+		transitions(state)?>
+	</global-transitions>
+<?
+	}
+}
+
+string transition(map transition) {?>
+		<!-- <?transition:Name?>:<?transition:Trigger:Name?> -->
+		<transition on="<?transition:Trigger:Name?>" to="<?transition:Target:Name?>"<?
+	if(hasTaggedValue(transition, 'validate') && taggedValue(transition, 'validate') eq 'false') {
+		' validate="false"'	
+	}
+	if(hasTaggedValue(transition, 'binding') && taggedValue(transition, 'binding') eq 'false') {
+		' bind="false"'	
+	}
+	?>><?
+	if(transition:Effect) {?>
+<?
+		protectedArea('Transition-' + replace(transition:Id, '-', '_') + '-' + replace(transition:Effect:Id, '-', '_'), '<!--', '-->')?><?
+	}?>
+		</transition>
+<?
+}
+
+?>

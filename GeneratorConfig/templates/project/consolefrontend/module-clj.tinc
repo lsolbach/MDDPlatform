@@ -1,0 +1,9 @@
+<?
+string plugins(map element) {
+	super(element) + ' "aspectj" "package" "publish"'
+}
+
+string dependencies(map element) {
+
+}
+?>

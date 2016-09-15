@@ -1,0 +1,71 @@
+<?
+string memberType = 'memberType'
+
+map getImportMap(map element) {
+	map importMap = super(element)
+	add(importMap, 'javax.persistence.*')
+}
+
+list getPropertyFieldAnnotationList(map attr) {
+	list annotationList = super(attr) 
+	if(taggedValue(attr, memberType) eq 'field') {
+		add(annotationList, getValidationAnnotationList(attr))
+	}
+	annotationList
+}
+
+list getPropertyGetMethodAnnotationList(map attr) {
+	list annotationList = super(attr)
+	if(taggedValue(attr, memberType) ne 'field') {
+		add(annotationList, getValidationAnnotationList(attr))
+	}
+	annotationList
+}
+
+list getAssociationFieldAnnotationList(map asso) {
+	list annotationList = super(asso)
+	if(taggedValue(asso, memberType) eq 'field') {
+		add(annotationList, getValidationAnnotationList(asso))
+	}
+	annotationList
+}
+
+list associationGetAnnotations(map asso) {
+	list annotationList = super(asso)
+	if(taggedValue(asso, memberType) eq 'field') {
+		add(annotationList, getValidationAnnotationList(asso))
+	}
+	annotationList
+}
+
+list getValidationAnnotationList(map field) {
+	list annotationList
+	if(isOptional(field)) {
+		add(annotationList, '@Null')
+	} else {
+		add(annotationList, '@NotNull')
+	}
+	if(hasTaggedValue(field, 'minValue')) {
+		add(annotationList, '@Min(' + taggedValue(field, 'minValue') + ')')
+	}
+	if(hasTaggedValue(field, 'maxValue')) {
+		add(annotationList, '@Max(' + taggedValue(field, 'maxValue') + ')')
+	}
+	if(hasTaggedValue(field, 'minSize') || hasTaggedValue(field, 'maxSize')) {
+		list paramList
+		if(hasTaggedValue(field, 'minSize')) {
+			add(paramList, 'min = ' + taggedValue(field, 'minSize'))
+		}
+		if(hasTaggedValue(field, 'maxSize')) {
+			add(paramList, 'max = ' + taggedValue(field, 'maxSize'))
+		}
+		add(annotationList, '@Size(' + join(paramListList, ',') + ')')
+	}
+	if(hasTaggedValue(field, 'past')) {
+		add(annotationList, '@Past')
+	} else if(hasTaggedValue(field, 'future')) {
+		add(annotationList, '@Future')
+	}
+	annotationList
+}
+?>

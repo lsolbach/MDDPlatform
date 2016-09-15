@@ -1,0 +1,66 @@
+<?
+/* configure activeMQ for messaging */
+list getNamespaceList(map element) {
+	nsList = super(element)
+	nsList.add('amq')
+	nsList
+}
+
+string namespaceDecl(string ns) {
+	if(ns eq 'amq') {?>
+	xmlns:<?ns?>="http://activemq.apache.org/schema/core"	<?
+	} else {
+		super(ns)
+	}
+}
+
+string namespaceLocation(map ns) {
+	if(ns eq 'amq') {?>
+		http://activemq.apache.org/schema/core
+		http://activemq.apache.org/schema/core/activemq-core.xsd<?
+	} else {
+		super(ns)
+	}
+}
+
+string beans(map element) {
+	super(element)
+	amqBroker(element)
+}
+
+string amqBroker(element) {?>
+	<amq:broker brokerName="" dataDirectory="${activemq.base/data}"><?
+	amqTransportConnectors(element)
+	amqPlugins(element)?>
+	</amq:broker>
+<?
+}
+
+string amqTransportConnectors(map element) {?>
+		<amq:transportConnectors>
+			<amq:transportConnector name="${activemq.name}" uri="${activemq.uri}">
+		</amq:transportConnectors><?
+}
+
+string amqPlugins(map element) {?>
+		<amq:plugins><?
+	amqSimpleAuthenticationPlugin(element)?>
+		</amq:plugins>
+<?
+}
+
+string amqSimpleAuthenticationPlugin(map element) {
+	/* TODO parameterize */?>
+			<amq:simpleAuthenticationPlugin>
+				<amq:users>
+					<amq:authenticationUser username="admin" password="!admin"
+						groups="admins,publishers,consumers"/>
+					<amq:authenticationUser username="publisher" password="!publisher"
+						groups="publishers,consumers"/>
+					<amq:authenticationUser username="consumer" password="!consumer"
+						groups="consumers"/>
+				</amq:users>
+			</amq:simpleAuthenticationPlugin>
+<?
+}
+?>

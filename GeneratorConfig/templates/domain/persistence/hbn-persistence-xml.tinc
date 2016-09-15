@@ -1,0 +1,29 @@
+<?
+string packageMappingFile(map package) {
+	map model = getModel(package)?>
+		<mapping-file><?package:QualifiedName.replace('.', '/')?>/<?model:Name?>.hbn.xml</mapping-file><?
+}
+
+string entityMappingFile(map entity) {?>
+		<mapping-file><?entity:QualifiedName.replace('.', '/')?>.hbn.xml</mapping-file><?
+}
+
+string mappingFiles(map element) {
+	/*packageMappingFile(element)*/	
+	join(mapFiltered(entityMappingFile, isEntity, classList), lineFeed())
+}
+
+string persistenceProperties(map element) {?>
+<!--
+		<provider>HibernateProvider</provider>
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+			<property name="hibernate.cache.provider_class"
+				value="net.sf.ehcache.hibernate.SingletonEhCacheProvider" />
+			<property name="hibernate.cache.use_second_level_cache"
+				value="true" />
+			<property name="hibernate.default_batch_fetch_size" value="16" />
+		</properties>
+--><?
+}
+?>

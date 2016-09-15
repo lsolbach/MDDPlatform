@@ -1,0 +1,34 @@
+<?!--
+   - include for the PostgreSQL sql dialect
+   --?><?
+/* TODO check if the types are correct */
+string sqlType(string typeName) {
+	if(typeName eq 'String' || typeName eq 'string') {
+		sqlType(typeName, 254)
+	} else if(typeName eq 'boolean' || typeName eq 'Boolean') {
+		'boolean'
+	} else if(typeName eq 'byte' || typeName eq 'Byte') {
+		'tinyint'
+	} else if(typeName eq 'char' || typeName eq 'Char') {
+		'tinyint'
+	} else if(typeName eq 'short' || typeName eq 'Short') {
+		'smallint'
+	} else if(typeName eq 'int' || typeName eq 'Integer') {
+		'int'
+	} else if(typeName eq 'long' || typeName eq 'Long') {
+		'bigint'
+	} else if(typeName eq 'float' || typeName eq 'Float') {
+		'numeric(20,10)'
+	} else if(typeName eq 'double' || typeName eq 'Double') {
+		'numeric(20,10)'
+	} else if(typeName eq 'TimeStamp') {
+		'timestamp'
+	} else if(typeName eq 'Time') {
+		'time'
+	} else if(typeName eq 'Date') {
+		'date'
+	} else if(typeName eq 'Id') {
+		'varchar(20)'
+	}
+}
+?>

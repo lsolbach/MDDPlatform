@@ -1,0 +1,98 @@
+<?
+map transientDependenciesMap(map element, map dependentMap) {
+	foreach dep <- element:ClientDependencySet {
+		map supplier = dep:Supplier
+		if(!dependencyMap[supplier:QualifiedName]) {
+			dependencyMap.put(supplier:QualifiedName, supplier)
+			dependencyMap = dependentModuleMap(supplier, dependencyMap)
+		}
+	}
+	dependencyMap
+}
+
+map transientDependenciesMap(map element, map dependentMap, string dependencyType) {
+	foreach dep | hasStereotype(dep, dependencyType) <- element:ClientDependencySet {
+		map supplier = dep:Supplier
+		if(!dependencyMap[supplier:QualifiedName]) {
+			dependencyMap.put(supplier:QualifiedName, supplier)
+			dependencyMap = dependentModuleMap(supplier, dependencyMap, dependencyType)
+		}
+	}
+	dependencyMap
+}
+
+map dependenciesMap(map element, map dependentMap) {
+	if(isLibrary(element)) {
+		/* add jar and model */
+		/* dependentMap.put() */
+		/* dependentMap.put() */
+	} else if(isFramework(element)) {
+		/* add jar and model */
+	
+	} else if(isApplicationComponent(element)) {
+		/* add jar and model */
+	
+	} else if(isDomainComponent(element)) {
+		/* add jar and model */
+	
+	} else if(isIntegrationComponent(element)) {
+		/* add jar and model */
+	
+	} else if(isPresentationComponent(element)) {
+		/* add jar and model */
+	
+	} else if(isWebFrontend(element)) {
+		/* add jar and model */
+	
+	} else if(isWebService(element)) {
+		/* add jar and model */
+	
+	} else if(isThirdParty(element)) {
+		/* add jar in version and type??? */
+
+	} else {
+	
+	}
+}
+
+map createArtifact(string moduleId, string version, string artifactId, string type) {
+	map artifact
+	artifact.put('Module', moduleId)
+	artifact.put('Version', version)
+	artifact.put('Artifact', artifactId)
+	artifact.put('Target', type)
+	artifact.put('Type', type)
+}
+
+numeric isLibrary(map element) {
+	element:ElementType eq 'Package' && hasStereotype(element, 'library')
+}
+
+numeric isFramework(map element) {
+	element:ElementType eq 'Package' && hasStereotype(element, 'framework')
+}
+
+numeric isApplicationComponent(map element) {
+	element:ElementType eq 'Package' && hasStereotype(element, 'application')
+}
+
+numeric isDomainComponent(map element) {
+	element:ElementType eq 'Package' && hasStereotype(element, 'domain')
+}
+
+numeric isIntegrationComponent(map element) {
+	element:ElementType eq 'Package' && hasStereotype(element, 'integration')
+}
+
+numeric isPresentationComponent(map element) {
+	element:ElementType eq 'Package' && hasStereotype(element, 'presentation')
+}
+
+numeric isWebFrontend(map element) {
+	element:ElementType eq 'Package' && hasStereotype(element, 'web frontend')
+}
+
+numeric isWebService(map element) {
+	element:ElementType eq 'Package' && hasStereotype(element, 'web service')
+}
+?>

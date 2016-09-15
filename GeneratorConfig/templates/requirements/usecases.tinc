@@ -1,0 +1,103 @@
+<?
+string content(map element) {
+	useCaseModel(element)
+}
+
+string useCaseModel(map element) {?>
+Use Case Model <?element:Name?>
+
+<?
+	foreach actor <- getActorList(element) {
+		actor(actor)
+	} 
+
+	foreach useCase <- getUseCaseList(element) {
+		useCase(useCase)
+	}	
+}
+
+string actor(map element) {?>
+Actor <?element:Name?>
+<?documentation(element)?>
+
+Associated UseCases
+<?actorUseCases(element)?>
+<?
+}
+
+string useCase(map element) {?>
+UseCase <?element:Name?>
+<?documentation(element)?>
+
+Associated Actors
+<?useCaseActors(element)?>
+
+Includes
+<?includes(element)?>
+
+Extension Points
+<?extensionPoints(element)?>
+
+Extensions
+<?extensions(element)?>
+
+Preconditions
+<?preconditions(element)?>
+
+Postconditions
+<?postconditions(element)?>
+
+Flows
+<?flows(element)?>
+
+<?
+}
+
+string actorUseCases(map element) {
+	foreach asso | isUseCase(asso:Type) <- element:AssociationList {
+		useCaseRef(asso)
+	}
+}
+
+string useCaseActors(map element) {
+	foreach asso | isActor(asso:Type) <- element:AssociationList {
+		actorRef(asso)
+	}
+}
+
+string actorRef(map asso) {
+	asso:Type:Name + lineFeed()
+}
+
+string useCaseRef(map asso) {
+	asso:Type:Name + lineFeed()
+}
+
+string includes(map element) {
+	foreach dep <- getDependencyList(element) {
+	
+	} 
+}
+
+string extensionPoints(map element) {
+
+}
+
+string extensions(map element) {
+	foreach dep <- getDependencyList(element) {
+	
+	} 
+}
+
+string preconditions(map element) {
+
+}
+
+string postconditions(map element) {
+
+}
+
+string flows(map element) {
+
+}
+?>

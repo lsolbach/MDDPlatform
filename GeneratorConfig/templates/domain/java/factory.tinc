@@ -1,0 +1,35 @@
+<?
+/* collect the domain objects a factory should create */
+map getFactoryMap(map element) {
+	map factoryMap
+	factoryMap = getFactoryMap(element, factoryMap)
+	factoryMap
+}
+
+map getFactoryMap(map element, map elementMap) {
+	/* element:Name.debug('called getFactoryMap() for element ') */
+	if(hasStereotype(element, 'factory')) {
+		foreach dep | hasStereotype(dep, 'creates') <- element:ClientDependencySet {
+			if(dep:Supplier:Namespace eq element:Namespace && !elementMap[dep:Supplier:Name]) {
+				elementMap.put(dep:Supplier:Name, dep:Supplier)
+				elementMap = getFactoryMap(dep:Supplier, elementMap)
+			}
+		}
+	} else if(hasStereotype(element, 'entity')) {
+		foreach asso | isComposed(asso) <- element:AssociationList {
+			if(asso:Type:Namespace eq element:Namespace && !elementMap[asso:Type:Name]) {
+				elementMap.put(asso:Type:Name, asso:Type)
+				elementMap = getFactoryMap(asso:Type, elementMap)
+			}
+		}
+	} else if(hasStereotype(element, 'value')) {
+		foreach asso | isComposed(asso) <- element:AssociationList {
+			if(asso:Type:Namespace eq element:Namespace && !elementMap[asso:Type:Name]) {
+				elementMap.put(asso:Type:Name, asso:Type)
+				elementMap = getFactoryMap(asso:Type, elementMap)
+			}
+		}
+	}
+	elementMap
+}
+?>

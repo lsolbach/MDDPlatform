@@ -1,0 +1,18 @@
+<?
+string fileComment(map element) {
+	'/*' + lineFeed()
+	' * Interface of entity ' + name(element) + lineFeed()
+	generationInfo(element, ' * ') + lineFeed()
+	' */'
+}
+
+list getTypeAnnotationList(map element) {
+	list annotationList = super(element) + getDomainTypeAnnotationList(element)
+	annotationList.add('@Entity')
+	if(isAggregateRoot(element)) {
+		annotationList.add('@AggregateRoot')
+	}
+	annotationList
+}
+
+?>

@@ -1,0 +1,377 @@
+<?!--
+   - Hibernate XML mapping library
+--?><?
+string contentXml(map element) {?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!--
+  -  Hibernate XML mapping for <?name(This)?>
+<?generationInfo(element, '  -  ')?>
+  -->
+
+<hibernate-mapping package="<?implementationPackageName(This)?>"
+                   default-access="field"
+                   default-lazy="false"
+                   auto-import="true"><?
+entities(This)
+?>
+</hibernate-mapping><?
+}
+
+string implementationPackageName(map element) {
+	if(isPackage(element)) {
+		qualifiedName(element)
+	} else if(isDomainObject(element)) {
+		element:Namespace + '.impl'
+	}
+}
+
+string implementationName(map element) {
+	implementationPackageName(element) + '.' + element:Name + 'Impl'
+}
+
+string entities(map element) {
+	if(isPackage(element)) {
+		/*join(mapFn(entities, getClassList(element)), lineFeed()) */
+		foreach class <- getClassList(element) {
+			entities(class) + lineFeed()
+		}
+	} else if(isEntity(element)) {
+		entity(element)
+	} else if(isRootValue(element)) {
+		/* a value which is directly composed in a repository */
+		/* TODO map as entity for hibernates sake (with composite key if necessary)? */
+		/* rootValue(element) */
+	}
+}
+
+string entity(map element) {?>
+	<class name="<?implementationName(element)?>" table="<?tableName(element)?>" lazy="true"><?
+	cache(element)
+	additionalProperties(element)
+	properties(element)
+	references(element)
+	additionalAssociations(element)
+	associations(element)
+	valueJoins(element)?>
+	</class><?
+}
+
+string rootValue(map element) {?>
+	<class name="<?implementationName(element)?>" table="<?tableName(element)?>" lazy="true"><?
+	cache(element)
+	additionalProperties(element)
+	properties(element)
+	references(element)
+	additionalAssociations(element)
+	associations(element)
+	valueJoins(element)?>
+	</class><?
+}
+
+string references(map element) {
+	foreach asso | isReference(asso) <- element:AssociationList {
+		reference(asso)
+	}
+}
+
+numeric isReference(map asso) {
+	(isOneToOne(asso) || isManyToOne(asso))
+	 && isNavigable(asso) && !isDerived(asso)
+	 && isEntity(asso:Type) && !isComposed(asso)
+}
+
+string reference(map asso) {?>
+		<property name="<?fieldName(asso)?>Id" column="<?foreignKeyName(asso)?>"/><?
+}
+
+string valueJoins(map element) {
+	foreach asso | isValueJoin(asso) <- element:AssociationList {
+		valueJoin(asso)
+	}
+}
+
+string isValueJoin(map asso) {
+	(isOneToOne(asso)) && isNavigable(asso) && !isDerived(asso) && isValue(asso:Type)
+}
+
+string valueJoin(map asso) {?>
+		<join table="<?tableName(asso:Type)?>" 
+			fetch="join"
+			<?optional(asso)?>>
+			<key column="<?foreignKeyName(asso:SourceEnd)?>" not-null="true"/><?
+			component(asso)?>
+		</join><?
+}
+
+string properties(map element) {
+	 tabs(2) + join(mapFn(property, element:AllAttributeList), lineFeed() + tabs(2))
+}
+
+string additionalProperties(map element) {
+	if(isEntity(element)) {
+		identifiable(element)
+		modifiable(element)
+	}
+	if(isRootValue(element)) {
+		rootValueId(element)
+	}
+	if(isRevisionable(element)) {
+		revisioned(element)
+	}
+	if(isTemporal(element)) {
+		temporal(element)
+	}
+	lineFeed()
+}
+
+string additionalAssociations(map element) {
+
+}
+
+string associations(map element) {
+	foreach asso <- element:AssociationList {
+		association(asso)
+	}
+}
+
+string association(map asso) {
+	if(isOneToOne(asso)) {
+		oneToOne(asso)
+	} else if(isOneToMany(asso)) {
+		oneToMany(asso)
+	} else if(isManyToOne(asso)) {
+		manyToOne(asso)
+	} else if(isManyToMany(asso)) {
+		manyToMany(asso)
+	}
+}
+
+string cache(map element) {
+	if(hasTaggedValue(element, 'cacheMode')) {?>
+		<cache usage="read-write" region="<?taggedValue(element, 'cacheMode')?>"/><?
+	}
+}
+
+string rootValueId(map element) {
+	/* TODO implement */
+	list primaryKeyList = getKeyList(element)
+	if(primaryKeyList.size() == 1) {
+	'<!-- 1 primary key -->'
+	} else if(primaryKeyList.size() > 1) {
+	'<!-- ' + primaryKeyList.size() + ' primary keys -->'	
+	} else {
+	'<!-- error: a root value must have at least 1 key field, because it is no entity with a given id -->'
+		/* error: a root value must have at least 1 key field, because it is no entity with a given id */
+	}
+}
+
+string identifiable(map element) {?>
+		<id name="id" column="<?columnName(element, 'id')?>" access="property">
+			<generator class="assigned"/>
+		</id><?
+}
+
+string modifiable(map element) {?>
+		<version name="modification" column="<?columnName(element, 'modification')?>" access="property" unsaved-value="negative"/><?
+}
+
+string revisioned(map element) {?>
+		<property name="createdAt" type="timestamp" column="<?columnName(element, 'createdAt')?>" access="property"/>
+		<property name="createdBy" column="<?columnName(element, 'createdBy')?>" access="property"/>
+		<property name="modifiedAt" type="timestamp" column="<?columnName(element, 'modifiedAt')?>" access="property"/>
+		<property name="modifiedBy" column="<?columnName(element, 'modifiedBy')?>" access="property"/><?
+}
+
+string temporal(map element) {
+	if(hasTaggedValue(element, 'temporal') && taggedValue(element, 'temporal')) {?>
+		<property name="invalidatedAt" type="timestamp" column="<?columnName(element, 'invalidatedAt')?>" access="property"/>
+		<property name="validFrom" type="timestamp" column="<?columnName(element, 'validFrom')?>" access="property"/>
+		<property name="validTo" type="timestamp" column="<?columnName(element, 'validTo')?>" access="property"/><?
+	}
+}
+
+string property(map attr) {
+	if(!isDerived(attr)) {
+	?><property name="<?javaName(attr)?>" <?propertyType(attr)?> column="<?columnName(attr)?>"/><?
+	}
+}
+
+string propertyType(map attr) {
+	if(attr:Type:Name eq 'Timestamp') {
+		'type="timestamp"'
+	} else if(attr:Type:Name eq 'Time') {
+		'type="time"'
+	} else if(attr:Type:Name eq 'Date') {
+		'type="date"'
+	} else if(attr:Type:Name eq 'Id') {
+		'type="string"'
+	} else if(isBlob(attr)) {
+		'type="binary"'	
+	} else if(isEnumeration(attr:Type)) {
+		'type="' + attr:Type:Namespace + '.hibernate.' + attr:Type:Name + 'Converter"'
+	} else {
+	}
+}
+
+string oneToOne(map asso) {
+	if(isNavigable(asso) && !isDerived(asso)) {
+		if(isEntity(asso:Type)) {
+			if(isComposed(asso)) {?>
+		<many-to-one name="<?fieldName(asso)?>"
+			class="<?implementationName(asso:Type)?>"
+			column="<?foreignKeyName(asso)?>"
+			unique="true"<?
+			cascade(asso)
+			lazy(asso)?>
+		/><?
+			}
+		}
+	}
+}
+
+string oneToMany(map asso) {
+	if(isNavigable(asso) && !isDerived(asso)) {
+		if(isEntity(asso:Type)) {
+			string assoType = fieldCollectionType(asso)
+			if(assoType eq 'List') {?>
+		<list name="<?fieldName(asso)?>" table="<?tableName(asso:Type)?>" 
+			<?cascade(asso)?> <?collectionLazy(asso)?>><?
+			collectionCache(asso)?>
+			<key column="<?foreignKeyName(asso:SourceEnd)?>" not-null="true"/>
+			<index column="<?indexName(asso:SourceEnd)?>"/>
+			<one-to-many class="<?implementationName(asso:Type)?>"/>
+		</list><?
+			} else if (assoType eq 'Set') {?>
+		<set name="<?fieldName(asso)?>" table="<?tableName(asso:Type)?>"
+			<?cascade(asso)?> <?collectionLazy(asso)?>><?
+			collectionCache(asso)?>
+			<key column="<?foreignKeyName(asso:SourceEnd)?>" not-null="true"/>
+			<one-to-many class="<?implementationName(asso:Type)?>"/>
+		</set><?
+			} else {?>
+		<bag name="<?fieldName(asso)?>" table="<?tableName(asso:Type)?>"
+			<?cascade(asso)?> <?collectionLazy(asso)?>><?
+			collectionCache(asso)?>
+			<key column="<?foreignKeyName(asso:SourceEnd)?>" not-null="true"/>
+			<one-to-many class="<?implementationName(asso:Type)?>"/>
+		</bag><?
+			}
+		} else {
+			string assoType = fieldCollectionType(asso)
+			if(assoType eq 'List') {?>
+		<list name="<?fieldName(asso)?>" table="<?tableName(asso:Type)?>"
+			<?collectionLazy(asso)?>><?
+			collectionCache(asso)?>
+			<key column="<?foreignKeyName(asso:SourceEnd)?>" not-null="true"/>
+			<index column="<?indexName(asso:SourceEnd)?>"/><?
+			composite(asso)?>
+		</list><?
+			} else if (assoType eq 'Set') {?>
+		<set name="<?fieldName(asso)?>" table="<?tableName(asso:Type)?>"
+			<?collectionLazy(asso)?>><?
+			collectionCache(asso)?>
+			<key column="<?foreignKeyName(asso:SourceEnd)?>" not-null="true"/><?
+			composite(asso)?>
+		</set><?
+			} else {?>
+		<bag name="<?fieldName(asso)?>" table="<?tableName(asso:Type)?>"
+			<?collectionLazy(asso)?>><?
+			collectionCache(asso)?>
+			<key column="<?foreignKeyName(asso:SourceEnd)?>" not-null="true"/>
+			<?composite(asso)?>
+		</bag><?
+			}
+		}
+	}
+}
+
+string manyToOne(map asso) {
+	if(isNavigable(asso) && !isDerived(asso)) {
+		if(isComposed(asso)) {?>
+		<many-to-one name="<?fieldName(asso)?>"
+			class="<?implementationName(asso:Type)?>"
+			column="<?foreignKeyName(asso)?>"<?
+			lazy(asso)?>
+		/><?
+		}
+	}
+}
+
+string manyToMany(map asso) {
+	if(isNavigable(asso) && !isDerived(asso)) {?>
+		<bag name="<?fieldName(asso)?>" table="<?associationTableName(asso)?>" <?collectionLazy(asso)?>><?
+         	collectionCache(asso)?>
+			<key column="<?foreignKeyName(asso)?>" not-null="true"/>
+			<many-to-many class="<?implementationName(asso:Type)?>" column="<?foreignKeyName(asso:SourceEnd)?>"/>
+		</bag><?
+	}
+}
+
+string component(map asso) {?>
+			<component name="<?fieldName(asso)?>" class="<?implementationName(asso:Type)?>">
+				<?join(mapFn(property, asso:Type:AttributeList), lineFeed() + tabs(4))?>
+			</component><?
+}
+
+string composite(map asso) {?>
+			<composite-element class="<?implementationName(asso:Type)?>">
+				<?additionalProperties(asso:Type)?>
+				<?join(mapFn(property, asso:Type:AttributeList), lineFeed() + tabs(4))?>
+				<?join(mapFiltered(association, isEntity, asso:Type:AssociationList), lineFeed() + tabs(4))?>
+			</composite-element><?
+}
+
+string cascade(map asso) {
+	if(isComposition(asso)) {
+		if(isMany(asso) || isQualified(asso)) {
+			'cascade="all,delete-orphan"'
+		} else {
+			'cascade="all"'
+		}
+	}
+}
+
+string optional(map element) {
+	if(isOptional(element)) {
+    	'optional="true"'
+	} else {
+		'optional="false"'
+	}
+}
+
+string lazy(map asso) {
+	if(isLazy(asso)) {
+		'lazy="proxy"'
+	} else {
+		'lazy="false"'
+		if(hasTaggedValue(asso, 'fetchMode')) {
+			' fetch="' + taggedValue(asso, 'fetchMode') + '"'
+		}
+	}
+}
+
+string collectionLazy(map asso) {
+	if(isLazy(asso)) {
+		'lazy="true"'
+	} else {
+		'lazy="false"'
+		if(hasTaggedValue(asso, 'fetchMode')) {
+			' fetch="' + taggedValue(asso, 'fetchMode') + '"'
+		}
+	}
+}
+
+string collectionCache(map asso) {
+	if(hasTaggedValue(asso, 'cacheMode')) {
+		if(taggedValue(asso, 'cacheMode') eq 'readOnly') {?>
+		<cache usage="read-only" region="readOnly"/><?
+		} else if(taggedValue(asso, 'cacheMode') eq '') {?>
+		<cache usage="read-write" region="read-write"/><?
+		} else {?>
+		<cache usage="read-write" region="<?taggedValue(asso, 'cacheMode')?>"/><?
+		}
+	}
+}
+?>

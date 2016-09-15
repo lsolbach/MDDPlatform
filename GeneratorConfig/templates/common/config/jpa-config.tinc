@@ -1,0 +1,78 @@
+<?!--
+ * common/config/jpa-config
+ *
+ * © 2012- Ludger Solbach
+ --?><?
+list getNamespaceList(map element) {
+	list namespaceList = super(element)
+	namespaceList.add('beans')
+	namespaceList.add('context')
+	namespaceList.add('tx')
+	namespaceList.add('jdbc')
+	namespaceList
+}
+
+string beans(map element) {
+	super(element)?>
+	<!-- start of common jpa config -->
+	<tx:annotation-driven mode="aspectj"/>
+<?
+	persistenceUnitManager(element)
+	entityManagerFactory(element)
+	transactionManager(element)
+}
+
+string persistenceUnitManager(map element) {
+	/* needed to handle multiple persistence units in different jars */?>
+	<bean id="persistenceUnitManager" class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
+		<property name="persistenceXmlLocations">
+			<list>
+				<value>classpath*:META-INF/*-persistence.xml</value>
+			</list>
+		</property>
+		<property name="persistenceUnitPostProcessors">
+			<bean class="org.soulspace.base.infrastructure.spring.jpa.MergingPersistenceUnitPostProcessor"/>
+		</property>
+		<property name="defaultDataSource" ref="dataSource"/>
+	</bean>
+<?
+}
+
+string entityManagerFactory(map element) {?>
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceUnitManager" ref="persistenceUnitManager"/>
+		<property name="jpaVendorAdapter" ref="vendorAdapter"/>
+	</bean>
+<?
+}	
+
+string transactionManager(map element) {?>
+	<bean id="transactionManager" 
+		class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+<?
+}
+
+string dataSource(map element) {
+	/* TODO parameterize, add pooling */?>
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="<?jdbcDriver(element)?>"/>
+		<property name="url" value="<?jdbcUrl(element)?>"/>
+		<property name="username" value="sa"/>		
+		<property name="password" value=""/>		
+	</bean>
+<?
+}
+
+string vendorAdapter(map element) {
+	/* TODO parameterize */?>
+	<bean id="vendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+		<property name="showSql" value="true"/>
+		<property name="generateDdl" value="false"/>
+		<property name="databasePlatform" value="<?databasePlatform(element)?>"/>
+	</bean>
+<?
+}
+?>

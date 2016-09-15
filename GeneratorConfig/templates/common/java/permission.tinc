@@ -1,0 +1,16 @@
+<?
+map getImportMap(map element) {
+	map importMap = super(element)
+	add(importMap, 'org.soulspace.annotation.authorisation.*')
+	importMap
+}
+
+list getOperationMethodAnnotationList(map op) {
+	list annotationList = super(op)
+	if(hasTaggedValue(op, 'permission')) {
+		add(annotationList, '@Secured(permission="' + taggedValue(op, 'permission') + '")')
+	}
+	annotationList
+}
+
+?>

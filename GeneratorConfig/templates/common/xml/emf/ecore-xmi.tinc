@@ -1,0 +1,205 @@
+<?!--
+   - commons/xml/emf/ecore-xml
+   - 
+   - Include for the generation of ECore XMI files.
+   - 
+   - © 2013- Ludger Solbach
+   --?><?
+string ecoreURI = 'http://www.eclipse.org/emf/2002/Ecore'   
+string xmiURI = 'http://www.omg.org/XMI'
+string schemaURI = 'http://www.w3.org/2001/XMLSchema-instance'
+string contentXml(map element) {
+	eModelPackage(element)
+}
+
+string eModelPackage(map element) {?>
+<ecore:EPackage
+	xmi:version="2.0"
+	xmlns:xmi="<?xmiURI?>"
+	xmlns:xsi="<?schemaURI?>"
+	xmlns:ecore="<?ecoreURI?>"
+	name="<?name(element)?>"
+	nsURI="<?nsURI(element)?>"
+	nsPrefix="<?nsPrefix(element)?>"><?
+	foreach owned <- getOwnedElementList(element) {
+		eModelElement(owned)
+	}?>
+</ecore:EPackage>
+<?
+}
+
+/* TODO check if correct! */
+string eModelElement(map element) {
+	if(eType(element) eq 'EPackage') {
+		ePackage(element)
+	} else if(eType(element) eq 'EClass') {
+		eClass(element)
+	} else if(eType(element) eq 'EDataType') {
+		eDataType(element)		
+	} else if(eType(element) eq 'EAttribute') {
+		eAttribute(element)
+	} else if(eType(element) eq 'EReference') {
+		eReference(element)
+	} else if(eType(element) eq 'EOperation') {
+		eOperation(element)
+	} else if(eType(element) eq 'EParameter') {
+		eParameter(element)
+	} else if(eType(element) eq 'EEnum') {
+		eEnum(element)
+	} else if(eType(element) eq 'EEnumLiteral') {
+		eEnumLiteral(element)
+	} else if(eType(element) eq 'EAnnotation') {
+		eAnnotation(element)
+	} else {
+		/* unhandled element type */
+	}
+}
+
+/* TODO check if correct! */
+string eNamedElement(map element) {?>
+	<ecore:ENamedElement xsi:type="ecore:EPackage" name="<?element:Name?>"><?
+	foreach owned <- getOwnedElementList(element) {
+		eModelElement(element)
+	}
+	?>
+	</ecore:ENamedElement>
+<?
+}
+
+/* TODO check if correct! */
+string ePackage(map element) {?>
+	<ecore:ENamedElement xsi:type="ecore:EPackage" name="<?element:Name?>"><?
+	foreach owned <- getOwnedElementList(element) {
+		eModelElement(element)
+	}
+	?>
+	</ecore:ENamedElement>
+<?
+}
+
+string eClass(map element) {?>
+	<eClassifiers xsi:type="ecore:<?eType(element)?>" name="<?element:Name?>"><?
+	?>
+	</eClassifiers><?
+}
+
+string eDataType(map element) {?>
+	<eClassifiers xsi:type="ecore:<?eType(element)?>" name="<?element:Name?>"><?
+	?>
+	</eClassifiers><?
+}
+
+string eAttribute(map attr) {?>
+	<eStructuralFeatures xsi:type="ecore:<?eType(attr)?>" name="<?attr:Name?>"
+	><?
+	?>
+	</eStructuralFeatures><?
+}
+
+/* TODO check if correct! */
+string eReference(map asso) {?>
+	<eStructuralFeatures type="ecore:<?eType(element)?>" name="<?asso:Name?>" eType="" eOpposite=""><?
+	?>
+	</eStructuralFeatures><?
+}
+
+string eOperation(map op) {?>
+	<eOperations name="<?op:Name?>" eType=""><?
+	foreach param | !isReturnParameter(param) <- getParameterList(op) {
+		eParameter(param)
+	}
+	?>
+	</eOperations><?
+}
+
+string eParameter(map param) {?>
+	<eParameters name="<?param:Name?>" eType="">
+	</eParameters><?
+}
+
+string eEnum(map element) {?>
+
+<?
+}
+
+string eEnumLiteral(map element) {?>
+
+<?
+}
+
+string eAnnotation(map element) {?>
+
+<?
+}
+
+string nsURI(map element) {
+	if(hasTaggedValue(element, 'namespaceURI')) {
+		taggedValue(element, 'namespaceURI')
+	} else {
+		'http:///' + element:Name
+	}
+}
+
+string nsPrefix(map element) {
+	if(hasTaggedValue(element, 'namespacePrefix')) {
+		taggedValue(element, 'namespacePrefix')
+	} else {
+		element:Name
+	}
+}
+
+string eType(map element) {
+	string eType = 'unknown'
+	if(element:ElementType eq 'Model') {
+		eType = 'EPackage'
+	} else if(element:ElementType eq 'Package') {
+		eType = 'EPackage'
+	} else if(element:ElementType eq 'Class') {
+		eType = 'EClass'
+	} else if(element:ElementType eq 'Interface') {
+		eType = 'EDatatype' /* TODO check if class or datatype is better */	
+	} else if(element:ElementType eq 'Attribute') {
+		eType = 'EAttribute'
+	} else if(element:ElementType eq 'AssociationEnd') {
+		eType = 'EReference'
+	} else if(element:ElementType eq 'DataType') {
+		eType = 'EDataType'
+	} else if(element:ElementType eq 'Operation') {
+		eType = 'EOperation'
+	} else if(element:ElementType eq 'Parameter') {
+		eType = 'EParameter'
+	} else if(element:ElementType eq 'Enumeration') {
+		eType = 'EEnum'
+	} else if(element:ElementType eq 'EnumerationLiteral') {
+		eType = 'EEnumLiteral'
+	}
+	eType
+}
+
+string eTypeRef(map element) {
+	string eTypeRef = 'unknown'
+	if(isECoreType(element)) {
+		eCoreTypeRef(element)
+	} else {
+		'#//' + element:Name
+	}
+	eTypeRef
+}
+
+string eOppositeRef(map asso) {
+	'#//' + asso:SourceEnd:Type:Name + '/' + asso:SourceEnd:Name
+}
+
+string eCoreTypeRef(map element) {
+	if(element:Type:Name eq 'Boolean') {
+		'http://www.eclipse.org/emf/2002/Ecore#//EBoolean'	
+	} else if(element:Type:Name eq 'String') {
+	
+	}
+}
+
+numeric isECoreType(map element) {
+	element:Type eq 'Boolean'
+	|| element:Type eq ''
+}
+?>

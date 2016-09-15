@@ -1,0 +1,19 @@
+<?
+string servlets(map element) {
+	super(element)?>
+  	<servlet>
+		<servlet-name>resourceLoader</servlet-name>
+		<servlet-class>org.soulspace.webframework.resource.ResourceLoaderServlet</servlet-class>						
+	</servlet>	
+<?
+}
+
+string servletMappings(map element) {
+	super(element)?>
+	<servlet-mapping>
+		<servlet-name>resourceLoader</servlet-name>
+		<url-pattern>/resource</url-pattern>
+	</servlet-mapping>
+<?
+}
+?>

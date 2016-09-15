@@ -1,0 +1,49 @@
+<?
+map getImportMap(map element) {
+	map importMap
+	if(hasGeneratorValue('NamespaceSuffix') && generatorValue('NamespaceSuffix').startsWith('client')) {
+		add(importMap, element:QualifiedName + '.client.*')
+	} else {
+		add(importMap, element:QualifiedName + '.*')
+	}
+	add(importMap, 'org.w3c.dom.*')
+	importMap
+}
+
+string typeModifiers(map element) {
+	'public'
+}
+
+string implementations(map element) {
+	'implements Marshaller'
+}
+
+string extension(map element) {}
+string constructors(map element) {}
+string memberFields(map element) {}
+
+string operations(map element) {
+	marshallerMethods(element)
+}
+
+string marshallerMethods(map element) {
+	foreach wsType <- filter(isWsType, getClassList(element)) {
+		marshalMethod(wsType)
+		unmarshalMethod(wsType)
+	}
+}
+
+string marshalMethod(map element) {?>
+	public String marshal<?element:Name?>(<?javaTypeForType(element)?> <?javaName(element)?>) {<?
+	marshalMethodBody(element)?>
+	}
+<?
+}
+
+string unmarshalMethod(map element) {?>
+	public <?javaTypeForType(element)?> unmarshal<?element:Name?>(Element e) {<?
+	unmarshalMethodBody(element)?>
+	}
+<?
+}
+?>

@@ -1,0 +1,34 @@
+<?
+string fileComment(map element) {
+?>/*
+ * Abstract class <?name(This)?>
+ * Base implementation of query interface <?Name?>.
+<? generationInfo(' * ')?>
+ */<?
+}
+
+string constructors(map element) {
+	defaultConstructor(element)
+	
+	list mappedFieldList = filter(isMapped, filter(isPropertyField, getFieldList(element)))
+	fieldConstructors(element, mappedFieldList)
+
+	/* TODO use mappingConstructor here */
+	list mappingFieldList = filter(isMapping, filter(isPropertyField, getFieldList(element)))
+	fieldConstructors(element, mappingFieldList)
+}
+
+map getImports(map element) {
+	map importMap = super(element)
+	importMap
+}
+
+string operations(map element) {
+	super(element)
+	queryMethod(element)
+}
+
+/* generic query method, override with specific implementation */
+string queryMethod(map element) { }
+
+?>

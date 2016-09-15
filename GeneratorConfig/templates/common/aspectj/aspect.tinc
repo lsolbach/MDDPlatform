@@ -1,0 +1,22 @@
+<?
+numeric isBeforeAdvice(map element) {
+	hasStereotype(element, 'before')
+}
+
+numeric isAroundAdvice(map element) {
+	hasStereotype(element, 'around')
+}
+
+numeric isAfterAdvice(map element) {
+	hasStereotype(element, 'after')
+}
+
+numeric isPointcut(map element) {
+	hasStereotype(element, 'pointcut')
+}
+
+numeric isIntertype(map element) {
+	hasStereotype(element, 'intertype')
+}
+
+?>

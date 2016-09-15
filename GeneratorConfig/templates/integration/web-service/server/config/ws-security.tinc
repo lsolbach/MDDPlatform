@@ -1,0 +1,37 @@
+<?
+string beans(map element) {
+	super(element)
+	if(isSecure(element)) {?>
+	<!-- ws security -->
+	<bean id="wsSecurityInterceptor" class="org.springframework.ws.soap.security.xwss.XwsSecurityInterceptor">
+		<property name="policyConfiguration" value="classpath*:securitypolicy.xml"/>
+		<property name="callbackHandlers">
+			<list>
+				<ref bean="passwordSecurityHandler"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="passwordSecurityHandler" class="org.springframework.ws.soap.security.xwss.callback.SimplePasswordValidationCallbackHandler">
+		<property name="users">
+			<bean class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+				<property name="location">
+					<value>classpath*:user.properties</value>
+				</properties>
+			</bean>
+		</property>
+	</bean>
+<?
+	}
+}
+
+string endpointProperties(map element) {
+	if(isSecure(element)) {?>
+		<property name="interceptors">
+            <list>
+            	<ref bean="wsSecurityInterceptor"/>
+            </list>
+        </property><?
+	}
+}
+?>

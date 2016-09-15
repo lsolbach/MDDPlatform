@@ -1,0 +1,37 @@
+<?
+string contentXml(map element) {?>
+<classpath>
+	<?srcClasspath(This)?>
+	<?containerClasspath(This)?>
+	<?inpathClasspath(This)?>
+	<?aspectpathClasspath(This)?>
+	<?runtimeClasspath(This)?>
+	<?devClasspath(This)?>
+	<classpathentry kind="output" path="bin"/>
+</classpath><?
+}
+
+string srcClasspath(map element) {
+	
+}
+
+string containerClasspath(map element) {
+	
+}
+
+string inpathClasspath(map element) {
+	
+}
+
+string aspectpathClasspath(map element) {
+	
+}
+
+string runtimeClasspath(map element) {
+	
+}
+
+string devClasspath(map element) {
+	
+}
+?>

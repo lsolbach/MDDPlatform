@@ -1,0 +1,39 @@
+<?
+list namespaceList(map element) {
+	list namespaces = super(element)
+	namespaces
+}
+
+list configList(map element) {
+	list configList = super(element)
+	configList.add(wsNamespacePrefix(element) + '-client')
+	configList
+}
+
+string beans(map element) {
+	super(element)
+	map endpoint = getEndpoint(element)?>
+	<bean id="<?wsNamespacePrefix(element)?>Client" class="<?namespace(element)?>.impl.WsClientImpl">
+		<constructor-arg index="0" ref="<?wsNamespacePrefix(element)?>Template"/>
+	</bean>
+	
+	<bean id="<?wsNamespacePrefix(element)?>Template"
+		class="org.springframework.ws.client.core.WebServiceTemplate"><?
+	wsTemplateProperties(element)?>
+	</bean>
+
+<?
+}
+
+string wsTemplateProperties(map element) {?>
+		<property name="defaultUri"
+			value="${<?wsNamespacePrefix(element)?>.locationUri}" />
+		<property name="interceptors">
+			<list><?wsTemplateInterceptors(element)?>
+			</list>
+		</property><?
+}
+
+/* Override to add security or other interceptors */
+string wsTemplateInterceptors(map element) { }
+?>

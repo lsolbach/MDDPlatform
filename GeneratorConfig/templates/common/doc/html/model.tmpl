@@ -1,0 +1,29 @@
+<html>
+<head>
+	<style>
+	</style>
+</head>
+<body>
+	<h1>Model <?Name?></h1><?
+if(hasDocumentation(This)) {
+	'<p>' + documentation(This) + '</p>'
+}?>
+	<h4>Package Overview</h4><?
+packageLinks(This)
+foreach package | isModelElement(package) <-PackageList {?>
+	<h2>Package <?package:Name?></h2><?
+	if(hasDocumentation(package)) {
+		'<p>' + documentation(package) + '</p>'
+	}?>
+	<h4>Class Overview</h4><?
+	classLinks(package)
+	foreach class | isModelElement(class) <- package:ClassList {?>
+	<h3>Class <?class:Name?></h3><?
+		if(hasDocumentation(package)) {
+			'<p>' + documentation(package) + '</p>'
+		}
+	}
+}
+?>
+</body>
+</html>

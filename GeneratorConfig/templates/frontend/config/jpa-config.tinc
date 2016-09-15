@@ -1,0 +1,25 @@
+<?!--
+ * frontend/config/jpa-config
+ * 
+ * requires common/config/jpa-config
+ * 
+ * ©2010-2012 Ludger Solbach
+--?><?
+list getNamespaceList(map element) {
+	list namespaceList = super(element)
+	namespaceList.add('context')
+	namespaceList
+}
+
+list getConfigList(map element) {
+	list configList = super(element)
+	configList.add('datasource')
+	configList
+}
+
+string beans(map element) {
+	super(element)
+	dataSource(element)	
+	vendorAdapter(element)
+}
+?>

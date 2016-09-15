@@ -1,0 +1,36 @@
+<?
+method isClass = cIsElementType('Class')
+list classList = getClassList(This)
+
+string schemaNamespacePrefix(map element) {
+	'ws'	
+}
+
+string schemaNamespace(map element) {
+	wsNamespace(element)
+}
+
+string schemaContent(map element) {
+	generationInfo()
+	compose(complexType, filter(isWsType, classList), lineFeed())
+	compose(request, filter(isWsRequest, classList), lineFeed())
+	compose(response, filter(isWsResponse, classList), lineFeed())
+}
+
+string request(map class) {
+	element(class)
+}
+
+string response(map class) {
+	element(class)
+}
+
+string typeRef(map element) {
+	string typeRef = super(element)
+	if(typeRef) {
+		typeRef
+	} else {
+		'ws:' + element:Type:Name
+	}
+}
+?>

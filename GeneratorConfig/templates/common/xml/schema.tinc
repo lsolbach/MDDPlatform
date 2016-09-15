@@ -1,0 +1,25 @@
+<?!--
+   - common/xml/schema
+   - 
+   - 
+   -
+   - © 2010- Ludger Solbach 
+   --?><?
+string typeRef(map element) {
+	/* TODO add other types as Set, Map, ... */
+	if(element:Type:QualifiedName eq 'mdsd.common.types.Id') {
+  		'xs:string'
+	} else if(element:Type:QualifiedName eq 'mdsd.common.types.Date') {
+		/* TODO Use correct schema type */
+  		'xs:long'
+	} else if(element:Type:QualifiedName eq 'mdsd.common.types.Time') {
+		/* TODO Use correct schema type */
+		'xs:long'
+	} else if(element:Type:QualifiedName eq 'mdsd.common.types.Timestamp') {
+		/* TODO Use correct schema type */
+		'xs:long'
+	} else {
+		super(element)
+	}
+}
+?>

@@ -1,0 +1,66 @@
+<?!--
+ * common/config/h2-config
+ *
+ * © 2012- Ludger Solbach
+ --?><?
+list getNamespaceList(map element) {
+	list nsList = super(element)
+	nsList
+}
+
+string beans(map element) {
+	super(element)
+}
+
+string dbType(map element) {
+	'H2'
+}
+
+string databasePlatform(map element) {
+	'org.hibernate.dialect.H2Dialect'
+}
+
+string jdbcDriver(map element) {
+	'org.h2.Driver'
+}
+
+string jdbcUrl(map element) {
+	'jdbc:h2:tcp://localhost/home/soulman/devel/servers/h2-data/dev'
+}
+
+string h2TcpServer(map element) {?>
+	<bean id="org.h2.tools.Server" class="org.h2.tools.Server"
+			factory-method="createTcpServer"
+			init-method="start"
+			destroy-method="stop">
+		<constructor-arg value="-tcp,-tcpAllowOthers,true,-tcpPort,8043" />
+	</bean>
+<?
+}
+
+string h2ErrorCodeMapping(map element) {?>
+	<!-- TODO check if this is still relevant with the version of spring used -->
+	<!-- There is an incompatibility with the Spring JdbcTemplate and H2 version 1.3.154 and newer -->
+	<import resource="classpath:org/springframework/jdbc/support/sql-error-codes.xml"/>
+	<bean id="H2" class="org.springframework.jdbc.support.SQLErrorCodes">
+		<property name="badSqlGrammarCodes">
+			<value>
+				42000,42001,42101,42102,42111,42112,42121,42122,42132
+			</value>
+		</property>
+		<property name="duplicateKeyCodes">
+			<value>23001,23505</value>
+		</property>
+		<property name="dataIntegrityViolationCodes">
+			<value>22003,22012,22025,23000</value>
+		</property>
+		<property name="dataAccessResourceFailureCodes">
+			<value>90046,90100,90117,90121,90126</value>
+		</property>
+		<property name="cannotAcquireLockCodes">
+			<value>50200</value>
+		</property>
+	</bean>
+<?
+}
+?>

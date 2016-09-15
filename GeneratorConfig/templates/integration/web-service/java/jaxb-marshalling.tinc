@@ -1,0 +1,40 @@
+<?
+map getImportMap(map element) {
+	map importMap = super(element)
+	/* FIXME use correct import and types */
+	add(importMap, 'org.springframework.oxm.Jaxb2Marshaller')
+	importMap
+}
+
+string memberFields(map element) {
+	marshallerField(element)
+}
+
+string operations(map element) {
+	marschallerAccessors(element)
+	super(element)
+}
+
+string marshallerField(map element) {?>
+	private Jaxb2Marshaller marshaller;<?
+}
+
+string marshallerAccessors(map element) {?>
+	public Jaxb2Marshaller getMarshaller() {
+		return marshaller;
+	}
+	
+	public void setMarshaller(Jaxb2Marshaller marshaller) {
+		this.marshaller = marshaller;
+	}
+	<?
+}
+
+string marshalMethodBody(map element) {
+
+}
+
+string unmarshalMethodBody(map element) {
+
+}
+?>

@@ -1,0 +1,147 @@
+<?!--
+ * common/config/spring-config
+ *
+ * © 2010- Ludger Solbach
+ --?><?
+map namespaceMap = getNamespaceMap(This)
+
+string contentXml(map element) {?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" <?
+	namespaceDecls(namespaceMap)
+	namespaceLocations(namespaceMap)?>
+    default-autowire="byName">
+	<!--
+	  - configuration for <?Namespace + '.' + Name?>
+<?generationInfo(element, '	  -  ')?>
+	  -->
+<?
+importConfig(This)
+beans(This)
+?>
+</beans><?
+}
+
+list getNamespaceList(map element) {
+	list namespaces
+	namespaces.add('beans')
+}
+
+map getNamespaceMap(map element) {
+	map namespaceMap
+	foreach ns <- getNamespaceList(element) {
+		namespaceMap.put(ns, ns)
+	}
+	namespaceMap
+}
+
+string namespaceDecls(map namespaceMap) {
+	foreach ns | ns ne 'beans' <- namespaceMap.keyList() {
+		namespaceDecl(ns)
+	}
+}
+
+string namespaceDecl(string ns) {?>
+	xmlns:<?ns?>="http://www.springframework.org/schema/<?ns?>"	<?
+}
+
+string namespaceLocations(map namespaceMap) {?>
+	xsi:schemaLocation="<?
+	foreach ns <- namespaceMap.keyList() {
+		namespaceLocation(ns)
+	}?>"<?
+}
+
+string namespaceLocation(string ns) {?>
+		http://www.springframework.org/schema/<?ns?>
+		http://www.springframework.org/schema/<?ns?>/spring-<?ns?>-3.0.xsd<?
+}
+
+method isConfig = cHasStereotype('config')
+
+string importConfig(map element) {
+	if(element:ClientDependencySet) {
+		join(mapFiltered(componentDependency, isDependency, element:ClientDependencySet), lineFeed())
+	}
+}
+
+string componentDependency(map dep) {
+?>	<import resource="classpath*:/<?dep:Supplier:QualifiedName.replace('.', '/')?>/component-config.xml"/><?
+}
+
+string dependencies(map element) {
+	if(element:ClientDependencySet) {
+		join(mapFiltered(dependency, isDependency, element:ClientDependencySet), lineFeed())	
+	}
+}
+
+string dependency(map dep) {
+?>		<property name="<?dep:Supplier:Name.firstLower()?>" ref="<?dep:Supplier:Name.firstLower()?>"/><?
+}
+
+string configAttributes(map element) {
+	join(mapFiltered(configAttribute, isConfig, element:AttributeList), lineFeed())	
+}
+
+string configAttribute(map element) {
+?>		<property name="<?element:Name.firstLower()?>" value="${<?element:Parent:Name.firstLower()?>.<?element:Name.firstLower()?>}"/><?
+}
+
+string classBean(map element) {?>
+	<bean id="<?element:Name.firstLower()?>"
+			class="<?qualifiedImplementationName(element)?>">
+<?beanBody(element)?>
+	</bean>
+<?
+}
+
+string aspectBean(map element) {?>
+	<bean id="<?element:Name.firstLower()?>"
+			class="<?qualifiedImplementationName(element)?>"
+			factory-method="aspectOf">
+<?beanBody(element)?>
+	</bean>
+<?
+}
+
+string beanBody(map element) {
+	dependencies(element)
+}
+
+string bean(method render, list elements) {
+	compose(render, elements, lineFeed())
+}
+
+string bean(method predicate, method render, list elements) {
+	compose(render, filter(predicate, elements), lineFeed())
+}
+
+list getConfigList(map element) {
+	list configList
+	configList.add('config')
+	configList
+}
+
+string config(map element) {?>
+	<bean id="propertyPlaceholderConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list><?
+	foreach config <- getConfigList(element) {?>
+				<value>classpath*:/<?config?>.properties</value><?
+	}?>
+			</list>
+		</property>
+	</bean>
+<?
+}
+
+string beans(map element) {
+	/* empty imlementation to be overridden in mixin includes */
+?>
+	<context:spring-configured/>
+	<context:annotation-config/>
+	<context:component-scan base-package="<?namespace(element)?>"/>
+<?
+}
+?>

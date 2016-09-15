@@ -1,0 +1,24 @@
+<?
+string operations(map element) {
+	dependencies(element)
+	super(element)
+}
+
+string dependencies(map element) {
+	list dependencyList = filter(isDependency, element:ClientDependencySet)
+	if(dependencyList) {?>
+		// Dependencies<?
+		foreach dep <- dependencyList {
+			dependencyInterface(dep:Supplier)
+		}
+	}
+	super(element)
+}
+
+string dependencyInterface(map element) {?>
+	void set<?element:Name.firstUpper()?>(<?element:Name?> <?javaName(element)?>);
+
+	<?element:Name?> get<?element:Name.firstUpper()?>();
+<?
+}
+?>

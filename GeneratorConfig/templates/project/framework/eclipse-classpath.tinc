@@ -1,0 +1,30 @@
+<?
+string srcClasspath(map element) {
+	super(element)?>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="unittest"/>
+	<classpathentry kind="src" path="generated/src"/><?
+}
+
+string containerClasspath(map element) {
+	super(element)?>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/><?
+}
+
+string runtimeClasspath(map element) {
+	super(element)
+}
+
+string aspectpathClasspath(map element) {
+	super(element)
+}
+
+string inpathClasspath(map element) {
+	super(element)
+}
+
+string devClasspath(map element) {
+	super(element)
+}
+?>

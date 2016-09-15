@@ -1,0 +1,13 @@
+<?!--
+   - common/xml/lib
+   - 
+   -
+   -
+   - © 2010- Ludger Solbach 
+   --?><?
+string generationInfo() {?>
+<!--
+<?generationInfo('  - ')?>
+  --><?
+}
+?>

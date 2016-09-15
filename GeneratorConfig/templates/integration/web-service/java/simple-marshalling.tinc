@@ -1,0 +1,65 @@
+<?
+map getImportMap(map element) {
+	map importMap = super(element)
+	add(importMap, 'org.springframework.util.xml.DomUtils')
+	add(importMap, 'org.soulspace.util.XmlUtils')
+	importMap
+}
+
+string marshalMethodBody(map element) {?>
+		StringBuilder sb = new StringBuilder(128);<?
+	foreach attr | !isDerived(attr) <- element:AttributeList {
+		xmlMarshalField(element, attr)
+	}?>
+		return sb.toString();<?
+}
+
+string xmlMarshalField(map element, map field) {?>
+		sb.append("<<?field:Name?>>");<?
+	if(javaType(field) eq 'String') {?>
+		sb.append(XmlUtils.encode(<?javaName(element)?>.get<?field:Name.firstUpper()?>()));<?
+	} else if(javaType(field) eq 'Date') {?>
+		sb.append(<?field:Name?>.getTime());<?
+	} else {?>
+		sb.append(<?field:Name?>);<?
+	}?>
+		sb.append("</<?field:Name?>>");<?
+}
+
+string unmarshalMethodBody(map element) {
+	list propertyList = filter(isPropertyField, getFieldList(element))
+	foreach field <- propertyList {?>
+		<?javaType(field)?> <?javaName(field)?> = <?xmlUnmarshalField(field)?>;<?
+	}?>
+		<?javaTypeForType(element)?> <?javaName(element)?>
+			= new <?javaTypeForType(element)?>Impl(<?arguments(propertyList)?>);
+		return <?javaName(element)?>;<?
+}
+
+string xmlUnmarshalField(map field) {
+	if(javaType(field) eq 'String') {
+		'DomUtils.getChildElementValueByTagName(e, "' + field:Name + '")'
+	} else if(javaType(field) eq 'Long' || javaType(field) eq 'long') {
+		'Long.valueOf(DomUtils.getChildElementValueByTagName(e, "' + field:Name + '"))'
+	} else if(javaType(field) eq 'Integer' || javaType(field) eq 'int') {
+		'Integer.valueOf(DomUtils.getChildElementValueByTagName(e, "' + field:Name + '"))'
+	} else if(javaType(field) eq 'Short' || javaType(field) eq 'short') {
+		'Short.valueOf(DomUtils.getChildElementValueByTagName(e, "' + field:Name + '"))'
+	} else if(javaType(field) eq 'Char' || javaType(field) eq 'char') {
+		'Char.valueOf(DomUtils.getChildElementValueByTagName(e, "' + field:Name + '"))'
+	} else if(javaType(field) eq 'Byte' || javaType(field) eq 'byte') {
+		'Byte.valueOf(DomUtils.getChildElementValueByTagName(e, "' + field:Name + '"))'
+	} else if(javaType(field) eq 'Double' || javaType(field) eq 'double') {
+		'Double.valueOf(DomUtils.getChildElementValueByTagName(e, "' + field:Name + '"))'
+	} else if(javaType(field) eq 'Float' || javaType(field) eq 'float') {
+		'Float.valueOf(DomUtils.getChildElementValueByTagName(e, "' + field:Name + '"))'
+	} else if(javaType(field) eq 'Boolean' || javaType(field) eq 'boolean') {
+		'Boolean.parseBoolean(DomUtils.getChildElementValueByTagName(e, "' + field:Name '"))'
+	} else if(javaType(field) eq 'Date') {
+		'new Date(Long.valueOf(DomUtils.getChildElementValueByTagName(e, "' + field:Name + '")))'
+	} else {
+		/* TODO other types */
+		'null'
+	}
+}
+?>

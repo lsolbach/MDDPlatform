@@ -1,0 +1,16 @@
+<?
+map getModel(map element) {
+
+	map myModel = createModel(element:Name, 'public')
+	map orgPackage = createPackage('org', 'public')
+	addOwnedElementToNamespace(myModel, orgPackage)
+	map soulspacePackage = createPackage('soulspace', 'public')
+	addOwnedElementToNamespace(orgPackage, soulspacePackage)
+
+	map systemPackage = createPackage('test', 'public')
+	addOwnedElementToNamespace(soulspacePackage, systemPackage)
+	map layerPackage = createPackage('domain', 'public')	
+	addOwnedElementToNamespace(systemPackage, layerPackage)
+
+}
+?>

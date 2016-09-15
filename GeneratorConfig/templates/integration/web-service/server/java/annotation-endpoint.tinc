@@ -1,0 +1,145 @@
+<?
+map webService = This:ParentElement
+
+map getImportMap(map element) {
+	map importMap = super(element)
+	add(importMap, 'java.util.*')
+	add(importMap, 'java.io.StringReader')
+	add(importMap, 'javax.xml.transform.Source')
+	add(importMap, 'javax.xml.transform.stream.StreamSource')
+	add(importMap, 'org.apache.log4j.Logger')
+	add(importMap, 'org.springframework.ws.server.endpoint.annotation.*')
+	add(importMap, 'org.w3c.dom.*')
+	importMap.put(element:Namespace + '.*', element:Namespace + '.*')
+	importMap
+}
+
+string fileComment(map element) {
+?>/*
+ * Annotation endpoint for web service <?webService:Name?>
+<? generationInfo(' * ')?>
+ */<?
+}
+
+string typeAnnotations(map element) {
+	super(element)?>
+@Endpoint<?
+}
+
+string abstract(map element) {
+	'abstract'
+}
+
+string implementations(map element) {
+}
+
+string memberFields(map element) {?>
+	private Marshaller marshaller;
+	protected Logger log = Logger.getLogger(this.getClass());
+<?
+	super(element)
+}
+
+string operations(map element) {
+	super(element)
+	marshallerSetMethod(element)
+	requests(element)
+}
+
+string marshallerSetMethod(map element) {?>
+	public void setMarshaller(Marshaller marshaller) {
+		this.marshaller = marshaller;
+	}
+<?
+}
+
+string requests(map element) {
+	foreach dep | hasStereotype(dep, 'handles') <- element:ClientDependencySet {
+		endpointRequest(element, dep:Supplier)
+	}
+}
+
+string endpointRequest(map endpoint, map request) {
+	map response = getResponse(request)
+?>	
+	@PayloadRoot(localPart = "<?request:Name?>", namespace = "<?wsNamespace(webService)?>")
+	public Source handle<?request:Name?>(
+		<?join(endpointMethodMappedParameters(request, ''), ',' + lineFeed() + tabs(2))?>
+		) {<?
+	if(getArgumentList(request)) {?>
+		log.debug("Requested <?request:Name?> (" + <?join(endpointMethodArguments(request), ' + ", " + ')?> + ")");<?
+	}?>
+
+		StringBuilder sb = new StringBuilder(128);				
+		sb.append("<<?response:Name?> xmlns=\"<?wsNamespace(webService)?>\">");<?
+	foreach asso <- response:AllAssociationList {?>
+		<?associationType(asso)?> result = doHandle<?request:Name?>(<?join(endpointMethodArguments(request), ', ')?>);<?
+		if(isMany(asso)) {?>
+		for(<?asso:Type:Name?> <?asso:Name?> : result) {
+			sb.append("<<?asso:Name?>>");
+			sb.append(marshaller.marshal<?asso:Type:Name?>(<?asso:Name?>));
+			sb.append("</<?asso:Name?>>");
+		}<?
+		} else {?>
+		sb.append("<<?asso:Name?>>");
+		sb.append(marshaller.marshal<?asso:Type:Name?>(result));
+		sb.append("</<?asso:Name?>>");<?
+		}
+	}?>
+		sb.append("</<?response:Name?>>");		
+
+		StringReader sr = new StringReader(sb.toString());
+		Source response = new StreamSource (sr);
+		
+		return response;			
+	}
+<?
+	foreach asso <- response:AssociationList {?>
+	protected abstract <?associationType(asso)?> doHandle<?request:Name?>(<?join(endpointMethodParameters(request), ', ')?>);
+<?
+	}
+}
+
+list endpointMethodMappedParameters(map request, string prefix) {
+	/* TODO use getArgumentList() from lib if feasable */
+	if(prefix eq '') {
+		prefix = '/' + wsNamespacePrefix(webService) + ':' + request:Name + '/'
+	}
+	list params
+	foreach attr <- request:AllAttributeList {
+		params.add('@XPathParam("'
+				 + prefix + wsNamespacePrefix(webService) + ':' + attr:Name
+				 + '") '+ javaType(attr) + ' ' + attr:Name)
+	}
+	foreach asso | !isMany(asso) <- request:AllAssociationList {
+		params = params + endpointMethodMappedParameters(asso:Type,
+							 prefix + wsNamespacePrefix(webService)
+							 + ':' + asso:Name + '/')
+	}
+	params
+}
+
+list endpointMethodParameters(map request) {
+	/* TODO use getArgumentList() from lib */
+	list params
+	foreach attr <- request:AllAttributeList {
+		params.add(javaType(attr) + ' ' + attr:Name)
+	}
+	foreach asso | !isMany(asso) <- request:AllAssociationList {
+		params = params + endpointMethodParameters(asso:Type)
+	}
+	params
+}
+
+list endpointMethodArguments(map request) {
+	/* TODO use getArgumentList() from lib */
+	list args
+	foreach attr <- request:AllAttributeList {
+		args.add(attr:Name)
+	}
+	foreach asso | !isMany(asso) <- request:AllAssociationList {
+		args = args + endpointMethodArguments(asso:Type)
+	}
+	args
+}
+?>

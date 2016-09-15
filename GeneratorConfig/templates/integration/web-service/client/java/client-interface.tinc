@@ -1,0 +1,32 @@
+<?
+string fileComment(map element) {
+?>/*
+ * Client interface for web service <?webService:Name?>
+<? generationInfo(' * ')?>
+ */<?
+}
+
+map getImportMap(map element) {
+	map importMap = super(element)
+
+	importMap
+}
+
+string operations(map element) {
+	super(element)
+	clientMethods(element)
+}
+
+string clientMethods(map element) {
+	foreach request <- getRequestList(element) {
+		clientMethod(request)
+	}
+}
+
+string clientMethod(map request) {
+	map response = getResponse(request)
+	clientMethodAnnotations(request)?>
+	<?returnType(response)?> <?request:Name.firstLower()?>(<??>);<?
+}
+
+?>

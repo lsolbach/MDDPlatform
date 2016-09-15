@@ -1,0 +1,53 @@
+<?
+string declaration(map element) {
+?><%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"
+    %><?
+}
+
+string tagLibs(map element) {
+	super(element)?>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="swf" uri="http://soulspace.org/webframework"%>
+<?
+}
+
+string head(map element) {?>
+<swf:head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" type="text/css" media="all" href="/content/resource?id=content.css">
+<title><?element:Name?></title>
+</swf:head>
+<?
+}
+
+string body(map element) {?>
+<swf:body><?
+	header(element)
+	navigation(element)?>
+	<swf:content><?
+	content(element)?>
+	</swf:content><?
+	footer(element)?>
+</swf:body><?
+}
+
+string header(map element) {?>
+	<swf:header>
+	</swf:header><?
+}
+
+string navigation(map element) {?>
+	<swf:nav>
+	</swf:nav><?
+}
+
+string footer(map element) {?>
+	<swf:footer>
+	</swf:footer><?
+}
+
+string attributeValue(map attr) {
+	'<c:out value="${' + attr:Name + '}"/>'
+}
+?>

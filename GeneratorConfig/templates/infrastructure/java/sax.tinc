@@ -1,0 +1,345 @@
+<?
+list getElementList(map element) {
+
+}
+
+map getImportMap(map element) {
+	map importMap
+	importMap.put('java.io.*', 'java.io.*')
+	importMap.put('java.util.*', 'java.util.*')
+	importMap.put('org.xml.sax.*', 'org.xml.sax.*')
+	importMap.put('org.xml.sax.helpers.*', 'org.xml.sax.helpers.*')
+	
+	importMap
+}
+
+string fileComment(map element) {
+
+}
+
+string extension(map element) {
+	'extends DefaultHandler'
+}
+
+string constructors(map element) {?>
+	public <?name()?>() {
+		super();
+		try {
+			xmlReader = XMLReaderFactory.createXMLReader();
+			xmlReader.setContentHandler(this);
+			xmlReader.setErrorHandler(this);
+		} catch (SAXException e) {
+			e.printStackTrace();
+		}
+	}
+<?
+}
+
+string memberFields(map element) {?>
+	private XMLReader xmlReader;
+	private Stack<java.lang.Object> elementStack;<?
+	super(element)
+}
+
+string operations(map element) {
+	parseMethods(element)
+	saxMethods(element)
+	saxHelper(element)	
+	startElementHandlers(elementList)
+	endElementHandlers(elementList)
+	super(element)
+}
+
+string parseMethods(map element) {?>
+	public void parse(File file) throws SAXException, IOException {
+		elementStack = new Stack<java.lang.Object>();
+	    FileReader r = new FileReader(file);
+	    xmlReader.parse(new InputSource(r));
+	    r.close();
+	}
+<?
+}
+
+string saxMethods(map element) {
+	saxCharacters(element)
+	saxIgnorableWhitespace(element)
+	saxStartElement(element)
+	saxEndElement(element)
+}
+
+string saxStartElement(map element) {?>
+	public void startElement(String uri, String name, String qName, Attributes attrs) {
+		boolean isHandled = false;
+		String elementName = "";
+		if ("".equals (uri)) {
+	    	elementName = qName;
+		} else {
+	    	elementName = name;
+		}
+	<?startElementDispatcher(elementList)?>
+		if(!isHandled && !elementName.startsWith("XMI")) {
+			System.out.println("WARN: Unhandled element: " + elementName);
+		}
+	}
+<?
+}
+
+string saxEndElement(map element) {?>
+	public void endElement(String uri, String name, String qName) {
+		String elementName;
+		if ("".equals (uri)) {
+	    	elementName = qName;
+		} else {
+	    	elementName = name;
+		}
+	<?endElementDispatcher(elementList)?>
+	}
+<?
+}
+
+string saxCharacters(map element) {?>
+	public void characters(char[] ch, int start, int length) throws SAXException {
+		String value = charsToString(ch, start, length);
+		if(value.trim().equals("")) {
+			return;
+		}
+		
+		if(!elementStack.isEmpty()) {
+			java.lang.Object obj = elementStack.peek();
+			if(obj instanceof List) {
+				List<String> elementList = (List<String>) obj;
+				elementList.add(stripTrailingLine(value));
+			}
+		}
+	}
+<?
+}
+
+string saxIgnorableWhitespace(map element) {?>
+	public void ignorableWhitespace(char[] ch, int start, int length) throws SAXException {
+		super.ignorableWhitespace(ch, start, length);
+		// Ignore as the method suggests
+	}
+<?
+}
+
+string saxHelper(map element) {?>
+	protected String stripTrailingLine(String input) {
+		if(input.endsWith("\r\n")) {
+			return input.substring(0, input.length() - 2);
+		} else if(input.endsWith("\n")) {
+			return input.substring(0, input.length() - 1);
+		} else if(input.endsWith("\r")) {
+			return input.substring(0, input.length() - 1);
+		} else {
+			return input;
+		}
+	}
+
+	protected String charsToString(char[] ch, int start, int length) {
+		StringBuilder sb = new StringBuilder();
+		for(int i = start; i < start + length; i++) {
+			sb.append(ch[i]);
+		}
+		String data = sb.toString();
+		if(data.startsWith("\n") && data.endsWith("\n")) {
+			return data.substring(1, data.length());
+		} else if(data.startsWith("\n")) {
+			return data.substring(1);
+		} else if(data.endsWith("\n")) {
+			return data;
+		} else {
+			return data + "\n";
+		}
+	}	
+<?
+}
+
+string startElementDispatcher(list elementList) {
+	foreach element <- elementList {
+	}
+}
+
+string dispatchStartClass(map class) {?>
+		if(elementName.equals("<?classElementName(class)?>")) {
+			// Class: <?class:Name?>, Tag: <?classElementName(class)?>
+			start<?class:Name?>(attrs);
+			isHandled = true;
+		}
+<?
+}
+
+string dispatchStartAttribute(map attr) {?>
+		if(elementName.equals("<?attributeElementName(attr)?>")) {
+			// Attribute: <?attr:Name?>, Tag: <?attributeElementName(attr)?>
+			start<?attr:ParentElement:Name?>_<?attr:Name.firstUpper()?>(attrs);
+			isHandled = true;
+		}
+<?
+}
+
+string dispatchStartAssociation(map asso) {?>
+		if(elementName.equals("<?associationElementName(asso)?>")) {
+			// Association: <?asso:Name?>, Tag: <?associationElementName(asso)?>
+			start<?asso:SourceEnd:Type:Name?>_<?asso:Name.firstUpper()?>(attrs);
+			isHandled = true;
+		}
+<?
+}
+
+string endElementDispatcher(list elementList) {
+	foreach element <- elementList {
+	}
+}
+
+string dispatchEndClass(map class) {?>
+		if(elementName.equals("<?classElementName(class)?>")) {
+			// Class: <?class:Name?>, Tag: <?classElementName(class)?>
+			end<?class:Name?>();
+		}
+<?
+}
+
+string dispatchEndAttribute(map attr) {?>
+		if(elementName.equals("<?attributeElementName(attr)?>")) {
+			// Attribute: <?attr:Name?>, Tag: <?attributeElementName(attr)?>
+			end<?attr:ParentElement:Name?>_<?attr:Name.firstUpper()?>();
+		}
+<?
+}
+
+string dispatchEndAssociation(map asso) {?>
+		if(elementName.equals("<?associationElementName(asso)?>")) {
+			// Association: <?asso:Name?>, Tag: <?associationElementName(asso)?>
+			end<?asso:SourceEnd:Type:Name?>_<?asso:Name.firstUpper()?>();
+		}
+<?
+}
+
+string startElementHandlers(list elementList) {
+	foreach element <- elementList {
+	}
+}
+
+/* TODO change element to class? */
+string handleStartClass(map element) {?>
+	protected void start<?element:Name?>(Attributes attrs) {
+		<?element:Name?> element = new <?element:Name?>Impl();
+		elementStack.push(element);<?
+	map attrMap = additionalPropertyMap(element)
+	foreach attr | !isDerived(attr) <- element:AllAttributes {
+		attrMap.put(attr:Name, attr)
+	}
+	list keyList = attrMap.keyList()
+	foreach attrKey
+			| !isMany(attrMap[attrKey]) && !isReferenceAttribute(attrMap[attrKey])
+			<- keyList {
+		attribute(attrMap[attrKey])
+	}?>
+	}
+<?
+}
+
+/* TODO change element to attr? */
+string handleStartAttribute(map element) {?>
+<?
+}
+
+/* TODO change element to class? */
+string handleStartAssociation(map element) {?>
+	protected void start<?element:SourceEnd:Type:Name?>_<?element:Name.firstUpper()?>(Attributes attrs) {
+		List<XmiObject> elementList = new ArrayList<XmiObject>();
+		elementStack.push(elementList);
+	}
+<?
+}
+
+string endElementHandlers(list elementList) {
+	foreach element <- elementList {
+	}
+}
+
+/* TODO change element to class? */
+string handleEndClass(map element) {?>
+	protected void end<?element:Name?>() {
+		<?element:Name?> element = (<?element:Name?>) elementStack.pop();
+		if(!elementStack.isEmpty()) {
+			java.lang.Object obj = elementStack.peek();
+			if(obj instanceof List) {
+				List<Object> elementList = (List<Object>) obj;
+				elementList.add(element);
+			} else if(obj instanceof Object) {
+				Object parentElement = (Object) obj; 
+				addElement(parentElement, element, <?element:Name?>.class, "<?methodName(element)?>");
+			}
+		}
+	}
+<?
+}
+
+/* TODO change element to attr? */
+string handleEndAttribute(map element) {?>
+	protected void end<?element:SourceEnd:Type:Name?>_<?element:Name.firstUpper()?>() {
+		List<XmiObject> elementList = (List<XmiObject>) elementStack.pop();
+		if(!elementStack.isEmpty() && !elementList.isEmpty()) {
+			<?element:SourceEnd:Type:Name?> parentElement = (<?element:SourceEnd:Type:Name?>) elementStack.peek();
+			for(XmiObject obj : elementList) {
+				<?element:Type:Name?> element = (<?element:Type:Name?>) obj; 
+				element.setParentElement(parentElement);<?
+			if(!isMany(element)) {?>
+				parentElement.set<?element:Name.firstUpper()?>(element);<?
+			} else {?>
+				parentElement.add<?element:Name.firstUpper()?>(element);<?
+			}
+			if(isNavigable(element:SourceEnd) && !isDerived(element:SourceEnd) && element:SourceEnd:Name) {
+				if(!isMany(element:SourceEnd)) {?>
+				element.set<?element:SourceEnd:Name.firstUpper()?>(parentElement);<?
+				} else {?>
+				element.add<?element:SourceEnd:Name.firstUpper()?>(parentElement);<?
+				}
+			}?>
+			}
+		}
+	}
+<?
+}
+
+string handleEndAssociation(map asso) {?>
+<?
+}
+
+string methodName(map element) {
+	if(!isMany(element)) {
+		'set' + element:Name.firstUpper()
+	} else {
+		'add' + element:Name.firstUpper()
+	}
+}
+
+string classElementName(map class) {
+	class:Name
+}
+
+string attributeElementName(map attr) {
+	attr:ParentElement:Name + '.' + attr:Name
+}
+
+string associationElementName(map asso) {
+	asso:SourceEnd:Type:Name + '.' + asso:Name
+}
+
+string attribute(map attr) {
+?>
+		if(attrs.getValue("<?attr:Name?>") != null) {<?
+				if(attr:Type:Name eq 'Boolean') {?>
+			element.set<?attr:Name.firstUpper()?>(java.lang.Boolean.parseBoolean(attrs.getValue("<?attr:Name?>")));<?
+				} else if(attr:Type:Name eq 'Integer' || attr:Type:Name eq 'UnlimitedInteger') {?>
+			element.set<?attr:Name.firstUpper()?>(java.lang.Integer.parseInt(attrs.getValue("<?attr:Name?>")));<?
+				} else if(hasStereotype(attr:Type, 'enumeration')) {?>
+			element.set<?attr:Name.firstUpper()?>(<?attr:Type:Name?>.valueOf(attrs.getValue("<?attr:Name?>").toUpperCase()));<?
+				} else if(!isReferenceAttribute(attr)) {?>
+			element.set<?attr:Name.firstUpper()?>(attrs.getValue("<?attr:Name?>"));<?
+				}?>
+		}<?
+}
+?>

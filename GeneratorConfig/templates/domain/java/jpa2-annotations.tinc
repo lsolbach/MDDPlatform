@@ -1,0 +1,94 @@
+<?
+string memberType = 'memberType'
+
+map getImportMap(map element) {
+	map importMap = super(element)
+	add(importMap, 'javax.persistence.*')
+}
+
+list getTypeAnnotationList(map element) {
+	list annotationList = super(element)
+	lineFeed() + '@javax.persistence.Entity'
+	lineFeed() + '@javax.persistence.Table(name="' + tableName(element)+ '")'
+	if(taggedValue(element, 'cacheMode') ne '') {
+		lineFeed() + '@javax.persistence.Cachable'
+	}
+	annotationList
+}
+
+string propertyAnnotations(map attr) {
+	list annotationList = 
+	if(taggedValue(attr, memberType) eq 'field') {
+		lineFeed() + '@java.persistence.Basic'
+		lineFeed() + '@java.persistence.Column(name=' + columnName(attr) +')'
+	}
+	annotationList
+}
+
+string propertyGetAnnotations(map attr) {
+	list annotationList = 
+	if(taggedValue(attr, memberType) ne 'field') {
+		lineFeed() + '@java.persistence.Basic'
+		lineFeed() + '@java.persistence.Column(name=' + columnName(attr) +')'
+		if(isTemporal(attr)) {
+			// Temporal
+		}
+	}
+	annotationList
+}
+
+list getAssociationGetMethodAnnotationList(map asso) {
+	list annotationList = super(asso)
+	if(taggedValue(attr, memberType) ne 'field') {
+		if(isOneToOne(asso)) {
+			oneToOneAnnotations(asso)
+		} else if(isOneToMany(asso)) {
+			oneToManyAnnotations(asso)
+		} else if(isManyToOne(asso)) {
+			manyToOneAnnotations(asso)
+		} else if(isManyToMany(asso)) {
+			manyToManyAnnotations(asso)
+		}
+	}
+	annotationList
+}
+
+/* TODO implement correct annotations */
+/* cascade, fetch type, lazy/eager, ordering */
+string oneToOneAnnotations(map asso) {
+	'@java.persistence.OneToOne'
+	'@java.persistence.Column(name=' + columnName(asso) +')'
+}
+
+string oneToManyAnnotations(map asso) {
+	'@java.persistence.OneToMany'
+	'@java.persistence.Column(name=' + columnName(asso) +')'
+}
+
+string manyToOneAnnotations(map asso) {
+	'@java.persistence.ManyToOne'
+	'@java.persistence.Column(name=' + columnName(attr) +')'
+}
+
+string manyToManyAnnotations(map asso) {
+	'@java.persistence.Basic'
+	'@java.persistence.Column(name=' + columnName(attr) +')'
+}
+
+boolean isTemporal(map element) {
+	element:Type:Name eq 'Date' || element:Type:Name eq 'Time' || element:Type:Name eq 'Timestamp'
+}
+
+string cache(map element) {
+
+}
+
+string fetchType(map asso) {
+
+}
+
+string cascade(map asso) {
+
+}
+
+?>

@@ -1,0 +1,23 @@
+<?
+map getImportMap(map element) {
+	map importMap = super(element)
+	add(importMap, 'org.soulspace.annotation.infrastructure.Profiled')
+	importMap
+}
+
+list getTypeAnnotationList(map element) {
+	list annotationList = super(element)
+	if(hasTaggedValue(element, 'profiled') && taggedValue(element, 'profiled') eq 'true') {
+		add(annotationList, '@Profiled')
+	}
+	annotationList
+}
+
+string operationMethodAnnotations(map op) {
+	list annotationList = super(op)
+	if(hasTaggedValue(op, 'profiled') && taggedValue(op, 'profiled') eq 'true') {
+		add(annotationList, '@Profiled')
+	}
+	annotationList
+}
+?>

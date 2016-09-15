@@ -1,0 +1,43 @@
+<?
+map webService = This
+
+string fileComment(map element) {
+?>/*
+ * Marshaller interface for the types of web service <?webService:Name?>
+<? generationInfo(' * ')?>
+ */<?
+}
+
+map getImportMap(map element) {
+	map importMap
+	add(importMap, 'org.w3c.dom.*')
+	importMap
+}
+
+string typeModifiers(map element) {
+	'public'
+}
+
+string extensions(map element) {}
+
+string operations(map element) {
+	marshallerMethods(element)
+}
+
+string marshallerMethods(map element) {
+	foreach wsType <- filter(isWsType, getClassList(element)) {
+		marshalMethod(wsType)
+		unmarshalMethod(wsType)
+	}
+}
+
+string marshalMethod(map element) {?>
+	String marshal<?element:Name?>(<?javaTypeForType(element)?> <?javaName(element)?>);
+<?
+}
+
+string unmarshalMethod(map element) {?>
+	<?javaTypeForType(element)?> unmarshal<?element:Name?>(Element e);
+<?
+}
+?>

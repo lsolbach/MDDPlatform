@@ -1,0 +1,62 @@
+<?
+/* repository implementation with xstream storage backend */
+
+map getImportMap(map element) {
+	map importMap = super(element)
+	add(importMap, 'org.soulspace.base.domain.persistence.PersistentStorage')
+	importMap
+}
+
+string repositoryConstructors(map element) {?>
+	public <?name(element)?>(PersistentStorage storage) {
+		super();
+		// register handled classes<?
+		/* TODO collect all classes (including children) in a map to handle duplicates and register them afterwards */
+	foreach asso <- element:AssociationList {
+		registerClass(asso)
+	}?>
+	}
+<?
+}
+
+string registerClass(map asso) {?>
+		storage.registerClass("<?javaType(asso)?>", <?javaType(asso)?>.class, <?javaType(asso)?>Impl.class);<?
+}
+
+string repositoryGetAsListMethodBody(map asso) {
+	asso:Name + 'List = storage.loadList(' + javaType(asso) + '.class);'
+}
+
+string repositoryGetAsSetMethodBody(map asso) {
+	asso:Name + 'Set = new HashSet<' + javaType(asso) + '>(storage.loadList(' + javaType(asso) + '.class));'
+}
+
+string repositoryGetMethodBody(map asso) {
+	javaName(asso) + ' = storage.load(' + javaType(asso) + 'Impl.class, ' + qualifierArguments(asso) + ');'
+}
+
+string repositoryFindMethodBody(map asso) {
+		?><?asso:Name?>Set = new HashSet<<?javaType(asso)?>>();
+		<?javaType(asso)?> <?javaName(asso)?> = storage.load(<?javaType(asso)?>Impl.class, <?qualifierArguments(asso)?>);
+		if(<?javaName(asso)?> != null) {
+			<?asso:Name?>Set.add(<?javaName(asso)?>);
+		}<?
+}
+
+string repositoryFindByIdListMethodBody(map asso) {
+	/* TODO implement */
+}
+
+string repositoryAddMethodBody(map asso) {
+	'storage.write(' + javaName(asso) + ');'
+}
+
+string repositoryUpdateMethodBody(map asso) {
+	'storage.write(' + javaName(asso) + ');'
+}
+
+string repositoryRemoveMethodBody(map asso) {
+	'storage.delete(' + javaName(asso) + ');'
+}
+
+?>

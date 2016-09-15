@@ -1,0 +1,569 @@
+<?
+string xmi(map element) {?>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Sat Sep 24 12:42:49 CEST 2011'>
+</XMI>
+<?
+}
+
+string xmiHeader(map element) {?>
+  <XMI.header>
+    <XMI.documentation>
+      <XMI.exporter>SoulMDA XMI Templates</XMI.exporter>
+      <XMI.exporterVersion>0.1</XMI.exporterVersion>
+    </XMI.documentation>
+    <XMI.metamodel xmi.name="UML" xmi.version="1.4"/>
+  </XMI.header><?
+}
+
+string xmiContent(map element) {?>
+<XMI.content><?
+	model(element)?>
+</XMI.content><?
+}
+
+
+string modelElement(map element) {
+	if(hasStereotypes(element)) {?>
+<UML:ModelElement.stereotype><?
+		/* map sterotypes */
+?>
+</UML:ModelElement.stereotype><?
+	}
+	if(hasTaggedValues(element)) {?>
+<UML:ModelElement.taggedValue><?
+		/* map tagged values */
+?>
+<UML:ModelElement.taggedValue><?
+	}
+	if(element:ClientDependencySet) {?>
+<UML:ModelElement.clientDependency><?
+		/* map client dependencies */
+		dependencyRef()?>
+</UML:ModelElement.clientDependency><?
+	}
+}
+
+string model(map element) {?>
+<UML:Model xmi.id='<?element:Id?>'
+	name='<?element:Name?>' isSpecification='false' isRoot='false' isLeaf='false'
+	isAbstract='false'><?
+	modelElement(element)
+	ownedElements(element)?>
+</UML:Model><?
+}
+
+string ownedElements(map element) {
+	if(element:OwnedElementList) {?>
+<UML:Namespace.ownedElement><?
+	/* modelElements? */
+		foreach ownedElement <- element:OwnedElementList {
+			ownedElement(ownedElement)		
+		}
+?>
+</UML:Namespace.ownedElement><?
+	}
+}
+
+string ownedElement(map element) {
+	if(element:ElementType eq 'Package') {
+		package(element)
+	} else if(element:ElementType eq 'SubSystem') {
+		/* TODO */		
+	} else if(element:ElementType eq 'Class') {
+		class(element)
+	} else if(element:ElementType eq 'Interface') {
+		interface(element)
+	} else if(element:ElementType eq 'DataType') {
+		dataType(element)
+	} else if(element:ElementType eq 'Attribute') {
+		attribute(element)
+	}
+	/* TODO */		
+}
+
+string features(map element) {
+	if(element:FeatureList) {?>
+<UML:Classifier.feature><?
+		foreach feature <- element:FeatureList {
+			feature(feature)
+		}?>
+</UML:Classifier.feature><?
+	}
+}
+
+string feature(map element) {
+	if(feature:ElementType eq 'Attribute') {
+		attribute(feature)
+	} else if(feature:ElementType eq 'Operation') {
+		operation(feature)
+	}
+}
+
+string structuralFeature(map element) {
+	if(element:Multiplicity) {?>
+<UML:StructuralFeature.multiplicity><?
+		multiplicity(element:Multiplicity)?>
+</UML:StructuralFeature.multiplicity><?
+	}
+	if(element:Type) {?>
+<UML:StructuralFeature.type><?
+		typeRef(element:Type)?>
+</UML:StructuralFeature.type><?
+	}
+}
+
+string behaviouralFeatures(map element) {
+	if(element:ParameterList) {?>
+<UML:BehavioralFeature.parameter><?
+?>
+</UML:BehavioralFeature.parameter><?
+	}
+}
+
+string packageRef(map element) {?>
+<UML:Package <?refId(element)?>/><?
+}
+
+string package(map element) {?>
+<UML:Package xmi.id='<?element:Id?>'
+	name='<?element:Name?>' isSpecification='false' isRoot='false'
+	isLeaf='false' isAbstract='false'><?
+	modelElement(element)
+	ownedElements(element)?>
+</UML:Package><?
+}
+
+string classRef(map element) {?>
+<UML:Class <?refId(element)?>/><?
+}
+
+string class(map element) {?>
+<UML:Class xmi.id='<?element:Id?>'
+	name='<?element:Name?>' visibility='<?element:Visibility?>'
+	isSpecification='false' isRoot='false'
+	isLeaf='false' isAbstract='false' isActive='false'><?
+	modelElement(element)
+	ownedElements(element)
+	features(element)
+	?>
+</UML:Class><?
+}
+
+string interfaceRef(map element) {?>
+<UML:Interface <?refId(element)?>/><?
+}
+
+/* todo */
+string interface(map element) {?>
+
+<?
+}
+
+string dataTypeRef(map element) {?>
+<UML:DataType <?refId(element)?>/><?
+}
+
+string dataType(map element) {?>
+<?
+}
+
+string attribute(map element) {?>
+<UML:Attribute xmi.id='<?element:Id?>'
+	name='<?element:Name?>' visibility='public' isSpecification='false'
+	ownerScope='<?element:OwnerScope?>'
+	changeability='<?element:Changeability?>' targetScope='<?element:TargetScope?>'><?
+	modelElement(element)
+	structuralFeature(element)?>
+</UML:Attribute><?
+}
+
+string association(map element) {?>
+<UML:Association xmi.id='<?element:Id?>'
+	name='<?element:Name?>' isSpecification='false' isRoot='false'
+	isLeaf='false' isAbstract='false'><?
+	modelElement(element)?>
+	<UML:Association.connection><?
+	associationEnds(element)?>
+	</UML:Association.connection>
+</UML:Association><?
+}
+
+string associationEnd(map element) {?>
+<UML:AssociationEnd xmi.id='<?element:Id?>'
+	visibility='public' isSpecification='false' isNavigable='false'
+	ordering='unordered' aggregation='composite'
+	targetScope='instance' changeability='changeable'><?
+	modelElement(element)
+	if(element:QualifierList) {?>
+	<UML:AssociationEnd.qualifier><?
+		associationEndQualifiers(element:QualifierList)?>
+	</UML:AssociationEnd.qualifier><?
+	}?>
+	<UML:AssociationEnd.participant><?
+		typeRef(element:Type)?>
+	</UML:AssociationEnd.participant>
+</UML:AssociationEnd><?
+}
+
+string associationEndQualifiers(map qualifierList) {
+	foreach qualifier <- qualifierList {
+		attribute(qualifier)
+	}
+}
+
+string operation(map element) {?>
+<UML:Operation xmi.id='<?element:Id?>'
+	name='<?element:Name?>' visibility='public' isSpecification='false'
+	ownerScope='instance' isQuery='false' concurrency='sequential' isRoot='false'
+	isLeaf='false' isAbstract='false'><?
+	modelElement(element)?>
+</UML:Operation><?
+}
+
+string parameter(map element) {?>
+<UML:Parameter xmi.id='<?element:Id?>'
+	name='<?element:Name?>' isSpecification='false' kind='return'><?
+	modelElement(element)
+	if(element:Type) {?>
+	<UML:Parameter.type><?
+		typeRef(element:Type)?>
+	</UML:Parameter.type><?
+	}?>
+</UML:Parameter><?
+}
+
+string dependencyRef(map element) {?>
+<UML:Dependency <?refId(element)?>/><?
+}
+
+string dependency(map element) {?>
+<UML:Dependency xmi.id='<?element:Id?>'
+	isSpecification = 'false'><?
+	modelElement(element)?>
+	<UML:Dependency.client><?
+	typeRef(element)?>
+	</UML:Dependency.client>
+	<UML:Dependency.supplier><?
+	typeRef(element)?>
+	</UML:Dependency.supplier>
+</UML:Dependency>
+<?
+}
+
+string generalizationRef(map element) {?>
+<UML:Generalization <?refId(element)?>/><?
+}
+
+/* todo */
+string generalization(map element) {?>
+
+<?
+}
+
+string nodeRef(map element) {?>
+<UML:Node <?refId(element)?>/><?
+}
+
+/* todo */
+string node(map element) {?>
+
+<?
+}
+
+string componentRef(map element) {?>
+<UML:Component <?refId(element)?>/><?
+}
+
+/* todo */
+string component(map element) {?>
+
+<?
+}
+
+string artifactRef(map element) {?>
+<UML:Artifact <?refId(element)?>/><?
+}
+
+/* todo */
+string artifact(map element) {?>
+
+<?
+}
+
+string argumentRef(map element) {?>
+<UML:Argument <?refId(element)?>/><?
+}
+
+/* todo */
+string argument(map element) {?>
+
+<?
+}
+
+string actionSequenceRef(map element) {?>
+<UML:ActionSequence <?refId(element)?>/><?
+}
+
+/* todo */
+string actionSequence(map element) {?>
+
+<?
+}
+
+string createActionRef(map element) {?>
+<UML:CreateAction <?refId(element)?>/><?
+}
+
+/* todo */
+string createAction(map element) {?>
+
+<?
+}
+
+string destroyActionRef(map element) {?>
+<UML:DestroyAction <?refId(element)?>/><?
+}
+
+/* todo */
+string destroyAction(map element) {?>
+
+<?
+}
+
+string callActionRef(map element) {?>
+<UML:CallAction <?refId(element)?>/><?
+}
+
+/* todo */
+string callAction(map element) {?>
+
+<?
+}
+
+string returnActionRef(map element) {?>
+<UML:ReturnAction <?refId(element)?>/><?
+}
+
+/* todo */
+string returnAction(map element) {?>
+
+<?
+}
+
+string sendActionRef(map element) {?>
+<UML:SendAction <?refId(element)?>/><?
+}
+
+/* todo */
+string sendAction(map element) {?>
+
+<?
+}
+
+string terminateActionRef(map element) {?>
+<UML:TerminateAction <?refId(element)?>/><?
+}
+
+/* todo */
+string terminateAction(map element) {?>
+
+<?
+}
+
+string uninterpretedActionRef(map element) {?>
+<UML:UninterpretedAction <?refId(element)?>/><?
+}
+
+/* todo */
+string uninterpretedAction(map element) {?>
+
+<?
+}
+
+string signalRef(map element) {?>
+<UML:Signal <?refId(element)?>/><?
+}
+
+/* todo */
+string signal(map element) {?>
+
+<?
+}
+
+string exceptionRef(map element) {?>
+<UML:Exception <?refId(element)?>/><?
+}
+
+/* todo */
+string exception(map element) {?>
+
+<?
+}
+
+string stateMachineRef(map element) {?>
+<UML:StateMachine <?refId(element)?>/><?
+}
+
+/* todo */
+string stateMachine(map element) {?>
+
+<?
+}
+
+string transitionRef(map element) {?>
+<UML:Transition <?refId(element)?>/><?
+}
+
+/* todo */
+string transition(map element) {?>
+
+<?
+}
+
+string guardRef(map element) {?>
+<UML:Guard <?refId(element)?>/><?
+}
+
+/* todo */
+string guard(map element) {?>
+
+<?
+}
+
+string state(map element) {?>
+<UML:State <?refId(element)?>/><?
+}
+
+/* todo */
+string state(map element) {?>
+
+<?
+}
+
+string simpleState(map element) {?>
+<UML:SimpleState <?refId(element)?>/><?
+}
+
+/* todo */
+string simpleState(map element) {?>
+
+<?
+}
+
+string finalState(map element) {?>
+<UML:FinalState <?refId(element)?>/><?
+}
+
+/* todo */
+string finalState(map element) {?>
+
+<?
+}
+
+string stereotypeRef(map element) {?>
+<UML:Stereotype <?refId(element)?>/><?
+}
+
+string stereotype(map element) {?>
+<UML:Stereotype xmi.id='<?element:Id?>'
+	name='<?element:Name?>' isSpecification='false'
+	isRoot='false' isLeaf='false'
+	isAbstract = 'false'><?
+	if(element:BaseClassSet) {
+		/* baseclasses */
+	}
+	if(element:DefinedTagSet) {?>
+	<UML:Stereotype.definedTag><?
+		/* tag definitions */
+	?>
+	</UML:Stereotype.definedTag><?
+	}?>
+</UML:Stereotype>
+<?
+}
+
+string stereotypeBaseClass(string baseClass) {?>
+<UML:Stereotype.baseClass><?baseClass?></UML:Stereotype.baseClass><?
+}
+
+string tagDefinitionRef(map element) {?>
+<UML:TagDefinition <?refId(element)?>/><?
+}
+
+string tagDefinition(map element) {?>
+<UML:TagDefinition xmi.id='<?element:Id?>'
+	name = '<?element:Name?>' isSpecification = 'false'><?
+	if(element:Multiplicity) {?>
+	<UML:TagDefinition.multiplicity><?
+		multiplicity(element:Multiplicity)?>
+	</UML:TagDefinition.multiplicity><?
+	}?>
+</UML:TagDefinition><?
+}
+
+string taggedValue(map element) {?>
+<UML:TaggedValue xmi.id='<?element:Id?>'
+	isSpecification='false'>
+	<UML:TaggedValue.dataValue><?element:Value?></UML:TaggedValue.dataValue>
+	<UML:TaggedValue.type><?
+	tagDefinitionRef(element)?>
+	</UML:TaggedValue.type>
+</UML:TaggedValue><?
+}
+
+string enumeration(map element) {?>
+<UML:Enumeration xmi.id='<?element:Id?>'
+	name='<?element:Name?>' isSpecification='false' isRoot='false'
+	isLeaf = 'false' isAbstract = 'false'><?
+	if(element:LiteralList) {?>
+	<UML:Enumeration.literal><?
+	/* map enum literals */?>
+	</UML:Enumeration.literal><?
+	}?>
+</UML:Enumeration><?
+}
+
+string enumerationLiteral(map element) {?>
+<UML:EnumerationLiteral xmi.id='<?element:Id?>'
+	name = '<?element:Name?>' isSpecification = 'false'/><?
+}
+
+string multiplicity(map element) {?>
+<UML:Multiplicity xmi.id='<?element:Id?>'>
+	<UML:Multiplicity.range>
+		<UML:MultiplicityRange xmi.id='<?'127-0-1-1-22cace28:12c459cc27e:-8000:0000000000000D12'?>'
+			lower='<?element:Low?>' upper='<?element:High?>'/>
+	</UML:Multiplicity.range>
+</UML:Multiplicity><?
+}
+
+string classifierRef(map element) {
+	/* TODO add relevant classifiers */
+	if(element:ElementType eq 'DataType') {
+		dataTypeRef(element)
+	} else if(element:ElementType eq 'Class') {
+		classRef(element)
+	} else if(element:ElementType eq 'Interface') {
+		interfaceRef(element)
+	}
+}
+
+string modelElementRef(map element) {
+	/* TODO add relevant classifiers */
+	/* else classifierRef(element) */
+}
+
+string refId(map element) {
+	if(isProfileElement(element)) {
+		'href="' + element:ProfileId + "#" + element:Id + '"'
+	} else {
+		'xmi.idref="' + element:Id + '"'
+	}
+}
+
+string newId() {
+	string id = ''
+	id.uuid()
+}
+
+?>

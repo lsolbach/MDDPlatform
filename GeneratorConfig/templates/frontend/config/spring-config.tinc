@@ -1,0 +1,9 @@
+<?
+
+/* import component configs */
+
+/* define property placeholder configurer */
+config(element)
+/* define beans (if any) */
+
+?>

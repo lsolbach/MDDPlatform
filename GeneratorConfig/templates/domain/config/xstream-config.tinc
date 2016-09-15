@@ -1,0 +1,9 @@
+<?
+string repositoryBean(map element) {?>
+	<bean id="<?element:Name.firstLower()?>" class="<?qualifiedImplementationName(element, 'XStream', '')?>">
+		<constructor-arg index="0" ref="storage"/>
+<?dependencies(element)?>
+	</bean>
+<?
+}
+?>

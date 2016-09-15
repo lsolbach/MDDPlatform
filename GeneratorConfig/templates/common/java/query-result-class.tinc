@@ -1,0 +1,17 @@
+<?!--
+ * common/java/query-result-class
+--?><?
+string fileComment(map element) {
+?>/*
+ * Abstract class <?name(This)?>
+ * Base implementation of query result interface <?Name?>.
+<? generationInfo(' * ')?>
+ */<?
+}
+
+string constructors(map element) {
+	defaultConstructor(element)
+	list mappedFieldList = filter(isMapped, filter(isPropertyField, getFieldList(element)))
+	fieldConstructors(element, mappedFieldList)
+}
+?>

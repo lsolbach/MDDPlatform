@@ -1,0 +1,21 @@
+Template StyleGuide
+
+Templates and template includes
+
+* The name of the template files should be all lower case with a '-' between words for readability
+* The file extension for templates is '.tmpl'
+* The file extension for template includes is '.tinc'
+* Place code of general use in library includes named 'lib.tinc'
+* Symbols defined in template code are camel cased and begin with a lower case letter
+* External symbols should begin with an upper case letter
+
+* Methods returning renderable strings have no prefix
+	(e.g. name() instead of renderName())
+* Methods defining a boolean predicate should be prefixed with 'is' or 'has', etc
+	(e.g. isEntity(), hasStereotype())
+* Methods collecting some data from the model should be prefixed with 'get'
+	(e.g. getEndpoint())
+* Methods collecting a list of elements from the model should be suffixed with 'List'
+	(e.g. getAssociationList())
+* Methods collecting a map of elements from the model should be suffixed with 'Map'
+	(e.g. getImportMap())

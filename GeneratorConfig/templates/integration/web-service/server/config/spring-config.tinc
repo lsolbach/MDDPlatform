@@ -1,0 +1,42 @@
+<?
+list namespaceList(map element) {
+	list namespaces = super(element)
+	namespaces
+}
+
+string beans(map element) {
+	super(element)
+	map endpoint = getEndpoint(This)?>
+
+	<bean class="<?endpoint:Namespace?>.impl.<?endpoint:Name?>">
+	<?dependencies(endpoint)?>
+	</bean>
+
+	<bean class="org.springframework.ws.server.endpoint.mapping.PayloadRootAnnotationMethodEndpointMapping"><?
+	endpointProperties(element)?>
+	</bean>
+
+    <bean class="org.springframework.ws.server.endpoint.adapter.XPathParamAnnotationMethodEndpointAdapter">
+      <property name="namespaces">
+        <props>
+          <prop key="<?wsNamespacePrefix(This)?>"><?wsNamespace(This)?></prop>
+        </props>
+      </property>
+    </bean>
+	
+	<bean id="wsdlBuilder" class="org.springframework.ws.wsdl.wsdl11.DynamicWsdl11Definition">
+	  <property name="builder">
+	    <bean class="org.springframework.ws.wsdl.wsdl11.builder.XsdBasedSoap11Wsdl4jDefinitionBuilder">
+	      <property name="schema" value="/WEB-INF/schema/<?Name?>.xsd"/>
+	      <property name="portTypeName" value="<?endpoint:Name?>"/>
+	      <property name="locationUri" value="${locationUri}"/>
+	      <property name="targetNamespace" value="<?wsNamespace(This)?>"/>
+	    </bean>
+	  </property>
+	</bean>
+
+<?
+}
+
+string endpointProperties(map element) {}
+?>

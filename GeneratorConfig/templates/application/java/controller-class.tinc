@@ -1,0 +1,14 @@
+<?
+string fileComment(map element) {
+?>/*
+ * Abstract class <?name(This)?>
+ * Base implementation of controller interface <?Name?>.
+<? generationInfo(' * ')?>
+ */<?
+}
+
+string abstract(map element) {
+	'abstract'
+}
+
+?>

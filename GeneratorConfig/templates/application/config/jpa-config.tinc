@@ -1,0 +1,39 @@
+<?!--
+ * application/config/jpa-config
+ --?><?
+list getNamespaceList(map element) {
+	list namespaces = super(element)
+	namespaces.add('beans')
+	namespaces.add('tx')
+}
+
+string beans(map element) {
+	super(element)?>
+
+	<!-- start of application jpa config -->
+<?
+	/* TODO use methods for dataSource and persistenceUniManager */
+	/* TODO parameterize datasource and persistenceUnitManager */
+	vendorAdapter(element)
+	transactionManager(element)
+	entityManagerFactory(element)
+?>
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" 
+			destroy-method="close">
+		<property name="driverClass" value="${db.driver}"/>
+		<property name="jdbcUrl" value="${db.url}" />
+		<!-- add conn pool properties-->
+	</bean>
+
+	<bean id="persistenceUnitManager" class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
+		<property name="persistenceXmlLocations">
+			<list>
+				<value>classpath*:META-INF/persistence.xml</value>
+			</list>
+		</property>
+		<property name="defaultDataSource" ref="dataSource"/>
+	</bean>
+
+<?
+}
+?>

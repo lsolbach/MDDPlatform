@@ -1,0 +1,12 @@
+<?
+list namespaceList(map element) {
+	list namespaceList = super(element)
+	namespaceList.add('beans')
+	namespaceList.add('context')
+	namespaceList
+}
+
+string beans(map element) {
+	super(element)
+}
+?>

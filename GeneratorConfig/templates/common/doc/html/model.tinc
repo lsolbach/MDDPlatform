@@ -1,0 +1,192 @@
+<?
+string headContent(map element) {?>
+	<style><?
+	inlineCss(element)?>
+	</style><?
+}
+
+string bodyContent(map element) {
+	model(element)
+}
+
+string ownedElement(map element) {
+	if(element:ElementType eq 'Package') {
+		package(element)
+	} else if(element:ElementType eq 'Class') {
+		class(element)
+	} else if(element:ElementType eq 'Interface') {
+		interface(element)
+	} else if(element:ElementType eq 'DataType') {
+		dataType(element)
+	} else if(element:ElementType eq 'StateMachine') {
+		stateMachine(element)
+	}
+}
+
+string model(map element) {
+	h1('Model ' + name(element))
+	h4('Description')
+	p(documentation(element))
+	stereotypes(element)
+	/* TODO TOC links */
+	/*join(mapFn(link, element:OwnedElementSet), br() + lineFeed())*/
+	foreach ownedElement <- element:OwnedElementSet {
+		ownedElement(ownedElement)
+	}
+}
+
+string package(map element) {
+	h2('Package ' + qualifiedName(element))
+	h4('Description')
+	p(documentation(element))
+	stereotypes(element)
+	/* TODO TOC links */
+	/*join(mapFn(link, element:OwnedElementSet), br() + lineFeed())*/
+	foreach ownedElement <- element:OwnedElementSet {
+		ownedElement(ownedElement)
+	}
+}
+
+string interface(map element) {
+	h2('Interface ' + name(element))
+	img(qualifiedPath(element) + '.gif') + lineFeed()
+	h4('Description')
+	p(documentation(element))
+	stereotypes(element)
+	taggedValues(element)	
+	operations(element)
+}
+
+string class(map element) {
+	h2('Class ' + name(element))
+	img(qualifiedPath(element) + '.gif') + lineFeed()
+	h4('Description')
+	p(documentation(element))
+	stereotypes(element)
+	taggedValues(element)
+	superClasses(element)
+	subClasses(element)
+	attributes(element)
+	associations(element)
+	operations(element)
+}
+
+string dataType(map element) {
+	h2('DataType ' + name(element))
+	img(qualifiedPath(element) + '.gif') + lineFeed()
+	h4('Description')
+	p(documentation(element))
+	stereotypes(element)
+	taggedValues(element)
+	
+}
+
+string stateMachine(map element) {
+	h2('Statemachine ' + name(element))
+	img(qualifiedPath(element) + '.gif') + lineFeed()
+	h4('Description')
+	p(documentation(element))
+	stereotypes(element)
+	taggedValues(element)
+	states(element)	
+}
+
+string stereotypes(map element) {
+	h4('Stereotypes')
+	list stereotypeList
+	foreach stereotype <- element:StereotypeSet {
+		stereotypeList.add(stereotype(stereotype))
+	}
+	/*stereotypesList = mapFn(stereotypeX, element:StereotypeSet)*/
+	p(join(stereotypeList, ', '))
+}
+
+string stereotype(map stereotype) {
+	'&lt;&lt;' + stereotype:Name + '&gt;&gt;'
+}
+
+string taggedValues(map element) {
+	h4('Tagged Values')
+	p(join(mapFn(taggedValue, element:TaggedValueSet), br()))
+}
+
+string taggedValue(map taggedValue) {
+	if(taggedValue:Name ne 'documentation') {
+		taggedValue:Name + '=' + taggedValue:Value
+	}
+}
+
+string superClasses(map element) {
+	h4('Superclasses')
+
+}
+
+string superclass(map element) {
+	name(element)
+}
+
+string subClasses(map element) {
+	h4('Subclasses')
+
+}
+
+string subclass(map element) {
+	name(element)
+}
+
+string attributes(map element) {
+	h4('Attributes')
+	if(element:AttributeList) {
+		table(tr(th('Name') + th('Type') + th('Visibility') + th('Optional'))
+				+ join(mapFn(attribute, element:AttributeList), ' '))
+	} else {
+		'-' + lineFeed()
+	}
+}
+
+string attribute(map element) {
+	tr(td(element:Name) + td(element:Type:Name) + td(visibility(element)) + td(boolean(isOptional(element))))
+}
+
+string associations(map element) {
+	h4('Associations')
+	if(element:AssociationList) {
+		table(tr(th('Name') + th('Type') + th('Visibility') + th('Optional')))
+	} else {
+		'-' + lineFeed()
+	}
+}
+
+string association(map element) {
+
+}
+
+string operations(map element) {
+	h4('Operations')
+	if(element:OperationList) {
+		table(tr(th('Name') + th('Parameters') + th('Visibility')))
+	} else {
+		'-' + lineFeed()
+	}
+}
+
+string operation(map element) {
+
+}
+
+string states(map element) {
+
+}
+
+string link(map element) {
+	a(qualifiedName(element), name(element))
+}
+
+string qualifiedlink(map element) {
+	a(qualifiedName(element), qualifiedName(element))
+}
+
+string qualifiedPath(map element) {
+	qualifiedName(element).replace('.', '/')
+}
+?>

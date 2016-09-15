@@ -1,0 +1,21 @@
+<?
+string fileComment(map element) {
+
+}
+
+string operations(map element) {
+
+}
+
+string doStartTag(map element) {
+
+}
+
+string doAfterBody(map element) {
+
+}
+
+string doEndTag(map element) {
+
+}
+?>

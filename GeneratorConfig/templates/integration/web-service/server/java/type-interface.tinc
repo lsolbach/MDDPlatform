@@ -1,0 +1,9 @@
+<?
+string fileComment(map element) {
+?>/*
+ * Interface of web service server type <?name(element)?>
+<?generationInfo(' * ')?>
+ */
+<?
+}
+?>

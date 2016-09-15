@@ -1,0 +1,21 @@
+<?
+map getImportMap(map element) {
+	map importMap = super(element)
+	add(importMap, 'org.springframework.scheduling.annotation.*')	
+	importMap
+}
+
+list getOperationAnnotationList(map op) {
+	list annotationList = super(op)
+	if(hasStereotype(op, 'async')) {
+		add(annotationList, '@Async')
+	} else if(hasStereotype(op, 'scheduled')) {
+		if(hasTaggedValue(op, 'schedule')) {
+			add(annotationList, '@Scheduled(' + taggedValue(op, 'schedule') + ')')
+		} else {
+			add(annotationList, '@Scheduled')
+		}
+	}
+	annotationList
+}
+?>

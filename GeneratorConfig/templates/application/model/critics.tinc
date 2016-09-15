@@ -1,0 +1,15 @@
+<?
+list validate(map package) {
+	list criticList
+	foreach element | isController(element) <- getClassList(package) {	
+		criticList = criticList + validateController(element)
+	}
+	criticList
+}
+
+list validateController(map element) {
+	list criticList
+	/* TODO validate controller */
+	criticList
+}
+?>

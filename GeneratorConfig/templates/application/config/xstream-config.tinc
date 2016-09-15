@@ -1,0 +1,11 @@
+<?
+string beans(map element) {
+	super(element)?>
+	<!-- start of xstream config -->
+	<bean id="storage" class="org.soulspace.base.domain.persistence.impl.XStreamPersistentStorageImpl">
+		<property name="rootDir" value="${root.dir}"/>
+	</bean>
+	<!-- end of xstream config -->
+<?
+}
+?>

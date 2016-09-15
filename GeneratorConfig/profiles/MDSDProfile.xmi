@@ -1,0 +1,2483 @@
+<?xml version = '1.0' encoding = 'UTF-8' ?>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Mon Dec 16 09:01:49 CET 2013'>
+  <XMI.header>    <XMI.documentation>
+      <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
+      <XMI.exporterVersion>0.34(6) revised on $Date: 2010-01-11 22:20:14 +0100 (Mon, 11 Jan 2010) $ </XMI.exporterVersion>
+    </XMI.documentation>
+    <XMI.metamodel xmi.name="UML" xmi.version="1.4"/></XMI.header>
+  <XMI.content>
+    <UML:Model xmi.id = '127-0-0-1-b6e136e:1232e5aaa5b:-8000:0000000000000B36'
+      name = 'MDSD' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+      isAbstract = 'false'>
+      <UML:ModelElement.taggedValue>
+        <UML:TaggedValue xmi.id = '127-0-1-1--5814fc5a:13a0371424b:-8000:0000000000000EB7'
+          isSpecification = 'false'>
+          <UML:TaggedValue.dataValue>Profile for Model Driven Software Development based on the Soulspace Architecture. This profile contains the necessary Stereotypes, TagDefinitions and DataTypes to design models for the generation of code.</UML:TaggedValue.dataValue>
+          <UML:TaggedValue.type>
+            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+          </UML:TaggedValue.type>
+        </UML:TaggedValue>
+        <UML:TaggedValue xmi.id = '127-0-1-1--5814fc5a:13a0371424b:-8000:0000000000000EB8'
+          isSpecification = 'false'>
+          <UML:TaggedValue.dataValue>Ludger Solbach</UML:TaggedValue.dataValue>
+          <UML:TaggedValue.type>
+            <UML:TagDefinition xmi.idref = '127-0-1-1-6a49b4b0:1363b673f33:-8000:0000000000000D47'/>
+          </UML:TaggedValue.type>
+        </UML:TaggedValue>
+        <UML:TaggedValue xmi.id = '127-0-1-1--5814fc5a:13a0371424b:-8000:0000000000000EB9'
+          isSpecification = 'false'>
+          <UML:TaggedValue.dataValue></UML:TaggedValue.dataValue>
+          <UML:TaggedValue.type>
+            <UML:TagDefinition xmi.idref = '127-0-1-1-612d0f7b:131c79c6fa5:-8000:0000000000000C99'/>
+          </UML:TaggedValue.type>
+        </UML:TaggedValue>
+      </UML:ModelElement.taggedValue>
+      <UML:Namespace.ownedElement>
+        <UML:Package xmi.id = '127-0-0-1-b6e136e:1232e5aaa5b:-8000:0000000000000CDE'
+          name = 'mdsd' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+          isAbstract = 'false'>
+          <UML:ModelElement.taggedValue>
+            <UML:TaggedValue xmi.id = '127-0-1-1--5dc66b02:13a081f9f6d:-8000:0000000000000EC2'
+              isSpecification = 'false'>
+              <UML:TaggedValue.dataValue>Contains Stereotypes, TagDefinitions and DataTypes for Model Driven Software Development.</UML:TaggedValue.dataValue>
+              <UML:TaggedValue.type>
+                <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+              </UML:TaggedValue.type>
+            </UML:TaggedValue>
+          </UML:ModelElement.taggedValue>
+          <UML:Namespace.ownedElement>
+            <UML:Package xmi.id = '127-0-0-1-b6e136e:1232e5aaa5b:-8000:0000000000000CDF'
+              name = 'domain' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:ModelElement.taggedValue>
+                <UML:TaggedValue xmi.id = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D05'
+                  isSpecification = 'false'>
+                  <UML:TaggedValue.dataValue>Contains stereotypes and tagged values for the abstractions and mechanisms of the domain layer. The abstractions in the domain layer are based on the principles of domain driven design.</UML:TaggedValue.dataValue>
+                  <UML:TaggedValue.type>
+                    <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                  </UML:TaggedValue.type>
+                </UML:TaggedValue>
+              </UML:ModelElement.taggedValue>
+              <UML:Namespace.ownedElement>
+                <UML:Stereotype xmi.id = '127-0-0-1-b6e136e:1232e5aaa5b:-8000:0000000000000CE2'
+                  name = 'entity' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Class</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D06'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Entities represent identifiable domain objects which retain their identity over their complete lifecylce independent of their state.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-0-1-b6e136e:1232e5aaa5b:-8000:0000000000000CE4'
+                  name = 'repository' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Class</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E45'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>A repository represents an abstraction for a persistent data storage.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-0-1-b6e136e:1232e5aaa5b:-8000:0000000000000CE3'
+                  name = 'value' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Class</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D07'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Values (or value objects) are domain object which are solely identified by their state. Values are by default immutable, which means that their state can not be changed once they are created.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-0-1-b6e136e:1232e5aaa5b:-8000:0000000000000CE7'
+                  name = 'aggregate root' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Class</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D09'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Aggregate roots are entities in the domain model that encapsulate the access to their children.
+The children of an aggregate root are specified by compositions on the aggregate root.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:Stereotype>
+                <UML:TagDefinition xmi.id = '127-0-0-1--124660e9:1284888af12:-8000:000000000000119C'
+                  name = 'alias' isSpecification = 'false'>
+                  <UML:TagDefinition.multiplicity>
+                    <UML:Multiplicity xmi.id = '127-0-0-1--124660e9:1284888af12:-8000:000000000000119D'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = '127-0-0-1--124660e9:1284888af12:-8000:000000000000119E'
+                          lower = '0' upper = '1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:TagDefinition.multiplicity>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E4C'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Specifies an alias name for this element.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:TagDefinition>
+                <UML:TagDefinition xmi.id = '127-0-1-1--3acb4be1:12ce734afaf:-8000:0000000000000E42'
+                  name = 'revisionable' isSpecification = 'false'>
+                  <UML:TagDefinition.multiplicity>
+                    <UML:Multiplicity xmi.id = '127-0-1-1--3acb4be1:12ce734afaf:-8000:0000000000000E44'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = '127-0-1-1--3acb4be1:12ce734afaf:-8000:0000000000000E43'
+                          lower = '0' upper = '0'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:TagDefinition.multiplicity>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E49'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Specifies if objects of this class are revisionable (should be revisioned).</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:TagDefinition>
+                <UML:TagDefinition xmi.id = '127-0-1-1--3acb4be1:12ce734afaf:-8000:0000000000000E4B'
+                  name = 'mutable' isSpecification = 'false'>
+                  <UML:TagDefinition.multiplicity>
+                    <UML:Multiplicity xmi.id = '127-0-1-1--3acb4be1:12ce734afaf:-8000:0000000000000E4D'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = '127-0-1-1--3acb4be1:12ce734afaf:-8000:0000000000000E4C'
+                          lower = '0' upper = '0'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:TagDefinition.multiplicity>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E48'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Specifies if objects of this class are mutable.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:TagDefinition>
+                <UML:TagDefinition xmi.id = '127-0-1-1--3acb4be1:12ce734afaf:-8000:0000000000000E4E'
+                  name = 'temporal' isSpecification = 'false'>
+                  <UML:TagDefinition.multiplicity>
+                    <UML:Multiplicity xmi.id = '127-0-1-1--3acb4be1:12ce734afaf:-8000:0000000000000E50'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = '127-0-1-1--3acb4be1:12ce734afaf:-8000:0000000000000E4F'
+                          lower = '0' upper = '0'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:TagDefinition.multiplicity>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E4A'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Specifies if objects of this class are temporal and should therefore  validFrom and validTo Timestamps should be stored.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:TagDefinition>
+                <UML:TagDefinition xmi.id = '127-0-1-1-293bd6fb:12f906cb6db:-8000:0000000000000C50'
+                  name = 'auditable' isSpecification = 'false'>
+                  <UML:TagDefinition.multiplicity>
+                    <UML:Multiplicity xmi.id = '127-0-1-1-293bd6fb:12f906cb6db:-8000:0000000000000C52'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = '127-0-1-1-293bd6fb:12f906cb6db:-8000:0000000000000C51'
+                          lower = '0' upper = '0'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:TagDefinition.multiplicity>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E46'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>If defined on a class, this TagDefinition specifies if an audit trail should be written for this class.
+Specifies if an attribute or association end is included in the audit trail, if an audit trail is written for the class (defaults to true for attributes and false for association ends).</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E47'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue> </UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1-6a49b4b0:1363b673f33:-8000:0000000000000D47'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:TagDefinition>
+                <UML:TagDefinition xmi.id = '127-0-1-1--79c771f6:12f9d6d1af9:-8000:0000000000000EB8'
+                  name = 'versionable' isSpecification = 'false'>
+                  <UML:TagDefinition.multiplicity>
+                    <UML:Multiplicity xmi.id = '127-0-1-1--79c771f6:12f9d6d1af9:-8000:0000000000000EBD'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = '127-0-1-1--79c771f6:12f9d6d1af9:-8000:0000000000000EBC'
+                          lower = '1' upper = '1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:TagDefinition.multiplicity>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E4B'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Specifies that objects of this class should be versioned.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:TagDefinition>
+                <UML:Stereotype xmi.id = '127-0-1-1-15553596:12e2a587c31:-8000:0000000000000C3D'
+                  name = 'query' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Class</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D0A'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>A query object represents a query on a data model, repository or persistent data store. The result of performing a query is a collection of query results.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-1-1-15553596:12e2a587c31:-8000:0000000000000C3E'
+                  name = 'query result' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Class</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D0B'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>A query result is the result of a query.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-1-1-6cd3cdf6:131ffde3e16:-8000:0000000000000EEC'
+                  name = 'model package' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Package</UML:Stereotype.baseClass>
+                </UML:Stereotype>
+                <UML:TagDefinition xmi.id = '127-0-1-1-24e644c2:1322901f865:-8000:0000000000000CE0'
+                  name = 'validatable' isSpecification = 'false'>
+                  <UML:TagDefinition.multiplicity>
+                    <UML:Multiplicity xmi.id = '127-0-1-1-24e644c2:1322901f865:-8000:0000000000000CE4'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = '127-0-1-1-24e644c2:1322901f865:-8000:0000000000000CE3'
+                          lower = '0' upper = '1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:TagDefinition.multiplicity>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D08'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Domain objects with a tagged value validatable set to true should be validated by the architecture.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:TagDefinition>
+                <UML:Stereotype xmi.id = '127-0-1-1--724cad06:142fa687284:-8000:0000000000000F06'
+                  name = 'domain object' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--724cad06:142fa687284:-8000:0000000000000F07'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>The stereotype domain object represents an abstract domain class that can be subclassed by entities or value objects.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:Stereotype>
+              </UML:Namespace.ownedElement>
+            </UML:Package>
+            <UML:Package xmi.id = '127-0-0-1-b6e136e:1232e5aaa5b:-8000:0000000000000CE9'
+              name = 'application' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:ModelElement.stereotype>
+                <UML:Stereotype xmi.idref = '127-0-1-1-15553596:12e2a587c31:-8000:0000000000000C3D'/>
+              </UML:ModelElement.stereotype>
+              <UML:ModelElement.taggedValue>
+                <UML:TaggedValue xmi.id = '127-0-1-1--5dc66b02:13a081f9f6d:-8000:0000000000000EBF'
+                  isSpecification = 'false'>
+                  <UML:TaggedValue.dataValue>Contains the Stereotypes and TagDefinitions of the Application layer.</UML:TaggedValue.dataValue>
+                  <UML:TaggedValue.type>
+                    <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                  </UML:TaggedValue.type>
+                </UML:TaggedValue>
+              </UML:ModelElement.taggedValue>
+              <UML:Namespace.ownedElement>
+                <UML:Stereotype xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FC8'
+                  name = 'controller' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Class</UML:Stereotype.baseClass>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FC9'
+                  name = 'event' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Class</UML:Stereotype.baseClass>
+                </UML:Stereotype>
+                <UML:Package xmi.id = '127-0-1-1--5dc66b02:13a081f9f6d:-8000:0000000000000EC0'
+                  name = 'workflow' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'/>
+              </UML:Namespace.ownedElement>
+            </UML:Package>
+            <UML:Package xmi.id = '127-0-0-1-b6e136e:1232e5aaa5b:-8000:0000000000000CEA'
+              name = 'common' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:ModelElement.taggedValue>
+                <UML:TaggedValue xmi.id = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D11'
+                  isSpecification = 'false'>
+                  <UML:TaggedValue.dataValue>The common package contains stereotypes an tagged values that are not specific to a single layer of the architecture.</UML:TaggedValue.dataValue>
+                  <UML:TaggedValue.type>
+                    <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                  </UML:TaggedValue.type>
+                </UML:TaggedValue>
+              </UML:ModelElement.taggedValue>
+              <UML:Namespace.ownedElement>
+                <UML:Stereotype xmi.id = '127-0-0-1-b6e136e:1232e5aaa5b:-8000:0000000000000CE6'
+                  name = 'service' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Class</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E25'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>A service provides functionality for some clients.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                  <UML:Stereotype.definedTag>
+                    <UML:TagDefinition xmi.id = '127-0-1-1--2db80ad5:13cb012c0f2:-8000:0000000000000EF0'
+                      name = 'stateful' isSpecification = 'false'>
+                      <UML:TagDefinition.multiplicity>
+                        <UML:Multiplicity xmi.id = '127-0-1-1--2db80ad5:13cb012c0f2:-8000:0000000000000EF4'>
+                          <UML:Multiplicity.range>
+                            <UML:MultiplicityRange xmi.id = '127-0-1-1--2db80ad5:13cb012c0f2:-8000:0000000000000EF3'
+                              lower = '0' upper = '1'/>
+                          </UML:Multiplicity.range>
+                        </UML:Multiplicity>
+                      </UML:TagDefinition.multiplicity>
+                    </UML:TagDefinition>
+                  </UML:Stereotype.definedTag>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-0-1--388b98f1:1233365bb02:-8000:0000000000000F55'
+                  name = 'key' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>AssociationEnd</UML:Stereotype.baseClass>
+                  <UML:Stereotype.baseClass>Attribute</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D10'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>An attribute or association end marked as a &apos;key&apos; is part of a compound identifier of an object.
+Key attributes and associations can also be used to create primary/foreign key constraints for database artifacts.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-0-1--648b72bb:123528b612f:-8000:00000000000010F9'
+                  name = 'typed' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Parameter</UML:Stereotype.baseClass>
+                  <UML:Stereotype.baseClass>DataType</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D0E'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Elements with the typed stereotype are typed (or paramterized) by the value of the tagged value type. Enables typed container classes (lists, sets, maps) as well as generic/template programming.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                  <UML:Stereotype.definedTag>
+                    <UML:TagDefinition xmi.id = '127-0-0-1--648b72bb:123528b612f:-8000:00000000000010FA'
+                      name = 'type' isSpecification = 'false'>
+                      <UML:TagDefinition.multiplicity>
+                        <UML:Multiplicity xmi.id = '127-0-0-1--648b72bb:123528b612f:-8000:00000000000010FB'>
+                          <UML:Multiplicity.range>
+                            <UML:MultiplicityRange xmi.id = '127-0-0-1--648b72bb:123528b612f:-8000:00000000000010FC'
+                              lower = '0' upper = '1'/>
+                          </UML:Multiplicity.range>
+                        </UML:Multiplicity>
+                      </UML:TagDefinition.multiplicity>
+                    </UML:TagDefinition>
+                  </UML:Stereotype.definedTag>
+                </UML:Stereotype>
+                <UML:Package xmi.id = '127-0-0-1--22ed5811:12355993433:-8000:0000000000001130'
+                  name = 'constraints' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E3B'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>The constraints package contains various tag definitions used to constrain parameters, attributes and association ends. This information can be used in the generation of validation logic, ui views,  database and xml schemas.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                  <UML:Namespace.ownedElement>
+                    <UML:TagDefinition xmi.id = '127-0-0-1--648b72bb:123528b612f:-8000:00000000000010DD'
+                      name = 'maxLength' isSpecification = 'false'>
+                      <UML:TagDefinition.multiplicity>
+                        <UML:Multiplicity xmi.id = '127-0-0-1--648b72bb:123528b612f:-8000:00000000000010DE'>
+                          <UML:Multiplicity.range>
+                            <UML:MultiplicityRange xmi.id = '127-0-0-1--648b72bb:123528b612f:-8000:00000000000010DF'
+                              lower = '0' upper = '1'/>
+                          </UML:Multiplicity.range>
+                        </UML:Multiplicity>
+                      </UML:TagDefinition.multiplicity>
+                    </UML:TagDefinition>
+                    <UML:TagDefinition xmi.id = '127-0-0-1--648b72bb:123528b612f:-8000:00000000000010EC'
+                      name = 'maxValue' isSpecification = 'false'>
+                      <UML:TagDefinition.multiplicity>
+                        <UML:Multiplicity xmi.id = '127-0-0-1--648b72bb:123528b612f:-8000:00000000000010ED'>
+                          <UML:Multiplicity.range>
+                            <UML:MultiplicityRange xmi.id = '127-0-0-1--648b72bb:123528b612f:-8000:00000000000010EE'
+                              lower = '0' upper = '1'/>
+                          </UML:Multiplicity.range>
+                        </UML:Multiplicity>
+                      </UML:TagDefinition.multiplicity>
+                    </UML:TagDefinition>
+                    <UML:TagDefinition xmi.id = '127-0-0-1--648b72bb:123528b612f:-8000:00000000000010E0'
+                      name = 'minLength' isSpecification = 'false'>
+                      <UML:TagDefinition.multiplicity>
+                        <UML:Multiplicity xmi.id = '127-0-0-1--648b72bb:123528b612f:-8000:00000000000010E1'>
+                          <UML:Multiplicity.range>
+                            <UML:MultiplicityRange xmi.id = '127-0-0-1--648b72bb:123528b612f:-8000:00000000000010E2'
+                              lower = '0' upper = '1'/>
+                          </UML:Multiplicity.range>
+                        </UML:Multiplicity>
+                      </UML:TagDefinition.multiplicity>
+                    </UML:TagDefinition>
+                    <UML:TagDefinition xmi.id = '127-0-0-1--648b72bb:123528b612f:-8000:00000000000010E9'
+                      name = 'minValue' isSpecification = 'false'>
+                      <UML:TagDefinition.multiplicity>
+                        <UML:Multiplicity xmi.id = '127-0-0-1--648b72bb:123528b612f:-8000:00000000000010EA'>
+                          <UML:Multiplicity.range>
+                            <UML:MultiplicityRange xmi.id = '127-0-0-1--648b72bb:123528b612f:-8000:00000000000010EB'
+                              lower = '0' upper = '1'/>
+                          </UML:Multiplicity.range>
+                        </UML:Multiplicity>
+                      </UML:TagDefinition.multiplicity>
+                    </UML:TagDefinition>
+                    <UML:TagDefinition xmi.id = '127-0-0-1--648b72bb:123528b612f:-8000:00000000000010E3'
+                      name = 'pattern' isSpecification = 'false'>
+                      <UML:TagDefinition.multiplicity>
+                        <UML:Multiplicity xmi.id = '127-0-0-1--648b72bb:123528b612f:-8000:00000000000010E4'>
+                          <UML:Multiplicity.range>
+                            <UML:MultiplicityRange xmi.id = '127-0-0-1--648b72bb:123528b612f:-8000:00000000000010E5'
+                              lower = '0' upper = '1'/>
+                          </UML:Multiplicity.range>
+                        </UML:Multiplicity>
+                      </UML:TagDefinition.multiplicity>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E3E'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>Specifies that the value of a string attribute has to match the given pattern.</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                    </UML:TagDefinition>
+                    <UML:TagDefinition xmi.id = '127-0-0-1-5244e515:1234d648402:-8000:000000000000137F'
+                      name = 'unique' isSpecification = 'false'>
+                      <UML:TagDefinition.multiplicity>
+                        <UML:Multiplicity xmi.id = '127-0-0-1-5244e515:1234d648402:-8000:0000000000001380'>
+                          <UML:Multiplicity.range>
+                            <UML:MultiplicityRange xmi.id = '127-0-0-1-5244e515:1234d648402:-8000:0000000000001381'
+                              lower = '0' upper = '1'/>
+                          </UML:Multiplicity.range>
+                        </UML:Multiplicity>
+                      </UML:TagDefinition.multiplicity>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E3D'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>Specifies that the value of this attribute or association end must be unique for every object in the same container.</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                    </UML:TagDefinition>
+                    <UML:TagDefinition xmi.id = '127-0-1-1--186460c0:12e14853dc8:-8000:0000000000000DB0'
+                      name = 'mandatory' isSpecification = 'false'>
+                      <UML:TagDefinition.multiplicity>
+                        <UML:Multiplicity xmi.id = '127-0-1-1--186460c0:12e14853dc8:-8000:0000000000000DB2'>
+                          <UML:Multiplicity.range>
+                            <UML:MultiplicityRange xmi.id = '127-0-1-1--186460c0:12e14853dc8:-8000:0000000000000DB1'
+                              lower = '0' upper = '0'/>
+                          </UML:Multiplicity.range>
+                        </UML:Multiplicity>
+                      </UML:TagDefinition.multiplicity>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E3C'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>Specifies that a parameter is mandatory (must not be null).</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                    </UML:TagDefinition>
+                    <UML:TagDefinition xmi.id = '127-0-1-1--2db80ad5:13cb012c0f2:-8000:0000000000000EE6'
+                      name = 'past' isSpecification = 'false'>
+                      <UML:TagDefinition.multiplicity>
+                        <UML:Multiplicity xmi.id = '127-0-1-1--2db80ad5:13cb012c0f2:-8000:0000000000000EEA'>
+                          <UML:Multiplicity.range>
+                            <UML:MultiplicityRange xmi.id = '127-0-1-1--2db80ad5:13cb012c0f2:-8000:0000000000000EE9'
+                              lower = '0' upper = '1'/>
+                          </UML:Multiplicity.range>
+                        </UML:Multiplicity>
+                      </UML:TagDefinition.multiplicity>
+                    </UML:TagDefinition>
+                    <UML:TagDefinition xmi.id = '127-0-1-1--2db80ad5:13cb012c0f2:-8000:0000000000000EEB'
+                      name = 'future' isSpecification = 'false'>
+                      <UML:TagDefinition.multiplicity>
+                        <UML:Multiplicity xmi.id = '127-0-1-1--2db80ad5:13cb012c0f2:-8000:0000000000000EEF'>
+                          <UML:Multiplicity.range>
+                            <UML:MultiplicityRange xmi.id = '127-0-1-1--2db80ad5:13cb012c0f2:-8000:0000000000000EEE'
+                              lower = '0' upper = '1'/>
+                          </UML:Multiplicity.range>
+                        </UML:Multiplicity>
+                      </UML:TagDefinition.multiplicity>
+                    </UML:TagDefinition>
+                    <UML:TagDefinition xmi.id = '127-0-1-1--2db80ad5:13cb012c0f2:-8000:0000000000000EF5'
+                      name = 'validator' isSpecification = 'false'>
+                      <UML:TagDefinition.multiplicity>
+                        <UML:Multiplicity xmi.id = '127-0-1-1--2db80ad5:13cb012c0f2:-8000:0000000000000EF9'>
+                          <UML:Multiplicity.range>
+                            <UML:MultiplicityRange xmi.id = '127-0-1-1--2db80ad5:13cb012c0f2:-8000:0000000000000EF8'
+                              lower = '1' upper = '1'/>
+                          </UML:Multiplicity.range>
+                        </UML:Multiplicity>
+                      </UML:TagDefinition.multiplicity>
+                    </UML:TagDefinition>
+                  </UML:Namespace.ownedElement>
+                </UML:Package>
+                <UML:Package xmi.id = '127-0-0-1--22ed5811:12355993433:-8000:0000000000001131'
+                  name = 'types' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Namespace.ownedElement>
+                    <UML:DataType xmi.id = '127-0-0-1--648b72bb:123528b612f:-8000:00000000000010F3'
+                      name = 'Collection' visibility = 'public' isSpecification = 'false' isRoot = 'false'
+                      isLeaf = 'false' isAbstract = 'false'/>
+                    <UML:DataType xmi.id = '127-0-0-1-5244e515:1234d648402:-8000:000000000000137E'
+                      name = 'Date' visibility = 'public' isSpecification = 'false' isRoot = 'false'
+                      isLeaf = 'false' isAbstract = 'false'/>
+                    <UML:DataType xmi.id = '127-0-0-1--648b72bb:123528b612f:-8000:00000000000010F1'
+                      name = 'List' visibility = 'public' isSpecification = 'false' isRoot = 'false'
+                      isLeaf = 'false' isAbstract = 'false'/>
+                    <UML:DataType xmi.id = '127-0-0-1--648b72bb:123528b612f:-8000:00000000000010F5'
+                      name = 'Map' visibility = 'public' isSpecification = 'false' isRoot = 'false'
+                      isLeaf = 'false' isAbstract = 'false'/>
+                    <UML:DataType xmi.id = '127-0-0-1--648b72bb:123528b612f:-8000:00000000000010F4'
+                      name = 'Set' visibility = 'public' isSpecification = 'false' isRoot = 'false'
+                      isLeaf = 'false' isAbstract = 'false'/>
+                    <UML:DataType xmi.id = '127-0-0-1-5244e515:1234d648402:-8000:000000000000137D'
+                      name = 'Time' visibility = 'public' isSpecification = 'false' isRoot = 'false'
+                      isLeaf = 'false' isAbstract = 'false'>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1--5dc66b02:13a081f9f6d:-8000:0000000000000ECF'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>Defines a datatype that stores only the time but no date information.</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                    </UML:DataType>
+                    <UML:DataType xmi.id = '127-0-0-1-5244e515:1234d648402:-8000:000000000000137C'
+                      name = 'TimeStamp' visibility = 'public' isSpecification = 'false' isRoot = 'false'
+                      isLeaf = 'false' isAbstract = 'false'>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1--5dc66b02:13a081f9f6d:-8000:0000000000000ECE'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>Defines a datatype that stores a specific point in time (including the date and time component).</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                    </UML:DataType>
+                    <UML:DataType xmi.id = '127-0-0-1-4a233c2e:12458f40858:-8000:0000000000001186'
+                      name = 'void' visibility = 'public' isSpecification = 'false' isRoot = 'false'
+                      isLeaf = 'false' isAbstract = 'false'>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1--5dc66b02:13a081f9f6d:-8000:0000000000000ECD'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>Specifies a no-value datatype.</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                    </UML:DataType>
+                    <UML:DataType xmi.id = '127-0-1-1-746bd628:12c50ec24e4:-8000:0000000000000C0C'
+                      name = 'Id' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                      isAbstract = 'false'>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1--5dc66b02:13a081f9f6d:-8000:0000000000000ECC'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>Specifies an Id datatype. Ids should be used to identify and reference objects (e.g. entities)</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                    </UML:DataType>
+                    <UML:DataType xmi.id = '127-0-1-1-121c2296:135a10b0f1c:-8000:0000000000000D2C'
+                      name = 'Array' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                      isAbstract = 'false'>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1--5dc66b02:13a081f9f6d:-8000:0000000000000ECA'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>Specifies an Array datatype.</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                    </UML:DataType>
+                    <UML:DataType xmi.id = '127-0-1-1-121c2296:135a10b0f1c:-8000:0000000000000D2D'
+                      name = 'Byte' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                      isAbstract = 'false'>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1--5dc66b02:13a081f9f6d:-8000:0000000000000ECB'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>Specifies a Byte datatype (an 8 Bit signed numerical value).</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                    </UML:DataType>
+                  </UML:Namespace.ownedElement>
+                </UML:Package>
+                <UML:Stereotype xmi.id = '127-0-0-1-3f18c855:124245648c8:-8000:000000000000115F'
+                  name = 'depends' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Dependency</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D0C'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>The depends stereotype marks a dependency as an injected dependency.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:Stereotype>
+                <UML:Package xmi.id = '127-0-0-1-3f18c855:124245648c8:-8000:0000000000001162'
+                  name = 'mapping' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Namespace.ownedElement>
+                    <UML:Stereotype xmi.id = '127-0-0-1-6b63ac37:1269f51990f:-8000:0000000000001543'
+                      name = 'mapping' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                      isAbstract = 'false'>
+                      <UML:Stereotype.baseClass>AssociationEnd</UML:Stereotype.baseClass>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E40'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>Specifies that this association end is a mapping from the source to the target.</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                      <UML:Stereotype.definedTag>
+                        <UML:TagDefinition xmi.id = '127-0-1-1-12dcc3d2:13195817292:-8000:0000000000000C88'
+                          name = 'joinType' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1-12dcc3d2:13195817292:-8000:0000000000000C8C'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1-12dcc3d2:13195817292:-8000:0000000000000C8B'
+                                  lower = '0' upper = '1'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                          <UML:ModelElement.taggedValue>
+                            <UML:TaggedValue xmi.id = '127-0-1-1-4f34ca1e:138ec1b3e59:-8000:0000000000000E7F'
+                              isSpecification = 'false'>
+                              <UML:TaggedValue.dataValue>Specifies the join type (LEFT, LEFT OUTER, RIGHT, RIGHT OUTER) for database queries.</UML:TaggedValue.dataValue>
+                              <UML:TaggedValue.type>
+                                <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                              </UML:TaggedValue.type>
+                            </UML:TaggedValue>
+                          </UML:ModelElement.taggedValue>
+                        </UML:TagDefinition>
+                        <UML:TagDefinition xmi.id = '127-0-1-1-4f34ca1e:138ec1b3e59:-8000:0000000000000E7C'
+                          name = 'joinOn' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1-4f34ca1e:138ec1b3e59:-8000:0000000000000E7E'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1-4f34ca1e:138ec1b3e59:-8000:0000000000000E7D'
+                                  lower = '0' upper = '0'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                          <UML:ModelElement.taggedValue>
+                            <UML:TaggedValue xmi.id = '127-0-1-1-4f34ca1e:138ec1b3e59:-8000:0000000000000E80'
+                              isSpecification = 'false'>
+                              <UML:TaggedValue.dataValue>Specifies the field to join on.</UML:TaggedValue.dataValue>
+                              <UML:TaggedValue.type>
+                                <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                              </UML:TaggedValue.type>
+                            </UML:TaggedValue>
+                          </UML:ModelElement.taggedValue>
+                        </UML:TagDefinition>
+                      </UML:Stereotype.definedTag>
+                    </UML:Stereotype>
+                    <UML:Stereotype xmi.id = '127-0-1-1--186460c0:12e14853dc8:-8000:0000000000000DA9'
+                      name = 'mapped' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                      isAbstract = 'false'>
+                      <UML:Stereotype.baseClass>Attribute</UML:Stereotype.baseClass>
+                      <UML:Stereotype.baseClass>AssociationEnd</UML:Stereotype.baseClass>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E3F'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>Specifies that this attribute or association end is mapped to an object of another class.</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                      <UML:Stereotype.definedTag>
+                        <UML:TagDefinition xmi.id = '127-0-1-1--186460c0:12e14853dc8:-8000:0000000000000DAA'
+                          name = 'class' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1--3abf279:131907657e6:-8000:0000000000000C8A'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1--3abf279:131907657e6:-8000:0000000000000C89'
+                                  lower = '0' upper = '1'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                          <UML:ModelElement.taggedValue>
+                            <UML:TaggedValue xmi.id = '127-0-1-1--5dc66b02:13a081f9f6d:-8000:0000000000000ED0'
+                              isSpecification = 'false'>
+                              <UML:TaggedValue.dataValue>The TagDefinition class defines a path to the Class to which an Attribute or AssociationEnd is mapped. The name of the tagged Attribute or AssociationEnd is used to resolve the target Attribute or AssociationEnd on the specified Class.</UML:TaggedValue.dataValue>
+                              <UML:TaggedValue.type>
+                                <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                              </UML:TaggedValue.type>
+                            </UML:TaggedValue>
+                          </UML:ModelElement.taggedValue>
+                        </UML:TagDefinition>
+                        <UML:TagDefinition xmi.id = '127-0-1-1--186460c0:12e14853dc8:-8000:0000000000000DAD'
+                          name = 'field' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1--3abf279:131907657e6:-8000:0000000000000C88'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1--3abf279:131907657e6:-8000:0000000000000C87'
+                                  lower = '0' upper = '1'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                        <UML:TagDefinition xmi.id = '127-0-1-1--3abf279:131907657e6:-8000:0000000000000C82'
+                          name = 'operator' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1--3abf279:131907657e6:-8000:0000000000000C86'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1--3abf279:131907657e6:-8000:0000000000000C85'
+                                  lower = '0' upper = '1'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                      </UML:Stereotype.definedTag>
+                    </UML:Stereotype>
+                  </UML:Namespace.ownedElement>
+                </UML:Package>
+                <UML:Stereotype xmi.id = '127-0-0-1--388b98f1:1233365bb02:-8000:0000000000000F4B'
+                  name = 'creates' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Dependency</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D0D'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>A create dependency means that the supplied object of the dependency is created by the dependency client (e.g. a factory).</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:Stereotype>
+                <UML:Package xmi.id = '127-0-0-1--124660e9:1284888af12:-8000:000000000000119F'
+                  name = 'security' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Namespace.ownedElement>
+                    <UML:TagDefinition xmi.id = '127-0-0-1--124660e9:1284888af12:-8000:00000000000011A3'
+                      name = 'permission' isSpecification = 'false'>
+                      <UML:TagDefinition.multiplicity>
+                        <UML:Multiplicity xmi.id = '127-0-0-1--124660e9:1284888af12:-8000:00000000000011A4'>
+                          <UML:Multiplicity.range>
+                            <UML:MultiplicityRange xmi.id = '127-0-0-1--124660e9:1284888af12:-8000:00000000000011A5'
+                              lower = '0' upper = '1'/>
+                          </UML:Multiplicity.range>
+                        </UML:Multiplicity>
+                      </UML:TagDefinition.multiplicity>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E41'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>Specifies the permission required to perform an operation or read a field.</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                    </UML:TagDefinition>
+                  </UML:Namespace.ownedElement>
+                </UML:Package>
+                <UML:Stereotype xmi.id = '127-0-1-1--3adf1582:12f33fa3d4c:-8000:0000000000000C44'
+                  name = 'handles' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Dependency</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E26'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>A handles dependency is used to model the relationship between a service (endpoint) and complex requests modelled as objects.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-1-1-34118924:12f677859e1:-8000:0000000000000C4D'
+                  name = 'enumeration' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Class</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--5dc66b02:13a081f9f6d:-8000:0000000000000EC8'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>The enumeration stereotype is a marker for an enumeration class. The standard enumerations of UML are limited to the specification of the enumeration values. Use classes with the enumeration stereotype to model complex enumerations with additional operations and attributes. The enumeration values are modelled as public frozen classifier attributes.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-0-1-b6e136e:1232e5aaa5b:-8000:0000000000000CE5'
+                  name = 'factory' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Class</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D0F'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>A factory is an object that is responsible of the creation of other objects. A factory is used to decouble the objects that want to use an object of an abstract type from the concrete implementation of that type. Factories can enforce validity constraints on the created objects before delivering them to the clients.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:Stereotype>
+                <UML:Package xmi.id = '127-0-1-1-5504e6ae:130086af519:-8000:0000000000000C79'
+                  name = 'scheduling' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Namespace.ownedElement>
+                    <UML:Stereotype xmi.id = '127-0-1-1-5504e6ae:130086af519:-8000:0000000000000C78'
+                      name = 'scheduled' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                      isAbstract = 'false'>
+                      <UML:Stereotype.baseClass>Operation</UML:Stereotype.baseClass>
+                      <UML:Stereotype.baseClass>Class</UML:Stereotype.baseClass>
+                      <UML:Stereotype.definedTag>
+                        <UML:TagDefinition xmi.id = '127-0-1-1-16a8f6cf:1303fdb6688:-8000:0000000000000C7D'
+                          name = 'schedule' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1--70932808:1325c831d74:-8000:0000000000000CF8'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1--70932808:1325c831d74:-8000:0000000000000CF7'
+                                  lower = '0' upper = '1'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                        <UML:TagDefinition xmi.id = '127-0-1-1--70932808:1325c831d74:-8000:0000000000000CE6'
+                          name = 'startDelay' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1--70932808:1325c831d74:-8000:0000000000000CF6'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1--70932808:1325c831d74:-8000:0000000000000CF5'
+                                  lower = '0' upper = '1'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                        <UML:TagDefinition xmi.id = '127-0-1-1--70932808:1325c831d74:-8000:0000000000000CE9'
+                          name = 'repeatInterval' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1--70932808:1325c831d74:-8000:0000000000000CFA'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1--70932808:1325c831d74:-8000:0000000000000CF9'
+                                  lower = '0' upper = '1'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                        <UML:TagDefinition xmi.id = '127-0-1-1--70932808:1325c831d74:-8000:0000000000000CEC'
+                          name = 'cronExpression' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1--70932808:1325c831d74:-8000:0000000000000CEE'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1--70932808:1325c831d74:-8000:0000000000000CED'
+                                  lower = '0' upper = '0'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                        <UML:TagDefinition xmi.id = '127-0-1-1--70932808:1325c831d74:-8000:0000000000000CEF'
+                          name = 'type' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1--70932808:1325c831d74:-8000:0000000000000CF4'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1--70932808:1325c831d74:-8000:0000000000000CF3'
+                                  lower = '0' upper = '1'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                          <UML:ModelElement.taggedValue>
+                            <UML:TaggedValue xmi.id = '127-0-1-1--70932808:1325c831d74:-8000:0000000000000CF2'
+                              isSpecification = 'false'>
+                              <UML:TaggedValue.dataValue></UML:TaggedValue.dataValue>
+                              <UML:TaggedValue.type>
+                                <UML:TagDefinition xmi.idref = '127-0-0-1--124660e9:1284888af12:-8000:000000000000119C'/>
+                              </UML:TaggedValue.type>
+                            </UML:TaggedValue>
+                          </UML:ModelElement.taggedValue>
+                        </UML:TagDefinition>
+                      </UML:Stereotype.definedTag>
+                    </UML:Stereotype>
+                  </UML:Namespace.ownedElement>
+                </UML:Package>
+                <UML:Package xmi.id = '127-0-1-1-7047feac:13639653047:-8000:0000000000000D31'
+                  name = 'tracking' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Namespace.ownedElement>
+                    <UML:Stereotype xmi.id = '127-0-1-1-7047feac:13639653047:-8000:0000000000000D30'
+                      name = 'tracked' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                      isAbstract = 'false'>
+                      <UML:Stereotype.baseClass>Attribute</UML:Stereotype.baseClass>
+                      <UML:Stereotype.baseClass>AssociationEnd</UML:Stereotype.baseClass>
+                      <UML:Stereotype.baseClass>Operation</UML:Stereotype.baseClass>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E42'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>Specifies that the access to the marked opertion or field should be tracked.</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                      <UML:Stereotype.definedTag>
+                        <UML:TagDefinition xmi.id = '127-0-1-1-7047feac:13639653047:-8000:0000000000000D32'
+                          name = 'trackingId' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1-7047feac:13639653047:-8000:0000000000000D36'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1-7047feac:13639653047:-8000:0000000000000D35'
+                                  lower = '1' upper = '1'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                          <UML:ModelElement.taggedValue>
+                            <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E43'
+                              isSpecification = 'false'>
+                              <UML:TaggedValue.dataValue>Specifies the id for the tracking event.</UML:TaggedValue.dataValue>
+                              <UML:TaggedValue.type>
+                                <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                              </UML:TaggedValue.type>
+                            </UML:TaggedValue>
+                          </UML:ModelElement.taggedValue>
+                        </UML:TagDefinition>
+                      </UML:Stereotype.definedTag>
+                    </UML:Stereotype>
+                  </UML:Namespace.ownedElement>
+                </UML:Package>
+                <UML:Stereotype xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E37'
+                  name = 'responds' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Dependency</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E38'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Specifies a request-response dependency.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-0-1--22ed5811:12355993433:-8000:000000000000113E'
+                  name = 'model' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Class</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--5dc66b02:13a081f9f6d:-8000:0000000000000EC9'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>The model stereotype specifies a data model class. Data model classes should be used to hold and transfer data. Data maodel classes should not be used to model persistent domain objects (entities and value) in the domain layer.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1-3f1bc310:1412fa3e83a:-8000:0000000000000F01'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>true</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--5dc66b02:13a081f9f6d:-8000:0000000000000EC3'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-1-1-3f1bc310:1412fa3e83a:-8000:0000000000000EFF'
+                  name = 'data' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1-3f1bc310:1412fa3e83a:-8000:0000000000000F00'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>The classes with a data stereotype represent data objects. A data object is an object which has state but no behaviour. Data objects are also known as data transfer objects or dtos.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:Stereotype>
+              </UML:Namespace.ownedElement>
+            </UML:Package>
+            <UML:Package xmi.id = '127-0-0-1-b6e136e:1232e5aaa5b:-8000:0000000000000CEB'
+              name = 'presentation' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:ModelElement.taggedValue>
+                <UML:TaggedValue xmi.id = '127-0-1-1--5dc66b02:13a081f9f6d:-8000:0000000000000EBC'
+                  isSpecification = 'false'>
+                  <UML:TaggedValue.dataValue>Contains the Stereotypes and TagDefinitions for the Presentation layer.</UML:TaggedValue.dataValue>
+                  <UML:TaggedValue.type>
+                    <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                  </UML:TaggedValue.type>
+                </UML:TaggedValue>
+              </UML:ModelElement.taggedValue>
+              <UML:Namespace.ownedElement>
+                <UML:Stereotype xmi.id = '127-0-0-1--22ed5811:12355993433:-8000:0000000000001133'
+                  name = 'view' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Class</UML:Stereotype.baseClass>
+                  <UML:Stereotype.definedTag>
+                    <UML:TagDefinition xmi.id = '127-0-1-1-7517072e:131e75bf005:-8000:0000000000000CB8'
+                      name = 'viewType' isSpecification = 'false'>
+                      <UML:TagDefinition.multiplicity>
+                        <UML:Multiplicity xmi.id = '127-0-1-1-7517072e:131e75bf005:-8000:0000000000000CBC'>
+                          <UML:Multiplicity.range>
+                            <UML:MultiplicityRange xmi.id = '127-0-1-1-7517072e:131e75bf005:-8000:0000000000000CBB'
+                              lower = '0' upper = '1'/>
+                          </UML:Multiplicity.range>
+                        </UML:Multiplicity>
+                      </UML:TagDefinition.multiplicity>
+                    </UML:TagDefinition>
+                  </UML:Stereotype.definedTag>
+                </UML:Stereotype>
+                <UML:Package xmi.id = '127-0-1-1-58c39979:138f6d5ada7:-8000:0000000000000E9A'
+                  name = 'web' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--5dc66b02:13a081f9f6d:-8000:0000000000000EC7'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Contains the web specific Stereotypes and TagDefinitions of the Presentation layer.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                  <UML:Namespace.ownedElement>
+                    <UML:Package xmi.id = '127-0-1-1--1b320d35:13719c5808c:-8000:0000000000000DE8'
+                      name = 'mvc' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                      isAbstract = 'false'>
+                      <UML:Namespace.ownedElement>
+                        <UML:Stereotype xmi.id = '127-0-1-1--1b320d35:13719c5808c:-8000:0000000000000DE9'
+                          name = 'request method' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                          isAbstract = 'false'>
+                          <UML:Stereotype.baseClass>Operation</UML:Stereotype.baseClass>
+                          <UML:Stereotype.definedTag>
+                            <UML:TagDefinition xmi.id = '127-0-1-1--1b320d35:13719c5808c:-8000:0000000000000DEA'
+                              name = 'mapping' isSpecification = 'false'>
+                              <UML:TagDefinition.multiplicity>
+                                <UML:Multiplicity xmi.id = '127-0-1-1--1b320d35:13719c5808c:-8000:0000000000000DEE'>
+                                  <UML:Multiplicity.range>
+                                    <UML:MultiplicityRange xmi.id = '127-0-1-1--1b320d35:13719c5808c:-8000:0000000000000DED'
+                                      lower = '1' upper = '1'/>
+                                  </UML:Multiplicity.range>
+                                </UML:Multiplicity>
+                              </UML:TagDefinition.multiplicity>
+                            </UML:TagDefinition>
+                            <UML:TagDefinition xmi.id = '127-0-1-1--1b320d35:13719c5808c:-8000:0000000000000DEF'
+                              name = 'view' isSpecification = 'false'>
+                              <UML:TagDefinition.multiplicity>
+                                <UML:Multiplicity xmi.id = '127-0-1-1--1b320d35:13719c5808c:-8000:0000000000000DF3'>
+                                  <UML:Multiplicity.range>
+                                    <UML:MultiplicityRange xmi.id = '127-0-1-1--1b320d35:13719c5808c:-8000:0000000000000DF2'
+                                      lower = '1' upper = '1'/>
+                                  </UML:Multiplicity.range>
+                                </UML:Multiplicity>
+                              </UML:TagDefinition.multiplicity>
+                            </UML:TagDefinition>
+                            <UML:TagDefinition xmi.id = '127-0-1-1--1b320d35:13719c5808c:-8000:0000000000000DF4'
+                              name = 'method' isSpecification = 'false'>
+                              <UML:TagDefinition.multiplicity>
+                                <UML:Multiplicity xmi.id = '127-0-1-1--1b320d35:13719c5808c:-8000:0000000000000DF8'>
+                                  <UML:Multiplicity.range>
+                                    <UML:MultiplicityRange xmi.id = '127-0-1-1--1b320d35:13719c5808c:-8000:0000000000000DF7'
+                                      lower = '0' upper = '-1'/>
+                                  </UML:Multiplicity.range>
+                                </UML:Multiplicity>
+                              </UML:TagDefinition.multiplicity>
+                            </UML:TagDefinition>
+                          </UML:Stereotype.definedTag>
+                        </UML:Stereotype>
+                        <UML:Stereotype xmi.id = '127-0-0-1--22ed5811:12355993433:-8000:000000000000113C'
+                          name = 'mvc controller' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                          isAbstract = 'false'>
+                          <UML:Stereotype.baseClass>Class</UML:Stereotype.baseClass>
+                          <UML:Stereotype.definedTag>
+                            <UML:TagDefinition xmi.id = '127-0-1-1--4d84d1bd:13721a6b3c5:-8000:000000000000105D'
+                              name = 'mapping' isSpecification = 'false'>
+                              <UML:TagDefinition.multiplicity>
+                                <UML:Multiplicity xmi.id = '127-0-1-1--4d84d1bd:13721a6b3c5:-8000:0000000000001061'>
+                                  <UML:Multiplicity.range>
+                                    <UML:MultiplicityRange xmi.id = '127-0-1-1--4d84d1bd:13721a6b3c5:-8000:0000000000001060'
+                                      lower = '0' upper = '1'/>
+                                  </UML:Multiplicity.range>
+                                </UML:Multiplicity>
+                              </UML:TagDefinition.multiplicity>
+                            </UML:TagDefinition>
+                            <UML:TagDefinition xmi.id = '127-0-1-1--4d84d1bd:13721a6b3c5:-8000:0000000000001062'
+                              name = 'method' isSpecification = 'false'>
+                              <UML:TagDefinition.multiplicity>
+                                <UML:Multiplicity xmi.id = '127-0-1-1--4d84d1bd:13721a6b3c5:-8000:0000000000001066'>
+                                  <UML:Multiplicity.range>
+                                    <UML:MultiplicityRange xmi.id = '127-0-1-1--4d84d1bd:13721a6b3c5:-8000:0000000000001065'
+                                      lower = '0' upper = '1'/>
+                                  </UML:Multiplicity.range>
+                                </UML:Multiplicity>
+                              </UML:TagDefinition.multiplicity>
+                            </UML:TagDefinition>
+                          </UML:Stereotype.definedTag>
+                        </UML:Stereotype>
+                        <UML:TagDefinition xmi.id = '127-0-1-1--1d170bd7:1394d0ba5f1:-8000:00000000000013D8'
+                          name = 'requestParameter' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1--1d170bd7:1394d0ba5f1:-8000:00000000000013DA'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1--1d170bd7:1394d0ba5f1:-8000:00000000000013D9'
+                                  lower = '0' upper = '0'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                        <UML:TagDefinition xmi.id = '127-0-1-1--1d170bd7:1394d0ba5f1:-8000:00000000000013DB'
+                          name = 'cookieValue' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1--1d170bd7:1394d0ba5f1:-8000:00000000000013DD'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1--1d170bd7:1394d0ba5f1:-8000:00000000000013DC'
+                                  lower = '0' upper = '0'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                        <UML:TagDefinition xmi.id = '127-0-1-1-8ddb653:13957ac8769:-8000:0000000000000EAF'
+                          name = 'modelRole' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1-8ddb653:13957ac8769:-8000:0000000000000EB1'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1-8ddb653:13957ac8769:-8000:0000000000000EB0'
+                                  lower = '0' upper = '0'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                      </UML:Namespace.ownedElement>
+                    </UML:Package>
+                    <UML:Package xmi.id = '127-0-1-1-7f73147e:1365a4c397a:-8000:0000000000000DE6'
+                      name = 'flow' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                      isAbstract = 'false'>
+                      <UML:Namespace.ownedElement>
+                        <UML:Stereotype xmi.id = '127-0-1-1--1da81be9:12e07331741:-8000:0000000000000C3C'
+                          name = 'action state' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                          isAbstract = 'false'>
+                          <UML:Stereotype.baseClass>SimpleState</UML:Stereotype.baseClass>
+                        </UML:Stereotype>
+                        <UML:Stereotype xmi.id = '127-0-1-1--1da81be9:12e07331741:-8000:0000000000000C3D'
+                          name = 'decision state' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                          isAbstract = 'false'>
+                          <UML:Stereotype.baseClass>SimpleState</UML:Stereotype.baseClass>
+                        </UML:Stereotype>
+                        <UML:Stereotype xmi.id = '127-0-1-1--1da81be9:12e07331741:-8000:0000000000000C3A'
+                          name = 'flow' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                          isAbstract = 'false'>
+                          <UML:Stereotype.baseClass>StateMachine</UML:Stereotype.baseClass>
+                        </UML:Stereotype>
+                        <UML:Stereotype xmi.id = '127-0-1-1--1da81be9:12e07331741:-8000:0000000000000C3B'
+                          name = 'view state' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                          isAbstract = 'false'>
+                          <UML:Stereotype.baseClass>SimpleState</UML:Stereotype.baseClass>
+                        </UML:Stereotype>
+                      </UML:Namespace.ownedElement>
+                    </UML:Package>
+                    <UML:Package xmi.id = '127-0-1-1-612d0f7b:131c79c6fa5:-8000:0000000000000C8E'
+                      name = 'components' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                      isAbstract = 'false'>
+                      <UML:Namespace.ownedElement>
+                        <UML:Stereotype xmi.id = '127-0-1-1-612d0f7b:131c79c6fa5:-8000:0000000000000C8F'
+                          name = 'ui component' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                          isAbstract = 'false'>
+                          <UML:Stereotype.baseClass>Class</UML:Stereotype.baseClass>
+                          <UML:Stereotype.definedTag>
+                            <UML:TagDefinition xmi.id = '127-0-1-1-612d0f7b:131c79c6fa5:-8000:0000000000000C90'
+                              name = 'bodyContent' isSpecification = 'false'>
+                              <UML:TagDefinition.multiplicity>
+                                <UML:Multiplicity xmi.id = '127-0-1-1-612d0f7b:131c79c6fa5:-8000:0000000000000C94'>
+                                  <UML:Multiplicity.range>
+                                    <UML:MultiplicityRange xmi.id = '127-0-1-1-612d0f7b:131c79c6fa5:-8000:0000000000000C93'
+                                      lower = '1' upper = '1'/>
+                                  </UML:Multiplicity.range>
+                                </UML:Multiplicity>
+                              </UML:TagDefinition.multiplicity>
+                            </UML:TagDefinition>
+                          </UML:Stereotype.definedTag>
+                        </UML:Stereotype>
+                        <UML:Stereotype xmi.id = '127-0-1-1-612d0f7b:131c79c6fa5:-8000:0000000000000C98'
+                          name = 'taglib' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                          isAbstract = 'false'>
+                          <UML:Stereotype.baseClass>Package</UML:Stereotype.baseClass>
+                          <UML:Stereotype.definedTag>
+                            <UML:TagDefinition xmi.id = '127-0-1-1-612d0f7b:131c79c6fa5:-8000:0000000000000C99'
+                              name = 'version' isSpecification = 'false'>
+                              <UML:TagDefinition.multiplicity>
+                                <UML:Multiplicity xmi.id = '127-0-1-1-612d0f7b:131c79c6fa5:-8000:0000000000000C9B'>
+                                  <UML:Multiplicity.range>
+                                    <UML:MultiplicityRange xmi.id = '127-0-1-1-612d0f7b:131c79c6fa5:-8000:0000000000000C9A'
+                                      lower = '0' upper = '0'/>
+                                  </UML:Multiplicity.range>
+                                </UML:Multiplicity>
+                              </UML:TagDefinition.multiplicity>
+                            </UML:TagDefinition>
+                          </UML:Stereotype.definedTag>
+                        </UML:Stereotype>
+                        <UML:Stereotype xmi.id = '127-0-1-1-612d0f7b:131c79c6fa5:-8000:0000000000000C9D'
+                          name = 'taglib validator' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                          isAbstract = 'false'/>
+                        <UML:Stereotype xmi.id = '127-0-1-1-24e644c2:1322901f865:-8000:0000000000000CE5'
+                          name = 'taglib listener' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                          isAbstract = 'false'/>
+                      </UML:Namespace.ownedElement>
+                    </UML:Package>
+                  </UML:Namespace.ownedElement>
+                </UML:Package>
+                <UML:Stereotype xmi.id = '127-0-1-1-7b522587:1393498d064:-8000:0000000000000E9E'
+                  name = 'view model' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>AssociationEnd</UML:Stereotype.baseClass>
+                  <UML:Stereotype.baseClass>Attribute</UML:Stereotype.baseClass>
+                  <UML:Stereotype.definedTag>
+                    <UML:TagDefinition xmi.id = '127-0-1-1-7b522587:1393498d064:-8000:0000000000000E9F'
+                      name = 'usageType' isSpecification = 'false'>
+                      <UML:TagDefinition.multiplicity>
+                        <UML:Multiplicity xmi.id = '127-0-1-1-7b522587:1393498d064:-8000:0000000000000EA1'>
+                          <UML:Multiplicity.range>
+                            <UML:MultiplicityRange xmi.id = '127-0-1-1-7b522587:1393498d064:-8000:0000000000000EA0'
+                              lower = '0' upper = '0'/>
+                          </UML:Multiplicity.range>
+                        </UML:Multiplicity>
+                      </UML:TagDefinition.multiplicity>
+                    </UML:TagDefinition>
+                    <UML:TagDefinition xmi.id = '127-0-1-1-8ddb653:13957ac8769:-8000:0000000000000EAA'
+                      name = 'direction' isSpecification = 'false'>
+                      <UML:TagDefinition.multiplicity>
+                        <UML:Multiplicity xmi.id = '127-0-1-1-8ddb653:13957ac8769:-8000:0000000000000EAE'>
+                          <UML:Multiplicity.range>
+                            <UML:MultiplicityRange xmi.id = '127-0-1-1-8ddb653:13957ac8769:-8000:0000000000000EAD'
+                              lower = '0' upper = '1'/>
+                          </UML:Multiplicity.range>
+                        </UML:Multiplicity>
+                      </UML:TagDefinition.multiplicity>
+                    </UML:TagDefinition>
+                  </UML:Stereotype.definedTag>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-1-1-75341226:141110bd0c0:-8000:0000000000000EFE'
+                  name = 'data panel' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'/>
+              </UML:Namespace.ownedElement>
+            </UML:Package>
+            <UML:Package xmi.id = '127-0-0-1--5702246:123335c3944:-8000:0000000000000F36'
+              name = 'aop' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:ModelElement.taggedValue>
+                <UML:TaggedValue xmi.id = '127-0-1-1--5dc66b02:13a081f9f6d:-8000:0000000000000EC1'
+                  isSpecification = 'false'>
+                  <UML:TaggedValue.dataValue>Contains the Stereotypes and TagDefinitions for Aspect Oriented Programming.</UML:TaggedValue.dataValue>
+                  <UML:TaggedValue.type>
+                    <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                  </UML:TaggedValue.type>
+                </UML:TaggedValue>
+              </UML:ModelElement.taggedValue>
+              <UML:Namespace.ownedElement>
+                <UML:Stereotype xmi.id = '127-0-0-1--5702246:123335c3944:-8000:0000000000000F41'
+                  name = 'pointcut' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Operation</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1-6a49b4b0:1363b673f33:-8000:0000000000000D51'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Represents a pointcut.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-0-1--5702246:123335c3944:-8000:0000000000000F42'
+                  name = 'advice' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Operation</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1-4f34ca1e:138ec1b3e59:-8000:0000000000000E88'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Specifies an advice.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--5dc66b02:13a081f9f6d:-8000:0000000000000EC6'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>true</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--5dc66b02:13a081f9f6d:-8000:0000000000000EC3'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                  <UML:Stereotype.definedTag>
+                    <UML:TagDefinition xmi.id = '127-0-0-1--388b98f1:1233365bb02:-8000:0000000000000F46'
+                      name = 'adviceType' isSpecification = 'false'>
+                      <UML:TagDefinition.multiplicity>
+                        <UML:Multiplicity xmi.id = '127-0-0-1--388b98f1:1233365bb02:-8000:0000000000000F47'>
+                          <UML:Multiplicity.range>
+                            <UML:MultiplicityRange xmi.id = '127-0-0-1--388b98f1:1233365bb02:-8000:0000000000000F48'
+                              lower = '0' upper = '1'/>
+                          </UML:Multiplicity.range>
+                        </UML:Multiplicity>
+                      </UML:TagDefinition.multiplicity>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1-4f34ca1e:138ec1b3e59:-8000:0000000000000E89'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>Specifies the type of the advice (before, after or around).</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                    </UML:TagDefinition>
+                  </UML:Stereotype.definedTag>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-0-1--5702246:123335c3944:-8000:0000000000000F43'
+                  name = 'intertype' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Attribute</UML:Stereotype.baseClass>
+                  <UML:Stereotype.baseClass>Operation</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1-6a49b4b0:1363b673f33:-8000:0000000000000D50'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Represents an intertype declaration.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-0-1--388b98f1:1233365bb02:-8000:0000000000000F56'
+                  name = 'aspect' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Class</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1-6a49b4b0:1363b673f33:-8000:0000000000000D4E'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Represents an aspect.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                  <UML:Stereotype.definedTag>
+                    <UML:TagDefinition xmi.id = '127-0-1-1-612d0f7b:131c79c6fa5:-8000:0000000000000C95'
+                      name = 'instanciationType' isSpecification = 'false'>
+                      <UML:TagDefinition.multiplicity>
+                        <UML:Multiplicity xmi.id = '127-0-1-1-612d0f7b:131c79c6fa5:-8000:0000000000000C97'>
+                          <UML:Multiplicity.range>
+                            <UML:MultiplicityRange xmi.id = '127-0-1-1-612d0f7b:131c79c6fa5:-8000:0000000000000C96'
+                              lower = '0' upper = '0'/>
+                          </UML:Multiplicity.range>
+                        </UML:Multiplicity>
+                      </UML:TagDefinition.multiplicity>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1-4f34ca1e:138ec1b3e59:-8000:0000000000000E8A'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>Specifies the instanciation type of the aspect (eg percflow, pertype).</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                    </UML:TagDefinition>
+                  </UML:Stereotype.definedTag>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-1-1--3adf1582:12f33fa3d4c:-8000:0000000000000C45'
+                  name = 'before' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Operation</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1-6a49b4b0:1363b673f33:-8000:0000000000000D4F'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Represents a before advice.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-1-1--3adf1582:12f33fa3d4c:-8000:0000000000000C46'
+                  name = 'after' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Operation</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1-6a49b4b0:1363b673f33:-8000:0000000000000D4C'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Represents an after advice.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-1-1--3adf1582:12f33fa3d4c:-8000:0000000000000C47'
+                  name = 'around' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Operation</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1-6a49b4b0:1363b673f33:-8000:0000000000000D4D'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Represents an around advice.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:Stereotype>
+              </UML:Namespace.ownedElement>
+            </UML:Package>
+            <UML:Package xmi.id = '127-0-0-1--5702246:123335c3944:-8000:0000000000000F37'
+              name = 'infrastructure' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:ModelElement.taggedValue>
+                <UML:TaggedValue xmi.id = '127-0-1-1--5dc66b02:13a081f9f6d:-8000:0000000000000EBE'
+                  isSpecification = 'false'>
+                  <UML:TaggedValue.dataValue>Contains the Stereotypes and TagDefinitions of the Infrastructure layer.</UML:TaggedValue.dataValue>
+                  <UML:TaggedValue.type>
+                    <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                  </UML:TaggedValue.type>
+                </UML:TaggedValue>
+              </UML:ModelElement.taggedValue>
+              <UML:Namespace.ownedElement>
+                <UML:Package xmi.id = '127-0-0-1--124660e9:1284888af12:-8000:00000000000011A0'
+                  name = 'transactions' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Namespace.ownedElement>
+                    <UML:Enumeration xmi.id = '127-0-0-1--70ef3886:123714f71f0:-8000:0000000000001156'
+                      name = 'TransactionPropagation' isSpecification = 'false' isRoot = 'false'
+                      isLeaf = 'false' isAbstract = 'false'>
+                      <UML:Enumeration.literal>
+                        <UML:EnumerationLiteral xmi.id = '127-0-0-1--70ef3886:123714f71f0:-8000:0000000000001158'
+                          name = 'REQUIRED' isSpecification = 'false'/>
+                        <UML:EnumerationLiteral xmi.id = '127-0-0-1--70ef3886:123714f71f0:-8000:0000000000001159'
+                          name = 'REQUIRES_NEW' isSpecification = 'false'/>
+                        <UML:EnumerationLiteral xmi.id = '127-0-0-1-3f18c855:124245648c8:-8000:0000000000001161'
+                          name = 'MANDATORY' isSpecification = 'false'/>
+                        <UML:EnumerationLiteral xmi.id = '127-0-0-1-3f18c855:124245648c8:-8000:0000000000001163'
+                          name = 'SUPPORTS' isSpecification = 'false'/>
+                        <UML:EnumerationLiteral xmi.id = '127-0-0-1-3f18c855:124245648c8:-8000:0000000000001164'
+                          name = 'NEVER' isSpecification = 'false'/>
+                        <UML:EnumerationLiteral xmi.id = '127-0-0-1-3f18c855:124245648c8:-8000:0000000000001165'
+                          name = 'NOT_SUPPORTED' isSpecification = 'false'/>
+                      </UML:Enumeration.literal>
+                    </UML:Enumeration>
+                    <UML:TagDefinition xmi.id = '127-0-0-1--70ef3886:123714f71f0:-8000:000000000000115A'
+                      name = 'transactionMode' isSpecification = 'false'>
+                      <UML:TagDefinition.multiplicity>
+                        <UML:Multiplicity xmi.id = '127-0-0-1--70ef3886:123714f71f0:-8000:000000000000115B'>
+                          <UML:Multiplicity.range>
+                            <UML:MultiplicityRange xmi.id = '127-0-0-1--70ef3886:123714f71f0:-8000:000000000000115C'
+                              lower = '0' upper = '1'/>
+                          </UML:Multiplicity.range>
+                        </UML:Multiplicity>
+                      </UML:TagDefinition.multiplicity>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E34'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>Specifies the transaction mode of this transaction.</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                    </UML:TagDefinition>
+                    <UML:Enumeration xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E27'
+                      name = 'TransactionIsolation' isSpecification = 'false' isRoot = 'false'
+                      isLeaf = 'false' isAbstract = 'false'>
+                      <UML:Enumeration.literal>
+                        <UML:EnumerationLiteral xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E29'
+                          name = 'SERIALIZABLE' isSpecification = 'false'/>
+                        <UML:EnumerationLiteral xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E2B'
+                          name = 'REPEATABLE_READS' isSpecification = 'false'/>
+                        <UML:EnumerationLiteral xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E28'
+                          name = 'READ_COMMITED' isSpecification = 'false'/>
+                        <UML:EnumerationLiteral xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E2A'
+                          name = 'READ_UNCOMMITED' isSpecification = 'false'/>
+                      </UML:Enumeration.literal>
+                    </UML:Enumeration>
+                    <UML:TagDefinition xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E2E'
+                      name = 'transactionIsolation' isSpecification = 'false'>
+                      <UML:TagDefinition.multiplicity>
+                        <UML:Multiplicity xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E32'>
+                          <UML:Multiplicity.range>
+                            <UML:MultiplicityRange xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E31'
+                              lower = '0' upper = '1'/>
+                          </UML:Multiplicity.range>
+                        </UML:Multiplicity>
+                      </UML:TagDefinition.multiplicity>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E33'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>Specifies the isolation level of this transaction.</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                    </UML:TagDefinition>
+                  </UML:Namespace.ownedElement>
+                </UML:Package>
+                <UML:TagDefinition xmi.id = '127-0-1-1--79c771f6:12f9d6d1af9:-8000:0000000000000EBE'
+                  name = 'dbAlias' isSpecification = 'false'>
+                  <UML:TagDefinition.multiplicity>
+                    <UML:Multiplicity xmi.id = '127-0-1-1--79c771f6:12f9d6d1af9:-8000:0000000000000EC0'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = '127-0-1-1--79c771f6:12f9d6d1af9:-8000:0000000000000EBF'
+                          lower = '0' upper = '0'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:TagDefinition.multiplicity>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E2C'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Database alias used to specify column or table names.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:TagDefinition>
+                <UML:Package xmi.id = '127-0-1-1-63c41b75:1321097abef:-8000:0000000000000CC2'
+                  name = 'search' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Namespace.ownedElement>
+                    <UML:Stereotype xmi.id = '127-0-1-1-63c41b75:1321097abef:-8000:0000000000000CC3'
+                      name = 'document' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                      isAbstract = 'false'>
+                      <UML:Stereotype.baseClass>Class</UML:Stereotype.baseClass>
+                    </UML:Stereotype>
+                    <UML:Stereotype xmi.id = '127-0-1-1-63c41b75:1321097abef:-8000:0000000000000CC4'
+                      name = 'field' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                      isAbstract = 'false'>
+                      <UML:Stereotype.baseClass>Attribute</UML:Stereotype.baseClass>
+                      <UML:Stereotype.definedTag>
+                        <UML:TagDefinition xmi.id = '127-0-1-1-63c41b75:1321097abef:-8000:0000000000000CC5'
+                          name = 'index' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1-63c41b75:1321097abef:-8000:0000000000000CC7'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1-63c41b75:1321097abef:-8000:0000000000000CC6'
+                                  lower = '0' upper = '0'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                        <UML:TagDefinition xmi.id = '127-0-1-1-63c41b75:1321097abef:-8000:0000000000000CC8'
+                          name = 'store' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1-63c41b75:1321097abef:-8000:0000000000000CCA'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1-63c41b75:1321097abef:-8000:0000000000000CC9'
+                                  lower = '0' upper = '0'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                        <UML:TagDefinition xmi.id = '127-0-1-1-63c41b75:1321097abef:-8000:0000000000000CCB'
+                          name = 'termVector' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1-63c41b75:1321097abef:-8000:0000000000000CCD'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1-63c41b75:1321097abef:-8000:0000000000000CCC'
+                                  lower = '0' upper = '0'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                      </UML:Stereotype.definedTag>
+                    </UML:Stereotype>
+                  </UML:Namespace.ownedElement>
+                </UML:Package>
+              </UML:Namespace.ownedElement>
+            </UML:Package>
+            <UML:Package xmi.id = '127-0-1-1-34118924:12f677859e1:-8000:0000000000000C4C'
+              name = 'architecture' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:Namespace.ownedElement>
+                <UML:Stereotype xmi.id = '127-0-1-1-293bd6fb:12f906cb6db:-8000:0000000000000C53'
+                  name = 'domain' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Package</UML:Stereotype.baseClass>
+                  <UML:Stereotype.baseClass>Component</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1-6a49b4b0:1363b673f33:-8000:0000000000000D3F'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Represents a component in the domain layer. A Domain layer component contains the specific objects and logic for one domain. The main abstractions in a domain component are entities and value objects, factories and repositories and services.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-1-1-293bd6fb:12f906cb6db:-8000:0000000000000C54'
+                  name = 'infrastructure' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Package</UML:Stereotype.baseClass>
+                  <UML:Stereotype.baseClass>Component</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1-6a49b4b0:1363b673f33:-8000:0000000000000D41'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Represents an infrastructure component.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-1-1-293bd6fb:12f906cb6db:-8000:0000000000000C55'
+                  name = 'presentation' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Package</UML:Stereotype.baseClass>
+                  <UML:Stereotype.baseClass>Component</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1-6a49b4b0:1363b673f33:-8000:0000000000000D44'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Represents a component in the presentation layer.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-1-1-293bd6fb:12f906cb6db:-8000:0000000000000C56'
+                  name = 'process' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Package</UML:Stereotype.baseClass>
+                  <UML:Stereotype.baseClass>Component</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1-6a49b4b0:1363b673f33:-8000:0000000000000D45'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Represents a process component.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-1-1-293bd6fb:12f906cb6db:-8000:0000000000000C57'
+                  name = 'application' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Package</UML:Stereotype.baseClass>
+                  <UML:Stereotype.baseClass>Component</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1-6a49b4b0:1363b673f33:-8000:0000000000000D3A'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Represents a component in the application layer. The application layer contains objects, logic and processes specific for the application.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-1-1-293bd6fb:12f906cb6db:-8000:0000000000000C58'
+                  name = 'framework' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Package</UML:Stereotype.baseClass>
+                  <UML:Stereotype.baseClass>Component</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1-6a49b4b0:1363b673f33:-8000:0000000000000D40'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Represents a framework.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-1-1-293bd6fb:12f906cb6db:-8000:0000000000000C59'
+                  name = 'library' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Package</UML:Stereotype.baseClass>
+                  <UML:Stereotype.baseClass>Component</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1-6a49b4b0:1363b673f33:-8000:0000000000000D43'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Represents a library.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-1-1--79c771f6:12f9d6d1af9:-8000:0000000000000EC2'
+                  name = 'integration' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Package</UML:Stereotype.baseClass>
+                  <UML:Stereotype.baseClass>Component</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1-6a49b4b0:1363b673f33:-8000:0000000000000D42'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Represents a component in the integration layer (e.g. web services, message queue access).</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-0-1-b6e136e:1232e5aaa5b:-8000:0000000000000CE8'
+                  name = 'component' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Package</UML:Stereotype.baseClass>
+                  <UML:Stereotype.definedTag>
+                    <UML:TagDefinition xmi.id = '127-0-1-1-132dccd6:131d6b08b14:-8000:0000000000000CAA'
+                      name = 'nsPrefix' isSpecification = 'false'>
+                      <UML:TagDefinition.multiplicity>
+                        <UML:Multiplicity xmi.id = '127-0-1-1-132dccd6:131d6b08b14:-8000:0000000000000CAE'>
+                          <UML:Multiplicity.range>
+                            <UML:MultiplicityRange xmi.id = '127-0-1-1-132dccd6:131d6b08b14:-8000:0000000000000CAD'
+                              lower = '0' upper = '1'/>
+                          </UML:Multiplicity.range>
+                        </UML:Multiplicity>
+                      </UML:TagDefinition.multiplicity>
+                    </UML:TagDefinition>
+                    <UML:TagDefinition xmi.id = '127-0-1-1-132dccd6:131d6b08b14:-8000:0000000000000CAF'
+                      name = 'nsUri' isSpecification = 'false'>
+                      <UML:TagDefinition.multiplicity>
+                        <UML:Multiplicity xmi.id = '127-0-1-1-132dccd6:131d6b08b14:-8000:0000000000000CB3'>
+                          <UML:Multiplicity.range>
+                            <UML:MultiplicityRange xmi.id = '127-0-1-1-132dccd6:131d6b08b14:-8000:0000000000000CB2'
+                              lower = '0' upper = '1'/>
+                          </UML:Multiplicity.range>
+                        </UML:Multiplicity>
+                      </UML:TagDefinition.multiplicity>
+                    </UML:TagDefinition>
+                  </UML:Stereotype.definedTag>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-1-1--3001b142:131f54c60c3:-8000:0000000000000CBE'
+                  name = 'web frontend' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Package</UML:Stereotype.baseClass>
+                  <UML:Stereotype.baseClass>Component</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1-6a49b4b0:1363b673f33:-8000:0000000000000D46'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Represents a web frontend. Web frontends are applications, that can be deployed to a web container and provide a web interface.</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1-6a49b4b0:1363b673f33:-8000:0000000000000D4A'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue></UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1-6a49b4b0:1363b673f33:-8000:0000000000000D47'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                  <UML:Stereotype.definedTag>
+                    <UML:TagDefinition xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FCA'
+                      name = 'context' isSpecification = 'false'>
+                      <UML:TagDefinition.multiplicity>
+                        <UML:Multiplicity xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FCC'>
+                          <UML:Multiplicity.range>
+                            <UML:MultiplicityRange xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FCB'
+                              lower = '0' upper = '0'/>
+                          </UML:Multiplicity.range>
+                        </UML:Multiplicity>
+                      </UML:TagDefinition.multiplicity>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E24'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>the context for the web application</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                    </UML:TagDefinition>
+                  </UML:Stereotype.definedTag>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-1-1--2a42fcc3:12d9a53b2ac:-8000:0000000000000C22'
+                  name = 'web service' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Package</UML:Stereotype.baseClass>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1-6a49b4b0:1363b673f33:-8000:0000000000000D4B'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Represents a web service. A web service is a component that can be deployed to a web container and provides access to some functionality over web service protocols (SOAP, REST).</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                  <UML:Stereotype.definedTag>
+                    <UML:TagDefinition xmi.id = '127-0-1-1--2a42fcc3:12d9a53b2ac:-8000:0000000000000C27'
+                      name = 'namespace' isSpecification = 'false'>
+                      <UML:TagDefinition.multiplicity>
+                        <UML:Multiplicity xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E19'>
+                          <UML:Multiplicity.range>
+                            <UML:MultiplicityRange xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E18'
+                              lower = '0' upper = '1'/>
+                          </UML:Multiplicity.range>
+                        </UML:Multiplicity>
+                      </UML:TagDefinition.multiplicity>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E22'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>the namespace URI for this web service</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                    </UML:TagDefinition>
+                    <UML:TagDefinition xmi.id = '127-0-1-1--2a42fcc3:12d9a53b2ac:-8000:0000000000000C2A'
+                      name = 'namespacePrefix' isSpecification = 'false'>
+                      <UML:TagDefinition.multiplicity>
+                        <UML:Multiplicity xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E17'>
+                          <UML:Multiplicity.range>
+                            <UML:MultiplicityRange xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E16'
+                              lower = '0' upper = '1'/>
+                          </UML:Multiplicity.range>
+                        </UML:Multiplicity>
+                      </UML:TagDefinition.multiplicity>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E23'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>the namespace prefix for this web service</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                    </UML:TagDefinition>
+                    <UML:TagDefinition xmi.id = '127-0-1-1--9db1c73:138ca9abb37:-8000:0000000000000E0C'
+                      name = 'secured' isSpecification = 'false'>
+                      <UML:TagDefinition.multiplicity>
+                        <UML:Multiplicity xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E13'>
+                          <UML:Multiplicity.range>
+                            <UML:MultiplicityRange xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E12'
+                              lower = '0' upper = '1'/>
+                          </UML:Multiplicity.range>
+                        </UML:Multiplicity>
+                      </UML:TagDefinition.multiplicity>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E20'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>secure this web service with WS-Security</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                    </UML:TagDefinition>
+                    <UML:TagDefinition xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E0F'
+                      name = 'nonce' isSpecification = 'false'>
+                      <UML:TagDefinition.multiplicity>
+                        <UML:Multiplicity xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E15'>
+                          <UML:Multiplicity.range>
+                            <UML:MultiplicityRange xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E14'
+                              lower = '0' upper = '1'/>
+                          </UML:Multiplicity.range>
+                        </UML:Multiplicity>
+                      </UML:TagDefinition.multiplicity>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E21'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>use a nonce for WS-Security</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                    </UML:TagDefinition>
+                    <UML:TagDefinition xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E1A'
+                      name = 'passwordDigest' isSpecification = 'false'>
+                      <UML:TagDefinition.multiplicity>
+                        <UML:Multiplicity xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E1E'>
+                          <UML:Multiplicity.range>
+                            <UML:MultiplicityRange xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E1D'
+                              lower = '0' upper = '1'/>
+                          </UML:Multiplicity.range>
+                        </UML:Multiplicity>
+                      </UML:TagDefinition.multiplicity>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E1F'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>use password digest for WS-Security UsernameTokenProfile</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                    </UML:TagDefinition>
+                  </UML:Stereotype.definedTag>
+                </UML:Stereotype>
+                <UML:Package xmi.id = '127-0-1-1--4efbb94e:132e7268ce4:-8000:0000000000000D26'
+                  name = 'dependency' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Namespace.ownedElement>
+                    <UML:Stereotype xmi.id = '127-0-1-1--4efbb94e:132e7268ce4:-8000:0000000000000D24'
+                      name = 'aspectin' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                      isAbstract = 'false'>
+                      <UML:Stereotype.baseClass>Dependency</UML:Stereotype.baseClass>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1-6a49b4b0:1363b673f33:-8000:0000000000000D3D'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>Represents an aspect in dependency. Aspects in the supplier component are applied to the client  component and vice versa.</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                      <UML:Stereotype.definedTag>
+                        <UML:TagDefinition xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000F8F'
+                          name = 'version' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000F9D'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000F9C'
+                                  lower = '0' upper = '1'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                        <UML:TagDefinition xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FAF'
+                          name = 'artifact' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FB3'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FB2'
+                                  lower = '0' upper = '-1'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                      </UML:Stereotype.definedTag>
+                    </UML:Stereotype>
+                    <UML:Stereotype xmi.id = '127-0-1-1--4efbb94e:132e7268ce4:-8000:0000000000000D23'
+                      name = 'aspect' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                      isAbstract = 'false'>
+                      <UML:Stereotype.baseClass>Dependency</UML:Stereotype.baseClass>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1-6a49b4b0:1363b673f33:-8000:0000000000000D3E'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>Represents an aspect dependency. Aspects in the supplier component are applied to the client  component but not vice versa.</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                      <UML:Stereotype.definedTag>
+                        <UML:TagDefinition xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000F8C'
+                          name = 'version' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000F9F'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000F9E'
+                                  lower = '0' upper = '1'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                        <UML:TagDefinition xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FAA'
+                          name = 'artifact' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FAE'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FAD'
+                                  lower = '0' upper = '-1'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                      </UML:Stereotype.definedTag>
+                    </UML:Stereotype>
+                    <UML:Stereotype xmi.id = '127-0-1-1--4efbb94e:132e7268ce4:-8000:0000000000000D22'
+                      name = 'runtime' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                      isAbstract = 'false'>
+                      <UML:Stereotype.baseClass>Dependency</UML:Stereotype.baseClass>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1-6a49b4b0:1363b673f33:-8000:0000000000000D3B'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>Represents a runtime dependency.</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                      <UML:Stereotype.definedTag>
+                        <UML:TagDefinition xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000F95'
+                          name = 'version' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000F99'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000F98'
+                                  lower = '0' upper = '1'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                        <UML:TagDefinition xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FC3'
+                          name = 'artifact' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FC7'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FC6'
+                                  lower = '0' upper = '-1'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                      </UML:Stereotype.definedTag>
+                    </UML:Stereotype>
+                    <UML:Stereotype xmi.id = '127-0-1-1--4efbb94e:132e7268ce4:-8000:0000000000000D25'
+                      name = 'devel' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                      isAbstract = 'false'>
+                      <UML:Stereotype.baseClass>Dependency</UML:Stereotype.baseClass>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1-6a49b4b0:1363b673f33:-8000:0000000000000D3C'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>Represents a development dependency.</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                      <UML:Stereotype.definedTag>
+                        <UML:TagDefinition xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000F92'
+                          name = 'version' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000F9B'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000F9A'
+                                  lower = '0' upper = '1'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                        <UML:TagDefinition xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FB4'
+                          name = 'artifact' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FC2'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FC1'
+                                  lower = '0' upper = '-1'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                      </UML:Stereotype.definedTag>
+                    </UML:Stereotype>
+                    <UML:Stereotype xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FA0'
+                      name = 'model' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                      isAbstract = 'false'>
+                      <UML:Stereotype.baseClass>Dependency</UML:Stereotype.baseClass>
+                      <UML:Stereotype.definedTag>
+                        <UML:TagDefinition xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FA1'
+                          name = 'version' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FA5'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FA4'
+                                  lower = '0' upper = '1'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                        <UML:TagDefinition xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FBA'
+                          name = 'artifact' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FBE'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FBD'
+                                  lower = '0' upper = '-1'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                      </UML:Stereotype.definedTag>
+                    </UML:Stereotype>
+                    <UML:Stereotype xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FA6'
+                      name = 'generator' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                      isAbstract = 'false'>
+                      <UML:Stereotype.baseClass>Dependency</UML:Stereotype.baseClass>
+                      <UML:Stereotype.definedTag>
+                        <UML:TagDefinition xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FA7'
+                          name = 'version' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FA9'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FA8'
+                                  lower = '0' upper = '0'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                        <UML:TagDefinition xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FB7'
+                          name = 'artifact' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FC0'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1-14c8b7d7:1364a0d9705:-8000:0000000000000FBF'
+                                  lower = '0' upper = '-1'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                      </UML:Stereotype.definedTag>
+                    </UML:Stereotype>
+                    <UML:Stereotype xmi.id = '127-0-1-1--11b7563e:1364eed7af0:-8000:0000000000000DC0'
+                      name = 'module version' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                      isAbstract = 'false'>
+                      <UML:Stereotype.baseClass>Package</UML:Stereotype.baseClass>
+                      <UML:Stereotype.definedTag>
+                        <UML:TagDefinition xmi.id = '127-0-1-1--11b7563e:1364eed7af0:-8000:0000000000000DCC'
+                          name = 'license' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1--11b7563e:1364eed7af0:-8000:0000000000000DCE'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1--11b7563e:1364eed7af0:-8000:0000000000000DCD'
+                                  lower = '0' upper = '0'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                        <UML:TagDefinition xmi.id = '127-0-1-1--11b7563e:1364eed7af0:-8000:0000000000000DCF'
+                          name = 'source' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1--11b7563e:1364eed7af0:-8000:0000000000000DD1'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1--11b7563e:1364eed7af0:-8000:0000000000000DD0'
+                                  lower = '0' upper = '0'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                      </UML:Stereotype.definedTag>
+                    </UML:Stereotype>
+                    <UML:Stereotype xmi.id = '127-0-1-1--11b7563e:1364eed7af0:-8000:0000000000000DC1'
+                      name = 'module' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                      isAbstract = 'false'>
+                      <UML:Stereotype.baseClass>Package</UML:Stereotype.baseClass>
+                      <UML:Stereotype.definedTag>
+                        <UML:TagDefinition xmi.id = '127-0-1-1--11b7563e:1364eed7af0:-8000:0000000000000DC2'
+                          name = 'license' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1--11b7563e:1364eed7af0:-8000:0000000000000DC6'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1--11b7563e:1364eed7af0:-8000:0000000000000DC5'
+                                  lower = '0' upper = '-1'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                          <UML:ModelElement.taggedValue>
+                            <UML:TaggedValue xmi.id = '127-0-1-1-4f34ca1e:138ec1b3e59:-8000:0000000000000E87'
+                              isSpecification = 'false'>
+                              <UML:TaggedValue.dataValue>Specifies the license of this module</UML:TaggedValue.dataValue>
+                              <UML:TaggedValue.type>
+                                <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                              </UML:TaggedValue.type>
+                            </UML:TaggedValue>
+                          </UML:ModelElement.taggedValue>
+                        </UML:TagDefinition>
+                        <UML:TagDefinition xmi.id = '127-0-1-1--11b7563e:1364eed7af0:-8000:0000000000000DC7'
+                          name = 'source' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1--11b7563e:1364eed7af0:-8000:0000000000000DCB'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1--11b7563e:1364eed7af0:-8000:0000000000000DCA'
+                                  lower = '0' upper = '1'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                      </UML:Stereotype.definedTag>
+                    </UML:Stereotype>
+                    <UML:Stereotype xmi.id = '127-0-1-1--11b7563e:1364eed7af0:-8000:0000000000000DD2'
+                      name = 'exclude' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                      isAbstract = 'false'>
+                      <UML:Stereotype.baseClass>Dependency</UML:Stereotype.baseClass>
+                      <UML:Stereotype.definedTag>
+                        <UML:TagDefinition xmi.id = '127-0-1-1-4f34ca1e:138ec1b3e59:-8000:0000000000000E81'
+                          name = 'artifact' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1-4f34ca1e:138ec1b3e59:-8000:0000000000000E83'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1-4f34ca1e:138ec1b3e59:-8000:0000000000000E82'
+                                  lower = '0' upper = '0'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                        <UML:TagDefinition xmi.id = '127-0-1-1-4f34ca1e:138ec1b3e59:-8000:0000000000000E84'
+                          name = 'version' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1-4f34ca1e:138ec1b3e59:-8000:0000000000000E86'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1-4f34ca1e:138ec1b3e59:-8000:0000000000000E85'
+                                  lower = '0' upper = '0'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                      </UML:Stereotype.definedTag>
+                    </UML:Stereotype>
+                    <UML:Stereotype xmi.id = '127-0-1-1-b02e35e:1364f885327:-8000:0000000000000DDE'
+                      name = 'artifact' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                      isAbstract = 'false'>
+                      <UML:Stereotype.baseClass>Package</UML:Stereotype.baseClass>
+                      <UML:Stereotype.definedTag>
+                        <UML:TagDefinition xmi.id = '127-0-1-1-b02e35e:1364f885327:-8000:0000000000000DDF'
+                          name = 'artifactType' isSpecification = 'false'>
+                          <UML:TagDefinition.multiplicity>
+                            <UML:Multiplicity xmi.id = '127-0-1-1-b02e35e:1364f885327:-8000:0000000000000DE1'>
+                              <UML:Multiplicity.range>
+                                <UML:MultiplicityRange xmi.id = '127-0-1-1-b02e35e:1364f885327:-8000:0000000000000DE0'
+                                  lower = '0' upper = '0'/>
+                              </UML:Multiplicity.range>
+                            </UML:Multiplicity>
+                          </UML:TagDefinition.multiplicity>
+                        </UML:TagDefinition>
+                      </UML:Stereotype.definedTag>
+                    </UML:Stereotype>
+                  </UML:Namespace.ownedElement>
+                </UML:Package>
+                <UML:Stereotype xmi.id = '127-0-1-1-58c39979:138f6d5ada7:-8000:0000000000000E98'
+                  name = 'application frontend' isSpecification = 'false' isRoot = 'false'
+                  isLeaf = 'false' isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Package</UML:Stereotype.baseClass>
+                  <UML:Stereotype.baseClass>Component</UML:Stereotype.baseClass>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = '127-0-1-1-58c39979:138f6d5ada7:-8000:0000000000000E99'
+                  name = 'console frontend' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Stereotype.baseClass>Package</UML:Stereotype.baseClass>
+                  <UML:Stereotype.baseClass>Component</UML:Stereotype.baseClass>
+                </UML:Stereotype>
+              </UML:Namespace.ownedElement>
+            </UML:Package>
+            <UML:Package xmi.id = '127-0-1-1--79c771f6:12f9d6d1af9:-8000:0000000000000EC1'
+              name = 'integration' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:ModelElement.taggedValue>
+                <UML:TaggedValue xmi.id = '127-0-1-1--5dc66b02:13a081f9f6d:-8000:0000000000000EBD'
+                  isSpecification = 'false'>
+                  <UML:TaggedValue.dataValue>Contains the Stereotypes and TagDefinitions of the Integration layer.</UML:TaggedValue.dataValue>
+                  <UML:TaggedValue.type>
+                    <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                  </UML:TaggedValue.type>
+                </UML:TaggedValue>
+              </UML:ModelElement.taggedValue>
+              <UML:Namespace.ownedElement>
+                <UML:Package xmi.id = '127-0-1-1--3acb4be1:12ce734afaf:-8000:0000000000000E51'
+                  name = 'webservice' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Namespace.ownedElement>
+                    <UML:Stereotype xmi.id = '127-0-0-1--22ed5811:12355993433:-8000:0000000000001140'
+                      name = 'ws endpoint' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                      isAbstract = 'false'>
+                      <UML:Stereotype.baseClass>Class</UML:Stereotype.baseClass>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E2D'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>Specifies an endpoint of a web service. A web service endpoint can handle web service requests.</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E3A'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue> </UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1-6a49b4b0:1363b673f33:-8000:0000000000000D47'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                    </UML:Stereotype>
+                    <UML:Stereotype xmi.id = '127-0-0-1--22ed5811:12355993433:-8000:0000000000001144'
+                      name = 'ws request' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                      isAbstract = 'false'>
+                      <UML:Stereotype.baseClass>Class</UML:Stereotype.baseClass>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E39'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>Specifies a request of web service.</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                    </UML:Stereotype>
+                    <UML:Stereotype xmi.id = '127-0-0-1--22ed5811:12355993433:-8000:0000000000001142'
+                      name = 'ws response' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                      isAbstract = 'false'>
+                      <UML:Stereotype.baseClass>Class</UML:Stereotype.baseClass>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E36'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>Specifies a response of a web service.</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                    </UML:Stereotype>
+                    <UML:Stereotype xmi.id = '127-0-0-1-70850053:1245204032f:-8000:0000000000001183'
+                      name = 'ws type' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                      isAbstract = 'false'>
+                      <UML:Stereotype.baseClass>Class</UML:Stereotype.baseClass>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E35'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>Specifies a data type used in a web service.</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                    </UML:Stereotype>
+                  </UML:Namespace.ownedElement>
+                </UML:Package>
+                <UML:Package xmi.id = '127-0-1-1-714bbbd0:132147c401a:-8000:0000000000000CCE'
+                  name = 'messaging' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Namespace.ownedElement>
+                    <UML:Stereotype xmi.id = '127-0-1-1-714bbbd0:132147c401a:-8000:0000000000000CCF'
+                      name = 'listener' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                      isAbstract = 'false'>
+                      <UML:Stereotype.baseClass>Class</UML:Stereotype.baseClass>
+                    </UML:Stereotype>
+                    <UML:Stereotype xmi.id = '127-0-1-1-714bbbd0:132147c401a:-8000:0000000000000CD0'
+                      name = 'listens' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                      isAbstract = 'false'>
+                      <UML:Stereotype.baseClass>Operation</UML:Stereotype.baseClass>
+                    </UML:Stereotype>
+                  </UML:Namespace.ownedElement>
+                </UML:Package>
+              </UML:Namespace.ownedElement>
+            </UML:Package>
+            <UML:Package xmi.id = '127-0-1-1-2f840fb1:1367437938f:-8000:0000000000000DE2'
+              name = 'requirements' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:Namespace.ownedElement>
+                <UML:Package xmi.id = '127-0-1-1-2f840fb1:1367437938f:-8000:0000000000000DE4'
+                  name = 'usecases' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:Namespace.ownedElement>
+                    <UML:Stereotype xmi.id = '127-0-1-1-2f840fb1:1367437938f:-8000:0000000000000DE3'
+                      name = 'use case model' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+                      isAbstract = 'false'>
+                      <UML:Stereotype.baseClass>Package</UML:Stereotype.baseClass>
+                      <UML:ModelElement.taggedValue>
+                        <UML:TaggedValue xmi.id = '127-0-1-1--11c7787:138dc18a00b:-8000:0000000000000E44'
+                          isSpecification = 'false'>
+                          <UML:TaggedValue.dataValue>Specifies that this package contains a use case model.</UML:TaggedValue.dataValue>
+                          <UML:TaggedValue.type>
+                            <UML:TagDefinition xmi.idref = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'/>
+                          </UML:TaggedValue.type>
+                        </UML:TaggedValue>
+                      </UML:ModelElement.taggedValue>
+                    </UML:Stereotype>
+                  </UML:Namespace.ownedElement>
+                </UML:Package>
+              </UML:Namespace.ownedElement>
+            </UML:Package>
+          </UML:Namespace.ownedElement>
+        </UML:Package>
+        <UML:TagDefinition xmi.id = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D02'
+          name = 'documentation' isSpecification = 'false'>
+          <UML:TagDefinition.multiplicity>
+            <UML:Multiplicity xmi.id = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D04'>
+              <UML:Multiplicity.range>
+                <UML:MultiplicityRange xmi.id = '127-0-1-1--70ad372e:132d3048a8f:-8000:0000000000000D03'
+                  lower = '0' upper = '0'/>
+              </UML:Multiplicity.range>
+            </UML:Multiplicity>
+          </UML:TagDefinition.multiplicity>
+        </UML:TagDefinition>
+        <UML:TagDefinition xmi.id = '127-0-1-1-6a49b4b0:1363b673f33:-8000:0000000000000D47'
+          name = 'author' isSpecification = 'false'>
+          <UML:TagDefinition.multiplicity>
+            <UML:Multiplicity xmi.id = '127-0-1-1-6a49b4b0:1363b673f33:-8000:0000000000000D49'>
+              <UML:Multiplicity.range>
+                <UML:MultiplicityRange xmi.id = '127-0-1-1-6a49b4b0:1363b673f33:-8000:0000000000000D48'
+                  lower = '0' upper = '0'/>
+              </UML:Multiplicity.range>
+            </UML:Multiplicity>
+          </UML:TagDefinition.multiplicity>
+        </UML:TagDefinition>
+        <UML:TagDefinition xmi.id = '127-0-1-1--5dc66b02:13a081f9f6d:-8000:0000000000000EC3'
+          name = 'deprecated' isSpecification = 'false'>
+          <UML:TagDefinition.multiplicity>
+            <UML:Multiplicity xmi.id = '127-0-1-1--5dc66b02:13a081f9f6d:-8000:0000000000000EC5'>
+              <UML:Multiplicity.range>
+                <UML:MultiplicityRange xmi.id = '127-0-1-1--5dc66b02:13a081f9f6d:-8000:0000000000000EC4'
+                  lower = '0' upper = '0'/>
+              </UML:Multiplicity.range>
+            </UML:Multiplicity>
+          </UML:TagDefinition.multiplicity>
+        </UML:TagDefinition>
+      </UML:Namespace.ownedElement>
+    </UML:Model>
+  </XMI.content>
+</XMI>

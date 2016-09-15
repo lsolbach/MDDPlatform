@@ -1,0 +1,13 @@
+digraph "<?qualifiedName(This)?>" {
+    outputmode=nodefirst;
+    
+	node [shape=plaintext fontsize=9];
+<?
+foreach class <- getClassList(This) {
+	class(class)
+	generalisations(class)
+	associations(class)
+	dependencies(class)
+}
+?>
+}

@@ -1,0 +1,92 @@
+<?!--
+ * common/config/activemq-config
+ *
+ * © 2012- Ludger Solbach
+ --?><?
+/* configure activeMQ for messaging */
+list getNamespaceList(map element) {
+	nsList = super(element)
+	nsList.add('jms')
+	nsList
+}
+
+string beans(map element) {
+	super(element)
+	connectionFactory(map element)
+	destinations(element)
+	senders(element)
+	messageListeners(element)
+	consumers(element)
+}
+
+string connectionFactory(map element) {?>
+	<bean id="jmsConnectionFactory"
+		class="org.apache.activemq.ActiveMQConnenctionFactory">
+		<property name="brokerURL" value="${activemq.uri}"/>
+		<property name="username" value="${activemq.user}"/>
+		<property name="password" value="${activemq.password}"/>
+	</bean>
+
+	<bean id="pooledJmsConnectionFactory"
+		class="org.apache.activemq.pool.PooledConnenctionFactory"
+		destroy-method="stop">
+		<property name="connectionFactory" ref="jmsConnectionFactory"/>
+	</bean>
+<?
+}
+
+string destinations(map element) {?>
+	
+<?
+}
+
+string jmsDestination(map element) {?>
+	<bean id="<?element:Name.firstLower()?>"
+		class="<?destinationClass(element)?>">
+	</bean>
+<?
+}
+
+string destinationClass(map element) {
+	if(hasTaggedValue(element, 'queueType')
+		&& taggedValue(element, 'queueType') eq 'TOPIC') {
+		'org.apache.activemq.command.ActiveMQTopic'
+	} else {
+		'org.apache.activemq.command.ActiveMQQueue'	
+	}
+}
+
+string senders(map element) {?>
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="pooledConnectionFactory"/>
+	</bean>
+<?
+}
+
+string messageListeners(map element) {
+
+}
+
+string consumers(map element) {
+
+}
+
+string consumer(map element) {?>
+	<bean id="<?element:Name.firstLower()?>"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="jmsConnectionFactory"/>
+		<property name="destination" ref="<?destination(element)?>"/>
+		<property name="messageListener" ref="<?getMessageListener(element)?>"/>
+	</bean>
+<?
+}
+
+string destination(map element) {
+
+}
+
+string getMessageListener(map element) {
+
+}
+
+?>

@@ -1,0 +1,74 @@
+<?!--
+ * domain/java/lib
+--?><?
+map getImportMap(map element) {
+	map importMap = super(element)
+	add(importMap, 'org.soulspace.annotation.domain.*')
+	importMap
+}
+
+list getDomainTypeAnnotationList(map element) {
+	list annotationList
+	if(isValidatable(element)) {
+		 annotationList.add('@Validatable')
+	}
+	if(isRevisionable(element)) {
+		annotationList.add('@Revisionable')
+	}
+	if(isAuditable(element)) {
+		annotationList.add('@Auditable')
+	}
+	if(isTemporal(element)) {
+		annotationList.add('@Temporal')
+	}
+	annotationList
+}
+
+list getExtensionList(map element) {
+	list extensionList
+	foreach superClass | hasStereotypes(superClass) <- getSuperClassList(element) {
+		extensionList.add(superClass:Name)
+	}
+	extensionList
+}
+
+string fieldReferenceName(map field) {
+	string roleName = javaName(field)
+	if(!roleName) {
+		roleName = javaName(field:Type) + 'Id'
+	}
+	if(isMany(field) || isQualified(field)) {
+		roleName + 'Id' + collectionType(field)		
+	} else {
+		roleName + 'Id'
+	}
+}
+
+string fieldReferenceType(map field) {
+	if(!isMany(field) && !isQualified(field)) {
+		javaType('mdsd.common.types.Id')
+	} else if(isQualified(field)) {
+		collectionType(field) + '<' + javaType(field:SourceEnd:QualifierList[0]) + ', ' + javaType('mdsd.common.types.Id') + '>'
+	} else {
+		collectionType(field) + '<' + javaType('mdsd.common.types.Id') + '>'
+	}
+}
+
+string fieldReferenceImplementationType(map field) {
+	if(!isMany(field) && !isQualified(field)) {
+		javaType(field)
+	} else if(isQualified(field)) {
+		collectionImplementationType(field) + '<' + javaType(field:SourceEnd:QualifierList[0]) + ', ' + javaType('mdsd.common.types.Id') + '>'
+	} else {
+		collectionImplementationType(field) + '<' + javaType('mdsd.common.types.Id') + '>'
+	}
+}
+
+string fieldReferenceInitialisation(map field) {
+	if(isMany(field) || isQualified(field)) {
+		'= new ' + fieldReferenceImplementationType(asso) + '()'
+	} else {
+		'= null'
+	}
+}
+?>

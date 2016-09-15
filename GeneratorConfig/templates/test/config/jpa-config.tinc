@@ -1,0 +1,50 @@
+<?!--
+ * test/config/jpa-config
+ *
+ * ©2010-2012 Ludger Solbach
+--?><?
+list modelPackageList = getModelPackageList(This)
+
+list getNamespaceList(map element) {
+	list namespaceList = super(element)
+	namespaceList.add('context')
+	namespaceList.add('jdbc')
+	namespaceList
+}
+
+string beans(map element) {
+	super(element)?>
+	<!-- start of test jpa config -->
+<?
+	vendorAdapter(element)
+	dataSource(element)
+	dataBaseInitialisation(element)
+	/*embeddedDataBase(element)*/
+}
+
+string dropTableScript(map component) {
+	'<jdbc:script location="classpath*:/' + component:QualifiedName.replace('.', '/') + '/drop-tables.sql"/>'
+}
+
+string createTableScript(map component) {
+	'<jdbc:script location="classpath*:/' + component:QualifiedName.replace('.', '/') + '/create-tables.sql"/>'
+}
+
+string embeddedDataBase(map element) {?>
+	<!-- Create an in-memory database for testing -->
+	<jdbc:embedded-database id="dataSource" type="<?databaseType(element)?>">
+		<?join(mapFn(dropTableScript, reverse(modelPackageList)), lineFeed() + tabs(2))?>
+		<?join(mapFn(createTableScript, modelPackageList), lineFeed() + tabs(2))?>
+	</jdbc:embedded-database>
+<?
+}
+
+string dataBaseInitialisation(map element) {?>
+	<!-- Initialize database for testing -->
+	<jdbc:initialize-database data-source="dataSource">
+		<?join(mapFn(dropTableScript, reverse(modelPackageList)), lineFeed() + tabs(2))?>
+		<?join(mapFn(createTableScript, modelPackageList), lineFeed() + tabs(2))?>
+	</jdbc:initialize-database>
+<?
+}
+?>

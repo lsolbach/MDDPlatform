@@ -1,0 +1,97 @@
+<?!--
+ * domain/java/spring-jpa
+ --?><?
+list getRepositoryGetAsListMethodAnnotationList(map asso) {
+	list annotationList = super(asso)
+	annotationList.add('@Transactional(propagation=Propagation.REQUIRED, readOnly=true)')
+	annotationList
+}
+
+string repositoryGetAsListMethodBody(map asso) {
+		?>TypedQuery<<?javaType(asso)?>Impl> query = getEntityManager().createQuery("SELECT e FROM <?javaType(asso)?>Impl e", <?javaType(asso)?>Impl.class);
+		<?asso:Name?>List = new ArrayList<<?javaType(asso)?>>(query.getResultList());<?
+}
+
+list getRepositoryGetAsSetMethodAnnotationList(map asso) {
+	list annotationList = super(asso)
+	annotationList.add('@Transactional(propagation=Propagation.REQUIRED, readOnly=true)')
+	annotationList
+}
+
+string repositoryGetAsSetMethodBody(map asso) {
+		?>TypedQuery<<?javaType(asso)?>Impl> query = getEntityManager().createQuery("SELECT e FROM <?javaType(asso)?>Impl e", <?javaType(asso)?>Impl.class);
+		<?asso:Name?>Set = new HashSet<<?javaType(asso)?>>(query.getResultList());<?
+}
+
+list getRepositoryGetMethodAnnotationList(map asso) {
+	list annotationList = super(asso)
+	annotationList.add('@Transactional(propagation=Propagation.REQUIRED, readOnly=true)')
+	annotationList
+}
+
+string repositoryGetMethodBody(map asso) {
+		javaName(asso) + ' = getEntityManager().find(' + javaType(asso) + 'Impl.class, ' + qualifierArguments(asso) + ');'
+}
+
+list getRepositoryFindMethodAnnotationList(map asso) {
+	list annotationList = super(asso)
+	annotationList.add('@Transactional(propagation=Propagation.REQUIRED, readOnly=true)')
+	annotationList
+}
+
+string repositoryFindMethodBody(map asso) {
+		?><?asso:Name?>Set = new HashSet<<?javaType(asso)?>>();
+		<?javaType(asso)?> <?javaName(asso)?> = getEntityManager().find(<?javaType(asso)?>Impl.class, <?qualifierArguments(asso)?>);
+		if(<?javaName(asso)?> != null) {
+			<?asso:Name?>Set.add(<?javaName(asso)?>);
+		}<?
+}
+
+list getRepositoryFindByIdListMethodAnnotationList(map asso) {
+	list annotationList = super(asso)
+	annotationList.add('@Transactional(propagation=Propagation.REQUIRED, readOnly=true)')
+	annotationList
+}
+
+string repositoryFindByIdListMethodBody(map asso) {
+		?>TypedQuery<<?javaType(asso)?>Impl> query = getEntityManager().createQuery("SELECT e FROM <?javaType(asso)?>Impl e WHERE e.id IN (:idList)", <?javaType(asso)?>Impl.class);
+		query.setParameter("idList", idList);
+		<?asso:Name?>List = new ArrayList<<?javaType(asso)?>>(query.getResultList());<?
+}
+
+list getRepositoryAddMethodAnnotationList(map asso) {
+	list annotationList = super(asso)
+	annotationList.add('@Transactional(propagation=Propagation.REQUIRED, readOnly=false)')
+	annotationList
+}
+
+string repositoryAddMethodBody(map asso) {
+	if(isEntity(asso:Type)) {
+		'getEntityManager().persist(' + javaName(asso) + ');'
+	} else {
+	}
+}
+
+list getRepositoryUpdateMethodAnnotationList(map asso) {
+	list annotationList = super(asso)
+	annotationList.add('@Transactional(propagation=Propagation.REQUIRED, readOnly=false)')
+	annotationList
+}
+
+string repositoryUpdateMethodBody(map asso) {
+		javaName(asso) + ' = getEntityManager().merge(' + javaName(asso) + ');'
+}
+
+list getRepositoryRemoveMethodAnnotationList(map asso) {
+	list annotationList = super(asso)
+	annotationList.add('@Transactional(propagation=Propagation.REQUIRED, readOnly=false)')
+	annotationList
+}
+
+string repositoryRemoveMethodBody(map asso) {
+	if(isEntity(asso:Type)) {
+		'getEntityManager().remove(getEntityManager().merge(' + javaName(asso) + '));'
+	} else {
+	}
+}
+?>

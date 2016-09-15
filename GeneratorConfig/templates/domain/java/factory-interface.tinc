@@ -1,0 +1,66 @@
+<?
+map factoryMap = getFactoryMap(This)
+
+string fileComment(map element) {
+	'/*' + lineFeed()
+	' * Interface of factory ' + name(element) + lineFeed()
+	generationInfo(element, ' * ') + lineFeed()
+	' */'
+}
+
+map getImportMap(map element) {
+	map importMap = super(element)
+	add(importMap, 'org.soulspace.annotation.common.Factory')
+	/* add imports for the elements of the factory map */	
+	foreach key <- factoryMap.keyList() {
+		importMap = importMap + getPropertyImports(factoryMap[key])
+	}
+	importMap
+}
+
+list getTypeAnnotationList(map element) {
+	list annotationList = super(element)
+	annotationList.add('@Factory')
+	annotationList
+}
+
+string operations(map element) {?>
+	// Factory interfaces<?
+	factoryInterfaces(element)
+	super(element)
+}
+
+string factoryInterfaces(map element) {
+	foreach name <- factoryMap.keyList() {
+		'// ' + name + lineFeed()
+	}
+	foreach dep | hasStereotype(dep, 'creates') <- element:ClientDependencySet {
+		factoryInterface(dep:Supplier)
+	}
+}
+
+string factoryInterface(map element) {
+	list fieldList = filter(isAccessibleField, getAllFieldList(element))
+	list mandatoryFieldList = filter(isMandatory, fieldList)?>
+	String create<?element:Name.firstUpper()?>(<?constructorParameters(fieldList)?>);<?
+	if(mandatoryFieldList && mandatoryFieldList ne fieldList) {?>
+	String create<?element:Name.firstUpper()?>(<?constructorParameters(mandatoryFieldList)?>);<?
+	}?>
+	<?element:Name?> get<?element:Name.firstUpper()?>(String id);<?
+	foreach asso | isComposed(asso) <- element:AssociationList {
+		factoryChildInterface(asso)
+	}
+}
+
+string factoryChildInterface(map asso) {
+	map child = asso:Type
+	list fieldList = filter(isAccessibleField, getAllFieldList(child))
+	list mandatoryFieldList = filter(isMandatory, fieldList)?>
+	void add<?asso:Name.firstUpper()?>(String id, <?constructorParameters(fieldList)?>);
+	<?child:Name?> create<?asso:Name.firstUpper()?>(<?constructorParameters(fieldList)?>);<?
+	if(mandatoryFieldList && mandatoryFieldList ne fieldList) {?>
+	void add<?asso:Name.firstUpper()?>(String id, <?constructorParameters(mandatoryFieldList)?>);
+	<?child:Name?> create<?asso:Name.firstUpper()?>(<?constructorParameters(mandatoryFieldList)?>);<?
+	}
+}
+?>

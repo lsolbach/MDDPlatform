@@ -1,0 +1,36 @@
+<?
+string displayName(map element) {
+	'<display-name>' + wsNamespacePrefix(element) + '</display-name>'
+}
+
+string servlets(map element) {
+	super(element)?>
+	<servlet>
+		<servlet-name><?wsNamespacePrefix(element)?></servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+				classpath*:<?wsNamespacePrefix(element)?>-config.xml
+			</param-value>
+		</init-param>
+	</servlet>
+<?
+}
+
+string servletMappings(map element) {
+	super(element)?>
+	<servlet-mapping>
+		<servlet-name><?wsNamespacePrefix(element)?></servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+<?
+}
+
+string sessionConfig(map element) {?>
+	<session-config>
+		<session-timeout>2</session-timeout>
+	</session-config>
+<?
+}
+?>

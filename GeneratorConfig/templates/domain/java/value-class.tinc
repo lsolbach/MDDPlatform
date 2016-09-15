@@ -1,0 +1,20 @@
+<?
+string fileComment(map element) {
+	'/*' + lineFeed()
+	' * Abstract class ' + name(This) + lineFeed()
+	' * Base implementation of value interface ' + element:Name + lineFeed()
+	generationInfo(element, ' * ') + lineFeed()
+	' */'
+}
+
+string abstract() {
+	'abstract'
+}
+
+list getTypeAnnotationList(map element) {
+	list annotationList = super(element) + getDomainTypeAnnotationList(element)
+	annotationList.add('@Value')
+	annotationList
+}
+
+?>

@@ -1,6 +1,9 @@
-DomainFramework
+GeneratorConfig
 ===============
 
+Templates and MDD Generator Config for the MDD Platform
+
+Should be renovated some day.
 
 Author/Project Lead
 -------------------
@@ -18,16 +21,4 @@ Code Repository
 ---------------
 [https://github.com/lsolbach/MDDPlatform] (https://github.com/lsolbach/MDDPlatform)
 
-History
--------
 
-Version 0.6.0 (--.--.201-)
---------------------------
-
-
-Version 0.5.1 (--.--.201-)
---------------------------
-* enhanced AuthorisationAspect, added AuthorisationService interface
-* added AuthenticationService
-* added TrackingAspect
-* changed version control from cvs to git

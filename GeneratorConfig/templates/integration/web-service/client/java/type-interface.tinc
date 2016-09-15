@@ -1,0 +1,13 @@
+<?
+string fileComment(map element) {
+?>/*
+ * Interface of web service client type <?name(element)?>
+<?generationInfo(' * ')?>
+ */
+<?
+}
+
+numeric isAccessibleAssociation(map asso) {
+	super(asso) && !hasStereotype(asso, 'mapping')
+}
+?>

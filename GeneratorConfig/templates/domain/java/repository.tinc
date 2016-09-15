@@ -1,0 +1,82 @@
+<?
+/* default implementation for repository methods */
+string repositoryAccessors(map element) {
+	foreach asso | isNavigable(asso) && isComposed(asso) <- element:AssociationList {
+		repositoryAccessor(asso)
+	}
+}
+
+string repositoryAccessor(map asso) {
+	if(isEntity(asso:Type) && (isMany(asso) || isQualified(asso))) {
+		repositoryGetAsListMethod(asso)
+		repositoryGetAsSetMethod(asso)
+	}
+	if(isEntity(asso:Type) && isQualified(asso)) {
+		repositoryGetMethod(asso)
+		repositoryFindMethod(asso)
+		if(getQualifierList(asso).size() == 1) {
+			/* qualified only by id */
+			repositoryFindByIdListMethod(asso)
+		}
+	}
+	if(isChangeable(asso)) {
+		/* add and remove methods are generated for value objects directly contained in repositories*/
+		repositoryAddMethod(asso)
+		if(!isAddOnly(asso)) {
+			repositoryRemoveMethod(asso)
+		}
+		/* TODO is update possible when addOnly is specified? */
+		if(isEntity(asso:Type)) {
+			repositoryUpdateMethod(asso)
+		}
+	}
+}
+
+list getRepositoryGetAsListMethodAnnotationList(map asso) {
+	list annotationList
+	annotationList
+}
+string repositoryGetAsListMethodBody(map asso) {}
+
+list getRepositoryGetAsSetMethodAnnotationList(map asso) {
+	list annotationList
+	annotationList
+}
+string repositoryGetAsSetMethodBody(map asso) {}
+
+list getRepositoryGetMethodAnnotationList(map asso) {
+	list annotationList
+	annotationList
+}
+string repositoryGetMethodBody(map asso) {}
+
+list getRepositoryFindMethodAnnotationList(map asso) {
+	list annotationList
+	annotationList
+}
+string repositoryFindMethodBody(map asso) {}
+
+list getRepositoryFindByIdListMethodAnnotationList(map asso) {
+	list annotationList
+	annotationList
+}
+string repositoryFindByIdListMethodBody(map asso) {}
+
+list getRepositoryAddMethodAnnotationList(map asso) {
+	list annotationList
+	annotationList
+}
+string repositoryAddMethodBody(map asso) {}
+
+list getRepositoryUpdateMethodAnnotationList(map asso) {
+	list annotationList
+	annotationList
+}
+string repositoryUpdateMethodBody(map asso) {}
+
+list getRepositoryRemoveMethodAnnotationList(map asso) {
+	list annotationList
+	annotationList
+}
+string repositoryRemoveMethodBody(map asso) {}
+?>

@@ -1,0 +1,20 @@
+<?
+string fileComment(map element) {
+?>/*
+ * Query interface <?name(This)?>.
+<? generationInfo(' * ')?>
+ */<?
+}
+
+string operations(map element) {
+	super(element)
+	queryMethod(element)
+}
+
+string queryMethod(map element) {
+	map result = getQueryResult(element)?>
+	List<<?javaTypeForType(result)?>> execute();
+<?
+}
+
+?>

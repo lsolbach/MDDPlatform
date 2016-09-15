@@ -1,0 +1,26 @@
+<?
+string fileComment(map element) {
+?>/*
+ * Abstract class <?name(This)?>
+ * Base implementation of service interface <?Name?>.
+<? generationInfo(' * ')?>
+ */<?
+}
+
+map getImportMap(map element) {
+	map importMap = super(element)
+	/* TODO move service annotation to org.soulspace.annotation.common and change the import */
+	add(importMap, 'org.soulspace.annotation.domain.Service')
+	importMap
+}
+
+string abstract(map element) {
+	'abstract'
+}
+
+string getTypeAnnotationList(map element) {
+	list annotationList = super(element)
+	add(annotationList, '@Service')
+	annotationList
+}
+?>

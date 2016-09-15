@@ -1,0 +1,66 @@
+<?
+string jspConfig(map element) {
+	super(element)?>
+	<jsp-config>
+  	  	<jsp-property-group>  	  		
+  			<url-pattern>*.jsp</url-pattern>
+  			<page-encoding>UTF-8</page-encoding> 
+  		</jsp-property-group>  	  		  	
+  	</jsp-config>
+<?
+}
+
+string contextParams(map element) {
+	super(element)?>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath*:application-context.xml
+		</param-value>
+	</context-param>
+<?
+}
+
+string listeners(map element) {
+	super(element)?>
+	<listener>
+		<listener-class>
+			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
+<?
+}
+
+string welcomeFiles(map element) {
+	super(element)?>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list><?
+}
+
+string servlets(map element) {
+	super(element)
+}
+
+string filters(map element) {
+	super(element)?>
+	<filter>
+		<filter-name>charsetFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>charsetFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>	
+<?
+}
+
+string sessionConfig(map element) {
+	super(element)
+}
+?>

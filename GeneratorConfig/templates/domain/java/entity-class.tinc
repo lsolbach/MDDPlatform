@@ -1,0 +1,95 @@
+<?
+string fileComment(map element) {
+	'/*' + lineFeed()
+	' * Abstract class ' + name(This) + lineFeed()
+	' * Base implementation of entity interface ' + element:Name + lineFeed()
+	generationInfo(element, ' * ') + lineFeed()
+	' */'
+}
+
+string abstract(map element) {
+	'abstract'
+}
+
+list getTypeAnnotationList(map element) {
+	list annotationList = super(element) + getDomainTypeAnnotationList(element)
+	annotationList.add('@Entity')
+	if(isAggregateRoot(element)) {
+		annotationList.add('@AggregateRoot')
+	}
+	annotationList
+}
+
+string constructorFieldInitialisation(map field) {
+	if(field:ElementType eq 'AssociationEnd' && isReferred(field)) {?>
+		this.<?javaName(field)?>Id = <?javaName(field)?>.getId();<?
+	}
+	super(field)
+}
+
+string constructorAssociationReferenceInitialisation(map field) {
+	if(!isMany(field) && !isQualified(field)) {?>
+		this.<?javaName(field)?>Id = <?javaName(field)?>.getId();
+<?
+	} else {
+		'// TODO copy ids from entity collection to new id collection'
+	}
+}
+
+string memberField(map field) {
+	if(isReferred(field)) {
+		/* handle references to entities (in other components) */
+		/* store persistent id(s) and transient entities */
+?>
+	<?fieldModifiers(field)?> <?fieldReferenceType(field)?> <?fieldReferenceName(field)?> <?fieldReferenceInitialisation(field)?>;
+	<?fieldModifiers(field)?> transient <?fieldType(field)?> <?fieldName(field)?> <?fieldInitialisation(field)?>;
+<?			
+	} else {
+		super(field)
+	}
+}
+
+string fieldAccessor(map field) {
+	if(isReferred(field)) {
+		/* handle references to entities (in other components) */
+		/* store persistent id(s) and transient entities */	
+	}
+	super(field)
+}
+
+string fieldQualifiedGetMethodBody(map field) {
+	if(isReferred(field)) {?>
+		// FIXME load from repository (domain/java/entity-class)<?
+	}?>
+		return <?fieldName(asso)?>.get(<?qualifierParameters(field)?>);<?
+}
+
+string fieldSetMethodBody(map field) {
+	if(isReferred(field)) {
+		'this.' + fieldReferenceName(field) + ' = ' + fieldName(field) + '.getId();' + lineFeed() + tabs(2)
+	}
+	super(field)
+}
+
+string fieldAddMethodBody(map field) {
+	if(isReferred(field)) {
+		fieldReferenceName(field) + '.add(' + javaName(field) + '.getId());' + lineFeed() + tabs(2)
+	}
+	super(field)
+}
+
+string fieldQualifiedAddMethodBody(map field) {
+	if(isReferred(field)) {
+		fieldReferenceName(field) + '.put(' + javaName(field:SourceEnd:Qualifiers[0]) + ', ' + javaName(field) + '.getId());' + lineFeed() + tabs(2)
+	}
+	super(field)
+}
+
+string fieldRemoveMethodBody(map field) {
+	if(isReferred(field)) {
+		fieldReferenceName(field) + '.remove(' + javaName(field) + '.getId());' + lineFeed() + tabs(2)
+	}
+	super(field)
+}
+
+?>

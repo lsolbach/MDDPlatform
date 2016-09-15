@@ -1,0 +1,13 @@
+<?!--
+ * application/config/spring-config
+ --?><?
+list getNamespaceList(map element) {
+	list namespaces = super(element)
+	namespaces
+}
+
+string beans(map element) {
+	super(element)
+	/* TODO generate services and other beans for the application layer */
+}
+?>

@@ -1,0 +1,67 @@
+<?
+map getImportMap(map element) {
+	map importMap = super(element)
+	add(importMap, 'org.soulspace.annotation.metadata.*')
+	importMap
+}
+
+list getPropertyFieldAnnotationList(map attr) {
+	list annotationList = super(attr)
+	if(isMandatory(attr)) {
+		annotationList.add('@Mandatory')
+	}
+	if(hasTaggedValue(attr, 'minLength') || hasTaggedValue(attr, 'maxLength')) {
+		list params
+		if(hasTaggedValue(attr, 'minLength')) {
+			params.add('min = ' + taggedValue(attr, 'minLength'))
+		}
+		if(hasTaggedValue(attr, 'maxLength')) {
+			params.add('max = ' + taggedValue(attr, 'maxLength'))
+		}
+		annotationList.add('@Size(' + join(params, ', ') + ')')
+	}
+	if(hasTaggedValue(attr, 'minValue') || hasTaggedValue(attr, 'maxValue')) {
+		list params
+		if(hasTaggedValue(attr, 'minValue')) {
+			params.add('min = ' + taggedValue(attr, 'minValue'))
+		}
+		if(hasTaggedValue(attr, 'maxValue')) {
+			params.add('max = ' + taggedValue(attr, 'maxValue'))
+		}
+		annotationList.add('@Range(' + join(params, ', ') + ')')
+	}
+	if(hasTaggedValue(attr, 'pattern')) {
+		annotationList.add('@Pattern(pattern="' + taggedValue(attr, 'pattern') + '")')
+	}
+	if(hasTaggedValue(attr, 'past')) {
+		annotationList.add('@Past')
+	} else if(hasTaggedValue(attr, 'future')) {
+		annotationList.add('@Future')
+	}
+	annotationList
+}
+
+list getAssociationFieldAnnotationList(map asso) {
+	list annotationList = super(asso)
+	if(isMandatory(asso)) {
+		annotationList.add('@Mandatory')
+	}
+	if(isMany(asso)) {
+		/* size constraints according to multiplicity */
+		list params
+		if(isMandatory(asso)) {
+			params.add('min = ' + getLowerBound(asso))
+		}
+		if(isBoundedMany(asso)) {
+			params.add('max = ' + getUpperBound(asso))			
+		}
+		if(params) {
+			annotationList.add('@Size(' + join(params, ', ') + ')')
+		}
+	}
+	if(isComposition(asso)) {
+		annotationList.add('@Composition')
+	}
+	annotationList
+}
+?>

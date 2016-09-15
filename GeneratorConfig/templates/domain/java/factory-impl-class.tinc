@@ -1,0 +1,9 @@
+<?
+string fileComment(map element) {
+	'/*' + lineFeed()
+	' * Implementation class ' + name(This) + lineFeed()
+	' * Implementation of factory interface ' + element:Name + lineFeed()
+	generationInfo(element, ' * ') + lineFeed()
+	' */'
+}
+?>

@@ -1,0 +1,10 @@
+<?
+string content(map element) {?>
+bin
+build
+dist
+lib
+generated
+backup<?
+}
+?>

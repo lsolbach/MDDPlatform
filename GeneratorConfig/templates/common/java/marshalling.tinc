@@ -1,0 +1,81 @@
+<?
+
+map getImportMap(map element) {
+	map importMap = super(element)
+	add(importMap, 'org.soulspace.util.XmlUtils')
+	add(importMap, 'org.springframework.util.xml.DomUtils')
+	add(importMap, 'org.w3c.dom.*')
+	importMap
+}
+
+string xmlMarshalSupport(map element) {
+	xmlMarshalMethod(element)
+	xmlUnmarshalMethod(element)
+}
+
+string xmlMarshalMethod(map element) {?>
+	public String marshal() {
+		StringBuilder sb = new StringBuilder(128);<?
+	foreach attr | !isDerived(attr) <- element:AttributeList {
+		xmlMarshalField(attr)
+	}?>
+		return sb.toString();
+	}
+<?
+}
+
+string xmlMarshalField(map element) {?>
+		sb.append("<<?element:Name?>>");<?
+	if(element:Type:Name eq 'String') {?>
+		sb.append(XmlUtils.encode(<?element:Name?>));<?
+	} else if(element:Type:QualifiedName eq 'mdsd.common.types.Date'
+			|| element:Type:QualifiedName eq 'mdsd.common.types.Time'
+			|| element:Type:QualifiedName eq 'mdsd.common.types.TimeStamp') {?>
+		sb.append(<?element:Name?>.getTime());<?
+	} else {?>
+		sb.append(<?element:Name?>.marshal());<?
+	}?>
+		sb.append("</<?element:Name?>>");
+<?
+}
+
+string xmlUnmarshalMethod(map element) {?>
+	public static <?element:Name?> unmarshal(Element e) {
+		<?element:Name?> obj = null;<?
+	foreach attr | !attr:Derived <- element:AttributeList {?>
+		<?javaType(element)?> <?javaName(element)?> = <?xmlUnmarshalField(attr)?>;<?
+	}?>
+		obj = new <?element:Name?>Impl(<?constructorArguments(propertyFieldList(element))?>);
+		return obj;
+	} 
+<?
+}
+
+string xmlUnmarshalField(map element) {
+	if(element:Type:Name eq 'String') {
+		'DomUtils.getChildElementValueByTagName(e, "' + element:Name + '")'
+	} else if(element:Type:Name eq 'Long' || element:Type:Name eq 'long') {
+		'Long.valueOf(DomUtils.getChildElementValueByTagName(e, "' + element:Name + '"))'
+	} else if(element:Type:Name eq 'Integer' || element:Type:Name eq 'int') {
+		'Integer.valueOf(DomUtils.getChildElementValueByTagName(e, "' + element:Name + '"))'
+	} else if(element:Type:Name eq 'Short' || element:Type:Name eq 'short') {
+		'Short.valueOf(DomUtils.getChildElementValueByTagName(e, "' + element:Name + '"))'
+	} else if(element:Type:Name eq 'Char' || element:Type:Name eq 'char') {
+		'Char.valueOf(DomUtils.getChildElementValueByTagName(e, "' + element:Name + '"))'
+	} else if(element:Type:Name eq 'Byte' || element:Type:Name eq 'byte') {
+		'Byte.valueOf(DomUtils.getChildElementValueByTagName(e, "' + element:Name + '"))'
+	} else if(element:Type:Name eq 'Double' || element:Type:Name eq 'double') {
+		'Double.valueOf(DomUtils.getChildElementValueByTagName(e, "' + element:Name + '"))'
+	} else if(element:Type:Name eq 'Float' || element:Type:Name eq 'float') {
+		'Float.valueOf(DomUtils.getChildElementValueByTagName(e, "' + element:Name + '"))'
+	} else if(element:Type:Name eq 'Boolean' || element:Type:Name eq 'boolean') {
+		'Boolean.parseBoolean(DomUtils.getChildElementValueByTagName(e, "' + element:Name '"))'
+	} else if(element:Type:QualifiedName eq 'mdsd.common.types.Date' || element:Type:QualifiedName eq 'mdsd.common.types.Time' || element:Type:QualifiedName eq 'mdsd.common.types.TimeStamp') {
+		'new Date(Long.valueOf(DomUtils.getChildElementValueByTagName(e, "' + element:Name + '")))'
+	} else if(isMany(element)) {
+		/* TODO handle collections */
+	} else {
+		element:Type + 'Impl.unmarshal(DomUtils.getChildElementByTagName(e, "' + element:Name + '")))'
+	}
+}
+?>

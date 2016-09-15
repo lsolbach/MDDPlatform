@@ -1,0 +1,8 @@
+<?
+string fileComment(map element) {
+?>/*
+ * Interface of application event <?name(element)?>
+<?generationInfo(' * ')?>
+ */<?
+}
+?>

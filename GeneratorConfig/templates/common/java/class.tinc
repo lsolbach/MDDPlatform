@@ -1,0 +1,76 @@
+<?!--
+ * common/java/class
+ * Requires includes lib, model/lib, java/lib, java/class, common/model/lib, common/java/lib
+ *
+ * Methods for java class generation
+ * Specific for the MDSD profile
+ *
+ * ©2010-2012 Ludger Solbach
+--?><?
+string memberFields(map element) {
+	dependencyFields(element)
+	super(element)
+}
+
+string operations(map element) {
+	dependencyAccessors(element)
+	super(element)
+}
+
+string dependencyFields(map element) {
+	list dependencyList = filter(isDependency, element:ClientDependencySet)
+	if(dependencyList) {
+		foreach dep <- dependencyList {
+			dependencyField(dep:Supplier)
+		}
+	}
+}
+
+string dependencyField(map element) {
+	dependencyFieldAnnotations(element)?>
+	<?element:Name?> <?javaName(element)?> = null;
+<?
+}
+
+string dependencyFieldAnnotations(map dep) {
+
+}
+
+string dependencyAccessors(map element) {
+	list dependencyList = filter(isDependency, element:ClientDependencySet)
+	if(dependencyList) {
+		foreach dep <- dependencyList {
+			dependencyAccessor(dep:Supplier)
+		}
+	}	
+}
+
+string dependencyAccessor(map element) {
+	dependencyGetMethod(element)
+	dependencySetMethod(element)
+}
+
+string dependencyGetMethod(map element) {
+	dependencyGetAnnotations(element)?>
+	public <?element:Name?> get<?element:Name.firstUpper()?>() {
+		return <?javaName(element)?>;
+	}
+<?
+}
+
+string dependencyGetAnnotations(map dep) {
+
+}
+
+string dependencySetMethod(map element) {
+	dependencySetAnnotations(element)?>
+	public void set<?element:Name.firstUpper()?>(<?element:Name?> <?javaName(element)?>) {
+		this.<?javaName(element)?> = <?javaName(element)?>;
+	}
+<?
+}
+
+string dependencySetAnnotations(map dep) {
+
+}
+?>

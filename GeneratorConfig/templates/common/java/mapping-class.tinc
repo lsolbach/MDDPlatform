@@ -1,0 +1,80 @@
+<?!--
+ - common/java/mapping-class
+--?><?
+
+string constructors(map element) {
+	defaultConstructor(element)
+	mappedConstructor(element)	
+	mappingConstructor(element)
+}
+
+string mappingConstructor(map element) {
+	list mappedFieldList = filter(isMapped, filter(isPropertyField, getFieldList(element)))
+	fieldConstructors(element, mappedFieldList)
+}
+
+string mappedConstructor(map element) {
+	list mappingFieldList = filter(isMapping, filter(isPropertyField, getFieldList(element)))
+	fieldConstructors(element, mappingFieldList)
+}
+
+string constructorPostInitialisation(map element, list fieldList) {
+	list mappingFieldList = filter(isMapping, fieldList)
+	if(mappingFieldList) {?>
+		mapFrom();<?
+	}
+}
+
+string operations(map element) {
+	super(element)
+	if(hasMappings(element)) {
+		mapFrom(element)
+		mapTo(element)
+	}
+}
+
+string mapFrom(map element) {?>
+	public final void mapFrom() {<?
+	foreach attr | isMapped(attr) <- element:AttributeList {
+		mapPathGetter(attr)
+	}?>
+  	}
+<?
+}
+
+string mapTo(map element) {?>
+	public final void mapTo() {<?
+	foreach attr | isMapped(attr) <- element:AttributeList {
+		mapPathSetter(attr)
+	}?>
+  	}
+<?
+}
+
+string mapPathGetter(map attr) {
+	if(isMapped(attr)) {
+		list pathList = getMappingPathList(attr)?>
+		<?attr:Name?> = <?join(mapFn(pathElementGetter, pathList), '.')?>;<?
+	}
+}
+
+string mapPathSetter(map attr) {
+	if(isMapped(attr)) {
+		list pathList = getMappingPathList(attr)
+		list getterPathList = head(pathList)
+		string setterPath = last(pathList)
+		list chainedList = mapFn(pathElementGetter, getterPathList)
+		chainedList.add(pathElementSetter(setterPath, attr))?>
+		<?join(chainedList, '.')?>;<?
+	}
+}
+
+string pathElementGetter(string pathElement) {
+	'get' + pathElement.firstUpper() + '()'
+}
+
+string pathElementSetter(string pathElement, map attr) {
+	'set' + pathElement.firstUpper() + '(' + attr:Name + ')'
+}
+
+?>

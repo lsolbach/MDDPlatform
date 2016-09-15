@@ -1,0 +1,221 @@
+<?
+string dropTables(map package) {
+	/* TODO the tables should be dropped according to their dependencies (foreign key relationships) */
+	foreach class | isValue(class) <- getClassList(package) {
+		dropTable(class)
+	}
+	foreach class | isEntity(class) <- getClassList(package) {
+		dropTable(class)
+	}
+}
+
+string dropAssoTables(map package) {
+	foreach class | isDomainObject(class) <- getClassList(package) {
+		foreach asso | isNavigable(asso) && isManyToMany(asso)
+					<- class:AssociationList {
+			dropAssoTable(asso)
+		}
+	}
+}
+
+string dropTable(map element) {?>
+drop table <?tableName(element)?> if exists;<?
+}
+
+string dropAssoTable(map asso) {?>
+drop table <?associationTableName(asso)?> if exists;<?
+}
+
+string createTables(map package) {
+	/* TODO the tables should be created according to their dependencies (foreign key relationships) */
+	foreach class | isEntity(class) <- getClassList(package) {
+		createTable(class)
+	}
+	foreach class | isValue(class) <- getClassList(package) {
+		createTable(class)
+	}
+}
+
+string createAssoTables(map package) {
+	foreach class | isDomainObject(class) <- getClassList(package) {
+		foreach asso | isNavigable(asso) && isManyToMany(asso) 
+					<- class:AssociationList {
+			createAssoTable(asso)
+		}
+	}
+}
+
+string createTable(map element) {?>
+-- table definition for <?element:Name?>
+create table <?tableName(element)?> (
+	<?join(getTableElementList(element), ',' + lineFeed() + tab())?>
+);
+<?
+}
+
+list getTableElementList(map element) {
+	additionalAttributes(element)
+	 + attributes(element)
+	 + associations(element)
+	 + indices(element)
+}
+
+list additionalAttributes(map element) {
+	list columnList
+	if(isEntity(element)) {
+		columnList.add('id varchar(20) not null primary key')
+		columnList.add('modification ' + sqlType('Integer') + ' not null')
+	}
+	if(isRevisionable(element)) {
+		columnList.add('created_at ' + sqlType('TimeStamp') + ' not null')
+		columnList.add('modified_at ' + sqlType('TimeStamp') + ' not null')
+		columnList.add('created_by varchar(20)')
+		columnList.add('modified_by varchar(20)')		
+	}
+	if(isTemporal(element)) {
+		columnList.add('valid_from_at ' + sqlType('TimeStamp') + ' not null')
+		columnList.add('valid_to ' + sqlType('TimeStamp') + ' not null')
+		columnList.add('invalidated_at ' + sqlType('TimeStamp') + ' not null')	
+	}
+	columnList
+}
+
+list additionalAssociations(map element) {
+	list columnList
+	columnList
+}
+
+string createAssoTable(map asso) {?>
+create table <?associationTableName(asso)?> {
+	<?foreignKey(asso)?>,
+	<?foreignKey(asso:SourceEnd)?>,
+	<?foreignKeyIndex(asso)?>,
+	<?foreignKeyIndex(asso:SourceEnd)?>
+}<?
+}
+
+string association(map asso) {
+	/* FIXME handle 'key' stereotypes on association ends correcty for foreign keys */
+	if(!isDerived(asso)) {
+		if(isOneToOne(asso)) {
+			oneToOne(asso)
+		} else if(isOneToMany(asso)) {
+			oneToMany(asso)
+		} else if(isManyToOne(asso)) {
+			manyToOne(asso)
+		} else if(isManyToMany(asso)) {
+			manyToMany(asso)
+		}
+	}
+}
+
+string oneToOne(map asso) {
+	if(isNavigable(asso)) {
+		if(isEntity(asso:Type) || isReferred(asso) || isKey(asso)) {
+			foreignKey(asso)
+		}
+	} else if(!isNavigable(asso)) {
+		if(isEntity(asso:Type) && isKey(asso)) {
+			foreignKey(asso)
+		}
+	}
+}
+
+string oneToMany(map asso) {
+	if(isNavigable(asso)) {
+
+	} else if(!isNavigable(asso)) {
+
+	}
+}
+
+string manyToOne(map asso) {
+	if(isEntity(asso:Type) && isNavigable(asso)) {
+		foreignKey(asso)
+	} else if(isEntity(asso:Type) && !isNavigable(asso)) {
+		if(!isReference(asso)) {
+			foreignKey(asso)
+			if(isOrdered(asso:SourceEnd)) {
+				',' + lineFeed() + tab() + orderIndex(asso)
+			}
+		}
+	}
+}
+
+string manyToMany(map asso) {
+	if(isNavigable(asso)) {
+
+	} else if(!isNavigable(asso)) {
+
+	}
+}
+
+string orderIndex(map asso) {
+	indexName(asso) + ' ' + sqlType('Integer') + ' not null'
+}
+
+list indices(map element) {
+	primaryKeyIndices(element) + foreignKeyIndices(element) + uniqueIndices(element)
+}
+
+list primaryKeyIndices(map element) {
+	list primaryKeyIndexList
+	if(isValue(element)) {
+		list primaryKeyList = getKeyList(element)
+		if(primaryKeyList) {
+			primaryKeyIndexList.add(primaryKeyIndex(element, primaryKeyList))
+		}
+	}
+	primaryKeyIndexList
+}
+
+numeric isForeignKey(map asso) {
+	!isDerived(asso:SourceEnd) && isEntity(asso:Type) 
+		&& (isKey(asso) || isReferred(asso))
+}
+
+string foreignKey(map asso) {
+	foreignKeyName(asso) + ' ' + sqlType('Id') + ' ' + optional(asso)
+}
+
+list foreignKeyIndices(map element) {
+	mapFn(foreignKeyIndex, filter(isForeignKey, element:AssociationList))
+}
+
+list uniqueIndices(map element) {
+	mapFn(uniqueIndex, filter(isUnique, element:AttributeList))
+}
+
+/* database specific, override if necessary*/
+
+string primaryKeyIndex(map value, list primaryKeyList) {
+	'PRIMARY KEY (' + join(mapFn(foreignKeyName, primaryKeyList), ', ') + ')'
+}
+
+string foreignKeyIndex(map asso) {
+	'FOREIGN KEY (' + foreignKeyName(asso) + ') REFERENCES ' + tableName(asso:Type) + ' (' + columnName(asso:Type, 'id') +')'
+}
+
+string uniqueIndex(map field) {
+	'UNIQUE (' + columnName(field) + ')'
+}
+
+string sqlType(map element) {
+	if(element:Type:Name eq 'String' || element:Type:Name eq 'string') {
+		if(hasTaggedValue(element, 'maxLength')) {
+			sqlType(element:Type:Name, toNumeric(taggedValue(element, 'maxLength')))
+		} else {
+			sqlType(element:Type:Name)
+		}
+	} else if(isBlob(element)) {
+		if(hasTaggedValue(element, 'maxLength')) {
+			sqlType('BLOB',  toNumeric(taggedValue(element, 'maxLength')))
+		} else {
+			sqlType('BLOB')
+		}
+	} else {
+		sqlType(element:Type:Name)
+	}
+}
+
+?>

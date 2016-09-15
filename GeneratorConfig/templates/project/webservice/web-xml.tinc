@@ -1,0 +1,39 @@
+<?
+string servlets(map element) {?>
+	<servlet>
+		<servlet-name><?wsName(element)?></servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+				classpath*:<?wsConfig(element)?>
+			</param-value>
+		</init-param>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name><?wsName(element)?></servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+<?
+}
+
+string sessionConfig(map element) {?>
+	<session-config>
+		<session-timeout>2</session-timeout>
+	</session-config>
+<?
+}
+
+string wsName(map element) {
+	if(hasTaggedValue(element, 'namespacePrefix')) {
+		taggedValue(element, 'namespacePrefix')
+	} else {
+		element:Name
+	}
+}
+
+string wsConfig(map element) {
+	'ws-config.xml'
+}
+?>

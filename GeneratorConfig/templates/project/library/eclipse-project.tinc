@@ -1,0 +1,16 @@
+<?
+string projectBuildCommands(map element) {
+	super(element)?>
+		<!--buildCommand>
+			<name>org.eclipse.ajdt.core.ajbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand--><?
+}
+
+string projectNatures(map element) {
+	super(element)?>
+		<!--nature>org.eclipse.ajdt.ui.ajnature</nature-->
+		<nature>org.eclipse.jdt.core.javanature</nature><?
+}
+?>

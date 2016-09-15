@@ -1,0 +1,17 @@
+<?
+
+map critic(map element, string level, string text) {
+	map c
+	c.put('Element', element)
+	c.put('Level', level)
+	c.put('Text', text)
+	c
+}
+
+list validate(map package) {
+	list criticList
+
+	criticList
+}
+
+?>

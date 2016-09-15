@@ -1,0 +1,34 @@
+<?
+string contentXml(map element) {?>
+<web-app
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+
+	<display-name><?name(element)?></display-name>
+<?
+	jspConfig(element)
+	listeners(element)
+	welcomeFiles(element)
+	servlets(element)
+	filters(element)
+	sessionConfig(element)?>
+</web-app><?
+}
+
+string jspConfig(map element) { }
+
+string contextParams(map element) { }
+
+string welcomeFiles(map element) { }
+
+string listeners(map element) { }
+
+string servlets(map element) { }
+
+string filters(map element) { }
+
+string sessionConfig(map element) { }
+?>

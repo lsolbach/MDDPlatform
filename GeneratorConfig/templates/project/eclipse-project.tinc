@@ -1,0 +1,24 @@
+<?
+string contentXml(map element) {?>
+<projectDescription>
+	<name><?name(element)?></name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec><?
+		projectBuildCommands(element)?>
+	</buildSpec>
+	<natures><?
+		projectNatures(element)?>
+	</natures>
+</projectDescription><?
+}
+
+string projectBuildCommands(map element) {
+
+}
+
+string projectNatures(map element) {
+
+}
+?>

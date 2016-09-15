@@ -1,0 +1,11 @@
+GeneratorConfig
+
+The GeneratorConfig project contains the configuration for the soulspace generator framework.
+
+/config			configuration of the generators
+/profiles		contains the MDSD profile and the standard ArgoUML profiles
+/std-templates	templates without references to specific profiles 
+/templates		templates with references to the MDSD profile
+
+
+

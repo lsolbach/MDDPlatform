@@ -1,0 +1,18 @@
+<?
+list namespaceList(map element) {
+	list namespaceList = super(element)
+	namespaceList
+}
+
+string beans(map element) {
+	super(element)
+?>
+	<!-- Import component config -->
+	<import resource="classpath*:/<?element:QualifiedName.replace('.', '/')?>/component-config.xml" />
+<?
+}
+
+string importConfig(map element) {
+	/* empty override */
+}
+?>

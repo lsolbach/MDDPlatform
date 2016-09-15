@@ -1,0 +1,90 @@
+<?
+string content(map element) {?>
+[
+ :module "<?name(element)?>"
+ :project "<?moduleProject(element)?>"
+ :type "<?moduleType(element)?>"
+ :version "0.1.0"<?
+	if(hasDocumentation(element)) {?>
+ :description "<?documentation(element)?>"<?
+ 	}?>
+ :author ""
+ :provider ""
+ ; :license ""
+ :plugins [<?plugins(element)?>]
+ :dependencies [<?dependencies(element)?>]
+]<?
+}
+
+string moduleProject(map element) {
+	namespace(element)
+}
+
+string moduleType(map element) {
+	if(hasStereotype(element, 'library')) {
+		'library'
+	} else if(hasStereotype(element, 'framework')) {
+		'framework'
+	} else if(hasStereotype(element, 'application')) {
+		'application'
+	} else if(hasStereotype(element, 'domain')) {
+		'domain'
+	} else if(hasStereotype(element, 'integration')) {
+		'integration'
+	} else if(hasStereotype(element, 'presentation')) {
+		'presentation'
+	} else if(hasStereotype(element, 'web frontend')) {
+		'webfrontend'
+	} else if(hasStereotype(element, 'web service')) {
+		'webservice'
+	} else if(hasStereotype(element, 'app frontend')) {
+		'appfrontend'
+	} else if(hasStereotype(element, 'console frontend')) {
+		'consolefrontend'
+	} else if(hasStereotype(element, 'data')) {
+		'data'
+	} else {
+		'unknown'
+	}
+}
+
+string plugins(map element) {
+	'"global" "dependencies"'
+}
+
+string dependencies(map element) {
+	
+}
+
+string dependency(map dep) {
+	'["' + project(dep) + '" "' + module(dep) + '" "' + version(dep) + '"]'
+}
+
+string project(map dep) {
+	if(hasTaggedValue(dep, 'project')) {
+		taggedValue(dep, 'project')
+	} else {
+		namespace(dep:Supplier)
+	}
+}
+
+string module(map dep) {
+	name(dep:Supplier)
+}
+
+string artifact(map dep) {
+	if(hasTaggedValue(dep, 'project')) {
+		taggedValue(dep, 'project')
+	} else {
+		name(dep:Supplier)
+	}
+}
+
+string version(map dep) {
+	if(hasTaggedValue(dep, 'version')) {
+		taggedValue(dep, 'version')
+	} else {
+		'0.1.0'
+	}
+}
+?>

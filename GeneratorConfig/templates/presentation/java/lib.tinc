@@ -1,0 +1,137 @@
+<?!--
+ - presentation/java/lib
+ --?><?
+
+/* mvc controller */
+
+map getImportMap(map element) {
+	map importMap = super(element)
+	add(importMap, 'org.springframework.stereotype.Controller')
+	add(importMap, 'org.springframework.web.bind.annotation.RequestMapping')
+	add(importMap, 'org.springframework.web.bind.annotation.RequestMethod')
+	add(importMap, 'org.springframework.web.bind.annotation.RequestParam')
+	add(importMap, 'org.springframework.web.bind.annotation.CookieValue')
+	add(importMap, 'org.springframework.ui.Model')
+	importMap
+}
+
+string requestMethodAnnotations(map op) {
+	operationMethodAnnotations(op)
+	/* TODO: if mapping contains a comma separated list of values, */
+	/* TODO: split the list and join the qouted values comma separated and wrap in braces */
+	if(hasTaggedValue(op, 'mapping')) {
+		'@RequestMapping(value="' + taggedValue(op, 'mapping') + '"' 
+		if(hasTaggedValue(op, 'method')) {
+			', method=RequestMethod.' + taggedValue(op, 'method')
+		}
+		')'
+	}
+}
+
+
+
+string requestMethodArguments(map op) {
+	list argList
+	argList.add(join(mapFiltered(requestMethodArgument, isInputParameter, op:ParameterList), ', '))
+	argList.add('model')
+	join(argList, ', ')
+}
+
+string requestMethodParameters(map op) {
+	list paramList
+	paramList.add(join(mapFiltered(requestMethodParameter, isInputParameter, op:ParameterList), ', '))
+	paramList.add('Model model')
+	join(paramList, ', ')
+}
+
+string requestMethodParameter(map arg) {
+	/* if the argument is an input model, use changeable model attributes as input parameters */
+	if(hasStereotype(arg:Type, 'model') /* && taggedValue(arg, 'direction') */) {
+		string modelRole = 'model'
+		if(hasTaggedValue(arg, 'modelRole')) {
+			modelRole = taggedValue(arg, 'modelRole')
+		}
+		join(mapFiltered(cModelParameter(modelRole), isChangeable, getAttributeList(arg:Type)), ', ')
+	} else {
+		requestMethodParameterAnnotations(arg) + ' ' + javaType(arg) + ' ' + javaName(arg)
+	}
+}
+
+string requestMethodModelParameter(string modelRole, map attr) {
+	'@RequestParam("' + modelRole + '/' + attr:Name + '") ' + javaType(attr) + ' ' + modelRole + javaName(attr).firstUpper()
+}
+
+method cModelParameter(string modelRole) {
+	string mRole = modelRole
+	method result = string fn(map attr) {
+		requestMethodModelParameter(mRole, attr)
+	}
+	result
+}
+
+string requestMethodParameterAnnotations(map param) {
+	if(isRequestParam(param)) {
+		'@RequestParam("' + taggedValue(param, 'requestParameter') + '")'
+	}
+	if(isCookieValue(param)) {
+		'@CookieValue("' + taggedValue(param, 'cookieValue') + '")'
+	}
+}
+
+string requestMethodDelegateParameters(map op) {
+	list paramList
+	paramList.add(join(mapFiltered(requestMethodDelegateParameter, isInputParameter, op:ParameterList), ', '))
+	paramList.add('Model model')
+	join(paramList, ', ')
+}
+
+string requestMethodDelegateParameter(map arg) {
+	/* if the argument is an input model, use changeable model attributes as input parameters */
+	if(hasStereotype(arg:Type, 'model') /* && taggedValue(arg, 'direction') */) {
+		string modelRole = 'model'
+		if(hasTaggedValue(arg, 'modelRole')) {
+			modelRole = taggedValue(arg, 'modelRole')
+		}
+		join(mapFiltered(cDelegateModelParameter(modelRole), isChangeable, getAttributeList(arg:Type)), ', ')
+	} else {
+		javaType(arg) + ' ' + javaName(arg)
+	}
+}
+
+string requestMethodDelegateModelParameter(string modelRole, map attr) {
+	javaType(attr) + ' ' + modelRole + javaName(attr).firstUpper()
+}
+
+method cDelegateModelParameter(string modelRole) {
+	string mRole = modelRole
+	method result = string fn(map attr) {
+		requestMethodDelegateModelParameter(mRole, attr)
+	}
+	result
+}
+
+string requestMethodArgument(map arg) {
+	/* if the argument is an input model, use changeable model attributes as input parameters */
+	if(hasStereotype(arg:Type, 'model') /* && taggedValue(arg, 'direction') */) {
+		string modelRole = 'model'
+		if(hasTaggedValue(arg, 'modelRole')) {
+			modelRole = taggedValue(arg, 'modelRole')
+		}
+		join(mapFiltered(cModelArgument(modelRole), isChangeable, getAttributeList(arg:Type)), ', ')
+	} else {
+		javaName(arg)
+	}
+}
+
+string requestMethodModelArgument(string modelRole, map attr) {
+	modelRole + javaName(attr).firstUpper()
+}
+
+method cModelArgument(string modelRole) {
+	string mRole = modelRole
+	method result = string fn(map attr) {
+		requestMethodModelArgument(mRole, attr)
+	}
+	result
+}
+?>

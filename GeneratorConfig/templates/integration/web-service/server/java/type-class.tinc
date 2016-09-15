@@ -1,0 +1,43 @@
+<?
+string fileComment(map element) {
+?>/*
+ * Web service server type <?name(element)?>
+ * Implementation of interface <?Name?>.
+<? generationInfo(' * ')?>
+ */
+<?
+}
+
+string constructors(map element) {
+	defaultConstructor(element)
+	/* TODO check if the application of standard constructors is correct here */
+	/* TODO maybe the correct constructors are mappingsConstructor() and nonMappingsConstructor() */
+	propertiesConstructor(element)
+	associationsConstructor(element)
+
+	nonMappingsConstructor(element)
+	mappingsConstructor(element)
+}
+
+string operations(map element) {
+	mapFrom(element)
+	mapTo(element)
+	super(element)
+}
+
+/* TODO implement mappingsConstructor() to initialize the fields according to the specified mapping */
+/* TODO mappingsConstructor() needs all mandatory non-mapped fields, non-mapped associations and all mapped associations */
+/* TODO the mappingsConstructor must initialize all neccesary fields and associations from the mapped objects */
+/* TODO nonMappingsConstructor() needs all mandatory mapped fields and all mapped associations */
+/* TODO mappingsConstructor() and nonMappingsConstructor() should reside in common/java/mapping */
+/* FIXME if no mappingsConstructor() is available, generate abstract type classes and implement the mappings constuctors by hand */
+
+string mappingsConstructor(map element) {
+	/* TODO implement and move to common/java/mapping */
+}
+
+string nonMappingsConstructor(map element) {
+	/* TODO implement and move to common/java/mapping */
+}
+
+?>

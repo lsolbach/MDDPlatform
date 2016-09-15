@@ -1,0 +1,40 @@
+<?
+
+string propertyGetMethodModifiers(map attr) {
+	super(attr) + ' synchronized'
+}
+
+string propertySetMethodModifiers(map attr) {
+	super(attr) + ' synchronized'
+}
+
+string propertyAddMethodModifiers(map attr) {
+	super(attr) + ' synchronized'
+}
+
+string propertyRemoveMethodModifiers(map attr) {
+	super(attr) + ' synchronized'
+}
+
+string associationGetMethodModifiers(map asso) {
+	super(asso) + ' synchronized'
+}
+
+string associationQualifiedGetMethodModifiers(map asso) {
+	super(asso) + ' synchronized'
+}
+
+string associationSetMethodModifiers(map asso) {
+	super(asso) + ' synchronized'
+}
+
+string associationAddMethodModifiers(map asso) {
+	super(asso) + ' synchronized'
+}
+
+string associationRemoveMethodModifiers(map asso) {
+	super(asso) + ' synchronized'
+}
+
+
+?>

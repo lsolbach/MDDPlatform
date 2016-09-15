@@ -1,0 +1,57 @@
+<?
+string fileComment(map element) {
+?>/*
+ * Abstract class <?name(This)?>
+ * Base implementation of mvc controller interface <?Name?>.
+<? generationInfo(' * ')?>
+ */<?
+}
+
+string abstract(map element) {
+	'abstract'
+}
+
+string typeAnnotations(map element) {
+	super(element)
+	lineFeed() + '@Controller'
+}
+
+string operation(map op) {
+	if(isRequestMethod(op)) {
+		requestMethod(op)
+	} else {
+		super(op)
+	}
+}
+
+string requestMethod(map op) {?>
+	<?requestMethodAnnotations(op)?>
+	public String <?op:Name?>(<?requestMethodParameters(op)?>) {
+		return do<?op:Name.firstUpper()?>(<?requestMethodArguments(op)?>);
+	}
+<?
+	requestMethodDelegate(op)
+}
+
+string requestMethodDelegate(map op) {?>
+	protected abstract String do<?op:Name.firstUpper()?>(<?requestMethodDelegateParameters(op)?>);
+<?
+}
+
+string requestMethodDelegateImplementation(map op) {?>
+	protected String do<?op:Name.firstUpper()?>(<?requestMethodDelegateParameters(op)?>) {
+		// TODO implement me
+	}
+<?
+}
+
+
+string viewName(map op) {
+	map returnParameter = select(isReturnParameter, op:ParameterList)
+	if(returnParameter && isView(returnParameter:Type)) {
+		returnParameter:Type:Name
+	} else {
+		""
+	}
+}
+?>

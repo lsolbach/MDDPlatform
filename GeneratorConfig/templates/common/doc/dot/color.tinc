@@ -1,0 +1,19 @@
+<?
+string color(map element) {
+	if(isEntity(element)) {
+		'bgcolor="#C8FFFF"'
+	} else if(isValue(element)) {
+		'bgcolor="#C8C8FF"'
+	} else if(isFactory(element)) {
+		'bgcolor="#FFC8C8"'  
+	} else if(isRepository(element)) {
+		'bgcolor="#FFAFAF"'
+	} else if(isService(element)) {
+		'bgcolor="#C8FFC8"'
+	} else if(isEnumeration(element)) {
+		'bgcolor="#99FF99"'
+	} else {
+		'bgcolor="#FFFFFF"'
+	}
+}
+?>

@@ -1,0 +1,60 @@
+<?
+map getImportMap(map element) {
+	map importMap = super(element)
+	list dependencyList = filter(cHasStereotype('depends'), element:ClientDependencySet)
+	foreach dep <- dependencyList {
+		importMap.put(dep:Supplier:QualifiedName, dep:Supplier)		
+	}
+	importMap
+}
+
+string importQualifiedName(string qualifiedName) {
+	if(!qualifiedName.startsWith('mdsd.common.types')) {
+		super(qualifiedName)
+	}
+}
+
+string javaType(map element) {
+	if(hasStereotype(element, 'typed')) {
+		javaTypeForType(element:Type, taggedValue(element, 'type'))
+	} else {
+		super(element)
+	}
+}
+
+string javaTypeForType(map type, string generic) {
+	if(type:Namespace.startsWith('mdsd.')) {
+		if(generic) {
+			javaTypeForMdsdType(type) + '<' + generic + '>'
+		} else {
+			javaTypeForMdsdType(type)
+		}
+	} else {
+		super(type, generic)
+	}
+}
+
+string javaTypeForMdsdType(map type) {
+	if(type:Name eq 'Id') {
+		'String'
+	} else if(type:Name eq 'Time') {
+		'Date'
+	} else if(type:Name eq 'TimeStamp') {
+		'Date'
+	} else {
+		type:Name
+	}
+}
+
+string javaType(string qualifiedName) {
+	if(qualifiedName eq 'mdsd.common.types.Id') {
+		'String'
+	} else if(qualifiedName eq 'mdsd.common.types.Time') {
+		'Date'
+	} else if(qualifiedName eq 'mdsd.common.types.TimeStamp') {
+		'Date'
+	} else {
+		qualifiedName
+	}
+}
+?>

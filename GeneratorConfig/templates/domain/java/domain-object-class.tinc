@@ -1,0 +1,10 @@
+<?
+string fileComment(map element) {
+	'/*' + lineFeed()
+	' * Abstract class ' + name(This) + lineFeed()
+	' * Base implementation of domain object interface ' + element:Name + lineFeed()
+	generationInfo(element, ' * ') + lineFeed()
+	' */'
+}
+
+?>
