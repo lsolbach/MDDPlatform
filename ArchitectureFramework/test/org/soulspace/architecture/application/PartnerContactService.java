@@ -9,6 +9,6 @@ public class PartnerContactService {
 	
 	public void makeContact(Partner p1, Partner p2) {
 		//Partner partner = new Partner();
-		//partner.toString();
+		//System.out.println(partner.toString());
 	}
 }

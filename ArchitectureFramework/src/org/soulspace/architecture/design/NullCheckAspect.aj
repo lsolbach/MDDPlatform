@@ -27,13 +27,13 @@ public abstract aspect NullCheckAspect {
 	
 	before(Object o) : checkedFieldSet(o) {
 		if(o == null) {
-			throw new RuntimeException("Setting a null value in field " + thisJoinPoint.getSignature().toShortString() + ", but the field is not marked as optional");
+			throw new NullPointerException("Setting a null value in field " + thisJoinPoint.getSignature().toShortString() + ", but the field is not marked as optional");
 		}
 	}
 	
 	after() returning(Object o) : checkedReturnValues() {
 		if(o == null) {
-			throw new RuntimeException("Method " + thisJoinPoint.getSignature().toShortString() + " returns a null value but is not marked as optional");
+			throw new NullPointerException("Method " + thisJoinPoint.getSignature().toShortString() + " returns a null value but is not marked as optional");
 		}
 	}
 
@@ -44,9 +44,9 @@ public abstract aspect NullCheckAspect {
 		Boolean[] nullArgs = new Boolean[args.length];
 		int nullArgCount = 0;
 
-		if(args == null) {
-			return;
-		}
+//		if(args == null) {
+//			return;
+//		}
 		
 		if(sig instanceof MethodSignature) {
 			paramAnnotations = ((MethodSignature) sig).getMethod().getParameterAnnotations();
@@ -71,7 +71,7 @@ public abstract aspect NullCheckAspect {
 					sb.append(" ");							
 				}
 			}
-			throw new RuntimeException(sb.toString());
+			throw new NullPointerException(sb.toString());
 		}
 	}
 	

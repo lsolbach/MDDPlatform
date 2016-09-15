@@ -40,13 +40,6 @@ public abstract aspect AbstractAuditAspect {
 	abstract pointcut childUpdate(Auditable auditable, DomainObject child);
 	abstract pointcut childDelete(Auditable auditable, DomainObject child);
 	
-//	pointcut rootCreate(Auditable auditable) : execution();
-//	pointcut rootUpdate(Auditable auditable) : execution();
-//	pointcut rootDelete(Auditable auditable) : execution();
-//	pointcut childCreate(Auditable auditable, DomainObject child) : execution();
-//	pointcut childUpdate(Auditable auditable, DomainObject child) : execution();
-//	pointcut childDelete(Auditable auditable, DomainObject child) : execution();
-	
 	after(Auditable auditable) : rootCreate(auditable) {
 		auditRepository.addAuditEvent(new AuditEventImpl(AuditEventType.CREATE, (DomainObject) auditable));
 		auditable.clearAuditEventList();
