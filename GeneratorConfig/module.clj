@@ -2,7 +2,7 @@
  :module "GeneratorConfig"
  :project "org.soulspace.modelling"
  :type :data
- :version "1.0.2"
+ :version "1.0.3"
  :description "Profiles, templates and configurations for model driven software development"
  :author "Ludger Solbach"
  :provider "soulspace.org"

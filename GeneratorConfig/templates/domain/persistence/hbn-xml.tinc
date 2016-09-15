@@ -234,7 +234,7 @@ string oneToOne(map asso) {
 string oneToMany(map asso) {
 	if(isNavigable(asso) && !isDerived(asso)) {
 		if(isEntity(asso:Type)) {
-			string assoType = fieldCollectionType(asso)
+			string assoType = collectionType(asso)
 			if(assoType eq 'List') {?>
 		<list name="<?fieldName(asso)?>" table="<?tableName(asso:Type)?>" 
 			<?cascade(asso)?> <?collectionLazy(asso)?>><?
