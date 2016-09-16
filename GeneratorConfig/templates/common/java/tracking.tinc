@@ -5,7 +5,6 @@ map getImportMap(map element) {
 	importMap
 }
 
-
 string operationMethodAnnotations(map op) {
 	list annotationList = super(op)
 	if(hasStereotype(op, 'tracked') && hasTaggedValue(op, 'trackingId')) {

@@ -159,7 +159,7 @@
   {; value implementation class
    :element "Class"
    :template "java/class" 
-   :includes ["lib" "model/lib" "java/lib" "java/class" "java/bean-class" "common/model/lib"
+   :includes ["lib" "model/lib" "java/lib" "java/class" "java/bean-impl-class" "common/model/lib"
               "common/java/lib" "java/impl-class" "domain/java/value-impl-class"]
    :namespaceSuffix "impl"
    :suffix "Impl"

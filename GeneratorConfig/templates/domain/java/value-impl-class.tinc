@@ -6,4 +6,13 @@ string fileComment(map element) {
 	generationInfo(element, ' * ') + lineFeed()
 	' */'
 }
+
+string extension(map element) {
+	'extends Abstract' + element:Name
+}
+
+string equals(map element) {}
+string hashcode(map element) {}
+string toString(map element) {}
+
 ?>

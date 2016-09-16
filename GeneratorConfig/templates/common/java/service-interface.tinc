@@ -15,7 +15,7 @@ map getImportMap(map element) {
 
 list getTypeAnnotationList(map element) {
 	list annotationList = super(element)
-	add(annotationList, '@Service')
+	annotationList.add('@Service')
 	annotationList
 }
 ?>

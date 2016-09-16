@@ -18,9 +18,9 @@ string abstract(map element) {
 	'abstract'
 }
 
-string getTypeAnnotationList(map element) {
+list getTypeAnnotationList(map element) {
 	list annotationList = super(element)
-	add(annotationList, '@Service')
+	annotationList.add('@Service')
 	annotationList
 }
 ?>

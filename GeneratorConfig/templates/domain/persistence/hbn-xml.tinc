@@ -259,7 +259,7 @@ string oneToMany(map asso) {
 		</bag><?
 			}
 		} else {
-			string assoType = fieldCollectionType(asso)
+			string assoType = collectionType(asso)
 			if(assoType eq 'List') {?>
 		<list name="<?fieldName(asso)?>" table="<?tableName(asso:Type)?>"
 			<?collectionLazy(asso)?>><?
